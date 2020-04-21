@@ -1,0 +1,30 @@
+{
+    "common": {
+        "account": "Аккаунт",
+        "status": "Статус",
+        "loading": "Загрузка...",
+        "facebookProfile": "Facebook профиль",
+        "dolphinId": "Dolphin ID",
+        "facebookId": "Facebook ID"
+    },
+    "sidebar": {
+        "adsManager": "Ads Manager",
+        "createAds": "Залить рекламу",
+        "comments": "Комментарии",
+        "tracker": "Трекер",
+        "automationRules": "Авто-правила",
+        "bankCards": "Банковские карты",
+        "settings": "Настройки"
+    },
+    "adsmanager": {
+        "tabs": {
+            "users": "Пользователи",
+            "accounts": "Аккаунты",
+            "cabs": "Кабинеты",
+            "dates": "Даты",
+            "campaigns": "Кампании",
+            "adsets": "Адсеты",
+            "ads": "Объявления"
+        }
+    }
+}

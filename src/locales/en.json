@@ -1,0 +1,30 @@
+{
+  "common": {
+    "account": "Account",
+    "status": "Status",
+    "loading": "Loading...",
+    "facebookProfile": "Facebook Profile",
+    "dolphinId": "Dolphin ID",
+    "facebookId": "Facebook ID"
+  },
+  "sidebar": {
+    "adsManager": "Ads Manager",
+    "createAds": "Create ads",
+    "comments": "Comments",
+    "tracker": "Tracker",
+    "automationRules": "Automation Rules",
+    "bankCards": "Bank Cards",
+    "settings": "Settings"
+  },
+  "adsmanager": {
+    "tabs": {
+      "users": "Users",
+      "accounts": "Accounts",
+      "cabs": "Cabs",
+      "dates": "Dates",
+      "campaigns": "Campaigns",
+      "adsets": "Adsets",
+      "ads": "Ads"
+    }
+  }
+}
