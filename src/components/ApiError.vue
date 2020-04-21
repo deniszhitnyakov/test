@@ -6,13 +6,13 @@
       max-width="700px"
     >
       <v-card>
-        <v-card-title>{{ $t('apiError.title') }}</v-card-title>
+        <v-card-title>{{ $t('dialogs.apiError.title') }}</v-card-title>
         <v-divider />
         <v-card-text
           style="max-height: 500px;"
           class="pt-3"
         >
-          {{ $t('apiError.message') }}:
+          {{ $t('dialogs.apiError.message') }}:
           <code dark>
             {{ apiError }}
           </code>

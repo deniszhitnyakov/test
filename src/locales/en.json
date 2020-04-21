@@ -1,9 +1,4 @@
 {
-	"accounts": {
-		"addDialog": {
-			"singleDialogTitle": "Add account"
-		}
-	},
 	"adsmanager": {
 		"tabs": {
 			"accounts": "Accounts",
@@ -14,10 +9,6 @@
 			"dates": "Dates",
 			"users": "Users"
 		}
-	},
-	"apiError": {
-		"message": "Copy and send this code to product's developer",
-		"title": "API error caused"
 	},
 	"common": {
 		"account": "Account",
@@ -39,6 +30,17 @@
 		"tags": "Tags",
 		"type": "Type",
 		"useragent": "Useragent"
+	},
+	"dialogs": {
+		"accounts": {
+			"singleAdd": {
+				"title": "Add account"
+			}
+		},
+		"apiError": {
+			"message": "Copy and send this code to product's developer",
+			"title": "API error caused"
+		}
 	},
 	"sidebar": {
 		"adsManager": "Ads Manager",

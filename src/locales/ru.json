@@ -1,9 +1,4 @@
 {
-	"accounts": {
-		"addDialog": {
-			"singleDialogTitle": "Добавить аккаунт"
-		}
-	},
 	"adsmanager": {
 		"tabs": {
 			"accounts": "Аккаунты",
@@ -14,10 +9,6 @@
 			"dates": "Даты",
 			"users": "Пользователи"
 		}
-	},
-	"apiError": {
-		"message": "Скопируйте и отправьте этот код разработчику",
-		"title": "Ошибка API"
 	},
 	"common": {
 		"account": "Аккаунт",
@@ -39,6 +30,17 @@
 		"tags": "Теги",
 		"type": "Тип",
 		"useragent": "Useragent"
+	},
+	"dialogs": {
+		"accounts": {
+			"singleAdd": {
+				"title": "Добавить аккаунт"
+			}
+		},
+		"apiError": {
+			"message": "Скопируйте и отправьте этот код разработчику",
+			"title": "Ошибка API"
+		}
 	},
 	"sidebar": {
 		"adsManager": "Ads Manager",

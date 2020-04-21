@@ -17,7 +17,7 @@
         >
           <v-icon>fas fa-times</v-icon>
         </v-btn>
-        <v-toolbar-title>{{ $t('accounts.addDialog.singleDialogTitle') }}</v-toolbar-title>
+        <v-toolbar-title>{{ $t('dialogs.accounts.singleAdd.title') }}</v-toolbar-title>
         <v-spacer />
         <v-toolbar-items>
           <v-btn
