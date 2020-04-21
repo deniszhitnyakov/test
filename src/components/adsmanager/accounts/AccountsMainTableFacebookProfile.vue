@@ -2,7 +2,7 @@
   <div>
     <!-- ССЫЛКА НА ПРОФИЛЬ -->
     <div v-if="account.fb_id && account.fb_name">
-      {{$t('common.facebookProfile')}}: <a
+      {{ $t('common.facebookProfile') }}: <a
         :href="'https://facebook.com/profile.php?id=' + account.fb_id"
         target="_blank"
       >
@@ -14,7 +14,7 @@
 
     <!-- ID ПРОФИЛЯ -->
     <div v-if="account.fb_id">
-      {{$t('common.facebookId')}}: {{ account.fb_id }}
+      {{ $t('common.facebookId') }}: {{ account.fb_id }}
     <!-- ID ПРОФИЛЯ КОНЕЦ-->
     </div>
   </div>

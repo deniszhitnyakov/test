@@ -1,22 +1,22 @@
-import Vue from 'vue'
-import App from './App.vue'
-import vuetify from './plugins/vuetify';
-import 'roboto-fontface/css/roboto/roboto-fontface.css'
-import '@fortawesome/fontawesome-free/css/all.css'
-import i18n from './i18n'
-import axios from 'axios';
-import VueRouter from 'vue-router';
-import Vuex from 'vuex';
-import Clipboard from 'v-clipboard';
-import store from './store/index.js';
-import apiError from './mixins/api_error_root';
-import Cookies from "js-cookie";
+import '@fortawesome/fontawesome-free/css/all.css';
+import 'roboto-fontface/css/roboto/roboto-fontface.css';
+import axios      from 'axios';
+import Cookies    from 'js-cookie';
+import Clipboard  from 'v-clipboard';
+import VueRouter  from 'vue-router';
+import Vuex       from 'vuex';
+import Vue        from 'vue';
 
-import AdsManager from './views/adsmanager/AdsManager'
+import App        from './App.vue';
+import i18n       from './i18n';
+import apiError   from './mixins/api_error_root';
+import vuetify    from './plugins/vuetify';
+import store      from './store/index.js';
+import AdsManager from './views/adsmanager/AdsManager';
 
 const routes = [
   {
-    path: "/adsmanager",
+    path: '/adsmanager',
     component: AdsManager,
   },
 ];
@@ -63,4 +63,4 @@ new Vue({
   store,
   api,
   render: (h) => h(App),
-}).$mount("#app");
+}).$mount('#app');

@@ -1,14 +1,18 @@
 <template>
-  <v-system-bar fixed color="primary" style="padding-left: 72px;">
-    <v-spacer></v-spacer>
+  <v-system-bar
+    fixed
+    color="primary"
+    style="padding-left: 72px;"
+  >
+    <v-spacer />
     
-    <topbar-locale/>
+    <topbar-locale />
 
-    <v-divider vertical></v-divider>
+    <v-divider vertical />
 
     <span class="mx-2">ver. 2020.106.4</span>
     
-    <v-divider vertical></v-divider>
+    <v-divider vertical />
     
     <span class="mx-2">
       deniszhitnyakov
@@ -19,10 +23,11 @@
 
 <script>
   import TopbarLocale from './TopbarLocale';
+
   export default {
     name: 'Topbar',
     components: {
       TopbarLocale
     }
-  }
+  };
 </script>

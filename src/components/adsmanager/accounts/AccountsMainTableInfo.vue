@@ -1,15 +1,15 @@
 <template>
-<div class="my-2">
+  <div class="my-2">
     <div>
-        {{account.name}}
+      {{ account.name }}
     </div>
-    <account-tags :account="account"/>
-</div>
-  
+    <account-tags :account="account" />
+  </div>
 </template>
 
 <script>
     import AccountTags from './AccountsMainTableTags';
+
     export default {
         name: 'AccountsMainTableInfo',
 

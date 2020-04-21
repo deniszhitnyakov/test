@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-chip
-      class="mr-1"
-      dark
       v-for="tag in account.tags"
       :key="`account-${account.id}-tag-${tag}`"
+      class="mr-1"
+      dark
       color="primary"
       outlined
       x-small

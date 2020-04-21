@@ -1,46 +1,58 @@
 <template>
-<div>
-<v-card>
-    <v-card-text>
-      <v-btn
-              fixed
-              dark
-              fab
-              bottom
-              right
-              color="pink"
+  <div>
+    <v-card>
+      <v-card-text>
+        <v-btn
+          fixed
+          dark
+          fab
+          bottom
+          right
+          color="pink"
+        >
+          <v-icon style="margin-left: -80px;">
+            mdi add
+          </v-icon>
+        </v-btn>
+        <v-data-table
+          :headers="cols"
+          :items="accounts.filtered"
+          show-expand
+          :loading="tableLoading"
+          :loading-text="$t('common.loading')"
+        >
+          <template v-slot:item.account="{ item }">
+            <accounts-main-table-info :account="item" />
+          </template>
+          <template v-slot:item.actions="{ item }">
+            <v-icon
+              style="width: 20px;"
+              class="mr-2"
+              small
+              :data-id="item.id"
             >
-              <v-icon style="margin-left: -80px;">mdi add</v-icon>
-            </v-btn>
-      <v-data-table
-        :headers="cols"
-        :items="accounts.filtered"
-        show-expand
-        :loading="tableLoading"
-        :loading-text="$t('common.loading')"
-      >
-        <template v-slot:item.account="{ item }">
-          <accounts-main-table-info :account="item"/>
-        </template>
-        <template v-slot:item.actions="{ item }">
-            <v-icon style="width: 20px;" class="mr-2" small :data-id="item.id">mdi delete</v-icon>
-          <v-icon style="width: 20px;" small :data-id="item.id">mdi edit</v-icon>
-          
-        </template>
-        <template v-slot:expanded-item="{ headers, item }">
-          <td :colspan="headers.length">
-            <div>
-              {{$t('common.dolphinId')}}: {{item.id}}
-            </div>
-            <accounts-main-table-facebook-profile :account="item"/>
-          </td>
-        </template>
-      </v-data-table>
-    </v-card-text>
-  </v-card>
-  
-</div>
-  
+              mdi delete
+            </v-icon>
+            <v-icon
+              style="width: 20px;"
+              small
+              :data-id="item.id"
+            >
+              mdi edit
+            </v-icon>
+          </template>
+          <template v-slot:expanded-item="{ headers, item }">
+            <td :colspan="headers.length">
+              <div>
+                {{ $t('common.dolphinId') }}: {{ item.id }}
+              </div>
+              <accounts-main-table-facebook-profile :account="item" />
+            </td>
+          </template>
+        </v-data-table>
+      </v-card-text>
+    </v-card>
+  </div>
 </template>
 
 <script>
@@ -76,7 +88,7 @@ export default {
       },
       { text: '', value: 'data-table-expand', align: 'right' },
   ]
-    })
+    });
   },
   computed: {
     ...mapGetters({

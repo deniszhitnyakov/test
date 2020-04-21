@@ -53,8 +53,8 @@
       />
       <a-button 
         icon="sync"
-        @click="$store.dispatch('accounts/LOAD_ACCOUNTS')" 
-        class="mr-1"
+        class="mr-1" 
+        @click="$store.dispatch('accounts/LOAD_ACCOUNTS')"
       />
       <a-tooltip title="Добавить аккаунт">
         <a-button

@@ -1,7 +1,7 @@
-import Vue from 'vue';
+import 'material-design-icons-iconfont/dist/material-design-icons.css';
+import ru      from 'vuetify/es5/locale/ru';
 import Vuetify from 'vuetify/lib';
-import ru from 'vuetify/es5/locale/ru';
-import "material-design-icons-iconfont/dist/material-design-icons.css";
+import Vue     from 'vue';
 
 Vue.use(Vuetify);
 
