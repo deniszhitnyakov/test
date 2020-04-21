@@ -1,25 +1,36 @@
 <template>
   <div>
     <v-card>
-      <v-card-text>
+      <v-card-text style="padding: 0px 8px 0px 8px">
         <v-btn
           fixed
           dark
           fab
-          bottom
+          top
           right
           color="pink"
+          x-small
+          style="top: 23px;"
+          @click="$store.dispatch('accounts/openDialog', 'add')"
         >
-          <v-icon style="margin-left: -80px;">
-            mdi add
+          <v-icon>
+            fas fa-plus
           </v-icon>
         </v-btn>
         <v-data-table
+          v-model="selected"
           :headers="cols"
           :items="accounts.filtered"
           show-expand
-          :loading="tableLoading"
+          :loading="loading.mainTable"
           :loading-text="$t('common.loading')"
+          fixed-header
+          :items-per-page="10"
+          :height="innerHeight - 50"
+          show-select
+          :rows-per-page-items="[20, 10, 30, 40]"
+          disable-pagination
+          hide-default-footer
         >
           <template v-slot:item.account="{ item }">
             <accounts-main-table-info :account="item" />
@@ -74,26 +85,29 @@ export default {
   },
   data: function() {
     return ({
+      selected: [],
       cols: [
-      {
-          text: this.$t('common.account'),
-          value: 'account',
-          sortDirections: [ 'descend', 'ascend' ],
-          width: 200,
-      },
-      {
-          value: 'actions',
-          align: 'right',
-          sortable: false
-      },
-      { text: '', value: 'data-table-expand', align: 'right' },
-  ]
+        {
+            text: this.$t('common.account'),
+            value: 'account',
+            sortDirections: [ 'descend', 'ascend' ],
+            width: 200,
+        },
+        {
+            value: 'actions',
+            align: 'right',
+            sortable: false
+        },
+        { text: '', value: 'data-table-expand', align: 'right' },
+      ]
     });
   },
+
   computed: {
     ...mapGetters({
       accounts: 'accounts/ACCOUNTS',
-      tableLoading: 'accounts/loading'
+      loading: 'accounts/loading',
+      innerHeight: 'main/innerHeight'
     }),
     rowSelection() {
       return {

@@ -2,6 +2,7 @@ import {mixinDialogMutations, mixinDialogActions, mixinDialogGetters} from '../.
 
 export default {
   namespaced: true,
+  root: true,
   state: {
     accounts: {
       all: [],
@@ -19,7 +20,10 @@ export default {
       edit: false,
       share: false,
     },
-    loading: false,
+    loading: {
+      mainTable: false,
+      addDialog: false,
+    },
   },
   getters: {
     ...mixinDialogGetters,
@@ -32,8 +36,8 @@ export default {
   mutations: {
     ...mixinDialogMutations,
 
-    SET_LOADING: (state, loading) => {
-      state.loading = loading;
+    SET_LOADING: (state, data) => {
+      state.loading[data.param] = data.value;
     },
     SET_ALL_ACCOUNTS: (state, payload) => {
       state.accounts.all = payload;
@@ -86,8 +90,10 @@ export default {
       state.accounts.forShare = account;
     },
   },
+
   actions: {
     ...mixinDialogActions,
+
     async loadAccount(context, id) {
       const response = await this._vm.api.get(`/accounts/?account_id=${id}`);
       if (typeof response.data.data[0] !== 'undefined') {
@@ -95,21 +101,28 @@ export default {
         context.commit('FILTER_ACCOUNTS');
       }
     },
+
     LOAD_ACCOUNTS(context) {
-      context.commit('SET_LOADING', true);
+      context.commit('SET_LOADING', {param: 'mainTable', value: true});
       this._vm.api('/accounts').then(response => {
         context.commit('SET_ALL_ACCOUNTS', response.data.data);
         context.commit('SET_FILTERED_ACCOUNTS', response.data.data);
-        context.commit('SET_LOADING', false);
+        context.commit('SET_LOADING', {
+          param: 'mainTable',
+          value: false
+        });
       });
     },
+
     SAVE_SELECTED_ACCOUNTS(context, payload) {
       context.commit('SET_SELECTED_ACCOUNTS', payload);
     },
+
     SAVE_FILTERS_NAME(context, payload) {
       context.commit('SET_FILTERS_NAME', payload);
       context.commit('FILTER_ACCOUNTS');
     },
+
     DELETE_ACCOUNTS(context, payload) {
       const hideLoading = this._vm.$message.loading('Удаляю', 0);
       this._vm.api.post('/accounts/delete', {
@@ -128,6 +141,7 @@ export default {
         this._vm.$message.error('Что-то пошло не так');
       });
     },
+
     async checkToken(context, account) {
       const hideLoading = this._vm.$message.loading('Проверяю токен', 0);
       const response = await this._vm.api(`/accounts/check_token/${account.id}`).catch(() => {
@@ -152,9 +166,11 @@ export default {
 
       context.dispatch('loadAccount', account.id);
     },
+
     async setAccountForAssigningTags(context, account) {
       context.commit('SET_ACCOUNT_FOR_ASSIGNING_TAGS', account);
     },
+
     async saveTags(context, account) {
       const hideLoading = this._vm.$message.loading('Сохраняю', 0);
       const response = await this._vm.api.post('/accounts/update_tags', account).catch(() => {
@@ -202,5 +218,38 @@ export default {
         return false;
       }
     },
+
+    async addAccount(context, account) {
+      context.commit('SET_LOADING', {
+        param: 'addDialog',
+        value: true
+      });
+
+      const response = await this._vm.api.post('/accounts/add', account).catch((error) => {
+        context.dispatch('main/apiError', error, {
+          root: true
+        });
+        
+        return false;
+      });
+
+      context.commit('SET_LOADING', {
+        param: 'addDialog',
+        value: false
+      });
+
+      if (typeof response.data.success === 'undefined') {
+        return false;
+      }
+
+      if (response.data.success) {
+        context.commit('CLOSE_DIALOG', 'add');
+        context.dispatch('LOAD_ACCOUNTS');
+      } else {
+        context.dispatch('main/apiError', response.data, {root: true});
+      }
+
+      return response.data.success;
+    }
   }
 };

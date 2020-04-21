@@ -1,0 +1,55 @@
+<template>
+  <v-row justify="center">
+    <v-dialog
+      :value="dialogs.apiError"
+      scrollable
+      max-width="700px"
+    >
+      <v-card>
+        <v-card-title>{{ $t('apiError.title') }}</v-card-title>
+        <v-divider />
+        <v-card-text
+          style="max-height: 500px;"
+          class="pt-3"
+        >
+          {{ $t('apiError.message') }}:
+          <code dark>
+            {{ apiError }}
+          </code>
+        </v-card-text>
+        <v-divider />
+        <v-card-actions>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="$store.dispatch('main/closeDialog', 'apiError')"
+          >
+            {{ $t('common.close') }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-row>
+</template>
+
+<script>
+    import {mapGetters} from 'vuex';
+
+    export default {
+        name: 'ApiError',
+
+        computed: {
+            ...mapGetters({
+                dialogs: 'main/dialogs',
+                apiError: 'main/apiError',
+            })
+        }
+    };
+</script>
+
+<style>
+    code {
+        width: 100%;
+        margin-top: 16px;
+    }
+</style>

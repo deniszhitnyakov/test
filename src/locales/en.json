@@ -1,30 +1,52 @@
 {
-  "common": {
-    "account": "Account",
-    "status": "Status",
-    "loading": "Loading...",
-    "facebookProfile": "Facebook Profile",
-    "dolphinId": "Dolphin ID",
-    "facebookId": "Facebook ID"
-  },
-  "sidebar": {
-    "adsManager": "Ads Manager",
-    "createAds": "Create ads",
-    "comments": "Comments",
-    "tracker": "Tracker",
-    "automationRules": "Automation Rules",
-    "bankCards": "Bank Cards",
-    "settings": "Settings"
-  },
-  "adsmanager": {
-    "tabs": {
-      "users": "Users",
-      "accounts": "Accounts",
-      "cabs": "Cabs",
-      "dates": "Dates",
-      "campaigns": "Campaigns",
-      "adsets": "Adsets",
-      "ads": "Ads"
-    }
-  }
+	"accounts": {
+		"addDialog": {
+			"singleDialogTitle": "Add account"
+		}
+	},
+	"adsmanager": {
+		"tabs": {
+			"accounts": "Accounts",
+			"ads": "Ads",
+			"adsets": "Adsets",
+			"cabs": "Cabs",
+			"campaigns": "Campaigns",
+			"dates": "Dates",
+			"users": "Users"
+		}
+	},
+	"apiError": {
+		"message": "Copy and send this code to product's developer",
+		"title": "API error caused"
+	},
+	"common": {
+		"account": "Account",
+		"add": "Add",
+		"close": "Close",
+		"dolphinId": "Dolphin ID",
+		"existingProxy": "Existing Proxy",
+		"facebookId": "Facebook ID",
+		"facebookProfile": "Facebook Profile",
+		"host": "Host",
+		"loading": "Loading...",
+		"login": "Login",
+		"name": "Name",
+		"password": "Password",
+		"port": "Port",
+		"proxy": "Proxy",
+		"required": "Required",
+		"status": "Status",
+		"tags": "Tags",
+		"type": "Type",
+		"useragent": "Useragent"
+	},
+	"sidebar": {
+		"adsManager": "Ads Manager",
+		"automationRules": "Automation Rules",
+		"bankCards": "Bank Cards",
+		"comments": "Comments",
+		"createAds": "Create ads",
+		"settings": "Settings",
+		"tracker": "Tracker"
+	}
 }

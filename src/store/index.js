@@ -6,6 +6,7 @@ import adsmanager from './modules/adsmanager.js';
 import bundles    from './modules/bundles.js';
 import jobs       from './modules/jobs.js';
 import main       from './modules/main.js';
+import proxy      from './modules/proxy.js';
 import tags       from './modules/tags.js';
 import users      from './modules/users.js';
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
         bundles,
         accounts,
         tags,
-        users
+        users,
+        proxy
     },
 });

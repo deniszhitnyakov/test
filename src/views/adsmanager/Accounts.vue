@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <topbar /> -->
+    <single-add-dialog v-if="dialogs.add" />
     <main-table />
     <assign-tags-dialog 
       v-if="dialogs.assignTags"
@@ -12,12 +12,13 @@
 </template>
 
 <script>
-import {mapGetters}     from 'vuex';
+import {mapGetters}         from 'vuex';
 
 // import Topbar           from '../../components/adsmanager/accounts/AccountTopbar';
-import AssignTagsDialog from '../../components/adsmanager/accounts/AccountsAssignTagsDialog';
-import MainTable        from '../../components/adsmanager/accounts/AccountsMainTable';
-import ShareDialog      from '../../components/adsmanager/accounts/AccountsShareDialog';
+import AssignTagsDialog     from '../../components/adsmanager/accounts/AccountsAssignTagsDialog';
+import MainTable            from '../../components/adsmanager/accounts/AccountsMainTable';
+import ShareDialog          from '../../components/adsmanager/accounts/AccountsShareDialog';
+import SingleAddDialog      from '../../components/adsmanager/accounts/AccountsSingleAddDialog';
 
 export default {
   name: 'Accounts',
@@ -25,7 +26,8 @@ export default {
     // Topbar,
     MainTable,
     AssignTagsDialog,
-    ShareDialog
+    ShareDialog,
+    SingleAddDialog
   },
   computed: {
     ...mapGetters({

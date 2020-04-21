@@ -1,30 +1,52 @@
 {
-    "common": {
-        "account": "Аккаунт",
-        "status": "Статус",
-        "loading": "Загрузка...",
-        "facebookProfile": "Facebook профиль",
-        "dolphinId": "Dolphin ID",
-        "facebookId": "Facebook ID"
-    },
-    "sidebar": {
-        "adsManager": "Ads Manager",
-        "createAds": "Залить рекламу",
-        "comments": "Комментарии",
-        "tracker": "Трекер",
-        "automationRules": "Авто-правила",
-        "bankCards": "Банковские карты",
-        "settings": "Настройки"
-    },
-    "adsmanager": {
-        "tabs": {
-            "users": "Пользователи",
-            "accounts": "Аккаунты",
-            "cabs": "Кабинеты",
-            "dates": "Даты",
-            "campaigns": "Кампании",
-            "adsets": "Адсеты",
-            "ads": "Объявления"
-        }
-    }
+	"accounts": {
+		"addDialog": {
+			"singleDialogTitle": "Добавить аккаунт"
+		}
+	},
+	"adsmanager": {
+		"tabs": {
+			"accounts": "Аккаунты",
+			"ads": "Объявления",
+			"adsets": "Адсеты",
+			"cabs": "Кабинеты",
+			"campaigns": "Кампании",
+			"dates": "Даты",
+			"users": "Пользователи"
+		}
+	},
+	"apiError": {
+		"message": "Скопируйте и отправьте этот код разработчику",
+		"title": "Ошибка API"
+	},
+	"common": {
+		"account": "Аккаунт",
+		"add": "Добавить",
+		"close": "Закрыть",
+		"dolphinId": "Dolphin ID",
+		"existingProxy": "Существующий прокси",
+		"facebookId": "Facebook ID",
+		"facebookProfile": "Facebook профиль",
+		"host": "Хост",
+		"loading": "Загрузка...",
+		"login": "Логин",
+		"name": "Название",
+		"password": "Пароль",
+		"port": "Порт",
+		"proxy": "Прокси",
+		"required": "Обязательно",
+		"status": "Статус",
+		"tags": "Теги",
+		"type": "Тип",
+		"useragent": "Useragent"
+	},
+	"sidebar": {
+		"adsManager": "Ads Manager",
+		"automationRules": "Авто-правила",
+		"bankCards": "Банковские карты",
+		"comments": "Комментарии",
+		"createAds": "Залить рекламу",
+		"settings": "Настройки",
+		"tracker": "Трекер"
+	}
 }

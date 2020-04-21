@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    floating
+    
     expand-on-hover
     dark
     mini-variant
@@ -10,7 +10,7 @@
       nav
     >
       <v-list-item-group
-          
+
         active-class="blue--text text--accent-4"
       >
         <v-list-item :to="{path: '/adsmanager'}">

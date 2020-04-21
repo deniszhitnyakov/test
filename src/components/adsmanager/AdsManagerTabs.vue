@@ -3,6 +3,7 @@
     centered
     grow
     :value="activeTab.tab"
+    :height="32"
     @change="changeTab"
   >
     <v-tab key="tab-users">
