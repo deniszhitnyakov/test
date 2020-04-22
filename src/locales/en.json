@@ -1,5 +1,66 @@
 {
 	"adsmanager": {
+		"cols": {
+			"action_app_custom_event": {
+				"Frequency": "Frequency",
+				"fb_mobile_achievement_unlocked": "Mobile App Feature Unlocks",
+				"fb_mobile_activate_app": "Mobile App Starts",
+				"fb_mobile_add_payment_info": "Mobile App Payment Details",
+				"fb_mobile_add_to_cart": "Mobile App Adds To Cart",
+				"fb_mobile_add_to_wishlist": "Mobile App Adds to Wishlist",
+				"fb_mobile_complete_registration": "Mobile App Registrations",
+				"fb_mobile_content_view": "Mobile App Content Views",
+				"fb_mobile_initiated_checkout": "Mobile App Checkouts",
+				"fb_mobile_level_achieved": "Mobile App Achievements",
+				"fb_mobile_purchase": "Mobile App Purchases",
+				"fb_mobile_rate": "Mobile App Ratings",
+				"fb_mobile_search": "Mobile App Searchs",
+				"fb_mobile_spent_credits": "Mobile App Credit Spends",
+				"fb_mobile_tutorial_completion": "Mobile App Tutorial Completions",
+				"other": "Other Mobile App Actions"
+			},
+			"action_app_install": "App Installs",
+			"action_app_use": "App Uses",
+			"action_checkin": "Check-ins",
+			"action_comment": "Post Comments",
+			"action_credit_spent": "Credit Spends",
+			"action_games": {
+				"plays": "Game Plays"
+			},
+			"action_landing_page_view": "Landing Page Views",
+			"action_like": "Page Likes",
+			"action_link_click": "Link Clicks",
+			"action_mobile_app_install": "Mobile App Installs",
+			"action_offsite_conversion": {
+				"fb_pixel_add_payment_info": "Adds Payment Info",
+				"fb_pixel_add_to_cart": "Adds To Cart",
+				"fb_pixel_add_to_wishlist": "Adds To Wishlist",
+				"fb_pixel_complete_registration": "Completed Registration",
+				"fb_pixel_initiate_checkout": "Initiates Checkout",
+				"fb_pixel_lead": "Leads",
+				"fb_pixel_purchase": "Purchases",
+				"fb_pixel_search": "Searchs",
+				"fb_pixel_view_content": "Views Content"
+			},
+			"action_outbound_click": "Outbound Clicks",
+			"action_photo_view": "Page Photo Views",
+			"action_post": "Post Shares",
+			"action_post_reaction": "Post Reactions",
+			"action_results": "Results",
+			"action_rsvp": "Event Responses",
+			"action_video_view": "3-Second Video Views",
+			"approve": "Approve",
+			"billing": "Cab billing",
+			"cab_limit": "Cab limit",
+			"cpm": "CPM",
+			"frequency": "",
+			"impressions": "Impressions",
+			"profit": "Profit",
+			"reach": "Reach",
+			"revenue": "Revenue",
+			"roi": "ROI",
+			"spend": "Spend"
+		},
 		"tabs": {
 			"accounts": "Accounts",
 			"ads": "Ads",
@@ -11,9 +72,12 @@
 		}
 	},
 	"common": {
+		"access_token": "Access token",
 		"account": "Account",
 		"add": "Add",
 		"close": "Close",
+		"conversionRate": "CR",
+		"cpa": "CPA",
 		"dolphinId": "Dolphin ID",
 		"existingProxy": "Existing Proxy",
 		"facebookId": "Facebook ID",
@@ -25,7 +89,9 @@
 		"password": "Password",
 		"port": "Port",
 		"proxy": "Proxy",
+		"quantity": "QTY",
 		"required": "Required",
+		"save": "Save",
 		"status": "Status",
 		"tags": "Tags",
 		"type": "Type",
@@ -33,6 +99,31 @@
 	},
 	"dialogs": {
 		"accounts": {
+			"assignTags": {
+				"success": "Tags saved",
+				"title": "Assign tags to [{accountName}] account"
+			},
+			"checkToken": {
+				"connectionError": "Connection error. In most cases - bad proxy.",
+				"ok": "Token is valid",
+				"tokenError": "Token is invalid"
+			},
+			"delete": {
+				"success": "Deleted"
+			},
+			"edit": {
+				"title": "Edit [{accountName}] account"
+			},
+			"share": {
+				"permissions": {
+					"edit": "Edit",
+					"read": "Read",
+					"share": "Share",
+					"stat": "View stats"
+				},
+				"success": "Saved",
+				"title": "Share [{accountName}] account"
+			},
 			"singleAdd": {
 				"title": "Add account"
 			}
@@ -40,7 +131,15 @@
 		"apiError": {
 			"message": "Copy and send this code to product's developer",
 			"title": "API error caused"
-		}
+		},
+		"confirm": "Confirm please"
+	},
+	"filters": {
+		"dates": "Dates",
+		"more": "+ more filters",
+		"searchByName": "Search by name",
+		"status": "Status filter",
+		"tags": "Tags filter"
 	},
 	"sidebar": {
 		"adsManager": "Ads Manager",

@@ -1,5 +1,66 @@
 {
 	"adsmanager": {
+		"cols": {
+			"action_app_custom_event": {
+				"Frequency": "Частота",
+				"fb_mobile_achievement_unlocked": "Запуски приложения",
+				"fb_mobile_activate_app": "Запуски приложения",
+				"fb_mobile_add_payment_info": "Ввод платежных данных",
+				"fb_mobile_add_to_cart": "Добавления в корзину",
+				"fb_mobile_add_to_wishlist": "Добавления в список желаний",
+				"fb_mobile_complete_registration": "Регистрации",
+				"fb_mobile_content_view": "Просмотры контента",
+				"fb_mobile_initiated_checkout": "Оформления заказов",
+				"fb_mobile_level_achieved": "Достижения",
+				"fb_mobile_purchase": "Заказы",
+				"fb_mobile_rate": "Оценки",
+				"fb_mobile_search": "Поиски",
+				"fb_mobile_spent_credits": "Потраченные кредиты",
+				"fb_mobile_tutorial_completion": "Завершения обучения",
+				"other": "Прочие действия"
+			},
+			"action_app_install": "Установки",
+			"action_app_use": "Использования",
+			"action_checkin": "Чекины",
+			"action_comment": "Комментарии",
+			"action_credit_spent": "Потраченные кредиты",
+			"action_games": {
+				"plays": "Кол-во игр"
+			},
+			"action_landing_page_view": "Просмотры лендинга",
+			"action_like": "Лайки страницы",
+			"action_link_click": "Клики по ссылке",
+			"action_mobile_app_install": "Установки",
+			"action_offsite_conversion": {
+				"fb_pixel_add_payment_info": "Добавления платежный данных",
+				"fb_pixel_add_to_cart": "Добавления в корзину",
+				"fb_pixel_add_to_wishlist": "Добавления в список желаний",
+				"fb_pixel_complete_registration": "Завершение регистрации",
+				"fb_pixel_initiate_checkout": "Оформления заказов",
+				"fb_pixel_lead": "Лиды",
+				"fb_pixel_purchase": "Покупки",
+				"fb_pixel_search": "Поиски",
+				"fb_pixel_view_content": "Просмотры контента"
+			},
+			"action_outbound_click": "Исходящие клики",
+			"action_photo_view": "Просмотры фото страницы",
+			"action_post": "Репосты",
+			"action_post_reaction": "Реакции на пост",
+			"action_results": "Результаты",
+			"action_rsvp": "Реакции на событие",
+			"action_video_view": "3-секундные просмотры видео",
+			"approve": "Апрув",
+			"billing": "Биллинг кабинета",
+			"cab_limit": "Лимит кабинета",
+			"cpm": "CPM",
+			"frequency": "",
+			"impressions": "Показы",
+			"profit": "Прибыль",
+			"reach": "Охват",
+			"revenue": "Доход",
+			"roi": "ROI",
+			"spend": "Расход"
+		},
 		"tabs": {
 			"accounts": "Аккаунты",
 			"ads": "Объявления",
@@ -11,9 +72,12 @@
 		}
 	},
 	"common": {
+		"access_token": "Токен",
 		"account": "Аккаунт",
 		"add": "Добавить",
 		"close": "Закрыть",
+		"conversionRate": "CR",
+		"cpa": "CPA",
 		"dolphinId": "Dolphin ID",
 		"existingProxy": "Существующий прокси",
 		"facebookId": "Facebook ID",
@@ -25,7 +89,9 @@
 		"password": "Пароль",
 		"port": "Порт",
 		"proxy": "Прокси",
+		"quantity": "кол-во",
 		"required": "Обязательно",
+		"save": "Сохранить",
 		"status": "Статус",
 		"tags": "Теги",
 		"type": "Тип",
@@ -33,6 +99,31 @@
 	},
 	"dialogs": {
 		"accounts": {
+			"assignTags": {
+				"success": "Теги сохранены",
+				"title": "Назначить теги на аккаунт [{accountName}]"
+			},
+			"checkToken": {
+				"connectionError": "Ошибка соединения с аккаунтом. Вероятно, проблема с прокси.",
+				"ok": "Токен в порядке",
+				"tokenError": "Токен отлетел"
+			},
+			"delete": {
+				"success": "Удалил"
+			},
+			"edit": {
+				"title": "Редактирование аккаунта [{accountName}]"
+			},
+			"share": {
+				"permissions": {
+					"edit": "Редактирование",
+					"read": "Просмотр",
+					"share": "Раздавать",
+					"stat": "Просмотр статистики"
+				},
+				"success": "Сохранил",
+				"title": "Раздача прав на аккаунт [{accountName}]"
+			},
 			"singleAdd": {
 				"title": "Добавить аккаунт"
 			}
@@ -40,7 +131,15 @@
 		"apiError": {
 			"message": "Скопируйте и отправьте этот код разработчику",
 			"title": "Ошибка API"
-		}
+		},
+		"confirm": "Подтверди плиз"
+	},
+	"filters": {
+		"dates": "Даты",
+		"more": "+ все фильтры",
+		"searchByName": " Поиск по названию",
+		"status": "Фильтр по статусу",
+		"tags": "Фильтр по тегам"
 	},
 	"sidebar": {
 		"adsManager": "Ads Manager",

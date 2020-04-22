@@ -1,18 +1,22 @@
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'roboto-fontface/css/roboto/roboto-fontface.css';
-import axios      from 'axios';
-import Cookies    from 'js-cookie';
-import Clipboard  from 'v-clipboard';
-import VueRouter  from 'vue-router';
-import Vuex       from 'vuex';
-import Vue        from 'vue';
+import 'vue2-daterange-picker/dist/vue2-daterange-picker.css';
+import axios                  from 'axios';
+import Cookies                from 'js-cookie';
+import moment                 from 'moment';
+import Clipboard              from 'v-clipboard';
+import VueRouter              from 'vue-router';
+import Vuex                   from 'vuex';
+import Vue                    from 'vue';
 
-import App        from './App.vue';
-import i18n       from './i18n';
-import apiError   from './mixins/api_error_root';
-import vuetify    from './plugins/vuetify';
-import store      from './store/index.js';
-import AdsManager from './views/adsmanager/AdsManager';
+import App                    from './App.vue';
+import i18n                   from './i18n';
+import apiError               from './mixins/api_error_root';
+import vuetify                from './plugins/vuetify';
+import store                  from './store/index.js';
+import AdsManager             from './views/adsmanager/AdsManager';
+
+Vue.prototype.monent = moment;
 
 const routes = [
   {
@@ -50,7 +54,6 @@ Vue.prototype.api = api;
 Vue.prototype.apiError = apiError;
 Vue.prototype.baseUrl = baseUrl;
 store.api = api;
-console.log(store);
 
 Vue.use(Vuex);
 Vue.use(VueRouter);

@@ -1,5 +1,5 @@
 export default {
-    'ACTIVE': 'green',
-    'NEW': 'orange',
-    'TOKEN_ERROR': 'red',
+    'ACTIVE': 'success',
+    'NEW': 'warning',
+    'TOKEN_ERROR': 'error',
 };

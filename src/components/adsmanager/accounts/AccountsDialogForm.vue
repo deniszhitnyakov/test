@@ -40,7 +40,7 @@
           <v-col cols="12">
             <v-textarea
               v-model="newAccount.access_token"
-              label="Access token"
+              :label="$t('common.access_token')"
               :rules="validation.rules.access_token"
             />
           </v-col>
@@ -93,7 +93,7 @@
                   <template v-slot:item="{item}">
                     [{{ item.accounts_count }}]
                     {{ 
-                      item.name !== null ?
+                      typeof item.name !== 'undefined' && item.name !== null ?
                         item.name :
                         item.login === null ?
                           `${item.ip}:${item.port}` :
@@ -103,7 +103,7 @@
                   <template v-slot:selection="{item}">
                     [{{ item.accounts_count }}]
                     {{ 
-                      item.name !== null ?
+                      typeof item.name !== 'undefined' && item.name !== null ?
                         item.name :
                         item.login === null ?
                           `${item.ip}:${item.port}` :
@@ -196,15 +196,11 @@
             edit: {
                 type: Boolean,
                 default: false,
+            },
+            account: {
+              type: Object,
+              default: () => ({})
             }
-        },
-
-        computed: {
-            ...mapGetters({
-                dialogs: 'accounts/dialogs',
-                tags: 'tags/tags',
-                proxy: 'proxy/proxy'
-            })
         },
 
         data: function() {
@@ -255,27 +251,21 @@
             });
         },
 
+        computed: {
+            ...mapGetters({
+                dialogs: 'accounts/dialogs',
+                tags: 'tags/tags',
+                proxy: 'proxy/proxy'
+            })
+        },
+
         watch: {
             'show.useragent': function() {
                 if (this.show.useragent === false) this.newAccount.useragent = '';
             },
 
             'show.proxy': function() {
-                if (this.show.useragent === false) {
-                    this.newAccount.proxy = {
-                        name: '',
-                        type: '',
-                        ip: '',
-                        port: '',
-                        login: '',
-                        password: '',
-                    };
-                }
-            },
-
-            existingProxy: function() {
-                const proxy = this.proxy.all.find(p => p.id === this.existingProxy);
-                if (typeof proxy === 'undefined') {
+                if (this.show.proxy === false) {
                     this.newAccount.proxy = {
                         name: '',
                         type: '',
@@ -285,9 +275,14 @@
                         password: '',
                     };
                 } else {
-                    this.newAccount.proxy = {...proxy};
+                  if (this.existingProxy) { 
+                    this.loadDataFromExistingProxy();
+                  }
                 }
-                
+            },
+
+            existingProxy: function() {
+                this.loadDataFromExistingProxy();
             },
 
             newAccount: {
@@ -305,18 +300,48 @@
         created() {
             this.$store.dispatch('tags/loadTags');
             this.$store.dispatch('proxy/loadProxy');
+
+            if (this.edit) {
+              if (this.account.proxy_id !== null) {
+               this.show.proxy = true;
+               this.existingProxy = this.account.proxy_id;
+              }
+
+              this.newAccount = {...this.account};
+              if (this.newAccount.user_agent !== null && this.newAccount.user_agent.length > 0) {
+                this.show.useragent = true;
+                this.newAccount.useragent = this.newAccount.user_agent;
+              }
+            }
         },
 
         methods: {
             searchExistingProxy(item, queryText) {
                 const q = queryText.toLowerCase();
-                if (item.name && item.name.toString().toLowerCase().search(q) !== -1) return true;
+                if (typeof item.name !== undefined && item.name && item.name.toString().toLowerCase().search(q) !== -1) return true;
                 if (item.ip && item.ip.toString().toLowerCase().search(q) !== -1) return true;
                 if (item.port && item.port.toString().toLowerCase().search(q) !== -1) return true;
                 if (item.login && item.login.toString().toLowerCase().search(q) !== -1) return true;
                 if (item.password && item.password.toString().toLowerCase().search(q) !== -1) return true;
 
                 return false;
+            },
+
+            loadDataFromExistingProxy() {
+              if (typeof this.existingProxy === 'undefined') {
+                  this.newAccount.proxy = {
+                        name: '',
+                        type: '',
+                        ip: '',
+                        port: '',
+                        login: '',
+                        password: '',
+                    };
+                }
+                const proxy = this.proxy.all.find(p => p.id === this.existingProxy);
+                if (proxy) {
+                    this.newAccount.proxy = {...proxy};
+                } 
             }
         }
     };

@@ -1,101 +1,101 @@
 <template>
-  <a-drawer
-    placement="right"
-    :closable="true"
-    :visible="true"
-    width="350"
-    @close="closeDialog"
+  <v-dialog
+    :value="dialogs.share"
+    max-width="500px"
+    scrollable
   >
-    <template slot="title">
-      Раздача прав на аккаунт
-      <a-tag color="blue">
-        {{ account.name }}
-      </a-tag>
-    </template>
+    <v-card :loading="loading.share">
+      <v-card-title>
+        <span class="headline">
+          {{ $t('dialogs.accounts.share.title', {accountName: account.name}) }}
+        </span>
+      </v-card-title>
+      <v-card-text style="max-height: 700px;">
+        <v-container>
+          <v-row>
+            <v-col
+              cols="12"
+            >
+              <v-treeview
+                v-model="newAccount.permissions"
+                selectable
+                dense
+                dark
+                open-on-click
+                selected-color="primary"
+                :items="items"
+                :open.sync="openedItems"
+              >
+                <template v-slot:prepend="{ item }">
+                  <!-- ИКОНКА - ПОЛЬЗОВАТЕЛЬ -->
+                  <v-icon
+                    v-if="item.id.search('user') !== -1"
+                    size="16"
+                    class="d-block text-center"
+                  >
+                    fas fa-user
+                  </v-icon>
 
-    <a-tree
-      v-model="newAccount.permissions"
-      checkable
-      :show-line="false"
-      :show-icon="false"
-      :default-expand-all="true"
-      style="padding-bottom: 50px;"
-    >
-      <a-tree-node
-        v-for="user in users"
-        :key="`permissions-for-user-${user.id}`"
-      >
-        <template slot="title">
-          <a-icon type="user" />
-          {{ user.display_name ? user.display_name : user.login }}
-        </template>
-        
-        <a-tree-node
-          :key="`${user.id}-read`"
-        >
-          <span slot="title">
-            <a-icon type="eye" /> 
-            Просмотр
-          </span>
-        </a-tree-node>
-        
-        <a-tree-node
-          :key="`${user.id}-edit`"
-        >
-          <span slot="title">
-            <a-icon type="edit" /> 
-            Редактирование
-          </span>
-        </a-tree-node>
+                  <!-- ИКОНКА - ПРОСМОТР -->
+                  <v-icon
+                    v-if="item.id.search('read') !== -1"
+                    size="16"
+                    class="d-block text-center"
+                  >
+                    fas fa-eye
+                  </v-icon>
 
-        <a-tree-node
-          :key="`${user.id}-stat`"
-        >
-          <span slot="title">
-            <a-icon type="bar-chart" /> 
-            Статистика
-          </span>
-        </a-tree-node>
+                  <!-- ИКОНКА - РЕДАКТИРОВАНИЕ -->
+                  <v-icon
+                    v-if="item.id.search('edit') !== -1"
+                    size="16"
+                    class="d-block text-center"
+                  >
+                    fas fa-pencil-alt
+                  </v-icon>
 
-        <a-tree-node
-          :key="`${user.id}-share`"
-        >
-          <span slot="title">
-            <a-icon type="share-alt" /> 
-            Раздавать
-          </span>
-        </a-tree-node>
-      </a-tree-node>
-    </a-tree>
+                  <!-- ИКОНКА - ПРОСМОТР СТАТИСТИКИ -->
+                  <v-icon
+                    v-if="item.id.search('stat') !== -1"
+                    size="16"
+                    class="d-block text-center"
+                  >
+                    fas fa-chart-bar
+                  </v-icon>
 
-    <div
-      :style="{
-        position: 'absolute',
-        right: 0,
-        bottom: 0,
-        width: '100%',
-        borderTop: '1px solid #e9e9e9',
-        padding: '10px 16px',
-        background: '#fff',
-        textAlign: 'right',
-        zIndex: 1,
-      }"
-    >
-      <a-button
-        :style="{ marginRight: '8px' }"
-        @click="closeDialog"
-      >
-        Отмена
-      </a-button>
-      <a-button
-        type="primary"
-        :disabled="JSON.stringify(account.permissions) === JSON.stringify(newAccount.permissions)"
-        @click="savePermissions"
-      >
-        Сохранить
-      </a-button>
-    </div>
-  </a-drawer>
+                  <!-- ИКОНКА - РАЗДАВАТЬ -->
+                  <v-icon
+                    v-if="item.id.search('share') !== -1"
+                    size="16"
+                    class="d-block text-center"
+                  >
+                    fas fa-share-alt
+                  </v-icon>
+                </template>
+              </v-treeview>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer />
+        <v-btn
+          color="blue darken-1"
+          text
+          @click="$store.dispatch('accounts/closeDialog', 'share')"
+        >
+          {{ $t('common.close') }}
+        </v-btn>
+        <v-btn
+          color="blue darken-1"
+          text
+          @click="savePermissions"
+        >
+          {{ $t('common.save') }}
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
@@ -103,29 +103,67 @@
 
     export default {
         name: 'AccountsShareDialog',
+
+        data: () => ({
+            newAccount: {},
+        }),
+
         computed: {
             ...mapGetters({
                 account: 'accounts/forShare',
                 users: 'users/allUsers',
+                dialogs: 'accounts/dialogs',
+                loading: 'accounts/loading',
+                profile: 'main/profile',
             }),
+
+            openedItems() {
+              let opened = [];
+
+              this.users.forEach((user) =>  {
+                if (user.id === this.profile.id) return;
+                if (!Array.isArray(this.newAccount.permissions)) return false;
+                
+                const permission = this.newAccount.permissions.find(p => {
+                  return p.search(`${user.id}-`) === 0;
+                });
+
+                if (permission) {
+                  opened.push(`user-${user.id}`);
+                }
+              });
+
+              return opened;
+            },
+
+            items() {
+              let items = [];
+
+              this.users.forEach((user) =>  {
+                if (user.id === this.profile.id) return;
+                let item = {
+                  id: 'user-' + user.id,
+                  name: user.display_name !== null ? user.display_name : user.login
+                };
+                item.children = [
+                  { id: `${user.id}-read`, name: this.$t('dialogs.accounts.share.permissions.read') },
+                  { id: `${user.id}-edit`, name: this.$t('dialogs.accounts.share.permissions.edit') },
+                  { id: `${user.id}-stat`, name: this.$t('dialogs.accounts.share.permissions.stat') },
+                  { id: `${user.id}-share`, name: this.$t('dialogs.accounts.share.permissions.share') },
+                ];
+
+                items.push(item);
+              });
+
+              return items;
+            }
         },
-        data: () => ({
-            newAccount: {},
-        }),
+        
         created() {
             this.newAccount = {...this.account};
         },
+        
         methods: {
-            closeDialog() {
-                if (JSON.stringify(this.account.permissions) === JSON.stringify(this.newAccount.permissions)) {
-                    this.$store.dispatch('accounts/closeDialog', 'share');
-                } else {
-                    if (confirm('Отменить изменения?')) {
-                        this.$store.dispatch('accounts/closeDialog', 'share');
-                    }
-                }
-            },
-
             async savePermissions() {
                 const success = await this.$store.dispatch('accounts/savePermissions', this.newAccount);
                 if (success) {

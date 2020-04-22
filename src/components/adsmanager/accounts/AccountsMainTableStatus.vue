@@ -1,11 +1,14 @@
 <template>
   <div>
-    <a-tag
+    <v-chip
       v-if="typeof colors[account.status] !== 'undefined'"
+      label
       :color="colors[account.status]"
+      x-small
+      outlined
     >
       {{ account.status }}
-    </a-tag>
+    </v-chip>
     <span v-if="typeof colors[account.status] === 'undefined'">
       {{ account.status }}
     </span>

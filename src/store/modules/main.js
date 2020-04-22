@@ -7,15 +7,19 @@ import {
 export default {
   namespaced: true,
   state: {
-    apiUrl: 'https://my.dolphin.ru.com/new/',
-    user: {},
+    profile: {},
     breadcrumbs: [],
     sidebarCollapsed: false,
     dialogs: {
       apiError: false,
+      alert: false,
     },
     apiError: '',
     innerHeight: 0,
+    alert: {
+      color: '',
+      message: '',
+    }
   },
   getters: {
     ...mixinDialogGetters,
@@ -25,7 +29,12 @@ export default {
     },
 
     apiError: state => state.apiError,
-    innerHeight: state => state.innerHeight
+
+    innerHeight: state => state.innerHeight,
+
+    alert: state => state.alert,
+
+    profile: state => state.profile,
   },
   mutations: {
     ...mixinDialogMutations,
@@ -48,11 +57,36 @@ export default {
 
     SET_INNER_HEIGHT: (state, height) => {
       state.innerHeight = height;
+    },
+
+    SET_ALERT: (state, alert) => {
+      state.alert = alert;
+    },
+
+    OPEN_ALERT: (state) => {
+      state.dialogs.alert = true;
+    },
+
+    CLOSE_ALERT: (state) => {
+      state.dialogs.alert = false;
+    },
+
+    SET_PROFILE: (state, profile) => {
+      state.profile = profile;
     }
   },
 
   actions: {
     ...mixinDialogActions,
+
+    async loadProfile(context) {
+      const response = await this._vm.api('/profile');
+      if (typeof response.data.data !== 'undefined') {
+        context.commit('SET_PROFILE', response.data.data);
+      }
+
+      return true;
+    },
 
     async apiError(context, error) {
       context.commit('SET_API_ERROR', error);
@@ -61,6 +95,19 @@ export default {
 
     async setInnerHeight(context, height) {
       context.commit('SET_INNER_HEIGHT', height);
+    },
+
+    async alert(context, alert) {
+      context.commit('CLOSE_ALERT');
+      context.commit('SET_ALERT', alert);
+      context.commit('OPEN_ALERT');
+      setTimeout(() => {
+        context.commit('CLOSE_ALERT');
+      }, 3000);
+    },
+
+    async closeAlert(context) {
+      context.commit('CLOSE_ALERT');
     }
   }
 };

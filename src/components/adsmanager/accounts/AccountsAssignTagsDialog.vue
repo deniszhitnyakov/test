@@ -1,69 +1,54 @@
 <template>
-  <a-drawer
-    placement="right"
-    :closable="true"
-    :visible="true"
-    width="500"
-    @close="$store.dispatch('accounts/closeDialog', 'assignTags')"
+  <v-dialog
+    :value="dialogs.assignTags"
+    persistent
+    max-width="600px"
   >
-    <template slot="title">
-      Назначение тегов аккаунту
-      <a-tag color="blue">
-        {{ account.name }}
-      </a-tag>
-    </template>
-
-    <div class="my-1">
-      <div class="text-small">
-        <strong>
-          Теги
-        </strong>
-      </div>
-      <div>
-        <a-select
-          v-model="newAccount.tags"
-          mode="tags"
-          class="w-100"
+    <v-card :loading="loading.assignTagsDialog">
+      <v-card-title>
+        <span class="headline">
+          {{ $t('dialogs.accounts.assignTags.title', {accountName: newAccount.name}) }}
+        </span>
+      </v-card-title>
+      <v-card-text>
+        <v-container>
+          <v-row>
+            <v-col
+              cols="12"
+            >
+              <v-combobox
+                v-model="newAccount.tags"
+                :label="$t('common.tags')"
+                :items="tags.all"
+                multiple
+                chips
+                dark
+                deletable-chips
+                clearable
+              />
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer />
+        <v-btn
+          color="blue darken-1"
+          text
+          @click="$store.dispatch('accounts/closeDialog', 'assignTags')"
         >
-          <a-select-option
-            v-for="tag in tags.all"
-            :key="`tag-${tag}`"
-            :value="tag"
-          >
-            {{ tag }}
-          </a-select-option>
-        </a-select>
-      </div>
-    </div>
-
-    <div
-      :style="{
-        position: 'absolute',
-        right: 0,
-        bottom: 0,
-        width: '100%',
-        borderTop: '1px solid #e9e9e9',
-        padding: '10px 16px',
-        background: '#fff',
-        textAlign: 'right',
-        zIndex: 1,
-      }"
-    >
-      <a-button
-        :style="{ marginRight: '8px' }"
-        @click="$store.dispatch('accounts/closeDialog', 'assignTags')"
-      >
-        Отмена
-      </a-button>
-      <a-button
-        type="primary"
-        :disabled="JSON.stringify(account.tags) === JSON.stringify(newAccount.tags)"
-        @click="saveTags"
-      >
-        Сохранить
-      </a-button>
-    </div>
-  </a-drawer>
+          {{ $t('common.close') }}
+        </v-btn>
+        <v-btn
+          color="blue darken-1"
+          text
+          @click="saveTags"
+        >
+          {{ $t('common.save') }}
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
@@ -71,12 +56,7 @@
 
     export default {
         name: 'AccountsAssignTagsDialog',
-        computed: {
-            ...mapGetters({
-                tags: 'tags/tags',
-                account: 'accounts/accountForAssigningTags'
-            })
-        },
+        
         data: () => (
             {
                 newAccount: {
@@ -84,10 +64,21 @@
                 }
             }
         ),
+
+        computed: {
+            ...mapGetters({
+                dialogs: 'accounts/dialogs',
+                tags: 'tags/tags',
+                account: 'accounts/accountForAssigningTags',
+                loading: 'accounts/loading'
+            })
+        },
+
         created() {
             this.newAccount = {...this.account};
             this.$store.dispatch('tags/loadTags');
         },
+
         methods: {
             async saveTags() {
                 const success = await this.$store.dispatch('accounts/saveTags', this.newAccount);

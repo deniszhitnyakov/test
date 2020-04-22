@@ -1,3 +1,4 @@
+import i18n                                                           from '../../i18n';
 import {mixinDialogMutations, mixinDialogActions, mixinDialogGetters} from '../../mixins/vuex_dialogs';
 
 export default {
@@ -10,9 +11,11 @@ export default {
       filtered: [],
       forAssigningTags: {},
       forShare: {},
+      forEdit: {},
     },
     filters: {
-      name: ''
+      name: '',
+      statuses: typeof localStorage.getItem('accounts-filters-statuses') === 'undefined' ? [] : JSON.parse(localStorage.getItem('accounts-filters-statuses')),
     },
     dialogs: {
       assignTags: false,
@@ -23,6 +26,9 @@ export default {
     loading: {
       mainTable: false,
       addDialog: false,
+      assignTagsDialog: false,
+      share: false,
+      editDialog: false,
     },
   },
   getters: {
@@ -31,6 +37,7 @@ export default {
     FILTERS: state => state.filters,
     accountForAssigningTags: state => state.accounts.forAssigningTags,
     forShare: state => state.accounts.forShare,
+    forEdit: state => state.accounts.forEdit,
     loading: state => state.loading,
   },
   mutations: {
@@ -53,22 +60,43 @@ export default {
         return payload.indexOf(account.id) === -1;
       });
     },
-    FILTER_ACCOUNTS: state => {
+    FILTER_ACCOUNTS (state) {
       let accounts = state.accounts.all;
       const filters = state.filters;
 
-      if (filters.name.length > 0) {
-        accounts = accounts.filter(account => {
-          return (
-            account.name.toLowerCase().search(filters.name.toLowerCase()) !== -1
-          );
+      if (filters.name) {
+        if (filters.name.length > 0) {
+          accounts = accounts.filter(account => {
+            return (
+              account.name.toString().toLowerCase().search(filters.name.toLowerCase()) !== -1
+            );
+          });
+        }
+      }
+
+      if (filters.statuses && filters.statuses.length > 0) {
+        accounts = accounts.filter(function(account) {
+          return filters.statuses.indexOf(account.status) > -1;
         });
       }
+
+      if (this.state.adsmanager.filters.tags && this.state.adsmanager.filters.tags.length > 0) {
+        accounts = accounts.filter(account => {
+          return this.state.adsmanager.filters.tags.some(tags => account.tags.indexOf(tags) > -1);
+        });
+      }
+      
       state.accounts.filtered = accounts;
     },
     SET_FILTERS_NAME: (state, payload) => {
       state.filters.name = payload;
     },
+
+    SET_FILTERS_STATUSES: (state, payload) => {
+      state.filters.statuses = payload;
+      localStorage.setItem('accounts-filters-statuses', JSON.stringify(payload));
+    },
+
     UPDATE_ACCOUNT: (state, newAccount) => {
       state.accounts.all = state.accounts.all.map(account => {
         if (account.id === newAccount.id) return newAccount;
@@ -89,25 +117,29 @@ export default {
     SET_ACCOUNT_FOR_SHARE: (state, account) => {
       state.accounts.forShare = account;
     },
+
+    SET_ACCOUNT_FOR_EDIT: (state, account) => {
+      state.accounts.forEdit = account;
+    },
   },
 
   actions: {
     ...mixinDialogActions,
 
-    async loadAccount(context, id) {
-      const response = await this._vm.api.get(`/accounts/?account_id=${id}`);
+    async loadAccount({commit, payload, rootState}) {
+      const response = await this._vm.api.get(`/accounts/?account_id=${payload}`);
       if (typeof response.data.data[0] !== 'undefined') {
-        context.commit('UPDATE_ACCOUNT', response.data.data[0]);
-        context.commit('FILTER_ACCOUNTS');
+        commit('UPDATE_ACCOUNT', response.data.data[0]);
+        commit('FILTER_ACCOUNTS', rootState.adsmanager.filters);
       }
     },
 
-    LOAD_ACCOUNTS(context) {
-      context.commit('SET_LOADING', {param: 'mainTable', value: true});
+    LOAD_ACCOUNTS({commit, rootState}) {
+      commit('SET_LOADING', {param: 'mainTable', value: true});
       this._vm.api('/accounts').then(response => {
-        context.commit('SET_ALL_ACCOUNTS', response.data.data);
-        context.commit('SET_FILTERED_ACCOUNTS', response.data.data);
-        context.commit('SET_LOADING', {
+        commit('SET_ALL_ACCOUNTS', response.data.data);
+        commit('FILTER_ACCOUNTS', rootState.adsmanager.filters);
+        commit('SET_LOADING', {
           param: 'mainTable',
           value: false
         });
@@ -118,49 +150,93 @@ export default {
       context.commit('SET_SELECTED_ACCOUNTS', payload);
     },
 
-    SAVE_FILTERS_NAME(context, payload) {
+    async setFiltersName(context, payload) {
       context.commit('SET_FILTERS_NAME', payload);
       context.commit('FILTER_ACCOUNTS');
     },
 
     DELETE_ACCOUNTS(context, payload) {
-      const hideLoading = this._vm.$message.loading('Удаляю', 0);
+      context.commit('SET_LOADING', {
+        param: 'mainTable',
+        value: true
+      });
+
       this._vm.api.post('/accounts/delete', {
         ids: payload
       }).then(response => {
-        hideLoading();
+        context.commit('SET_LOADING', {
+          param: 'mainTable',
+          value: false
+        });
+
         if (response.data.success) {
-          this._vm.$message.success('Удалил');
+          context.dispatch('main/alert', {
+            color: 'success',
+            message: i18n.t('dialogs.accounts.delete.success')
+          }, {
+            root: true
+          });
+
           context.commit('DELETE_ACCOUNTS', payload);
           context.commit('FILTER_ACCOUNTS');
         } else {
-          this._vm.apiError(response);
+          context.dispatch('main/apiError', response.data, {
+            root: true
+          });
         }
-      }).catch(() => {
-        hideLoading();
-        this._vm.$message.error('Что-то пошло не так');
+      }).catch((e) => {
+        context.commit('SET_LOADING', {
+          param: 'mainTable',
+          value: false
+        });
+
+        context.dispatch('main/apiError', e, {
+          root: true
+        });
       });
     },
 
     async checkToken(context, account) {
-      const hideLoading = this._vm.$message.loading('Проверяю токен', 0);
-      const response = await this._vm.api(`/accounts/check_token/${account.id}`).catch(() => {
-        hideLoading();
-        this._vm.$message.error('Что-то пошло не так');
-        return false;
+      context.commit('SET_LOADING', {
+        param: 'mainTable',
+        value: true
       });
 
-      hideLoading();
+      const response = await this._vm.api(`/accounts/check_token/${account.id}`).catch((e) => {
+        context.dispatch('main/apiError', e, {
+          root: true
+        });
+      });
+
+      context.commit('SET_LOADING', {
+        param: 'mainTable',
+        value: false
+      });
       
       switch(response.data.result) {
         case 'ok':
-          this._vm.$message.success('Токен в порядке');
+          context.dispatch('main/alert', {
+            color: 'success',
+            message: i18n.t('dialogs.accounts.checkToken.ok')
+          }, {
+            root: true
+          });
           break;
         case 'token_error':
-          this._vm.$message.error('Токен отлетел');
+          context.dispatch('main/alert', {
+            color: 'error',
+            message: i18n.t('dialogs.accounts.checkToken.tokenError')
+          }, {
+            root: true
+          });
           break;
         case 'connection_error':
-          this._vm.$message.error('Ошибка соединения с аккаунтом. Вероятно, проблема с прокси.', 7);
+          context.dispatch('main/alert', {
+            color: 'error',
+            message: i18n.t('dialogs.accounts.checkToken.connectionError')
+          }, {
+            root: true
+          });
           break;
       }
 
@@ -172,24 +248,34 @@ export default {
     },
 
     async saveTags(context, account) {
-      const hideLoading = this._vm.$message.loading('Сохраняю', 0);
-      const response = await this._vm.api.post('/accounts/update_tags', account).catch(() => {
-        hideLoading();
-        this._vm.$message.error('Что-то пошло не так');
-        return false;
+      context.commit('SET_LOADING', {
+        param: 'assignTagsDialog',
+        value: true
       });
 
-      hideLoading();
+      const response = await this._vm.api.post('/accounts/update_tags', account).catch((e) => {
+        context.dispatch('main/apiError', e, { root: true });
+      });
+
+      context.commit('SET_LOADING', {
+        param: 'assignTagsDialog',
+        value: false
+      });
 
       if (response.data.success) {
-        this._vm.$message.success('Сохранил');
+        context.dispatch('main/alert', {
+          color: 'success',
+          message: i18n.t('dialogs.accounts.assignTags.success')
+        }, {root: true});
+
         context.commit('SET_ACCOUNT_TAGS', account);
         context.commit('FILTER_ACCOUNTS');
         return true;
       } else {
-        this._vm.$message.error('Что-то пошло не так');
-        return false;
+        context.dispatch('main/apiError', response.data, { root: true });
       }
+
+      return response.data.success;
     },
 
     async initAccountForShare(context, account) {
@@ -199,24 +285,39 @@ export default {
     },
 
     async savePermissions(context, account) {
-      const hideLoading = this._vm.$message.loading('Сохраняю', 0);
-      const response = await this._vm.api.post('/accounts/update_permissions', account).catch(() => {
-        hideLoading();
-        this._vm.$message.error('Что-то пошло не так');
-        return false;
+      context.commit('SET_LOADING', {
+        param: 'share',
+        value: true
       });
 
-      hideLoading();
+      const response = await this._vm.api.post('/accounts/update_permissions', account).catch((e) => {
+        context.dispatch('main/apiError', e, {
+          root: true
+        });
+      });
+
+      context.commit('SET_LOADING', {
+        param: 'share',
+        value: false
+      });
 
       if (response.data.success) {
-        this._vm.$message.success('Сохранил');
+        context.dispatch('main/alert', {
+          color: 'success',
+          message: i18n.t('dialogs.accounts.share.success')
+        }, {
+          root: true
+        });
+
         context.commit('UPDATE_ACCOUNT', account);
         context.commit('FILTER_ACCOUNTS');
-        return true;
       } else {
-        this._vm.$message.error('Что-то пошло не так');
-        return false;
+        context.dispatch('main/apiError', response.data, {
+          root: true
+        });
       }
+
+      return response.data.success;
     },
 
     async addAccount(context, account) {
@@ -250,6 +351,59 @@ export default {
       }
 
       return response.data.success;
+    },
+
+    async saveAccount(context, account) {
+      context.commit('SET_LOADING', {
+        param: 'editDialog',
+        value: true
+      });
+
+      const response = await this._vm.api.post('/accounts/update', account).catch((error) => {
+        context.dispatch('main/apiError', error, {
+          root: true
+        });
+
+        return false;
+      });
+
+      context.commit('SET_LOADING', {
+        param: 'editDialog',
+        value: false
+      });
+
+      if (typeof response.data.success === 'undefined') {
+        return false;
+      }
+
+      if (response.data.success) {
+        context.commit('CLOSE_DIALOG', 'edit');
+        context.dispatch('LOAD_ACCOUNTS');
+        setTimeout(() => {
+          context.dispatch('LOAD_ACCOUNTS');
+        }, 5000);
+      } else {
+        context.dispatch('main/apiError', response.data, {
+          root: true
+        });
+      }
+
+      return response.data.success;
+    },
+
+    async initAccountForEdit(context, account) {
+      context.commit('SET_ACCOUNT_FOR_EDIT', account);
+      context.commit('OPEN_DIALOG', 'edit');
+      return true;
+    },
+
+    async setFiltersStatuses(context, payload) {
+      context.commit('SET_FILTERS_STATUSES', payload);
+      context.commit('FILTER_ACCOUNTS');
+    },
+
+    async filterAccounts({commit, rootState}) {
+      commit('FILTER_ACCOUNTS', rootState.adsmanager.filters);
     }
   }
 };

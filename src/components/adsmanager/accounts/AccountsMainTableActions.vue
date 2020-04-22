@@ -1,45 +1,76 @@
 <template>
-  <a-button-group>
-    <a-tooltip title="Проверить токен">
-      <a-button
-        type="default"
-        icon="api"
-        @click="$store.dispatch('accounts/checkToken', account)"
-      />
-    </a-tooltip>
-    <a-tooltip title="Изменить теги">
-      <a-button
-        type="default"
-        icon="tag"
-        @click="assignTags(account)"
-      />
-    </a-tooltip>
-    <a-tooltip title="Поделиться аккаунтом">
-      <a-button
-        type="default"
-        icon="share-alt"
-        @click="shareAccount(account)"
-      />
-    </a-tooltip>
-    <a-tooltip title="Редактировать">
-      <a-button
-        type="default"
-        icon="edit"
-      />
-    </a-tooltip>
-    <a-tooltip title="Удалить">
-      <a-button
-        type="default"
-        icon="delete"
-        @click="deleteAccount(account.id)"
-      />
-    </a-tooltip>
-  </a-button-group>
+  <div style="margin-left: -6px !important">
+    <!-- ТЕГИ -->
+    <v-btn
+      icon
+      small
+      dark
+      :color="useColors ? 'success' : ''"
+      @click="assignTags(account)"
+    >
+      <v-icon size="12px">
+        fas fa-tags
+      </v-icon>
+    </v-btn>
+
+    <!-- РАЗДАЧА -->
+    <v-btn
+      icon
+      small
+      dark
+      :color="useColors ? 'success' : ''"
+      @click="shareAccount(account)"
+    >
+      <v-icon size="12px">
+        fas fa-share-alt
+      </v-icon>
+    </v-btn>
+
+    <!-- ПРОВЕРКА ТОКЕНА -->
+    <v-btn
+      icon
+      small
+      dark
+      :color="useColors ? 'warning' : ''"
+      @click="$store.dispatch('accounts/checkToken', account)"
+    >
+      <v-icon size="12px">
+        fas fa-code
+      </v-icon>
+    </v-btn>
+
+    <!-- РЕДАКТИРОВАНИЕ -->
+    <v-btn
+      icon
+      small
+      dark
+      :color="useColors ? 'warning' : ''"
+      @click="editAccount(account)"
+    >
+      <v-icon size="12px">
+        fas fa-pencil-alt
+      </v-icon>
+    </v-btn>
+      
+    <!-- УДАЛЕНИЕ -->
+    <v-btn
+      icon
+      small
+      dark
+      :color="useColors ? 'error' : ''"
+      @click="deleteAccount(account)"
+    >
+      <v-icon size="12px">
+        fas fa-trash-alt
+      </v-icon>
+    </v-btn>
+  </div>
 </template>
 
 <script>
     export default {
         name: 'AccountsMainTableStatus',
+        
         props: {
             account: {
                 type: Object,
@@ -48,10 +79,17 @@
                 })
             }
         },
+
+        data() {
+          return {
+            useColors: false,
+          };
+        },
+        
         methods: {
-          deleteAccount(id) {
-            if(confirm('Подверди плиз')) {
-              this.$store.dispatch('accounts/DELETE_ACCOUNTS', [id]);
+          deleteAccount(account) {
+            if(confirm(this.$t('dialogs.confirm'))) {
+              this.$store.dispatch('accounts/DELETE_ACCOUNTS', [account.id]);
             }
           },
           
@@ -62,6 +100,10 @@
 
           shareAccount(account) {
             this.$store.dispatch('accounts/initAccountForShare', account);
+          },
+
+          editAccount(account) {
+            this.$store.dispatch('accounts/initAccountForEdit', account);
           }
         }
     };
