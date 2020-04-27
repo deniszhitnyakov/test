@@ -34,6 +34,13 @@
           hide-default-footer
           class="elevation-1"
         >
+          <template #items="{item}">
+            <tr>
+              <td>
+                <accounts-main-table-info :account="item" />
+              </td>
+            </tr>
+          </template>
           <!-- СТОЛБЕЦ - АККАУНТ -->
           <template v-slot:item.account="{ item }">
             <accounts-main-table-info :account="item" />
@@ -58,6 +65,99 @@
               <accounts-main-table-facebook-profile :account="item" />
             </td>
           </template>
+
+          <!-- ОБЫЧНЫЕ СТОЛБЦЫ -->
+          <template 
+            v-for="col in commonCols"
+            v-slot:[`item.${col}`]="{item}"
+          >
+            <div 
+              :key="`col-${col}`"
+              class="stat-digits"
+            >
+              <span
+                v-if="typeof stat[item.id] !== 'undefined' && typeof stat[item.id][col] !== 'undefined'"
+              >
+                {{ stat[item.id][col] }}
+              </span>
+              <span
+                v-if="typeof stat[item.id] === 'undefined' || typeof stat[item.id][col] === 'undefined'"
+              >
+                0
+              </span>
+              <span v-if="col === 'spend'"> USD</span>
+              <span v-if="col === 'profit'"> USD</span>
+              <span v-if="col === 'revenue'"> USD</span>
+              <span v-if="col === 'roi'">%</span>
+              <span v-if="col === 'approve'">%</span>
+            </div>
+          </template>
+
+          <!-- СЛОЖНЫЕ СТОЛБЦЫ - КОЛИЧЕСТВО -->
+          <template 
+            v-for="col in actionCols"
+            v-slot:[`item.${col}-quantity`]="{item}"
+          >
+            <span
+              v-if="typeof stat[item.id] !== 'undefined' && typeof stat[item.id]['actions'] !== 'undefined'"
+              :key="`col-${col}`"
+              class="stat-digits"
+            >
+              <span v-if="typeof stat[item.id]['actions'][col] !== 'undefined'">
+                {{ stat[item.id]['actions'][col]['quantity'] }}
+              </span>
+              <span
+                v-if="typeof stat[item.id]['actions'][col] === 'undefined'"
+                class="stat-digits"
+              >
+                0
+              </span>
+            </span>
+          </template>
+
+          <!-- СЛОЖНЫЕ СТОЛБЦЫ - CPA -->
+          <template 
+            v-for="col in actionCols"
+            v-slot:[`item.${col}-cpa`]="{item}"
+          >
+            <span
+              v-if="typeof stat[item.id] !== 'undefined' && typeof stat[item.id]['actions'] !== 'undefined'"
+              :key="`col-${col}`"
+              class="stat-digits"
+            >
+              <span v-if="typeof stat[item.id]['actions'][col] !== 'undefined'">
+                {{ stat[item.id]['actions'][col]['cpa'] }} USD
+              </span>
+              <span
+                v-if="typeof stat[item.id]['actions'][col] === 'undefined'"
+                class="stat-digits"
+              >
+                -
+              </span>
+            </span>
+          </template>
+
+          <!-- СЛОЖНЫЕ СТОЛБЦЫ - CR -->
+          <template 
+            v-for="col in actionCols"
+            v-slot:[`item.${col}-cr`]="{item}"
+          >
+            <span
+              v-if="typeof stat[item.id] !== 'undefined' && typeof stat[item.id]['actions'] !== 'undefined'"
+              :key="`col-${col}`"
+              class="stat-digits"
+            >
+              <span v-if="typeof stat[item.id]['actions'][col] !== 'undefined'">
+                {{ stat[item.id]['actions'][col]['cr'] }} %
+              </span>
+              <span
+                v-if="typeof stat[item.id]['actions'][col] === 'undefined'"
+                class="stat-digits"
+              >
+                -
+              </span>
+            </span>
+          </template>
         </v-data-table>
       </v-card-text>
     </v-card>
@@ -65,22 +165,27 @@
 </template>
 
 <script>
-import { mapGetters }                   from 'vuex';
+import { mapGetters }                       from 'vuex';
 
-import AccountsMainTableFacebookProfile from './AccountsMainTableFacebookProfile';
-import AccountsMainTableInfo            from './AccountsMainTableInfo';
-import AccountsMainTableStatus          from './AccountsMainTableStatus';
+import actionCols                           from '../../../constants/adsmanager/action_cols';
+import commonCols                           from '../../../constants/adsmanager/common_cols';
+
+import AccountsMainTableFacebookProfile     from './AccountsMainTableFacebookProfile';
+import AccountsMainTableInfo                from './AccountsMainTableInfo';
+import AccountsMainTableStatus              from './AccountsMainTableStatus';
 
 export default {
   components: {
     AccountsMainTableFacebookProfile,
     AccountsMainTableStatus,
-    AccountsMainTableInfo
+    AccountsMainTableInfo,
   },
   data: function() {
     return ({
       selected: [],
       cols: [],
+      commonCols,
+      actionCols
     });
   },
 
@@ -90,6 +195,7 @@ export default {
       loading: 'accounts/loading',
       innerHeight: 'main/innerHeight',
       profile: 'main/profile',
+      stat: 'accounts/stat'
     }),
   },
 
@@ -107,9 +213,9 @@ export default {
 
       this.profile.columns.forEach(col => {
         if (col.search('action') === 0) {
-          cols.push({ text: `${this.$t(`adsmanager.cols.${col}`)} (${this.$t('common.quantity')})`, value: col, width: 100});
-          cols.push({ text: `${this.$t(`adsmanager.cols.${col}`)} (${this.$t('common.conversionRate')})`, value: col, width: 100});
-          cols.push({ text: `${this.$t(`adsmanager.cols.${col}`)} (${this.$t('common.cpa')})`, value: col, width: 100});
+          cols.push({ text: `${this.$t(`adsmanager.cols.${col}`)} (${this.$t('common.quantity')})`, value: `${col}-quantity`, width: 100});
+          cols.push({ text: `${this.$t(`adsmanager.cols.${col}`)} (${this.$t('common.conversionRate')})`, value: `${col}-cr`, width: 100});
+          cols.push({ text: `${this.$t(`adsmanager.cols.${col}`)} (${this.$t('common.cpa')})`, value: `${col}-cpa`, width: 100});
         } else {
           cols.push({ text: `${this.$t(`adsmanager.cols.${col}`)}`, value: col, width: 100});
         }

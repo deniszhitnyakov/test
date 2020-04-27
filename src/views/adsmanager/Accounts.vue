@@ -61,7 +61,6 @@ export default {
     this.$store.dispatch('users/loadUsers');
     setInterval( () => {
       this.$store.dispatch('accounts/LOAD_ACCOUNTS');
-      
       this.$store.dispatch('users/loadUsers');
     }, 60000 );
   },

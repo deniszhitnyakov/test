@@ -13,6 +13,7 @@ export default {
       forShare: {},
       forEdit: {},
     },
+    stat: [],
     filters: {
       name: '',
       statuses: typeof localStorage.getItem('accounts-filters-statuses') === 'undefined' ? [] : JSON.parse(localStorage.getItem('accounts-filters-statuses')),
@@ -39,6 +40,7 @@ export default {
     forShare: state => state.accounts.forShare,
     forEdit: state => state.accounts.forEdit,
     loading: state => state.loading,
+    stat: state => state.stat
   },
   mutations: {
     ...mixinDialogMutations,
@@ -46,6 +48,11 @@ export default {
     SET_LOADING: (state, data) => {
       state.loading[data.param] = data.value;
     },
+
+    SET_STAT: (state, data) => {
+      state.stat = data;
+    },
+
     SET_ALL_ACCOUNTS: (state, payload) => {
       state.accounts.all = payload;
     },
@@ -82,7 +89,10 @@ export default {
 
       if (this.state.adsmanager.filters.tags && this.state.adsmanager.filters.tags.length > 0) {
         accounts = accounts.filter(account => {
-          return this.state.adsmanager.filters.tags.some(tags => account.tags.indexOf(tags) > -1);
+          return this.state.adsmanager.filters.tags.some(tags => {
+            if (!account.tags) return false;
+            return account.tags.indexOf(tags) > -1;
+          });
         });
       }
       
@@ -134,7 +144,7 @@ export default {
       }
     },
 
-    LOAD_ACCOUNTS({commit, rootState}) {
+    LOAD_ACCOUNTS({commit, rootState, dispatch}) {
       commit('SET_LOADING', {param: 'mainTable', value: true});
       this._vm.api('/accounts').then(response => {
         commit('SET_ALL_ACCOUNTS', response.data.data);
@@ -143,6 +153,7 @@ export default {
           param: 'mainTable',
           value: false
         });
+        dispatch('loadStat');
       });
     },
 
@@ -404,6 +415,15 @@ export default {
 
     async filterAccounts({commit, rootState}) {
       commit('FILTER_ACCOUNTS', rootState.adsmanager.filters);
+    },
+
+    async loadStat({rootState, commit}) {
+      const response = await this._vm.api('/stat/by_account', {
+        ids: rootState.accounts.accounts.filtered.map(account => account.id),
+        dates: rootState.adsmanager.dates,
+      });
+
+      commit('SET_STAT', response.data.data);
     }
   }
 };

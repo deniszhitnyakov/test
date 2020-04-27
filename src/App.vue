@@ -101,7 +101,8 @@ export default {
     padding: 0px 8px 8px 8px;
   }
 
-  /* .topbar-row > v-col > v-row > v-col {
-    padding: 0;
-  } */
+  .stat-digits {
+    font-size: 16px;
+    /* font-family: monospace; */
+  }
 </style>

@@ -83,6 +83,7 @@
             async saveTags() {
                 const success = await this.$store.dispatch('accounts/saveTags', this.newAccount);
                 if (success) {
+                    this.$store.dispatch('tags/loadTags');
                     this.$store.dispatch('accounts/closeDialog', 'assignTags');
                 }
             }
