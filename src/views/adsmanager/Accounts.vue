@@ -13,6 +13,22 @@
     <!-- TOPBAR -->
     <topbar />
 
+    <!-- // КНОПКА ДОБАВЛЕНИЯ -->
+    <v-btn
+      fixed
+      dark
+      fab
+      bottom
+      right
+      color="pink"
+      x-small
+      @click="$store.dispatch('accounts/openDialog', 'add')"
+    >
+      <v-icon>
+        fas fa-plus
+      </v-icon>
+    </v-btn>
+
     <!-- ТАБЛИЦА -->
     <main-table />
   </div>

@@ -105,4 +105,8 @@ export default {
     font-size: 16px;
     /* font-family: monospace; */
   }
+
+  .stat-table tfoot {
+    font-weight: bold;
+  }
 </style>
