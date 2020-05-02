@@ -11,10 +11,12 @@
       sm="7"
     >
       <v-row>
+        <!-- МАССОВЫЕ ДЕЙСТВИЯ -->
         <v-col
           cols="12"
           sm="4"
         >
+          <!-- МАССОВЫЕ ДЕЙСТВИЯ - НАЗНАЧИТЬ ТЕГИ -->
           <div style="float: left;">
             <v-btn
               small
@@ -29,6 +31,7 @@
             </v-btn>
           </div>
 
+          <!-- МАССОВЫЕ ДЕЙСТВИЯ - ПОДЕЛИТЬСЯ -->
           <div style="float: left;">
             <v-btn
               small
@@ -43,6 +46,7 @@
             </v-btn>
           </div>
 
+          <!-- МАССОВЫЕ ДЕЙСТВИЯ - ПРОВЕРИТЬ ТОКЕН -->
           <div style="float: left;">
             <v-btn
               small
@@ -56,7 +60,7 @@
               </v-icon>
             </v-btn>
           </div>
-
+          <!-- МАССОВЫЕ ДЕЙСТВИЯ - УДАЛИТЬ -->
           <div style="float: left;">
             <v-btn
               small
@@ -71,6 +75,7 @@
             </v-btn>
           </div>
 
+          <!-- МАССОВЫЕ ДЕЙСТВИЯ - ИНДИКАТОР -->
           <div style="float: left;">
             <div
               class="body-2 ml-3"
@@ -80,10 +85,13 @@
             </div>
           </div>
         </v-col>
+
+        <!-- КНОПКИ ДЕЙСТВИЙ -->
         <v-col
           cols="12"
           sm="8"
         >
+          <!-- КНОПКИ ДЕЙСТВИЙ - ДОБАВИТЬ АККАУНТ -->
           <div style="float: right;">
             <v-btn
               small
@@ -101,6 +109,7 @@
             </v-btn>
           </div>
 
+          <!-- КНОПКИ ДЕЙСТВИЙ - ДОБАВИТЬ АККАУНТ -->
           <div style="float: right;">
             <v-btn
               small
@@ -115,21 +124,12 @@
             </v-btn>
           </div>
 
+          <!-- КНОПКИ ДЕЙСТВИЙ - СТОЛБЦЫ -->
           <div style="float: right;">
-            <v-btn
-              small
-              color="primary"
-              text
-              style="min-width: 0; width: 30px; margin-top: 1px;"
-              class="ml-3"
-              @click="$store.dispatch('adsmanager/openDialog', 'columns')"
-            >
-              <v-icon :size="18">
-                view_column
-              </v-icon>
-            </v-btn>
+            <topbar-cols />
           </div>
 
+          <!-- КНОПКИ ДЕЙСТВИЙ - ЭКСПОРТ ДАННЫХ -->
           <div style="float: right;">
             <v-btn
               small
@@ -144,7 +144,7 @@
             </v-btn>
           </div>
 
-          <!-- ФИЛЬТРЫ -->
+          <!-- КНОПКИ ДЕЙСТВИЙ - ФИЛЬТРЫ -->
           <div style="float: right;">
             <v-btn
               small
@@ -208,6 +208,7 @@
 import { mapGetters }       from 'vuex';
 
 import accountsStatuses     from '../../../constants/accounts/accounts-statuses';
+import TopbarCols           from '../AdsManagerTopbarCols';
 import FiltersDate          from '../filters/AdsManagerFiltersDate';
 
 import FiltersBar           from './AccountsFiltersBar';
@@ -217,7 +218,8 @@ export default {
 
   components: {
     FiltersBar,
-    FiltersDate
+    FiltersDate,
+    TopbarCols
   },
 
   data() {

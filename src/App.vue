@@ -164,4 +164,10 @@ export default {
   table > thead > tr:hover > th:nth-child(3) {
     background: #2a2a2a;
   }
+
+  table > thead > tr > th:nth-child(1),
+  table > thead > tr > th:nth-child(2),
+  table > thead > tr > th:nth-child(3) {
+    z-index: 4 !important;
+  }
 </style>

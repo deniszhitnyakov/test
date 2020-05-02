@@ -137,6 +137,9 @@
 		},
 		"adsmanager": {
 			"columns": {
+				"savePresetLabel": "Save as preset (optional)",
+				"setupCols": "Setup columns",
+				"sharePresetLabel": "Share preset to all users",
 				"success": "Columns saved"
 			}
 		},
