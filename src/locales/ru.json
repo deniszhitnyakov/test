@@ -137,6 +137,8 @@
 		},
 		"adsmanager": {
 			"columns": {
+				"savePresetLabel": "Сохранить (необязательно)",
+				"sharePresetLabel": "Показывать набор другим пользователям",
 				"success": "Столбцы сохранены"
 			}
 		},

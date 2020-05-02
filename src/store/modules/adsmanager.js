@@ -73,14 +73,15 @@ export default {
             context.commit('SET_FILTERS_DATES', dates);
         },
 
-        async saveCols(context, cols) {
+        async saveCols(context, data) {
             context.commit('SET_LOADING', {
                 param: 'columnsDialog',
                 value: true
             });
 
             const response = await this._vm.api.post('/profile/save_columns', {
-                columns: cols
+                columns: data.cols,
+                preset: data.preset,
             }).catch((e) => {
                 context.dispatch('main/apiError', e, {
                     root: true

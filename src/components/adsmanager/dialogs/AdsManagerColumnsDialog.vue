@@ -10,6 +10,7 @@
         dark
         color="primary"
       >
+        <!-- КНОПКА ЗАКРЫТИЯ -->
         <v-btn
           icon
           dark
@@ -17,9 +18,36 @@
         >
           <v-icon>fas fa-times</v-icon>
         </v-btn>
+
+        <!-- ЗАГОЛОВОК -->
         <v-toolbar-title>{{ $t('common.columns') }}</v-toolbar-title>
         <v-spacer />
+
+        <!-- КНОПКИ ДЕЙСТВИЯ -->
         <v-toolbar-items>
+          <!-- СОХРАНИТЬ НАБОР СТОЛБЦОВ -->
+          <div style="height: 100%; display: flex; align-items: center;">
+            <v-checkbox
+              v-if="preset.name && preset.name.length > 0"
+              v-model="preset.shared"
+              :label="$t('dialogs.adsmanager.columns.sharePresetLabel')"
+              color="white"
+              hide-details
+            />
+            <v-text-field
+              v-model="preset.name"
+              dense
+              clearable
+              :label="$t('dialogs.adsmanager.columns.savePresetLabel')"
+              single-line
+              hide-details
+              style="width: 300px; margin-top: -6px;"
+              class="mr-5 ml-5"
+              color="white"
+            />
+          </div>
+          
+          <!-- КНОПКА СОХРАНЕНИЯ -->
           <v-btn
             dark
             text
@@ -29,12 +57,16 @@
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
+
+      <!-- ОСНОВНОЕ ОКНО -->
       <v-card-text :loading="loading.columns">
         <v-row>
+          <!-- ЛЕВАЯ ЧАСТЬ -->
           <v-col
             cols="4"
             offset="2"
           >
+            <!-- СТРОКА ПОИСКА -->
             <div class="mb-3">
               <v-text-field
                 dense
@@ -46,6 +78,8 @@
                 @input="searchLeftCols"
               />
             </div>
+
+            <!-- КАРТОЧКИ (ЛЕВО) -->
             <div class="cols-container">
               <draggable
                 :value="cols.filtered"
@@ -63,19 +97,42 @@
                   <v-card-text
                     style="cursor: move; padding: 8px 8px 8px 16px;"
                   >
-                    <span class="title">
-                      <v-icon>drag_handle</v-icon>
-                      {{ $t(`adsmanager.cols.${col}`) }}
-                    </span>
+                    <!-- СОДЕРЖИМОЕ КАРТОЧКИ (ЛЕВО) -->
+                    <div style="display: flex; justify-content: space-between;">
+                      <!-- ТЕКСТ КАРТОЧКИ -->
+                      <div>
+                        <span class="title">
+                          <v-icon>drag_handle</v-icon>
+                          {{ $t(`adsmanager.cols.${col}`) }}
+                        </span>
+                      </div>
+
+                      <!-- КНОПКА ДОБАВЛЕНИЯ -->
+                      <div 
+                        v-if="selectedCols.all.indexOf(col) === -1"
+                        style="display: flex; align-items: center;"
+                      >
+                        <v-btn
+                          text
+                          small
+                          icon
+                          @click="addCol(col)"
+                        >
+                          <v-icon>add</v-icon>
+                        </v-btn>
+                      </div>
+                    </div>
                   </v-card-text>
                 </v-card>
               </draggable>
             </div>
           </v-col>
 
+          <!-- ПРАВАЯ ЧАСТЬ -->
           <v-col
             cols="4"
           >
+            <!-- СТРОКА ПОИСКА -->
             <div class="mb-3">
               <v-text-field
                 v-model="search"
@@ -87,6 +144,8 @@
                 hide-details
               />
             </div>
+
+            <!-- КАРТОЧКИ (ПРАВО) -->
             <div class="cols-container">
               <draggable
                 :list="selectedCols.all"
@@ -101,13 +160,17 @@
                   <v-card-text
                     style="cursor: move; padding: 8px 8px 8px 16px;"
                   >
+                    <!-- СОДЕРЖИМОЕ КАРТОЧКИ (ПРАВО) -->
                     <div style="display: flex; justify-content: space-between;">
+                      <!-- ТЕКСТ КАРТОЧКИ -->
                       <div>
                         <span class="title">
                           <v-icon>drag_handle</v-icon>
                           {{ $t(`adsmanager.cols.${col}`) }}
                         </span>
                       </div>
+
+                      <!-- КНОПКА УДАЛЕНИЯ -->
                       <div style="display: flex; align-items: center;">
                         <v-btn
                           text
@@ -156,7 +219,11 @@
                     all: [],
                     filtered: [],
                 },
-                search: ''
+                search: '',
+                preset: {
+                  name: '',
+                  shared: false,
+                }
             };
         },
 
@@ -214,9 +281,6 @@
             },
 
             onMove(event) {
-                // return true;
-                // console.log(event.draggedContext.element);
-                // console.log(event);
                 return this.selectedCols.all.indexOf(event.draggedContext.element) === -1;
             },
 
@@ -229,6 +293,13 @@
                     if (col === colToDelete) return false;
                     return true;
                 });
+            },
+
+            addCol(colToAdd) {
+              if (this.selectedCols.all.indexOf(colToAdd) === -1) {
+                this.selectedCols.all.push(colToAdd);
+                this.filterCols();
+              }
             },
 
             filterCols() {
@@ -244,20 +315,16 @@
             },
 
             async saveCols() {
-                const success = await this.$store.dispatch('adsmanager/saveCols', this.selectedCols.all);
+                const data = {
+                  cols: this.selectedCols.all,
+                  preset: this.preset,
+                };
+                const success = await this.$store.dispatch('adsmanager/saveCols', data);
                 if (success) {
                     await this.$store.dispatch('main/loadProfile');
                     await this.$store.dispatch('adsmanager/closeDialog', 'columns');
                 }
             },
-
-            onChange(event) {
-                console.log(event);
-            },
-
-            onStart(event) {
-                console.log(event);
-            }
         }
     };
 </script>
