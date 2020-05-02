@@ -128,4 +128,40 @@ export default {
     margin-top: -5px;
     margin-right: 8px;
   }
+
+  table > tbody > tr > td:nth-child(1), 
+  table > thead > tr > th:nth-child(1) {
+    position: sticky !important; 
+    position: -webkit-sticky !important; 
+    left: 0; 
+    z-index: 3;
+    background: #1e1e1e;
+  }
+
+  table > tbody > tr > td:nth-child(2), 
+  table > thead > tr > th:nth-child(2) {
+    position: sticky !important; 
+    position: -webkit-sticky !important; 
+    left: 40px; 
+    z-index: 3;
+    background: #1e1e1e;
+  }
+
+  table > tbody > tr > td:nth-child(3), 
+  table > thead > tr > th:nth-child(3) {
+    position: sticky !important; 
+    position: -webkit-sticky !important; 
+    left: 190px; 
+    z-index: 3;
+    background: #1e1e1e;
+  }
+
+  table > tbody > tr:hover > td:nth-child(1), 
+  table > thead > tr:hover > th:nth-child(1),
+  table > tbody > tr:hover > td:nth-child(2), 
+  table > thead > tr:hover > th:nth-child(2),
+  table > tbody > tr:hover > td:nth-child(3), 
+  table > thead > tr:hover > th:nth-child(3) {
+    background: #2a2a2a;
+  }
 </style>

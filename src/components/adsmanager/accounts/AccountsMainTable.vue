@@ -23,7 +23,9 @@
                 v-for="item in items"
                 :key="`row-${item.id}`"
               >
-                <td>
+                <td
+                  style=""
+                >
                   <div style="margin-left: 9px;">
                     <v-simple-checkbox
                       v-ripple
