@@ -7,7 +7,12 @@
       x-small
       outlined
     >
-      {{ account.status }}
+      <span v-if="account.status === 'TOKEN_ERROR'">
+        ERROR
+      </span>
+      <span v-else>
+        {{ account.status }}
+      </span>
     </v-chip>
     <span v-if="typeof colors[account.status] === 'undefined'">
       {{ account.status }}

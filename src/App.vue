@@ -106,8 +106,8 @@ export default {
     /* font-family: monospace; */
   }
 
-  .stat-table tfoot {
-    font-weight: bold;
+  .stat-table tr:last-child {
+    font-weight: bold !important;
   }
 
   .vue-daterange-picker input[type=text], .topbar-row input[type=text] {
