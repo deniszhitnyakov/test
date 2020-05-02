@@ -43,7 +43,7 @@ export default {
   computed: {
     ...mapGetters({
       dialogs: 'accounts/dialogs',
-      globalFilters: 'adsmanager/filters'
+      globalFilters: 'adsmanager/filters',
     })
   },
 
@@ -54,7 +54,7 @@ export default {
         await this.$store.dispatch('accounts/filterAccounts');
         this.$store.dispatch('accounts/loadStat');
       }
-    }
+    },
   },
   
   created() {

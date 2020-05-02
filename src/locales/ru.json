@@ -53,10 +53,11 @@
 			"billing": "Биллинг кабинета",
 			"cab_limit": "Лимит кабинета",
 			"cpm": "CPM",
-			"frequency": "",
+			"frequency": "Частота",
 			"impressions": "Показы",
 			"profit": "Прибыль",
 			"reach": "Охват",
+			"results": "Результаты",
 			"revenue": "Доход",
 			"roi": "ROI",
 			"spend": "Расход"
@@ -76,8 +77,10 @@
 		"account": "Аккаунт",
 		"add": "Добавить",
 		"close": "Закрыть",
+		"columns": "Столбцы",
 		"conversionRate": "CR",
 		"cpa": "CPA",
+		"delete": "Удалить",
 		"dolphinId": "Dolphin ID",
 		"existingProxy": "Существующий прокси",
 		"facebookId": "Facebook ID",
@@ -91,8 +94,10 @@
 		"port": "Порт",
 		"proxy": "Прокси",
 		"quantity": "кол-во",
+		"remove": "Убрать",
 		"required": "Обязательно",
 		"save": "Сохранить",
+		"search": "Поиск",
 		"selected": "Выбрано",
 		"status": "Статус",
 		"tags": "Теги",
@@ -128,6 +133,11 @@
 			},
 			"singleAdd": {
 				"title": "Добавить аккаунт"
+			}
+		},
+		"adsmanager": {
+			"columns": {
+				"success": "Столбцы сохранены"
 			}
 		},
 		"apiError": {

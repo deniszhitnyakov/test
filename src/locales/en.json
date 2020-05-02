@@ -53,10 +53,11 @@
 			"billing": "Cab billing",
 			"cab_limit": "Cab limit",
 			"cpm": "CPM",
-			"frequency": "",
+			"frequency": "Frequency",
 			"impressions": "Impressions",
 			"profit": "Profit",
 			"reach": "Reach",
+			"results": "Results",
 			"revenue": "Revenue",
 			"roi": "ROI",
 			"spend": "Spend"
@@ -76,8 +77,10 @@
 		"account": "Account",
 		"add": "Add",
 		"close": "Close",
+		"columns": "Columns",
 		"conversionRate": "CR",
 		"cpa": "CPA",
+		"delete": "Delete",
 		"dolphinId": "Dolphin ID",
 		"existingProxy": "Existing Proxy",
 		"facebookId": "Facebook ID",
@@ -91,8 +94,10 @@
 		"port": "Port",
 		"proxy": "Proxy",
 		"quantity": "QTY",
+		"remove": "Remove",
 		"required": "Required",
 		"save": "Save",
+		"search": "Search",
 		"selected": "Selected",
 		"status": "Status",
 		"tags": "Tags",
@@ -128,6 +133,11 @@
 			},
 			"singleAdd": {
 				"title": "Add account"
+			}
+		},
+		"adsmanager": {
+			"columns": {
+				"success": "Columns saved"
 			}
 		},
 		"apiError": {

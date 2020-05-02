@@ -7,7 +7,9 @@ import {
 export default {
   namespaced: true,
   state: {
-    profile: {},
+    profile: {
+      columns: [],
+    },
     breadcrumbs: [],
     sidebarCollapsed: false,
     dialogs: {
@@ -108,6 +110,6 @@ export default {
 
     async closeAlert(context) {
       context.commit('CLOSE_ALERT');
-    }
+    },
   }
 };

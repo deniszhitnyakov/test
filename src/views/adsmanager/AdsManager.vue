@@ -1,6 +1,7 @@
 <template>
   <div>
     <tabs />
+    <columns-dialog v-if="dialogs.columns" />
     <div style="padding: 8px;">
       <keep-alive>
         <component :is="activeTab.component" />
@@ -10,16 +11,17 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex';
+    import {mapGetters}  from 'vuex';
 
-    import tabs         from '../../components/adsmanager/AdsManagerTabs';
+    import tabs          from '../../components/adsmanager/AdsManagerTabs';
+    import ColumnsDialog from '../../components/adsmanager/dialogs/AdsManagerColumnsDialog';
 
-    import accounts     from './Accounts';
-    import adsets       from './Adsets';
-    import ads          from './Ads';
-    import cabs         from './Cabs';
-    import campaigns    from './Campaigns';
-    import users        from './Users';
+    import accounts      from './Accounts';
+    import adsets        from './Adsets';
+    import ads           from './Ads';
+    import cabs          from './Cabs';
+    import campaigns     from './Campaigns';
+    import users         from './Users';
 
     export default {
         name: 'AdsManager',
@@ -31,12 +33,14 @@
             cabs,
             adsets,
             users,
-            ads
+            ads,
+            ColumnsDialog
         },
 
         computed: {
             ...mapGetters({
-                activeTab: 'adsmanager/activeTab'
+                activeTab: 'adsmanager/activeTab',
+                dialogs: 'adsmanager/dialogs'
             })
         }
     };

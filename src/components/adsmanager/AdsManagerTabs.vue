@@ -10,7 +10,21 @@
       {{ $t('adsmanager.tabs.users') }}
     </v-tab>
     <v-tab key="tab-accounts">
-      {{ $t('adsmanager.tabs.accounts') }}
+      <v-badge
+        color="red"
+        inline
+        tile
+        :content="accounts.selected.length"
+        :value="accounts.selected.length"
+      >
+        <template #badge>
+          {{ accounts.selected.length }}
+          <v-icon style="margin-top: -2px;">
+            close
+          </v-icon>
+        </template>
+        {{ $t('adsmanager.tabs.accounts') }}
+      </v-badge>
     </v-tab>
     <v-tab key="tab-cabs">
       {{ $t('adsmanager.tabs.cabs') }}
@@ -38,7 +52,8 @@
 
         computed: {
             ...mapGetters({
-                activeTab: 'adsmanager/activeTab'
+                activeTab: 'adsmanager/activeTab',
+                accounts: 'accounts/ACCOUNTS'
             })
         },
 

@@ -1,5 +1,12 @@
 import moment from 'moment';
 
+import i18n   from '../../i18n';
+import {
+    mixinDialogMutations,
+    mixinDialogActions,
+    mixinDialogGetters
+} from '../../mixins/vuex_dialogs';
+
 export default {
     namespaced: true,
     state: {
@@ -15,13 +22,24 @@ export default {
                 endDate: moment().format('YYYY-MM-DD')
             } :
             JSON.parse(localStorage.getItem('adsmanager-filters-dates')),
+        },
+        dialogs: {
+            columns: false,
+        },
+        loading: {
+            columnsDialog: false,
         }
     },
     getters: {
+        ...mixinDialogGetters,
         activeTab: state => state.activeTab,
         filters: state => state.filters,
+        dialogs: state => state.dialogs,
+        loading: state => state.loading,
     },
     mutations: {
+        ...mixinDialogMutations,
+
         SET_ACTIVE_TAB: (state, tab) => {
             state.activeTab = tab;
         },
@@ -34,9 +52,15 @@ export default {
         SET_FILTERS_DATES: (state, dates) => {
             state.filters.dates = dates;
             localStorage.setItem('adsmanager-filters-dates', JSON.stringify(dates));
+        },
+
+        SET_LOADING: (state, data) => {
+            state.loading[data.param] = data.value;
         }
     },
     actions: {
+        ...mixinDialogActions,
+        
         async setActiveTab(context, tab) {
             context.commit('SET_ACTIVE_TAB', tab);
         },
@@ -47,6 +71,35 @@ export default {
 
         async setFiltersDates(context, dates) {
             context.commit('SET_FILTERS_DATES', dates);
+        },
+
+        async saveCols(context, cols) {
+            context.commit('SET_LOADING', {
+                param: 'columnsDialog',
+                value: true
+            });
+
+            const response = await this._vm.api.post('/profile/save_columns', {
+                columns: cols
+            }).catch((e) => {
+                context.dispatch('main/apiError', e, {
+                    root: true
+                });
+            });
+
+            context.commit('SET_LOADING', {
+                param: 'columnsDialog',
+                value: false
+            });
+
+            context.dispatch('main/alert', {
+                color: 'success',
+                message: i18n.t('dialogs.adsmanager.columns.success')
+            }, {
+                root: true
+            });
+
+            return response.data.success;
         }
     }
 };

@@ -122,6 +122,7 @@
               text
               style="min-width: 0; width: 30px; margin-top: 1px;"
               class="ml-3"
+              @click="$store.dispatch('adsmanager/openDialog', 'columns')"
             >
               <v-icon :size="18">
                 view_column
