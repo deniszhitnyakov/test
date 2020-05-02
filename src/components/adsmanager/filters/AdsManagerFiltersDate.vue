@@ -18,6 +18,7 @@
         hide-details
         :value="moment(picker.startDate).format('YYYY-MM-DD') + ' - ' + moment(picker.endDate).format('YYYY-MM-DD')"
         readonly
+        style="cursor: pointer;"
       />
     </template>
   </date-range-picker>

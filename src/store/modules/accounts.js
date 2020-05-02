@@ -418,12 +418,17 @@ export default {
     },
 
     async loadStat({rootState, commit}) {
-      const response = await this._vm.api('/stat/by_account', {
+      const data = {
         ids: rootState.accounts.accounts.filtered.map(account => account.id),
-        dates: rootState.adsmanager.dates,
-      });
+        dates: rootState.adsmanager.filters.dates,
+      };
+      const response = await this._vm.api.post('/stat/by_account', data);
 
       commit('SET_STAT', response.data.data);
+    },
+
+    async saveSelectedAccounts(context, accounts) {
+      context.commit('SET_SELECTED_ACCOUNTS', accounts);
     }
   }
 };

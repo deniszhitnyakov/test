@@ -109,4 +109,23 @@ export default {
   .stat-table tfoot {
     font-weight: bold;
   }
+
+  .vue-daterange-picker input[type=text], .topbar-row input[type=text] {
+    cursor: pointer;
+  }
+
+  .v-text-field.v-text-field--solo.v-input--dense > .v-input__control {
+    min-height: 30px !important;
+  }
+
+  .v-text-field.v-text-field--solo.v-input--dense input[type=text], .topbar-row .v-label {
+    font-size: 12px !important;
+  }
+
+  .sidebar-collapse-button {
+    width: 24px !important;
+    height: 24px !important;
+    margin-top: -5px;
+    margin-right: 8px;
+  }
 </style>

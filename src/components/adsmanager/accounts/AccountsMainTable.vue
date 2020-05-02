@@ -23,7 +23,17 @@
                 v-for="item in items"
                 :key="`row-${item.id}`"
               >
-                <td />
+                <td>
+                  <div style="margin-left: 9px;">
+                    <v-simple-checkbox
+                      v-ripple
+                      color="primary"
+                      :value="typeof selected.find(account => account.id === item.id) !== 'undefined'"
+                      style="width: 24px;"
+                      @input="selectAccount($event, item)"
+                    />
+                  </div>
+                </td>
                 <td>
                   <accounts-main-table-info :account="item" />
                 </td>
@@ -59,7 +69,7 @@
               </tr>
 
               <!-- TOTAL -->
-              <tr>
+              <tr v-if="accounts.filtered.length > 0">
                 <td
                   colspan="3"
                   style="font-weight: bold;"
@@ -146,6 +156,15 @@ export default {
     }),
   },
 
+  watch: {
+    selected: {
+      deep: true,
+      handler() {
+        this.$store.dispatch('accounts/saveSelectedAccounts', this.selected);
+      }
+    }
+  },
+
   async created() {
     await this.$store.dispatch('main/loadProfile');
 
@@ -163,5 +182,18 @@ export default {
     const statCols = this.makeCols();
     this.cols = this.cols.concat(statCols);
   },
+
+  methods: {
+    selectAccount(state, account) {
+      if (state === true) {
+        this.selected.push(account);
+      } else {
+        this.selected = this.selected.filter(a => {
+          if (a.id === account.id) return false;
+          return true;
+        });
+      }
+    }
+  }
 };
 </script>

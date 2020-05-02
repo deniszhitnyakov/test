@@ -3,6 +3,8 @@ export default {
         makeCols() {
             let cols = [];
 
+            console.log(this.profile.columns);
+
             this.profile.columns.forEach(col => {
                 if (col.search('action') === 0) {
                     let quantityCol = {

@@ -13,22 +13,6 @@
     <!-- TOPBAR -->
     <topbar />
 
-    <!-- // КНОПКА ДОБАВЛЕНИЯ -->
-    <v-btn
-      fixed
-      dark
-      fab
-      bottom
-      right
-      color="pink"
-      x-small
-      @click="$store.dispatch('accounts/openDialog', 'add')"
-    >
-      <v-icon>
-        fas fa-plus
-      </v-icon>
-    </v-btn>
-
     <!-- ТАБЛИЦА -->
     <main-table />
   </div>
@@ -53,7 +37,7 @@ export default {
     AssignTagsDialog,
     ShareDialog,
     SingleAddDialog,
-    EditDialog
+    EditDialog,
   },
   
   computed: {
@@ -66,8 +50,9 @@ export default {
   watch: {
     globalFilters: {
       deep: true,
-      handler() {
-        this.$store.dispatch('accounts/filterAccounts');
+      async handler() {
+        await this.$store.dispatch('accounts/filterAccounts');
+        this.$store.dispatch('accounts/loadStat');
       }
     }
   },
