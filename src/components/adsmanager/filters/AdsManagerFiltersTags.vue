@@ -36,6 +36,9 @@
 
         methods: {
             filterTags(tags) {
+                if(tags) {
+                    this.$emit('filtered');
+                }
                 this.$store.dispatch('adsmanager/setFiltersTags', tags);
             }
         }

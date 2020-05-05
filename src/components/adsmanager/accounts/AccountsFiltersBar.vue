@@ -56,7 +56,7 @@
           cols="12"
           class="py-0 my-2"
         >
-          <filters-tags />
+          <filters-tags @filtered="$store.dispatch('accounts/clearSelected')" />
         </v-col>
       </v-row>
 
@@ -101,6 +101,7 @@
 
         methods: {
             async filterStatus(statuses) {
+                if (statuses) this.$store.dispatch('accounts/clearSelected');
                 await this.$store.dispatch('accounts/setFiltersStatuses', statuses.map(status => {
                     if (typeof status.value !== 'undefined') return status.value;
                     return status;

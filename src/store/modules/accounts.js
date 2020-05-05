@@ -95,7 +95,7 @@ export default {
       if (this.state.adsmanager.filters.tags && this.state.adsmanager.filters.tags.length > 0) {
         accounts = accounts.filter(account => {
           return this.state.adsmanager.filters.tags.some(tags => {
-            if (!account.tags) return false;
+            if (!Array.isArray(account.tags)) return false;
             return account.tags.indexOf(tags) > -1;
           });
         });
@@ -136,6 +136,10 @@ export default {
     SET_ACCOUNT_FOR_EDIT: (state, account) => {
       state.accounts.forEdit = account;
     },
+
+    CLEAR_SELECTED_ACCOUNTS: state => {
+      state.accounts.selected = [];
+    }
   },
 
   actions: {
@@ -506,5 +510,9 @@ export default {
 
       return response.data.success;
     },
+
+    async clearSelected(context) {
+      context.commit('CLEAR_SELECTED_ACCOUNTS');
+    }
   }
 };

@@ -155,7 +155,7 @@ export default {
       loading: 'accounts/loading',
       innerHeight: 'main/innerHeight',
       profile: 'main/profile',
-      stat: 'accounts/stat'
+      stat: 'accounts/stat',
     }),
   },
 
@@ -164,6 +164,16 @@ export default {
       deep: true,
       handler() {
         this.$store.dispatch('accounts/saveSelectedAccounts', this.selected);
+      }
+    },
+
+    'accounts.selected': {
+      deep: true,
+      handler() {
+        if (JSON.stringify(this.selected) !== JSON.stringify(this.accounts.selected)) {
+          this.selected = [];
+          this.selected = this.selected.concat(this.accounts.selected);
+        }
       }
     },
 
