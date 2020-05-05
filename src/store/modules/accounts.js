@@ -171,7 +171,7 @@ export default {
       context.commit('FILTER_ACCOUNTS');
     },
 
-    DELETE_ACCOUNTS(context, payload) {
+    async multipleDeleteAccounts(context, payload) {
       context.commit('SET_LOADING', {
         param: 'mainTable',
         value: true

@@ -54,17 +54,7 @@
           </div>
           <!-- МАССОВЫЕ ДЕЙСТВИЯ - УДАЛИТЬ -->
           <div style="float: left;">
-            <v-btn
-              small
-              :disabled="accounts.selected.length === 0"
-              color="primary"
-              text
-              style="min-width: 0; width: 30px; margin-top: 1px;"
-            >
-              <v-icon :size="12">
-                fas fa-trash
-              </v-icon>
-            </v-btn>
+            <multiple-delete />
           </div>
 
           <!-- МАССОВЫЕ ДЕЙСТВИЯ - ИНДИКАТОР -->
@@ -204,6 +194,7 @@ import TopbarCols           from '../AdsManagerTopbarCols';
 import FiltersDate          from '../filters/AdsManagerFiltersDate';
 
 import FiltersBar           from './AccountsFiltersBar';
+import MultipleDelete       from './AccountsMultipleDelete';
 import MultipleTokensCheck  from './AccountsMultipleTokensCheck';
 
 export default {
@@ -213,7 +204,8 @@ export default {
     FiltersBar,
     FiltersDate,
     TopbarCols,
-    MultipleTokensCheck
+    MultipleTokensCheck,
+    MultipleDelete
   },
 
   data() {
