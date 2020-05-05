@@ -129,8 +129,8 @@ export default {
     margin-right: 8px;
   }
 
-  table > tbody > tr > td:nth-child(1), 
-  table > thead > tr > th:nth-child(1) {
+  div.v-data-table__wrapper > table > tbody > tr > td:nth-child(1), 
+  div.v-data-table__wrapper > table > thead > tr > th:nth-child(1) {
     position: sticky !important; 
     position: -webkit-sticky !important; 
     left: 0; 
@@ -138,8 +138,8 @@ export default {
     background: #1e1e1e;
   }
 
-  table > tbody > tr > td:nth-child(2), 
-  table > thead > tr > th:nth-child(2) {
+  div.v-data-table__wrapper > table > tbody > tr > td:nth-child(2), 
+  div.v-data-table__wrapper > table > thead > tr > th:nth-child(2) {
     position: sticky !important; 
     position: -webkit-sticky !important; 
     left: 40px; 
@@ -147,8 +147,8 @@ export default {
     background: #1e1e1e;
   }
 
-  table > tbody > tr > td:nth-child(3), 
-  table > thead > tr > th:nth-child(3) {
+  div.v-data-table__wrapper > table > tbody > tr > td:nth-child(3), 
+  div.v-data-table__wrapper > table > thead > tr > th:nth-child(3) {
     position: sticky !important; 
     position: -webkit-sticky !important; 
     left: 190px; 
@@ -156,18 +156,18 @@ export default {
     background: #1e1e1e;
   }
 
-  table > tbody > tr:hover > td:nth-child(1), 
-  table > thead > tr:hover > th:nth-child(1),
-  table > tbody > tr:hover > td:nth-child(2), 
-  table > thead > tr:hover > th:nth-child(2),
-  table > tbody > tr:hover > td:nth-child(3), 
-  table > thead > tr:hover > th:nth-child(3) {
+  div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(1), 
+  div.v-data-table__wrapper > table > thead > tr:hover > th:nth-child(1),
+  div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(2), 
+  div.v-data-table__wrapper > table > thead > tr:hover > th:nth-child(2),
+  div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(3), 
+  div.v-data-table__wrapper > table > thead > tr:hover > th:nth-child(3) {
     background: #2a2a2a;
   }
 
-  table > thead > tr > th:nth-child(1),
-  table > thead > tr > th:nth-child(2),
-  table > thead > tr > th:nth-child(3) {
+  div.v-data-table__wrapper > table > thead > tr > th:nth-child(1),
+  div.v-data-table__wrapper > table > thead > tr > th:nth-child(2),
+  div.v-data-table__wrapper > table > thead > tr > th:nth-child(3) {
     z-index: 4 !important;
   }
 </style>

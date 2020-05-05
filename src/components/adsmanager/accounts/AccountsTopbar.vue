@@ -112,7 +112,7 @@
           </div>
 
           <!-- КНОПКИ ДЕЙСТВИЙ - ЭКСПОРТ ДАННЫХ -->
-          <div style="float: right;">
+          <!-- <div style="float: right;">
             <v-btn
               small
               color="primary"
@@ -124,7 +124,7 @@
                 import_export
               </v-icon>
             </v-btn>
-          </div>
+          </div> -->
 
           <!-- КНОПКИ ДЕЙСТВИЙ - ФИЛЬТРЫ -->
           <div style="float: right;">
