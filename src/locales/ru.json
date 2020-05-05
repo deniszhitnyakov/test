@@ -97,11 +97,14 @@
 		"remove": "Убрать",
 		"required": "Обязательно",
 		"save": "Сохранить",
+		"saved": "Сохранил",
 		"search": "Поиск",
+		"selectAll": "Выбрать все",
 		"selected": "Выбрано",
 		"status": "Статус",
 		"tags": "Теги",
 		"type": "Тип",
+		"unselectAll": "Убрать все",
 		"useragent": "Useragent"
 	},
 	"dialogs": {
@@ -120,6 +123,11 @@
 			},
 			"edit": {
 				"title": "Редактирование аккаунта [{accountName}]"
+			},
+			"multipeShare": {
+				"addPermissions": "Добавить права",
+				"removePermissions": "Снять права",
+				"title": "Поделиться аккаунтами"
 			},
 			"share": {
 				"permissions": {

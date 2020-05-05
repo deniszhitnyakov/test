@@ -23,12 +23,14 @@ export default {
       add: false,
       edit: false,
       share: false,
+      multipleShare: false,
     },
     loading: {
       mainTable: false,
       addDialog: false,
       assignTagsDialog: false,
       share: false,
+      multipleShare: false,
       editDialog: false,
     },
   },
@@ -40,7 +42,8 @@ export default {
     forShare: state => state.accounts.forShare,
     forEdit: state => state.accounts.forEdit,
     loading: state => state.loading,
-    stat: state => state.stat
+    stat: state => state.stat,
+    selected: state => state.accounts.selected,
   },
   mutations: {
     ...mixinDialogMutations,
@@ -429,6 +432,41 @@ export default {
 
     async saveSelectedAccounts(context, accounts) {
       context.commit('SET_SELECTED_ACCOUNTS', accounts);
-    }
+    },
+
+    async saveMultiplePermissions(context, data) {
+      context.commit('SET_LOADING', {
+        param: 'multipleShare',
+        value: true
+      });
+
+      const response = await this._vm.api.post('/accounts/update_multiple_permissions', data).catch((e) => {
+        context.dispatch('main/apiError', e, {
+          root: true
+        });
+      });
+
+      context.commit('SET_LOADING', {
+        param: 'multipleShare',
+        value: false
+      });
+
+      if (response.data.success) {
+        context.dispatch('main/alert', {
+          color: 'success',
+          message: i18n.t('common.saved')
+        }, {
+          root: true
+        });
+
+        context.dispatch('LOAD_ACCOUNTS');
+      } else {
+        context.dispatch('main/apiError', response.data, {
+          root: true
+        });
+      }
+
+      return response.data.success;
+    },
   }
 };

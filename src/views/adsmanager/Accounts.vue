@@ -3,12 +3,9 @@
     <!-- ДИАЛОГИ -->
     <single-add-dialog v-if="dialogs.add" />
     <edit-dialog v-if="dialogs.edit" />
-    <assign-tags-dialog 
-      v-if="dialogs.assignTags"
-    />
-    <share-dialog 
-      v-if="dialogs.share"
-    />
+    <multiple-share-dialog v-if="dialogs.multipleShare" />
+    <assign-tags-dialog v-if="dialogs.assignTags" />
+    <share-dialog v-if="dialogs.share" />
 
     <!-- TOPBAR -->
     <topbar />
@@ -19,14 +16,15 @@
 </template>
 
 <script>
-import {mapGetters}         from 'vuex';
+import {mapGetters}                 from 'vuex';
 
-import AssignTagsDialog     from '../../components/adsmanager/accounts/AccountsAssignTagsDialog';
-import EditDialog           from '../../components/adsmanager/accounts/AccountsEditDialog';
-import MainTable            from '../../components/adsmanager/accounts/AccountsMainTable';
-import ShareDialog          from '../../components/adsmanager/accounts/AccountsShareDialog';
-import SingleAddDialog      from '../../components/adsmanager/accounts/AccountsSingleAddDialog';
-import Topbar               from '../../components/adsmanager/accounts/AccountsTopbar';
+import AssignTagsDialog             from '../../components/adsmanager/accounts/AccountsAssignTagsDialog';
+import EditDialog                   from '../../components/adsmanager/accounts/AccountsEditDialog';
+import MainTable                    from '../../components/adsmanager/accounts/AccountsMainTable';
+import MultipleShareDialog          from '../../components/adsmanager/accounts/AccountsMultipleShareDialog';
+import ShareDialog                  from '../../components/adsmanager/accounts/AccountsShareDialog';
+import SingleAddDialog              from '../../components/adsmanager/accounts/AccountsSingleAddDialog';
+import Topbar                       from '../../components/adsmanager/accounts/AccountsTopbar';
 
 export default {
   name: 'Accounts',
@@ -38,6 +36,7 @@ export default {
     ShareDialog,
     SingleAddDialog,
     EditDialog,
+    MultipleShareDialog
   },
   
   computed: {

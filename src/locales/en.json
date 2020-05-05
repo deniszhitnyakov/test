@@ -97,11 +97,14 @@
 		"remove": "Remove",
 		"required": "Required",
 		"save": "Save",
+		"saved": "Saved",
 		"search": "Search",
+		"selectAll": "Select all",
 		"selected": "Selected",
 		"status": "Status",
 		"tags": "Tags",
 		"type": "Type",
+		"unselectAll": "Unselect all",
 		"useragent": "Useragent"
 	},
 	"dialogs": {
@@ -120,6 +123,11 @@
 			},
 			"edit": {
 				"title": "Edit [{accountName}] account"
+			},
+			"multipeShare": {
+				"addPermissions": "Add permissions",
+				"removePermissions": "Remove permissions",
+				"title": "Share multiple accounts"
 			},
 			"share": {
 				"permissions": {
