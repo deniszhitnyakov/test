@@ -50,17 +50,7 @@
 
           <!-- МАССОВЫЕ ДЕЙСТВИЯ - ПРОВЕРИТЬ ТОКЕН -->
           <div style="float: left;">
-            <v-btn
-              small
-              :disabled="accounts.selected.length === 0"
-              color="primary"
-              text
-              style="min-width: 0; width: 30px; margin-top: 1px;"
-            >
-              <v-icon :size="12">
-                fas fa-code
-              </v-icon>
-            </v-btn>
+            <multiple-tokens-check />
           </div>
           <!-- МАССОВЫЕ ДЕЙСТВИЯ - УДАЛИТЬ -->
           <div style="float: left;">
@@ -214,6 +204,7 @@ import TopbarCols           from '../AdsManagerTopbarCols';
 import FiltersDate          from '../filters/AdsManagerFiltersDate';
 
 import FiltersBar           from './AccountsFiltersBar';
+import MultipleTokensCheck  from './AccountsMultipleTokensCheck';
 
 export default {
   name: 'AccountsTopbar',
@@ -221,7 +212,8 @@ export default {
   components: {
     FiltersBar,
     FiltersDate,
-    TopbarCols
+    TopbarCols,
+    MultipleTokensCheck
   },
 
   data() {

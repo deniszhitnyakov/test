@@ -78,6 +78,7 @@
 		"add": "Add",
 		"close": "Close",
 		"columns": "Columns",
+		"confirmPlease": "Confirm please",
 		"conversionRate": "CR",
 		"cpa": "CPA",
 		"delete": "Delete",
@@ -133,6 +134,9 @@
 				"addTags": "Add tags",
 				"removeTags": "Remove tags",
 				"title": "Assign tags to multiple accounts"
+			},
+			"multipleTokensCheck": {
+				"title": "Checking tokens"
 			},
 			"share": {
 				"permissions": {
