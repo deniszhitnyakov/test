@@ -193,6 +193,10 @@
               return items;
             }
         },
+
+        created() {
+          this.$store.dispatch('users/loadUsers');
+        },
         
         methods: {
             async savePermissions() {

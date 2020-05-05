@@ -105,16 +105,18 @@
         name: 'AccountsShareDialog',
 
         data: () => ({
-            newAccount: {},
+            newAccount: {
+              permissions: [],
+            },
         }),
 
         computed: {
             ...mapGetters({
-                account: 'accounts/forShare',
-                users: 'users/allUsers',
-                dialogs: 'accounts/dialogs',
-                loading: 'accounts/loading',
-                profile: 'main/profile',
+              account: 'accounts/forShare',
+              users: 'users/allUsers',
+              dialogs: 'accounts/dialogs',
+              loading: 'accounts/loading',
+              profile: 'main/profile',
             }),
 
             openedItems() {
@@ -139,7 +141,7 @@
             items() {
               let items = [];
 
-              this.users.forEach((user) =>  {
+              this.users.forEach(user =>  {
                 if (user.id === this.profile.id) return;
                 let item = {
                   id: 'user-' + user.id,
@@ -161,6 +163,8 @@
         
         created() {
             this.newAccount = {...this.account};
+            if (!this.newAccount.permissions) this.newAccount.permissions = [];
+            this.$store.dispatch('users/loadUsers');
         },
         
         methods: {
