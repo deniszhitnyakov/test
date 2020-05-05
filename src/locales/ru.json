@@ -125,8 +125,11 @@
 				"title": "Редактирование аккаунта [{accountName}]"
 			},
 			"multipeShare": {
+<<<<<<< HEAD
 				"addPermissions": "Добавить права",
 				"removePermissions": "Снять права",
+=======
+>>>>>>> 2a48288f47c7771d96ebe62b5533ed95903ba25c
 				"title": "Поделиться аккаунтами"
 			},
 			"share": {
