@@ -19,27 +19,6 @@
             <v-col
               cols="12"
             >
-              <!-- ВЫБОР РЕЖИМА -->
-              <div>
-                <v-radio-group
-                  v-model="mode"
-                  row
-                  dense
-                  style="margin-top: 0px;"
-                  hide-details
-                  class="my-1"
-                >
-                  <v-radio
-                    :label="$t('dialogs.accounts.multipeShare.addPermissions')"
-                    :value="1"
-                  />
-                  <v-radio
-                    :label="$t('dialogs.accounts.multipeShare.removePermissions')"
-                    :value="-1"
-                  />
-                </v-radio-group>
-              </div>
-              
               <div>
                 <!-- ВЫБРАТЬ ВСЕ -->
                 <v-btn
@@ -123,6 +102,27 @@
                   </v-icon>
                 </template>
               </v-treeview>
+
+              <!-- ВЫБОР РЕЖИМА -->
+              <div>
+                <v-radio-group
+                  v-model="mode"
+                  row
+                  dense
+                  style="margin-top: 0px;"
+                  hide-details
+                  class="mt-3"
+                >
+                  <v-radio
+                    :label="$t('dialogs.accounts.multipeShare.addPermissions')"
+                    :value="1"
+                  />
+                  <v-radio
+                    :label="$t('dialogs.accounts.multipeShare.removePermissions')"
+                    :value="-1"
+                  />
+                </v-radio-group>
+              </div>
             </v-col>
           </v-row>
         </v-container>
