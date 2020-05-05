@@ -97,6 +97,7 @@
 		"remove": "Убрать",
 		"required": "Обязательно",
 		"save": "Сохранить",
+		"saved": "Сохранил",
 		"search": "Поиск",
 		"selected": "Выбрано",
 		"status": "Статус",
@@ -120,6 +121,9 @@
 			},
 			"edit": {
 				"title": "Редактирование аккаунта [{accountName}]"
+			},
+			"multipeShare": {
+				"title": "Поделиться аккаунтами"
 			},
 			"share": {
 				"permissions": {

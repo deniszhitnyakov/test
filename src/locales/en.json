@@ -97,6 +97,7 @@
 		"remove": "Remove",
 		"required": "Required",
 		"save": "Save",
+		"saved": "Saved",
 		"search": "Search",
 		"selected": "Selected",
 		"status": "Status",
@@ -120,6 +121,9 @@
 			},
 			"edit": {
 				"title": "Edit [{accountName}] account"
+			},
+			"multipeShare": {
+				"title": "Share multiple accounts"
 			},
 			"share": {
 				"permissions": {

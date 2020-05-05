@@ -39,6 +39,7 @@
               color="primary"
               text
               style="min-width: 0; width: 30px; margin-top: 1px;"
+              @click="$store.dispatch('accounts/openDialog', 'multipleShare')"
             >
               <v-icon :size="12">
                 fas fa-share-alt
