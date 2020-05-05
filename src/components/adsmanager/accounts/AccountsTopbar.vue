@@ -24,6 +24,7 @@
               color="primary"
               text
               style="min-width: 0; width: 30px; margin-top: 1px;"
+              @click="$store.dispatch('accounts/openDialog', 'multipleAssignTags')"
             >
               <v-icon :size="12">
                 fas fa-tags

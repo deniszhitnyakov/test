@@ -4,6 +4,7 @@
     <single-add-dialog v-if="dialogs.add" />
     <edit-dialog v-if="dialogs.edit" />
     <multiple-share-dialog v-if="dialogs.multipleShare" />
+    <multiple-assign-tags-dialog v-if="dialogs.multipleAssignTags" />
     <assign-tags-dialog v-if="dialogs.assignTags" />
     <share-dialog v-if="dialogs.share" />
 
@@ -16,15 +17,16 @@
 </template>
 
 <script>
-import {mapGetters}                 from 'vuex';
+import {mapGetters}                         from 'vuex';
 
-import AssignTagsDialog             from '../../components/adsmanager/accounts/AccountsAssignTagsDialog';
-import EditDialog                   from '../../components/adsmanager/accounts/AccountsEditDialog';
-import MainTable                    from '../../components/adsmanager/accounts/AccountsMainTable';
-import MultipleShareDialog          from '../../components/adsmanager/accounts/AccountsMultipleShareDialog';
-import ShareDialog                  from '../../components/adsmanager/accounts/AccountsShareDialog';
-import SingleAddDialog              from '../../components/adsmanager/accounts/AccountsSingleAddDialog';
-import Topbar                       from '../../components/adsmanager/accounts/AccountsTopbar';
+import AssignTagsDialog                     from '../../components/adsmanager/accounts/AccountsAssignTagsDialog';
+import EditDialog                           from '../../components/adsmanager/accounts/AccountsEditDialog';
+import MainTable                            from '../../components/adsmanager/accounts/AccountsMainTable';
+import MultipleAssignTagsDialog             from '../../components/adsmanager/accounts/AccountsMultipleAssignTagsDialog';
+import MultipleShareDialog                  from '../../components/adsmanager/accounts/AccountsMultipleShareDialog';
+import ShareDialog                          from '../../components/adsmanager/accounts/AccountsShareDialog';
+import SingleAddDialog                      from '../../components/adsmanager/accounts/AccountsSingleAddDialog';
+import Topbar                               from '../../components/adsmanager/accounts/AccountsTopbar';
 
 export default {
   name: 'Accounts',
@@ -36,7 +38,8 @@ export default {
     ShareDialog,
     SingleAddDialog,
     EditDialog,
-    MultipleShareDialog
+    MultipleShareDialog,
+    MultipleAssignTagsDialog
   },
   
   computed: {

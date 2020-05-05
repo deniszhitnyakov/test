@@ -24,6 +24,7 @@ export default {
       edit: false,
       share: false,
       multipleShare: false,
+      multipleAssignTags: false,
     },
     loading: {
       mainTable: false,
@@ -32,6 +33,7 @@ export default {
       share: false,
       multipleShare: false,
       editDialog: false,
+      multipleAssignTags: false,
     },
   },
   getters: {
@@ -287,6 +289,42 @@ export default {
         return true;
       } else {
         context.dispatch('main/apiError', response.data, { root: true });
+      }
+
+      return response.data.success;
+    },
+
+    async saveMultipleTags(context, data) {
+      context.commit('SET_LOADING', {
+        param: 'multipleAssignTags',
+        value: true
+      });
+
+      const response = await this._vm.api.post('/accounts/update_multiple_tags', data).catch((e) => {
+        context.dispatch('main/apiError', e, {
+          root: true
+        });
+      });
+
+      context.commit('SET_LOADING', {
+        param: 'multipleAssignTags',
+        value: false
+      });
+
+      if (response.data.success) {
+        context.dispatch('main/alert', {
+          color: 'success',
+          message: i18n.t('common.saved')
+        }, {
+          root: true
+        });
+
+        context.dispatch('LOAD_ACCOUNTS');
+        return true;
+      } else {
+        context.dispatch('main/apiError', response.data, {
+          root: true
+        });
       }
 
       return response.data.success;

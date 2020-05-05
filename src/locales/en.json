@@ -129,6 +129,11 @@
 				"removePermissions": "Remove permissions",
 				"title": "Share multiple accounts"
 			},
+			"multipleAssignTags": {
+				"addTags": "Add tags",
+				"removeTags": "Remove tags",
+				"title": "Assign tags to multiple accounts"
+			},
 			"share": {
 				"permissions": {
 					"edit": "Edit",

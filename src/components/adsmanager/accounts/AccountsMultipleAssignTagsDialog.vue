@@ -1,13 +1,13 @@
 <template>
   <v-dialog
-    :value="dialogs.assignTags"
-    persistent
+    :value="dialogs.multipleAssignTags"
     max-width="600px"
   >
-    <v-card :loading="loading.assignTagsDialog">
+    <v-card :loading="loading.multipleAssignTags">
+      <!-- ЗАГОЛОВОК -->
       <v-card-title>
         <span class="headline">
-          {{ $t('dialogs.accounts.assignTags.title', {accountName: newAccount.name}) }}
+          {{ $t('dialogs.accounts.multipleAssignTags.title') }}
         </span>
       </v-card-title>
       <v-card-text>
@@ -16,8 +16,9 @@
             <v-col
               cols="12"
             >
+              <!-- ТЕГИ -->
               <v-combobox
-                v-model="newAccount.tags"
+                v-model="selectedTags"
                 :label="$t('common.tags')"
                 :items="tags.all"
                 multiple
@@ -25,7 +26,30 @@
                 dark
                 deletable-chips
                 clearable
+                dense
+                hide-details
               />
+
+              <!-- ВЫБОР РЕЖИМА -->
+              <div>
+                <v-radio-group
+                  v-model="mode"
+                  row
+                  dense
+                  style="margin-top: 0px;"
+                  hide-details
+                  class="mt-3"
+                >
+                  <v-radio
+                    :label="$t('dialogs.accounts.multipleAssignTags.addTags')"
+                    :value="1"
+                  />
+                  <v-radio
+                    :label="$t('dialogs.accounts.multipleAssignTags.removeTags')"
+                    :value="-1"
+                  />
+                </v-radio-group>
+              </div>
             </v-col>
           </v-row>
         </v-container>
@@ -35,7 +59,7 @@
         <v-btn
           color="blue darken-1"
           text
-          @click="$store.dispatch('accounts/closeDialog', 'assignTags')"
+          @click="$store.dispatch('accounts/closeDialog', 'multipleAssignTags')"
         >
           {{ $t('common.close') }}
         </v-btn>
@@ -57,6 +81,13 @@
     export default {
         name: 'AccountsMultipleAssignTagsDialog',
         
+        data() {
+          return {
+            mode: 1,
+            selectedTags: [],
+          };
+        },
+
         computed: {
             ...mapGetters({
                 dialogs: 'accounts/dialogs',
@@ -67,16 +98,20 @@
         },
 
         created() {
-            this.newAccount = {...this.account};
             this.$store.dispatch('tags/loadTags');
         },
 
         methods: {
             async saveTags() {
-                const success = await this.$store.dispatch('accounts/saveTags', this.newAccount);
+                const data = {
+                  ids: this.accounts.map(account => account.id),
+                  tags: this.selectedTags,
+                  mode: this.mode,
+                };
+                const success = await this.$store.dispatch('accounts/saveMultipleTags', data);
                 if (success) {
                     this.$store.dispatch('tags/loadTags');
-                    this.$store.dispatch('accounts/closeDialog', 'assignTags');
+                    this.$store.dispatch('accounts/closeDialog', 'multipleAssignTags');
                 }
             }
         }

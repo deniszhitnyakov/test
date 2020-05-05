@@ -129,6 +129,11 @@
 				"removePermissions": "Снять права",
 				"title": "Поделиться аккаунтами"
 			},
+			"multipleAssignTags": {
+				"addTags": "Добавить теги",
+				"removeTags": "Убрать теги",
+				"title": "Назначить теги аккаунтам"
+			},
 			"share": {
 				"permissions": {
 					"edit": "Редактирование",
