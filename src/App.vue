@@ -157,11 +157,8 @@ export default {
   }
 
   div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(1), 
-  div.v-data-table__wrapper > table > thead > tr:hover > th:nth-child(1),
   div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(2), 
-  div.v-data-table__wrapper > table > thead > tr:hover > th:nth-child(2),
-  div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(3), 
-  div.v-data-table__wrapper > table > thead > tr:hover > th:nth-child(3) {
+  div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(3) {
     background: #2a2a2a;
   }
 

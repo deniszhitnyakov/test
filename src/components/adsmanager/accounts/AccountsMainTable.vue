@@ -16,6 +16,7 @@
           disable-pagination
           hide-default-footer
           class="elevation-1 stat-table"
+          :custom-sort="customSort"
         >
           <template #body="{items}">
             <tbody>
@@ -114,18 +115,19 @@
 </template>
 
 <script>
-import { mapGetters }                                     from 'vuex';
+import { mapGetters }                                       from 'vuex';
 
-import actionCols                                         from '../../../constants/adsmanager/action_cols';
-import commonCols                                         from '../../../constants/adsmanager/common_cols';
-import makeCols                                           from '../../../mixins/adsmanager/make_cols';
-import ComplexStatCellCpa                                 from '../stat-cells/AdsManagerComplexStatCellCpa';
-import ComplexStatCellCr                                  from '../stat-cells/AdsManagerComplexStatCellCr';
-import ComplexStatCellQuantity                            from '../stat-cells/AdsManagerComplexStatCellQuantity';
-import SimpleStatCell                                     from '../stat-cells/AdsManagerSimpleStatCell';
+import actionCols                                           from '../../../constants/adsmanager/action_cols';
+import commonCols                                           from '../../../constants/adsmanager/common_cols';
+import customSort                                           from '../../../mixins/adsmanager/custom_sort';
+import makeCols                                             from '../../../mixins/adsmanager/make_cols';
+import ComplexStatCellCpa                                   from '../stat-cells/AdsManagerComplexStatCellCpa';
+import ComplexStatCellCr                                    from '../stat-cells/AdsManagerComplexStatCellCr';
+import ComplexStatCellQuantity                              from '../stat-cells/AdsManagerComplexStatCellQuantity';
+import SimpleStatCell                                       from '../stat-cells/AdsManagerSimpleStatCell';
 
-import AccountsMainTableInfo                              from './AccountsMainTableInfo';
-import AccountsMainTableStatus                            from './AccountsMainTableStatus';
+import AccountsMainTableInfo                                from './AccountsMainTableInfo';
+import AccountsMainTableStatus                              from './AccountsMainTableStatus';
 
 export default {
   components: {
@@ -137,7 +139,7 @@ export default {
     ComplexStatCellCpa
   },
 
-  mixins: [makeCols],
+  mixins: [makeCols, customSort],
 
   data: function() {
     return ({
@@ -221,7 +223,7 @@ export default {
           return true;
         });
       }
-    }
+    },
   }
 };
 </script>
