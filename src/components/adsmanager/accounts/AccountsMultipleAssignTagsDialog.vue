@@ -2,6 +2,7 @@
   <v-dialog
     :value="dialogs.multipleAssignTags"
     max-width="600px"
+    persistent
   >
     <v-card :loading="loading.multipleAssignTags">
       <!-- ЗАГОЛОВОК -->

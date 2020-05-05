@@ -3,6 +3,7 @@
     :value="dialogs.share"
     max-width="500px"
     scrollable
+    persistent
   >
     <v-card :loading="loading.share">
       <v-card-title>

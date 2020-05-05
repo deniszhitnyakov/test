@@ -3,6 +3,7 @@
     :value="dialogs.multipleShare"
     max-width="500px"
     scrollable
+    persistent
   >
     <v-card :loading="loading.multipleShare">
       <!-- ЗАГОЛОВОК -->
