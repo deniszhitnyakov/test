@@ -134,6 +134,9 @@
 				"removeTags": "Убрать теги",
 				"title": "Назначить теги аккаунтам"
 			},
+			"multipleTokensCheck": {
+				"title": "Проверка токенов"
+			},
 			"share": {
 				"permissions": {
 					"edit": "Редактирование",

@@ -134,6 +134,9 @@
 				"removeTags": "Remove tags",
 				"title": "Assign tags to multiple accounts"
 			},
+			"multipleTokensCheck": {
+				"title": "Checking tokens"
+			},
 			"share": {
 				"permissions": {
 					"edit": "Edit",
