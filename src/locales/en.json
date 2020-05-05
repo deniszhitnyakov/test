@@ -125,11 +125,8 @@
 				"title": "Edit [{accountName}] account"
 			},
 			"multipeShare": {
-<<<<<<< HEAD
 				"addPermissions": "Add permissions",
 				"removePermissions": "Remove permissions",
-=======
->>>>>>> 2a48288f47c7771d96ebe62b5533ed95903ba25c
 				"title": "Share multiple accounts"
 			},
 			"share": {
