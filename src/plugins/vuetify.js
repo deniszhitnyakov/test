@@ -1,5 +1,5 @@
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
-import ru      from 'vuetify/es5/locale/ru';
+import en      from 'vuetify/es5/locale/en';
 import Vuetify from 'vuetify/lib';
 import Vue     from 'vue';
 
@@ -24,8 +24,8 @@ export default new Vuetify({
     },
   },
     lang: {
-      locales: { ru },
-      current: 'ru',
+      locales: { en },
+      current: 'en',
     },
   icons: {
     iconfont: 'md',

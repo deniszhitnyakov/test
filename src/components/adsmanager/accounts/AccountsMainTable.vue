@@ -11,13 +11,19 @@
           :loading-text="$t('common.loading')"
           fixed-header
           :items-per-page="10"
-          :height="innerHeight - 50 - 48"
+          :height="innerHeight - 50 - 48 - 48"
           show-select
-          disable-pagination
-          hide-default-footer
-          class="elevation-1 stat-table"
+          class="elevation-1 stat-table stat-table-accounts"
           :custom-sort="customSort"
         >
+          <template #header.data-table-select="{ on , props }">
+            <v-simple-checkbox
+              color="primary"
+              v-bind="props"
+              style="width: 48px; text-align: center;"
+              v-on="on"
+            />
+          </template>
           <template #body="{items}">
             <tbody>
               <tr
@@ -27,12 +33,12 @@
                 <td
                   style=""
                 >
-                  <div style="margin-left: 9px;">
+                  <div>
                     <v-simple-checkbox
                       v-ripple
                       color="primary"
                       :value="typeof selected.find(account => account.id === item.id) !== 'undefined'"
-                      style="width: 24px;"
+                      style="width: 48px; text-align: center;"
                       @input="selectAccount($event, item)"
                     />
                   </div>
@@ -73,12 +79,9 @@
 
               <!-- TOTAL -->
               <tr v-if="accounts.filtered.length > 0">
-                <td
-                  colspan="3"
-                  style="font-weight: bold;"
-                >
-                  &nbsp;
-                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
                 <template v-for="col in profile.columns">
                   <simple-stat-cell
                     v-if="commonCols.indexOf(col) > -1"
@@ -227,3 +230,43 @@ export default {
   }
 };
 </script>
+<style>
+  .stat-table-accounts div.v-data-table__wrapper > table > tbody > tr > td:nth-child(1), 
+  .stat-table-accounts div.v-data-table__wrapper > table > thead > tr > th:nth-child(1) {
+    position: sticky !important; 
+    position: -webkit-sticky !important; 
+    left: 0; 
+    z-index: 3;
+    background: #1e1e1e;
+  }
+
+  .stat-table-accounts div.v-data-table__wrapper > table > tbody > tr > td:nth-child(2), 
+  .stat-table-accounts div.v-data-table__wrapper > table > thead > tr > th:nth-child(2) {
+    position: sticky !important; 
+    position: -webkit-sticky !important; 
+    left: 40px; 
+    z-index: 3;
+    background: #1e1e1e;
+  }
+
+  .stat-table-accounts div.v-data-table__wrapper > table > tbody > tr > td:nth-child(3), 
+  .stat-table-accounts div.v-data-table__wrapper > table > thead > tr > th:nth-child(3) {
+    position: sticky !important; 
+    position: -webkit-sticky !important; 
+    left: 190px; 
+    z-index: 3;
+    background: #1e1e1e;
+  }
+
+  .stat-table-accounts div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(1), 
+  .stat-table-accounts div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(2), 
+  .stat-table-accounts div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(3) {
+    background: #2a2a2a;
+  }
+
+  .stat-table-accounts div.v-data-table__wrapper > table > thead > tr > th:nth-child(1),
+  .stat-table-accounts div.v-data-table__wrapper > table > thead > tr > th:nth-child(2),
+  .stat-table-accounts div.v-data-table__wrapper > table > thead > tr > th:nth-child(3) {
+    z-index: 4 !important;
+  }
+</style>

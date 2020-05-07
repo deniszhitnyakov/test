@@ -32,6 +32,7 @@
         },
 
         created() {
+          this.$store.dispatch('cabs/loadCabs');
           setInterval(() => {
             this.$store.dispatch('cabs/loadCabs');
           }, 60000);

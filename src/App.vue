@@ -129,42 +129,7 @@ export default {
     margin-right: 8px;
   }
 
-  div.v-data-table__wrapper > table > tbody > tr > td:nth-child(1), 
-  div.v-data-table__wrapper > table > thead > tr > th:nth-child(1) {
-    position: sticky !important; 
-    position: -webkit-sticky !important; 
-    left: 0; 
-    z-index: 3;
-    background: #1e1e1e;
-  }
-
-  div.v-data-table__wrapper > table > tbody > tr > td:nth-child(2), 
-  div.v-data-table__wrapper > table > thead > tr > th:nth-child(2) {
-    position: sticky !important; 
-    position: -webkit-sticky !important; 
-    left: 40px; 
-    z-index: 3;
-    background: #1e1e1e;
-  }
-
-  div.v-data-table__wrapper > table > tbody > tr > td:nth-child(3), 
-  div.v-data-table__wrapper > table > thead > tr > th:nth-child(3) {
-    position: sticky !important; 
-    position: -webkit-sticky !important; 
-    left: 190px; 
-    z-index: 3;
-    background: #1e1e1e;
-  }
-
-  div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(1), 
-  div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(2), 
-  div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(3) {
-    background: #2a2a2a;
-  }
-
-  div.v-data-table__wrapper > table > thead > tr > th:nth-child(1),
-  div.v-data-table__wrapper > table > thead > tr > th:nth-child(2),
-  div.v-data-table__wrapper > table > thead > tr > th:nth-child(3) {
-    z-index: 4 !important;
-  }
+  /* th[role=columnheader] .v-data-table__checkbox i {
+    color: var(--v-primary-base) !important;
+  } */
 </style>

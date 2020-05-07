@@ -1,15 +1,18 @@
 <template>
   <div class="my-2">
-    <div class="subtitle-1">
-      {{ account.name }}
+    <div>
+      <span
+        style="cursor: pointer;"
+        @click="editAccount(account)"
+      >
+        {{ account.name }}
+      </span>
     </div>
-    <accounts-main-table-actions :account="account" />
     <account-tags :account="account" />
   </div>
 </template>
 
 <script>
-    import AccountsMainTableActions         from './AccountsMainTableActions';
     import AccountTags                      from './AccountsMainTableTags';
 
     export default {
@@ -17,7 +20,6 @@
 
         components: {
             AccountTags,
-            AccountsMainTableActions
         },
 
         props: {
@@ -25,6 +27,12 @@
                 type: Object,
                 default: () => ({})
             }
+        },
+
+        methods: {
+          editAccount(account) {
+            this.$store.dispatch('accounts/initAccountForEdit', account);
+          }
         }
     };
 </script>

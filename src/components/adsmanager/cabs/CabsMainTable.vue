@@ -4,7 +4,7 @@
       <v-card-text style="padding: 0px 8px 0px 8px">
         <!-- ТАБЛИЦА -->
         <v-data-table
-          v-model="selected"
+          :value="selected"
           :headers="cols"
           :items="cabs.filtered"
           :loading="loading.mainTable"
@@ -13,33 +13,45 @@
           :items-per-page="10"
           :height="innerHeight - 50 - 48"
           show-select
-          disable-pagination
-          hide-default-footer
-          class="elevation-1 stat-table"
+          class="elevation-1 stat-table stat-table-cabs"
           :custom-sort="customSort"
+          @toggle-select-all="selectAll"
+          @item-selected="selectItem"
         >
+          <template #header.data-table-select="{ on , props }">
+            <v-simple-checkbox
+              color="primary"
+              v-bind="props"
+              style="width: 48px; text-align: center;"
+              v-on="on"
+            />
+          </template>
           <template #body="{items}">
             <tbody>
               <tr
                 v-for="item in items"
                 :key="`row-${item.id}`"
               >
+                <!-- ГАЛОЧКА -->
                 <td>
-                  <div style="margin-left: 9px;">
-                    <!-- <v-simple-checkbox
+                  <div>
+                    <v-simple-checkbox
                       v-ripple
                       color="primary"
-                      :value="typeof selected.find(account => account.id === item.id) !== 'undefined'"
-                      style="width: 24px;"
-                      @input="selectAccount($event, item)"
-                    /> -->
+                      :value="typeof selected.find(cab => cab.id === item.id) !== 'undefined'"
+                      style="width: 48px; text-align: center;"
+                      @input="selectItem(item, $event)"
+                    />
                   </div>
                 </td>
+
+                <!-- ОСНОВНАЯ ИНФОРМАЦИЯ -->
                 <td>
-                  {{ item.name }}
+                  <cabs-main-table-info :cab="item" />
                 </td>
+                <!-- СТАТУС -->
                 <td>
-                  <!-- <accounts-main-table-status :account="item" /> -->
+                  <cabs-main-table-status :cab="item" />
                 </td>
                 <template v-for="col in profile.columns">
                   <simple-stat-cell
@@ -71,12 +83,9 @@
 
               <!-- TOTAL -->
               <tr v-if="cabs.filtered.length > 0">
-                <td
-                  colspan="3"
-                  style="font-weight: bold;"
-                >
-                  &nbsp;
-                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
                 <template v-for="col in profile.columns">
                   <simple-stat-cell
                     v-if="commonCols.indexOf(col) > -1"
@@ -113,16 +122,20 @@
 </template>
 
 <script>
-  import {mapGetters}                                           from 'vuex';
+  import {mapGetters}                                              from 'vuex';
 
-  import actionCols                                             from '../../../constants/adsmanager/action_cols';
-  import commonCols                                             from '../../../constants/adsmanager/common_cols';
-  import customSort                                             from '../../../mixins/adsmanager/custom_sort';
-  import makeCols                                               from '../../../mixins/adsmanager/make_cols';
-  import ComplexStatCellCpa                                     from '../stat-cells/AdsManagerComplexStatCellCpa';
-  import ComplexStatCellCr                                      from '../stat-cells/AdsManagerComplexStatCellCr';
-  import ComplexStatCellQuantity                                from '../stat-cells/AdsManagerComplexStatCellQuantity';
-  import SimpleStatCell                                         from '../stat-cells/AdsManagerSimpleStatCell';
+  import actionCols                                                from '../../../constants/adsmanager/action_cols';
+  import commonCols                                                from '../../../constants/adsmanager/common_cols';  
+  import customSort                                                from '../../../mixins/adsmanager/custom_sort';
+  import makeCols                                                  from '../../../mixins/adsmanager/make_cols';  
+  import selectItems                                               from '../../../mixins/adsmanager/select_items';  
+  import ComplexStatCellCpa                                        from '../stat-cells/AdsManagerComplexStatCellCpa';
+  import ComplexStatCellCr                                         from '../stat-cells/AdsManagerComplexStatCellCr';
+  import ComplexStatCellQuantity                                   from '../stat-cells/AdsManagerComplexStatCellQuantity';
+  import SimpleStatCell                                            from '../stat-cells/AdsManagerSimpleStatCell';
+
+  import CabsMainTableInfo                                         from './CabsMainTableInfo';
+  import CabsMainTableStatus                                       from './CabsMainTableStatus';
 
   export default {
     name: 'CabsMainTable',
@@ -131,12 +144,15 @@
       SimpleStatCell,
       ComplexStatCellQuantity,
       ComplexStatCellCr,
-      ComplexStatCellCpa
+      ComplexStatCellCpa,
+      CabsMainTableInfo,
+      CabsMainTableStatus
     },
 
     mixins: [
       makeCols,
-      customSort
+      customSort,
+      selectItems
     ],
 
     data() {
@@ -186,6 +202,46 @@
 
     created() {
       this.cols = this.makeCols(this.firstCols);
-    }
+    },
   };
 </script>
+<style>
+  .stat-table-cabs div.v-data-table__wrapper > table > tbody > tr > td:nth-child(1), 
+  .stat-table-cabs div.v-data-table__wrapper > table > thead > tr > th:nth-child(1) {
+    position: sticky !important; 
+    position: -webkit-sticky !important; 
+    left: 0; 
+    z-index: 3;
+    background: #1e1e1e;
+  }
+
+  .stat-table-cabs div.v-data-table__wrapper > table > tbody > tr > td:nth-child(2), 
+  .stat-table-cabs div.v-data-table__wrapper > table > thead > tr > th:nth-child(2) {
+    position: sticky !important; 
+    position: -webkit-sticky !important; 
+    left: 40px; 
+    z-index: 3;
+    background: #1e1e1e;
+  }
+
+  .stat-table-cabs div.v-data-table__wrapper > table > tbody > tr > td:nth-child(3), 
+  .stat-table-cabs div.v-data-table__wrapper > table > thead > tr > th:nth-child(3) {
+    position: sticky !important; 
+    position: -webkit-sticky !important; 
+    left: 190px; 
+    z-index: 3;
+    background: #1e1e1e;
+  }
+
+  .stat-table-cabs div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(1), 
+  .stat-table-cabs div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(2), 
+  .stat-table-cabs div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(3) {
+    background: #2a2a2a;
+  }
+
+  .stat-table-cabs div.v-data-table__wrapper > table > thead > tr > th:nth-child(1),
+  .stat-table-cabs div.v-data-table__wrapper > table > thead > tr > th:nth-child(2),
+  .stat-table-cabs div.v-data-table__wrapper > table > thead > tr > th:nth-child(3) {
+    z-index: 4 !important;
+  }
+</style>

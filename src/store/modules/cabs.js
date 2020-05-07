@@ -44,6 +44,10 @@ export default {
 
     SET_STAT: (state, stat) => {
       state.stat = stat;
+    },
+
+    SET_SELECTED_CABS: (state, cabs) => {
+      state.cabs.selected = cabs;
     }
   },
   actions: {
@@ -100,5 +104,9 @@ export default {
 
       commit('SET_STAT', response.data.data);
     },
+
+    async saveSelectedCabs(context, cabs) {
+      context.commit('SET_SELECTED_CABS', cabs);
+    }
   },
 };
