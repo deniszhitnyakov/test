@@ -15,6 +15,7 @@
           show-select
           class="elevation-1 stat-table stat-table-accounts"
           :custom-sort="customSort"
+          :footer-props="{'items-per-page-options': [10, 30, 50, 100, -1]}"
         >
           <template #header.data-table-select="{ on , props }">
             <v-simple-checkbox

@@ -129,7 +129,7 @@ export default {
     margin-right: 8px;
   }
 
-  /* th[role=columnheader] .v-data-table__checkbox i {
-    color: var(--v-primary-base) !important;
-  } */
+  .v-data-footer, .v-data-footer__select {
+    height: 48px !important;
+  }
 </style>
