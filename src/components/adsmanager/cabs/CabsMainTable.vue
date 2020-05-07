@@ -220,7 +220,7 @@
   .stat-table-cabs div.v-data-table__wrapper > table > thead > tr > th:nth-child(2) {
     position: sticky !important; 
     position: -webkit-sticky !important; 
-    left: 40px; 
+    left: 48px; 
     z-index: 3;
     background: #1e1e1e;
   }
@@ -229,7 +229,7 @@
   .stat-table-cabs div.v-data-table__wrapper > table > thead > tr > th:nth-child(3) {
     position: sticky !important; 
     position: -webkit-sticky !important; 
-    left: 190px; 
+    left: 198px; 
     z-index: 3;
     background: #1e1e1e;
   }

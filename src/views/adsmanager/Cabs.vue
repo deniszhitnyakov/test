@@ -16,6 +16,12 @@
           MainTable
         },
 
+        data() {
+          return {
+            updateStatInterval: 0,
+          };
+        },
+
         computed: {
           ...mapGetters({
             accounts: 'accounts/filtered',
@@ -33,9 +39,13 @@
 
         created() {
           this.$store.dispatch('cabs/loadCabs');
-          setInterval(() => {
+          this.updateStatInterval = setInterval(() => {
             this.$store.dispatch('cabs/loadCabs');
           }, 60000);
-        }
+        },
+
+        beforeDestroy() {
+          clearInterval(this.updateStatInterval);
+        },
     };
 </script>

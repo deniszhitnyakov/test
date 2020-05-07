@@ -10,7 +10,7 @@
           :loading="loading.mainTable"
           :loading-text="$t('common.loading')"
           fixed-header
-          :items-per-page="10"
+          :items-per-page="50"
           :height="innerHeight - 50 - 48 - 48"
           show-select
           class="elevation-1 stat-table stat-table-accounts"
@@ -245,7 +245,7 @@ export default {
   .stat-table-accounts div.v-data-table__wrapper > table > thead > tr > th:nth-child(2) {
     position: sticky !important; 
     position: -webkit-sticky !important; 
-    left: 40px; 
+    left: 48px; 
     z-index: 3;
     background: #1e1e1e;
   }
@@ -254,7 +254,7 @@ export default {
   .stat-table-accounts div.v-data-table__wrapper > table > thead > tr > th:nth-child(3) {
     position: sticky !important; 
     position: -webkit-sticky !important; 
-    left: 190px; 
+    left: 198px; 
     z-index: 3;
     background: #1e1e1e;
   }

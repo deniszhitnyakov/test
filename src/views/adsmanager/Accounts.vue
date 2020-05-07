@@ -41,6 +41,12 @@ export default {
     MultipleShareDialog,
     MultipleAssignTagsDialog
   },
+
+  data() {
+    return {
+      updateStatInterval: 0,
+    };
+  },
   
   computed: {
     ...mapGetters({
@@ -62,7 +68,7 @@ export default {
   created() {
     this.$store.dispatch('accounts/LOAD_ACCOUNTS');
     this.$store.dispatch('users/loadUsers');
-    setInterval( () => {
+    this.updateStatInterval = setInterval( () => {
       this.$store.dispatch('accounts/LOAD_ACCOUNTS');
       this.$store.dispatch('users/loadUsers');
     }, 60000 );
@@ -70,6 +76,10 @@ export default {
 
   mounted() {
     this.$store.dispatch('accounts/filterAccounts');
-  }
+  },
+
+  beforeDestroy() {
+    clearInterval(this.updateStatInterval);
+  },
 };
 </script>
