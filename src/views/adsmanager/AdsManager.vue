@@ -3,9 +3,9 @@
     <tabs />
     <columns-dialog v-if="dialogs.columns" />
     <div style="padding: 8px;">
-      <keep-alive>
-        <component :is="activeTab.component" />
-      </keep-alive>
+      <!-- <keep-alive> -->
+      <component :is="activeTab.component" />
+      <!-- </keep-alive> -->
     </div>
   </div>
 </template>
@@ -42,6 +42,10 @@
                 activeTab: 'adsmanager/activeTab',
                 dialogs: 'adsmanager/dialogs'
             })
+        },
+
+        created() {
+          this.$store.dispatch('accounts/LOAD_ACCOUNTS');
         }
     };
 </script>

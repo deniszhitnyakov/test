@@ -1,7 +1,11 @@
 export default {
     methods: {
-        makeCols() {
+        makeCols(firstCols = null) {
             let cols = [];
+
+            if (firstCols) {
+                cols = cols.concat(firstCols);
+            }
 
             this.profile.columns.forEach(col => {
                 if (col.search('action') === 0) {

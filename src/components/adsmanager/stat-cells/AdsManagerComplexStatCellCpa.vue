@@ -26,8 +26,7 @@
 </template>
 
 <script>
-import numeral            from 'numeral';
-    import { mapGetters } from 'vuex';
+    import numeral            from 'numeral';
 
     export default {
         name: 'AdsManagerComplexStatCellCpa',
@@ -54,9 +53,9 @@ import numeral            from 'numeral';
         },
 
         computed: {
-            ...mapGetters({
-                stat: 'accounts/stat'
-            }),
+            stat() {
+              return this.$store.getters[`${this.$store.state.adsmanager.activeTab.component}/stat`];
+            },
 
             show() {
                 if (this.col === 'action_results') {

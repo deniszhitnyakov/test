@@ -4,6 +4,7 @@ import Vue        from 'vue';
 import accounts   from './modules/accounts.js';
 import adsmanager from './modules/adsmanager.js';
 import bundles    from './modules/bundles.js';
+import cabs       from './modules/cabs.js';
 import jobs       from './modules/jobs.js';
 import main       from './modules/main.js';
 import proxy      from './modules/proxy.js';
@@ -21,6 +22,7 @@ export default new Vuex.Store({
         accounts,
         tags,
         users,
-        proxy
+        proxy,
+        cabs
     },
 });

@@ -5,7 +5,6 @@
       hide-overlay
       persistent
       width="300"
-      bottom
     >
       <v-card
         color="primary"
@@ -67,6 +66,7 @@
     methods: {
       multipleCheckTokens() {
         if (!confirm(this.$t('common.confirmPlease'))) return;
+        this.tokensChecked = 0;
         if (this.accounts.selected && this.accounts.selected.length > 0) {
           this.loading = true;
           this.accounts.selected.forEach(account => {
@@ -83,7 +83,7 @@
     }
   };
 </script>
-<style>
+<style scoped>
 .v-dialog__content {
   align-items: flex-end !important;
 }

@@ -46,6 +46,7 @@ export default {
     loading: state => state.loading,
     stat: state => state.stat,
     selected: state => state.accounts.selected,
+    filtered: state => state.accounts.filtered,
   },
   mutations: {
     ...mixinDialogMutations,

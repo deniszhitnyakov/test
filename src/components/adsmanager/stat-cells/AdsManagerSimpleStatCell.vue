@@ -23,7 +23,6 @@
 
 <script>
     import numeral        from 'numeral';
-    import { mapGetters } from 'vuex';
 
     export default {
         name: 'AdsManagerSimpleStatCell',
@@ -33,27 +32,28 @@
                 type: Object,
                 default: () => ({})
             },
+
             col: {
                 type: String,
                 default: '',
             },
+
             itIsTotalRow: {
               type: Boolean,
               default: false,
-            }
+            },
         },
 
         data() {
           return {
-            numeral
+            numeral,
           };
         },
 
         computed: {
-            ...mapGetters({
-                stat: 'accounts/stat'
-            }),
-
+            stat() {
+              return this.$store.getters[`${this.$store.state.adsmanager.activeTab.component}/stat`];
+            },
             show() {
                 if(this.itIsTotalRow) {
                   return (
