@@ -28,7 +28,8 @@
         computed: {
           ...mapGetters({
             accounts: 'accounts/filtered',
-            globalFilters: 'adsmanager/filters'
+            globalFilters: 'adsmanager/filters',
+            filters: 'cabs/filters',
           })
         },
 
@@ -43,7 +44,14 @@
           globalFilters: {
             deep: true,
             handler() {
-              this.$store.dispatch('cabs/filterCabs');
+              this.filterCabs();
+            }
+          },
+
+          filters: {
+            deep: true,
+            handler() {
+              this.filterCabs();
             }
           }
         },
@@ -57,6 +65,13 @@
 
         beforeDestroy() {
           clearInterval(this.updateStatInterval);
+        },
+
+        methods: {
+          async filterCabs() {
+            await this.$store.dispatch('cabs/filterCabs');
+            await this.$store.dispatch('cabs/loadStat');
+          }
         },
     };
 </script>

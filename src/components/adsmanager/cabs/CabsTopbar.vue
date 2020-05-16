@@ -64,7 +64,7 @@
             <v-list>
               <v-list-item
                 dense
-                @click="alert('1111')"
+                @click="$store.dispatch('cabs/setSpecificFilter', {filter: 'type', data: 'personal'});"
               >
                 <v-list-item-title>
                   {{ $t('adsmanager.cabs.filters.personalCabs') }}
@@ -73,17 +73,18 @@
 
               <v-list-item
                 dense
-                @click="alert('1111')"
+                @click="$store.dispatch('cabs/setSpecificFilter', {filter: 'type', data: 'business'});"
               >
                 <v-list-item-title>
                   {{ $t('adsmanager.cabs.filters.businessCabs') }}
                 </v-list-item-title>
               </v-list-item>
 
-              <v-divider inset />
+              <v-divider />
+              
               <v-list-item
                 dense
-                @click="alert('1111')"
+                @click="$store.dispatch('cabs/setSpecificFilter', {filter: 'accountsStatuses', data: ['ACTIVE']});"
               >
                 <v-list-item-title>
                   {{ $t('adsmanager.cabs.filters.underActiveAccounts') }}
@@ -92,7 +93,7 @@
               
               <v-list-item
                 dense
-                @click="alert('1111')"
+                @click="$store.dispatch('cabs/setSpecificFilter', {filter: 'cabsStatuses', data: [{text: 'ACTIVE', color: 'success', value: 1}]});"
               >
                 <v-list-item-title>
                   {{ $t('adsmanager.cabs.filters.active') }}
@@ -101,7 +102,7 @@
 
               <v-list-item
                 dense
-                @click="alert('1111')"
+                @click="$store.dispatch('cabs/setSpecificFilter', {filter: 'cabsStatuses', data: [{text: 'UNSETTLED',color: 'warning', value: 3}]});"
               >
                 <v-list-item-title>
                   {{ $t('adsmanager.cabs.filters.withDebt') }}
@@ -110,32 +111,41 @@
 
               <v-list-item
                 dense
-                @click="alert('1111')"
+                @click="$store.dispatch('cabs/setSpecificFilter', {filter: 'cabsStatuses', data: [{text: 'DISABLED', color: 'red', value: 2}]});"
               >
                 <v-list-item-title>
                   {{ $t('adsmanager.cabs.filters.onlyBlocked') }}
                 </v-list-item-title>
               </v-list-item>
 
-              <v-divider inset />
+              <v-divider />
 
               <v-list-item
                 dense
-                @click="alert('1111')"
+                @click="$store.dispatch('cabs/setSpecificFilter', {filter: 'attachedCard', data: 'with-card'});"
+              >
+                <v-list-item-title>
+                  {{ $t('adsmanager.cabs.filters.withCard') }}
+                </v-list-item-title>
+              </v-list-item>
+
+              <v-list-item
+                dense
+                @click="$store.dispatch('cabs/setSpecificFilter', {filter: 'attachedCard', data: 'without-card'});"
               >
                 <v-list-item-title>
                   {{ $t('adsmanager.cabs.filters.withoutCard') }}
                 </v-list-item-title>
               </v-list-item>
 
-              <v-divider inset />
+              <v-divider />
 
               <v-list-item
                 dense
                 @click="showFilters = true"
               >
                 <v-list-item-title>
-                  {{ $t('common.allFilters') }}
+                  {{ $t('filters.seeAll') }}
                 </v-list-item-title>
               </v-list-item>
             </v-list>
@@ -179,6 +189,8 @@
 </template>
 
 <script>
+  import {mapGetters}         from 'vuex';
+
   import TopbarCols           from '../AdsManagerTopbarCols';
   import FiltersDate          from '../filters/AdsManagerFiltersDate';
 
@@ -198,22 +210,38 @@
     data() {
       return {
         showFilters: false,
+        nameSearchText: '',
       };
     },
 
     computed: {
+      ...mapGetters({
+        filters: 'cabs/filters',
+        globalFilters: 'adsmanager/filters'
+      }),
+      
       activeFiltersCount() {
-      let count = 0;
+        let count = 0;
 
-      // if (this.filters.statuses.length > 0) count++;
-      // if (this.globalFilters.tags.length > 0) count++;
+        if (this.filters.accountsStatuses.length > 0) count++;
+        if (this.filters.cabsStatuses.length > 0) count++;
+        if (this.globalFilters.tags.length > 0) count++;
+        if (this.filters.type !== 'all') count++;
+        if (this.filters.attachedCard !== 'all') count++;
 
-      return count;
-    }
+        return count;
+      }
     },
 
     methods: {
-      filterName() {}
+      filterName(name) {
+        this.nameSearchText = name;
+        setTimeout(async () => {
+          if (name === this.nameSearchText) {
+            await this.$store.dispatch('cabs/setSpecificFilter', {filter: 'name', data: name});
+          }  
+        }, 500);
+      },
     }
   };
 </script>

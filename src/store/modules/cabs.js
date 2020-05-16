@@ -29,6 +29,8 @@ export default {
       accountsStatuses: [],
       cabsStatuses: [],
       tags: [],
+      type: 'all',
+      attachedCard: 'all',
     }
   },
   getters: {
@@ -67,12 +69,40 @@ export default {
       }
 
       if (this.state.adsmanager.filters.tags && this.state.adsmanager.filters.tags.length > 0) {
-        console.log(this.state.adsmanager.filters.tags);
         cabs = cabs.filter(cab => {
           return this.state.adsmanager.filters.tags.some(tags => {
             if (!Array.isArray(cab.tags)) return false;
             return cab.tags.indexOf(tags) > -1;
           });
+        });
+      }
+
+      if (state.filters.type !== 'all') {
+        cabs = cabs.filter(cab => {
+          if (state.filters.type === 'personal') {
+            return !cab.business_id; 
+          } else if (state.filters.type === 'business') {
+            return cab.business_id;
+          }
+        });
+      }
+
+      if (state.filters.attachedCard !== 'all') {
+        cabs = cabs.filter(cab => {
+          if (state.filters.attachedCard === 'with-card') {
+            return cab.card_number;
+          } else if (state.filters.attachedCard === 'without-card') {
+            return !cab.card_number;
+          }
+        });
+      }
+
+      if (state.filters.name && state.filters.name.toString().length > 0) {
+        cabs = cabs.filter(cab => {
+          if (cab.name) {
+            return cab.name.toString().toLowerCase().search(state.filters.name.toString().toLowerCase()) > -1;
+          }
+          return false;
         });
       }
 

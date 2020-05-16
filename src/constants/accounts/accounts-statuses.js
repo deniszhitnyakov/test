@@ -1,9 +1,5 @@
 export default [
-    {
-        text: 'ACTIVE',
-        value: 'ACTIVE',
-        color: 'success',
-    },
+    {text: 'ACTIVE', value: 'ACTIVE', color: 'success'},
     {
         text: 'TOKEN_ERROR',
         value: 'TOKEN_ERROR',

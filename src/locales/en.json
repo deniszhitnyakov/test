@@ -12,10 +12,22 @@
 			},
 			"filters": {
 				"active": "Active",
+				"attachedCard": "Attached card",
+				"attachedCardRadios": {
+					"no": "Without card",
+					"yes": "With card"
+				},
 				"businessCabs": "Business Manager cabs",
+				"cabType": "Cab type",
+				"cabTypes": {
+					"all": "All",
+					"business": "Business Manager",
+					"personal": "Personal"
+				},
 				"onlyBlocked": "Blocked",
 				"personalCabs": "Personal cabs",
 				"underActiveAccounts": "Under active accounts",
+				"withCard": "With bank card",
 				"withDebt": "Unsettled",
 				"withoutCard": "Without bank card"
 			}
@@ -96,7 +108,9 @@
 		"access_token": "Access token",
 		"account": "Account",
 		"add": "Add",
+		"all": "All",
 		"allFilters": "All filters",
+		"any": "Any",
 		"archive": "Archive",
 		"cab": "Cabinet",
 		"close": "Close",
@@ -116,6 +130,7 @@
 		"login": "Login",
 		"manageTags": "Manage tags",
 		"name": "Name",
+		"no": "No",
 		"password": "Password",
 		"port": "Port",
 		"proxy": "Proxy",
@@ -133,7 +148,8 @@
 		"tags": "Tags",
 		"type": "Type",
 		"unselectAll": "Unselect all",
-		"useragent": "Useragent"
+		"useragent": "Useragent",
+		"yes": "Yes"
 	},
 	"dialogs": {
 		"accounts": {
@@ -199,6 +215,7 @@
 		"dates": "Dates",
 		"more": "+ more filters",
 		"searchByName": "Search by name",
+		"seeAll": "See all filters",
 		"status": "Status filter",
 		"tags": "Tags filter"
 	},

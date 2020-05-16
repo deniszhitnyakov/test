@@ -12,10 +12,22 @@
 			},
 			"filters": {
 				"active": "Активные",
+				"attachedCard": "Привязана ли карта",
+				"attachedCardRadios": {
+					"no": "Без карты",
+					"yes": "Есть карта"
+				},
 				"businessCabs": "Кабинеты БМов",
+				"cabType": "Тип кабинета",
+				"cabTypes": {
+					"all": "Все",
+					"business": "БМ",
+					"personal": "Личный"
+				},
 				"onlyBlocked": "Заблокированные",
 				"personalCabs": "Личные кабинеты",
 				"underActiveAccounts": "С активными аккаунтами",
+				"withCard": "Есть привязанная карта",
 				"withDebt": "С задолженностью",
 				"withoutCard": "Без привязанной карты"
 			}
@@ -96,7 +108,9 @@
 		"access_token": "Токен",
 		"account": "Аккаунт",
 		"add": "Добавить",
+		"all": "Все",
 		"allFilters": "Все фильтры",
+		"any": "Любой",
 		"archive": "Архивировать",
 		"cab": "Кабинет",
 		"close": "Закрыть",
@@ -116,6 +130,7 @@
 		"login": "Логин",
 		"manageTags": "Теги",
 		"name": "Название",
+		"no": "Нет",
 		"password": "Пароль",
 		"port": "Порт",
 		"proxy": "Прокси",
@@ -133,7 +148,8 @@
 		"tags": "Теги",
 		"type": "Тип",
 		"unselectAll": "Убрать все",
-		"useragent": "Useragent"
+		"useragent": "Useragent",
+		"yes": "Да"
 	},
 	"dialogs": {
 		"accounts": {
@@ -199,6 +215,7 @@
 		"dates": "Даты",
 		"more": "+ все фильтры",
 		"searchByName": " Поиск по названию",
+		"seeAll": "Открыть все фильтры",
 		"status": "Фильтр по статусу",
 		"tags": "Фильтр по тегам"
 	},
