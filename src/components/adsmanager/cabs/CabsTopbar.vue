@@ -3,6 +3,7 @@
     <filters-bar
       v-if="showFilters"
       :show="showFilters"
+      :active-filters-count="activeFiltersCount"
       @close="showFilters = false"
     />
     <!-- ЛЕВАЯ ЧАСТЬ -->
@@ -161,7 +162,7 @@
                 @click="showFilters = true"
               >
                 <v-list-item-title>
-                  {{ $t('filters.seeAll') }}
+                  {{ $t('filters.showAll').toUpperCase() }}
                 </v-list-item-title>
               </v-list-item>
             </v-list>

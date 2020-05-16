@@ -33,6 +33,7 @@
         </div>
         <div>
           <v-btn
+            v-if="activeFiltersCount > 0"
             text
             color="primary"
             small
@@ -243,6 +244,10 @@
             show: {
                 type: Boolean,
                 default: false,
+            },
+            activeFiltersCount: {
+              type: Number,
+              default: 0,
             }
         },
 
