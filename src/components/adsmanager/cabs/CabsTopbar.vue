@@ -225,9 +225,11 @@
 
         if (this.filters.accountsStatuses.length > 0) count++;
         if (this.filters.cabsStatuses.length > 0) count++;
-        if (this.globalFilters.tags.length > 0) count++;
+        if (this.filters.bms.length > 0) count++;
         if (this.filters.type !== 'all') count++;
         if (this.filters.attachedCard !== 'all') count++;
+
+        if (this.globalFilters.tags.length > 0) count++;
 
         return count;
       }

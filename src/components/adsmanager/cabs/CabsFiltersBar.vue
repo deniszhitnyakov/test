@@ -33,11 +33,16 @@
           cols="12"
           class="py-0 mt-2"
         >
-          <!-- ФИЛЬТР АККАУНТУ -->
+          <!-- ФИЛЬТР ПО БМ -->
+          <h5 class="mb-1">
+            {{ $t('common.bm') }}
+          </h5>
           <v-combobox
-            :label="$t('filters.accountStatus')"
-            :items="accountsStatuses"
-            :value="filters.accountsStatuses"
+            :label="$t('common.bm')"
+            :items="bms"
+            item-value="id"
+            item-text="name"
+            :value="filters.bms"
             multiple
             chips
             dark
@@ -48,47 +53,22 @@
             solo
             prepend-inner-icon="fas fa-code"
             hide-details
-            @change="filterAccountsStatuses"
-          /> 
+            @change="filterBms"
+          />
         </v-col>
         
         <v-col
           cols="12"
           class="py-0 mt-2"
         >
-          <!-- ФИЛЬТР ПО БМ -->
-          <v-combobox
-            :label="$t('filters.cabStatus')"
-            :items="cabsStatuses"
-            :item-value="item => item.text"
-            :value="filters.cabsStatuses"
-            multiple
-            chips
-            dark
-            deletable-chips
-            clearable
-            dense
-            small-chips
-            solo
-            prepend-inner-icon="fas fa-code"
-            hide-details
-            @change="filterCabsStatuses"
-          />
-        </v-col>
-        
-        <v-col>
-          <v-divider />
-        </v-col>
-
-        <v-col
-          cols="12"
-          class="py-0"
-        >
           <!-- ФИЛЬТР ПО СТАТУСУ АККАУНТА -->
+          <h5 class="mb-1">
+            {{ $t('filters.accountStatus') }}
+          </h5>
           <v-combobox
-            :label="$t('filters.accountStatus')"
             :items="accountsStatuses"
             :value="filters.accountsStatuses"
+            :label="$t('filters.accountStatus')"
             multiple
             chips
             dark
@@ -108,6 +88,9 @@
           class="py-0 mt-2"
         >
           <!-- ФИЛЬТР ПО СТАТУСУ КАБИНЕТА -->
+          <h5 class="mb-1">
+            {{ $t('filters.cabStatus') }}
+          </h5>
           <v-combobox
             :label="$t('filters.cabStatus')"
             :items="cabsStatuses"
@@ -130,6 +113,9 @@
           cols="12"
           class="py-0 mt-2"
         >
+          <h5 class="mb-1">
+            {{ $t('common.tags') }}
+          </h5>
           <filters-tags @filtered="$store.dispatch('accounts/clearSelected')" />
         </v-col>
         
@@ -229,7 +215,8 @@
         data() {
             return {
                 accountsStatuses,
-                cabsStatuses
+                cabsStatuses,
+                bms: [],
             };
         },
 
@@ -241,7 +228,31 @@
             })
         },
 
+        watch: {
+          cabs: {
+            deep: true,
+            handler() {
+              this.makeBmsList();
+            }
+          }
+        },
+
+        created() {
+          this.makeBmsList();
+        },
+
         methods: {
+            makeBmsList() {
+              if (!this.cabs) return;
+              this.cabs.all.forEach(cab => {
+                if (cab.business_name && typeof cab.business_name !== 'undefined') {
+                  if (this.bms.indexOf(cab.business_name) === -1) {
+                    this.bms.push({id: cab.business_id, name: cab.business_name});
+                  }
+                }
+              });
+            },
+            
             async filterAccountsStatuses(statuses) {
                 if (statuses && statuses.length > 0) {
                   this.$store.dispatch('cabs/clearSelected');
@@ -258,13 +269,23 @@
             },
 
             async filterCabsStatuses(statuses) {
-              console.log(statuses);
               if (statuses && statuses.length > 0) {
                 this.$store.dispatch('cabs/clearSelected');
               }
               const data = {
                 filter: 'cabsStatuses',
                 data: statuses
+              };
+              await this.$store.dispatch('cabs/setSpecificFilter', data);
+            },
+
+            async filterBms(bms) {
+              if (bms && bms.length > 0) {
+                this.$store.dispatch('cabs/clearSelected');
+              }
+              const data = {
+                filter: 'bms',
+                data: bms
               };
               await this.$store.dispatch('cabs/setSpecificFilter', data);
             }

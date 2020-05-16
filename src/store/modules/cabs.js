@@ -31,6 +31,7 @@ export default {
       tags: [],
       type: 'all',
       attachedCard: 'all',
+      bms: [],
     }
   },
   getters: {
@@ -101,6 +102,17 @@ export default {
         cabs = cabs.filter(cab => {
           if (cab.name) {
             return cab.name.toString().toLowerCase().search(state.filters.name.toString().toLowerCase()) > -1;
+          }
+          return false;
+        });
+      }
+
+      if (state.filters.bms && Array.isArray(state.filters.bms) && state.filters.bms.length > 0) {
+        cabs = cabs.filter(cab => {
+          if (cab.business_id) {
+            return state.filters.bms.some(bm => {
+              return bm.id === cab.business_id;
+            });
           }
           return false;
         });
