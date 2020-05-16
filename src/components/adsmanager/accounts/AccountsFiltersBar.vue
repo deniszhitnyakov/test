@@ -5,7 +5,7 @@
     right
     absolute
     dark
-    style="z-index: 9999; width: 300px;"
+    style="z-index: 9999; width: 400px;"
     @transitionend="$emit('close')"
   >
     <div style="padding: 16px">

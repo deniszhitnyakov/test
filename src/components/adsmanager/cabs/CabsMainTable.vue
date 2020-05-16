@@ -12,7 +12,7 @@
           fixed-header
           :items-per-page="50"
           :footer-props="{'items-per-page-options': [10, 30, 50, 100, -1]}"
-          :height="innerHeight - 50 - 48"
+          :height="innerHeight - 50 - 48 - 48"
           show-select
           class="elevation-1 stat-table stat-table-cabs"
           :custom-sort="customSort"

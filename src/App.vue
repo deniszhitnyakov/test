@@ -96,6 +96,7 @@ export default {
 
   .topbar-row > div.col-12 {
     padding: 0px 16px 0px 16px;
+    min-height: 38px;
   }
   .topbar-row > div.col-12 > div.row > div[class^="col-"] {
     padding: 0px 8px 8px 8px;

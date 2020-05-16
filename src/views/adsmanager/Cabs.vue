@@ -1,5 +1,6 @@
 <template>
   <div>
+    <topbar />
     <main-table />
   </div>
 </template>
@@ -8,12 +9,14 @@
     import {mapGetters} from 'vuex';
 
     import MainTable    from '../../components/adsmanager/cabs/CabsMainTable';
+    import Topbar       from '../../components/adsmanager/cabs/CabsTopbar';
 
     export default {
         name: 'Cabs',
 
         components: {
-          MainTable
+          MainTable,
+          Topbar
         },
 
         data() {
@@ -25,6 +28,7 @@
         computed: {
           ...mapGetters({
             accounts: 'accounts/filtered',
+            globalFilters: 'adsmanager/filters'
           })
         },
 
@@ -33,6 +37,13 @@
             deep: true,
             handler() {
               this.$store.dispatch('cabs/loadCabs');
+            }
+          },
+
+          globalFilters: {
+            deep: true,
+            handler() {
+              this.$store.dispatch('cabs/filterCabs');
             }
           }
         },

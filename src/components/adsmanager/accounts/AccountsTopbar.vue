@@ -73,25 +73,7 @@
           cols="12"
           sm="8"
         >
-          <!-- КНОПКИ ДЕЙСТВИЙ - ДОБАВИТЬ АККАУНТ -->
-          <div style="float: right;">
-            <v-btn
-              small
-              color="primary"
-              text
-              style="min-width: 0; margin-top: 1px;"
-              class="ml-3"
-              @click="$store.dispatch('accounts/openDialog', 'add')"
-            >
-              <v-icon :size="18">
-                add
-              </v-icon>
-
-              {{ $t('common.add') }} {{ $t('common.account') }}
-            </v-btn>
-          </div>
-
-          <!-- КНОПКИ ДЕЙСТВИЙ - ДОБАВИТЬ АККАУНТ -->
+          <!-- КНОПКИ ДЕЙСТВИЙ - ОБНОВИТЬ СТАТИСТИКУ -->
           <div style="float: right;">
             <v-btn
               small
@@ -145,6 +127,24 @@
               <span v-if="activeFiltersCount > 0">
                 ({{ activeFiltersCount }})
               </span>
+            </v-btn>
+          </div>
+
+          <!-- КНОПКИ ДЕЙСТВИЙ - ДОБАВИТЬ АККАУНТ -->
+          <div style="float: right;">
+            <v-btn
+              small
+              color="primary"
+              text
+              style="min-width: 0; margin-top: 1px;"
+              class="ml-3"
+              @click="$store.dispatch('accounts/openDialog', 'add')"
+            >
+              <v-icon :size="18">
+                add
+              </v-icon>
+
+              {{ $t('common.add') }} {{ $t('common.account') }}
             </v-btn>
           </div>
         </v-col>

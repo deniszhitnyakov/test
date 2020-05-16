@@ -1,5 +1,25 @@
 {
 	"adsmanager": {
+		"cabs": {
+			"actions": {
+				"applyAutomationRule": "Применить автоправило",
+				"applyAutomationRulesGroup": "Применить группу автоправил",
+				"attachBankCard": "Привязать карту",
+				"changeBillingCountry": "Изменить гео биллинга",
+				"clearAllAutomationRules": "Снять все автоправила",
+				"createPixel": "Создать пиксель",
+				"turnOffNotifications": "Выключить уведомления"
+			},
+			"filters": {
+				"active": "Активные",
+				"businessCabs": "Кабинеты БМов",
+				"onlyBlocked": "Заблокированные",
+				"personalCabs": "Личные кабинеты",
+				"underActiveAccounts": "С активными аккаунтами",
+				"withDebt": "С задолженностью",
+				"withoutCard": "Без привязанной карты"
+			}
+		},
 		"cols": {
 			"action_app_custom_event": {
 				"Frequency": "Частота",
@@ -76,6 +96,8 @@
 		"access_token": "Токен",
 		"account": "Аккаунт",
 		"add": "Добавить",
+		"allFilters": "Все фильтры",
+		"archive": "Архивировать",
 		"cab": "Кабинет",
 		"close": "Закрыть",
 		"columns": "Столбцы",
@@ -92,18 +114,21 @@
 		"host": "Хост",
 		"loading": "Загрузка...",
 		"login": "Логин",
+		"manageTags": "Теги",
 		"name": "Название",
 		"password": "Пароль",
 		"port": "Порт",
 		"proxy": "Прокси",
 		"quantity": "кол-во",
 		"remove": "Убрать",
+		"rename": "Переименовать",
 		"required": "Обязательно",
 		"save": "Сохранить",
 		"saved": "Сохранил",
 		"search": "Поиск",
 		"selectAll": "Выбрать все",
 		"selected": "Выбрано",
+		"share": "Поделиться",
 		"status": "Статус",
 		"tags": "Теги",
 		"type": "Тип",
@@ -169,6 +194,8 @@
 		"confirm": "Подтверди плиз"
 	},
 	"filters": {
+		"accountStatus": "Статус аккаунта",
+		"cabStatus": "Статус кабинета",
 		"dates": "Даты",
 		"more": "+ все фильтры",
 		"searchByName": " Поиск по названию",
