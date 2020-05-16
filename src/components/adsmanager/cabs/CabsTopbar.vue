@@ -35,6 +35,22 @@
 
         <!-- КНОПКИ ДЕЙСТВИЙ - ФИЛЬТРЫ -->
         <div style="float: right;">
+          <v-btn
+            v-if="activeFiltersCount > 0"
+            text
+            color="primary"
+            small
+            class="mr-1"
+            @click="$store.dispatch('cabs/clearFilters')"
+          >
+            <v-icon
+              class="mr-1"
+              :size="18"
+            >
+              close
+            </v-icon>
+            {{ $t('common.clear') }} {{ $t('common.filters') }}
+          </v-btn>
           <v-menu
             offset-y
             open-on-hover
@@ -223,13 +239,32 @@
       activeFiltersCount() {
         let count = 0;
 
-        if (this.filters.accountsStatuses.length > 0) count++;
-        if (this.filters.cabsStatuses.length > 0) count++;
-        if (this.filters.bms.length > 0) count++;
-        if (this.filters.type !== 'all') count++;
-        if (this.filters.attachedCard !== 'all') count++;
+        if (!this.filters) return 0;
 
-        if (this.globalFilters.tags.length > 0) count++;
+        if (
+          typeof this.filters.accountsStatuses !== 'undefined' &&
+          this.filters.accountsStatuses.length > 0
+        ) count++;
+        if (
+          typeof this.filters.cabsStatuses !== 'undefined' &&
+          this.filters.cabsStatuses.length > 0
+        ) count++;
+        if (
+          typeof this.filters.bms !== 'undefined' &&
+          this.filters.bms.length > 0
+        ) count++;
+        if (
+          typeof this.filters.tags !== 'undefined' &&
+          this.filters.tags.length > 0
+        ) count++;
+        if (
+          typeof this.filters.type!== 'undefined' &&
+          this.filters.type !== 'all'
+        ) count++;
+        if (
+          typeof this.filters.attachedCard !== 'undefined' &&
+          this.filters.attachedCard !== 'all'
+        ) count++;
 
         return count;
       }

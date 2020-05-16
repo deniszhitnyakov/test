@@ -24,15 +24,16 @@ export default {
     dialogs: {
       filters: false,
     },
-    filters: {
+    emptyFilters: {
       name: '',
       accountsStatuses: [],
       cabsStatuses: [],
-      tags: [],
       type: 'all',
       attachedCard: 'all',
       bms: [],
-    }
+      tags: [],
+    },
+    filters: {}
   },
   getters: {
     ...mixinDialogGetters,
@@ -55,13 +56,21 @@ export default {
     FILTER_CABS(state) {
       let cabs = state.cabs.all;
 
-      if (state.filters.accountsStatuses && state.filters.accountsStatuses.length > 0) {
+      if (
+        typeof state.filters.accountsStatuses !== 'undefined' &&
+        state.filters.accountsStatuses && 
+        state.filters.accountsStatuses.length > 0
+      ) {
         cabs = cabs.filter(cab => {
           return state.filters.accountsStatuses.indexOf(cab.account.status.toString()) > -1;
         });
       }
 
-      if (state.filters.cabsStatuses && state.filters.cabsStatuses.length > 0) {
+      if (
+        typeof state.filters.cabsStatuses !== 'undefined' &&
+        state.filters.cabsStatuses && 
+        state.filters.cabsStatuses.length > 0
+      ) {
         cabs = cabs.filter(cab => {
           return state.filters.cabsStatuses.find(status => {
             return status.value === cab.status;
@@ -69,16 +78,23 @@ export default {
         });
       }
 
-      if (this.state.adsmanager.filters.tags && this.state.adsmanager.filters.tags.length > 0) {
+      if (
+        typeof state.filters.tags !== 'undefined' &&
+        state.filters.tags && 
+        state.filters.tags.length > 0
+      ) {
         cabs = cabs.filter(cab => {
-          return this.state.adsmanager.filters.tags.some(tags => {
+          return state.filters.tags.some(tags => {
             if (!Array.isArray(cab.tags)) return false;
             return cab.tags.indexOf(tags) > -1;
           });
         });
       }
 
-      if (state.filters.type !== 'all') {
+      if (
+        typeof state.filters.type !== 'undefined' &&
+        state.filters.type !== 'all'
+      ) {
         cabs = cabs.filter(cab => {
           if (state.filters.type === 'personal') {
             return !cab.business_id; 
@@ -88,7 +104,10 @@ export default {
         });
       }
 
-      if (state.filters.attachedCard !== 'all') {
+      if (
+        typeof state.filters.attachedCard !== 'undefined' &&
+        state.filters.attachedCard !== 'all'
+      ) {
         cabs = cabs.filter(cab => {
           if (state.filters.attachedCard === 'with-card') {
             return cab.card_number;
@@ -98,7 +117,11 @@ export default {
         });
       }
 
-      if (state.filters.name && state.filters.name.toString().length > 0) {
+      if (
+        typeof state.filters.name !== 'undefined' && 
+        state.filters.name && 
+        state.filters.name.toString().length > 0
+      ) {
         cabs = cabs.filter(cab => {
           if (cab.name) {
             return cab.name.toString().toLowerCase().search(state.filters.name.toString().toLowerCase()) > -1;
@@ -107,7 +130,12 @@ export default {
         });
       }
 
-      if (state.filters.bms && Array.isArray(state.filters.bms) && state.filters.bms.length > 0) {
+      if (
+        typeof state.filters.bms !== 'undefined' &&
+        state.filters.bms && 
+        Array.isArray(state.filters.bms) && 
+        state.filters.bms.length > 0
+      ) {
         cabs = cabs.filter(cab => {
           if (cab.business_id) {
             return state.filters.bms.some(bm => {
@@ -131,6 +159,22 @@ export default {
 
     SET_SPECIFIC_FILTER: (state, data) => {
       state.filters[data.filter] = data.data;
+      localStorage.setItem('adsmanager-cabs-filters', JSON.stringify(state.filters));
+    },
+
+    LOAD_FILTERS: (state) => {
+      if (localStorage.getItem('adsmanager-cabs-filters')) {
+        state.filters = JSON.parse(localStorage.getItem('adsmanager-cabs-filters'));
+      } else {
+        state.filters = {...state.emptyFilters};
+      }
+    },
+
+    CLEAR_FILTERS: state => {
+      state.filters = {
+        ...state.emptyFilters
+      };
+      localStorage.removeItem('adsmanager-cabs-filters');
     }
   },
   actions: {
@@ -204,6 +248,14 @@ export default {
 
     async filterCabs(context) {
       context.commit('FILTER_CABS');
+    },
+
+    async loadFilters(context) {
+      context.commit('LOAD_FILTERS');
+    },
+
+    async clearFilters(context) {
+      context.commit('CLEAR_FILTERS');
     }
   },
 };

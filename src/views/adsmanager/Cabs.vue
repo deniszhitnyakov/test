@@ -57,6 +57,7 @@
         },
 
         created() {
+          this.$store.dispatch('cabs/loadFilters');
           this.$store.dispatch('cabs/loadCabs');
           this.updateStatInterval = setInterval(() => {
             this.$store.dispatch('cabs/loadCabs');

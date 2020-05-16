@@ -9,23 +9,45 @@
     @transitionend="$emit('close')"
   >
     <div style="padding: 16px">
-      <div class="mb-3">
-        <span>
+      <div
+        class="mb-3"
+        style="display: flex; justify-content: space-between;"
+      >
+        <div>
+          <span>
+            <v-btn
+              color="grey"
+              fab
+              x-small
+              outlined
+              dark
+              class="sidebar-collapse-button"
+              @click="$emit('close')"
+            >
+              <v-icon>keyboard_arrow_right</v-icon>
+            </v-btn>
+          </span>
+          <span class="title">
+            {{ $t('common.filters') }}
+          </span>
+        </div>
+        <div>
           <v-btn
-            color="grey"
-            fab
-            x-small
-            outlined
-            dark
-            class="sidebar-collapse-button"
-            @click="$emit('close')"
+            text
+            color="primary"
+            small
+            style="margin-top: 3px;"
+            @click="$store.dispatch('cabs/clearFilters')"
           >
-            <v-icon>keyboard_arrow_right</v-icon>
+            <v-icon
+              class="mr-1"
+              :size="18"
+            >
+              close
+            </v-icon>
+            {{ $t('common.clear') }}
           </v-btn>
-        </span>
-        <span class="title">
-          {{ $t('common.filters') }}
-        </span>
+        </div>
       </div>
       
       <v-row>
@@ -116,7 +138,22 @@
           <h5 class="mb-1">
             {{ $t('common.tags') }}
           </h5>
-          <filters-tags @filtered="$store.dispatch('accounts/clearSelected')" />
+          <v-combobox
+            :label="$t('common.tags')"
+            :items="tags.all"
+            :value="filters.tags"
+            multiple
+            chips
+            dark
+            deletable-chips
+            clearable
+            dense
+            small-chips
+            solo
+            prepend-inner-icon="fas fa-tags"
+            hide-details
+            @change="filterTags"
+          />
         </v-col>
         
         <v-col>
@@ -151,10 +188,6 @@
             />
           </v-radio-group>
         </v-col>
-
-        <!-- <v-col>
-          <v-divider />
-        </v-col> -->
 
         <!-- ФИЛЬТР ПО НАЛИЧИЮ КАРТЫ -->
         <v-col
@@ -195,15 +228,16 @@
     import { mapGetters }       from 'vuex';
 
     import accountsStatuses     from '../../../constants/accounts/accounts-statuses';    
-    import cabsStatuses         from '../../../constants/cabs/statuses_for_select';    
-    import FiltersTags          from '../filters/AdsManagerFiltersTags';
+    import cabsStatuses         from '../../../constants/cabs/statuses_for_select';
+    
+    // import FiltersTags          from '../filters/AdsManagerFiltersTags';
 
     export default {
         name: 'CabsFiltersBar',
 
-        components: {
-            FiltersTags,
-        },
+        // components: {
+        //     FiltersTags,
+        // },
 
         props: {
             show: {
@@ -239,6 +273,10 @@
 
         created() {
           this.makeBmsList();
+          this.$store.dispatch('tags/loadTags');
+          setInterval(() => {
+            this.$store.dispatch('tags/loadTags');
+          }, 60000);
         },
 
         methods: {
@@ -286,6 +324,17 @@
               const data = {
                 filter: 'bms',
                 data: bms
+              };
+              await this.$store.dispatch('cabs/setSpecificFilter', data);
+            },
+
+            async filterTags(tags) {
+              if (tags && tags.length > 0) {
+                this.$store.dispatch('cabs/clearSelected');
+              }
+              const data = {
+                filter: 'tags',
+                data: tags
               };
               await this.$store.dispatch('cabs/setSpecificFilter', data);
             }
