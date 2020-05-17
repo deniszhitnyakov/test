@@ -1,8 +1,6 @@
 <template>
   <v-navigation-drawer
-    
     expand-on-hover
-    dark
     mini-variant
     fixed
   >

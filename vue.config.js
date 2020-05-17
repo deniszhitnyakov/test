@@ -1,6 +1,6 @@
 module.exports = {
-  "transpileDependencies": [
-    "vuetify"
+  'transpileDependencies': [
+    'vuetify'
   ],
 
   pluginOptions: {
@@ -13,4 +13,4 @@ module.exports = {
   },
 
   publicPath: ''
-}
+};
