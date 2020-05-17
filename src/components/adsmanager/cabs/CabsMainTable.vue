@@ -61,6 +61,11 @@
                     :col="col"
                     :item="item"
                   />
+                  <billing-cell
+                    v-if="col === 'billing'"
+                    :key="`stat-col-${col}`"
+                    :cab="item"
+                  />
                   <complex-stat-cell-quantity
                     v-if="actionCols.indexOf(col) > -1"
                     :key="`stat-col-${col}-quantity`"
@@ -88,6 +93,12 @@
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <template v-for="col in profile.columns">
+                  <td
+                    v-if="col === 'billing'"
+                    :key="`stat-col-${col}-total`"
+                  >
+                    &nbsp;
+                  </td>
                   <simple-stat-cell
                     v-if="commonCols.indexOf(col) > -1"
                     :key="`stat-col-${col}-total`"
@@ -130,6 +141,7 @@
   import customSort                                                from '../../../mixins/adsmanager/custom_sort';
   import makeCols                                                  from '../../../mixins/adsmanager/make_cols';  
   import selectItems                                               from '../../../mixins/adsmanager/select_items';  
+  import BillingCell                                               from '../stat-cells/AdsManagerBillingCell';
   import ComplexStatCellCpa                                        from '../stat-cells/AdsManagerComplexStatCellCpa';
   import ComplexStatCellCr                                         from '../stat-cells/AdsManagerComplexStatCellCr';
   import ComplexStatCellQuantity                                   from '../stat-cells/AdsManagerComplexStatCellQuantity';
@@ -147,7 +159,8 @@
       ComplexStatCellCr,
       ComplexStatCellCpa,
       CabsMainTableInfo,
-      CabsMainTableStatus
+      CabsMainTableStatus,
+      BillingCell
     },
 
     mixins: [

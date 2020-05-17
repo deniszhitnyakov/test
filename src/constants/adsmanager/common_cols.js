@@ -7,5 +7,6 @@ export default [
     'revenue',
     'profit',
     'roi',
-    'approve'
+    'approve',
+    'billing',
 ];

@@ -5,6 +5,7 @@ import axios                  from 'axios';
 import Cookies                from 'js-cookie';
 import moment                 from 'moment';
 import Clipboard              from 'v-clipboard';
+import FlagIcon               from 'vue-flag-icon';
 import VueRouter              from 'vue-router';
 import Vuex                   from 'vuex';
 import Vue                    from 'vue';
@@ -62,6 +63,7 @@ store.api = api;
 Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.use(Clipboard);
+Vue.use(FlagIcon);
 
 new Vue({
   vuetify,

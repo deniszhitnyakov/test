@@ -2,6 +2,7 @@ export default {
     methods: {
         makeCols(firstCols = null) {
             let cols = [];
+            let simpleCellWidth = 100;
 
             if (firstCols) {
                 cols = cols.concat(firstCols);
@@ -35,10 +36,21 @@ export default {
                     cols.push(crCol);
                     cols.push(cpaCol);
                 } else {
+                    if (col === 'billing') {
+                        if (
+                            this.$store.state.adsmanager.activeTab.component === 'users' ||
+                            this.$store.state.adsmanager.activeTab.component === 'accounts' ||
+                            this.$store.state.adsmanager.activeTab.component === 'dates'
+                        ) return;
+
+                        simpleCellWidth = 200;
+                    } else {
+                        simpleCellWidth = 100;
+                    }
                     cols.push({
                         text: `${this.$t(`adsmanager.cols.${col}`)}`,
                         value: col,
-                        width: 100
+                        width: simpleCellWidth,
                     });
                 }
             });

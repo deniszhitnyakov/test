@@ -1,5 +1,5 @@
 <template>
-  <td>
+  <td v-if="show">
     <span
       v-if="show"
     >
@@ -47,6 +47,9 @@
         data() {
           return {
             numeral,
+            excludedCols: [
+              'billing'
+            ]
           };
         },
 
@@ -55,6 +58,8 @@
               return this.$store.getters[`${this.$store.state.adsmanager.activeTab.component}/stat`];
             },
             show() {
+                if (this.excludedCols.indexOf(this.col) > -1) return false;
+
                 if(this.itIsTotalRow) {
                   return (
                     typeof this.stat['total'] !== 'undefined' &&
