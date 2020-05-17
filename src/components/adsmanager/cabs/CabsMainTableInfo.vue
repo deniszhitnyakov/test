@@ -13,22 +13,22 @@
 </template>
 
 <script>
-  import CabsMainTableTags from './CabsMainTableTags';
+import CabsMainTableTags from './CabsMainTableTags';
 
-  export default {
-    name: 'CabsMainTableInfo',
+export default {
+  name: 'CabsMainTableInfo',
 
-    components: {
-      CabsMainTableTags
-    },
+  components: {
+    CabsMainTableTags
+  },
 
-    props: {
-      cab: {
-        type: Object,
-        default: () => ({
-          name: '',
-        })
-      }
+  props: {
+    cab: {
+      type: Object,
+      default: () => ({
+        name: '',
+      })
     }
-  };
+  }
+};
 </script>

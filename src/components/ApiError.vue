@@ -33,18 +33,18 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex';
+import {mapGetters} from 'vuex';
 
-    export default {
-        name: 'ApiError',
+export default {
+  name: 'ApiError',
 
-        computed: {
-            ...mapGetters({
-                dialogs: 'main/dialogs',
-                apiError: 'main/apiError',
-            })
-        }
-    };
+  computed: {
+    ...mapGetters({
+      dialogs: 'main/dialogs',
+      apiError: 'main/apiError',
+    })
+  }
+};
 </script>
 
 <style>

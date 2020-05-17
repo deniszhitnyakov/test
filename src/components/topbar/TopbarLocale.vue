@@ -23,10 +23,10 @@
 </template>
 
 <script>
-    export default {
-        name: 'TopbarLocale',
-        data: () => ({
-            newLocale: '',
-        })
-    };
+export default {
+  name: 'TopbarLocale',
+  data: () => ({
+    newLocale: '',
+  })
+};
 </script>

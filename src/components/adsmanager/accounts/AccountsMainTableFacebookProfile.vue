@@ -21,21 +21,21 @@
 </template>
 
 <script>
-    import clipboard from '../../../mixins/clipboard';
+import clipboard from '../../../mixins/clipboard';
 
-    export default {
-        name: 'AccountsMainTableFacebookProfile',
-        mixins: [clipboard],
-        props: {
-            account: {
-                type: Object,
-                default: () => ({
-                    fb_id: null,
-                    fb_name: null,
-                })
-            }
-        }
-    };
+export default {
+  name: 'AccountsMainTableFacebookProfile',
+  mixins: [clipboard],
+  props: {
+    account: {
+      type: Object,
+      default: () => ({
+        fb_id: null,
+        fb_name: null,
+      })
+    }
+  }
+};
 </script>
 
 <style scoped>

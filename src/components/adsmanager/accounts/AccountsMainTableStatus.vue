@@ -21,20 +21,20 @@
 </template>
 
 <script>
-    import colors from '../../../constants/accounts/status-colors';
+import colors from '../../../constants/accounts/status-colors';
 
-    export default {
-        name: 'AccountsMainTableStatus',
-        props: {
-            account: {
-                type: Object,
-                default: () => ({
-                    status: 'NEW',
-                })
-            }
-        },
-        data: () => ({
-            colors
-        })
-    };
+export default {
+  name: 'AccountsMainTableStatus',
+  props: {
+    account: {
+      type: Object,
+      default: () => ({
+        status: 'NEW',
+      })
+    }
+  },
+  data: () => ({
+    colors
+  })
+};
 </script>

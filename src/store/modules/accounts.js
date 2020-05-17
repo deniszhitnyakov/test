@@ -235,30 +235,30 @@ export default {
       });
       
       switch(response.data.result) {
-        case 'ok':
-          context.dispatch('main/alert', {
-            color: 'success',
-            message: i18n.t('dialogs.accounts.checkToken.ok')
-          }, {
-            root: true
-          });
-          break;
-        case 'token_error':
-          context.dispatch('main/alert', {
-            color: 'error',
-            message: i18n.t('dialogs.accounts.checkToken.tokenError')
-          }, {
-            root: true
-          });
-          break;
-        case 'connection_error':
-          context.dispatch('main/alert', {
-            color: 'error',
-            message: i18n.t('dialogs.accounts.checkToken.connectionError')
-          }, {
-            root: true
-          });
-          break;
+      case 'ok':
+        context.dispatch('main/alert', {
+          color: 'success',
+          message: i18n.t('dialogs.accounts.checkToken.ok')
+        }, {
+          root: true
+        });
+        break;
+      case 'token_error':
+        context.dispatch('main/alert', {
+          color: 'error',
+          message: i18n.t('dialogs.accounts.checkToken.tokenError')
+        }, {
+          root: true
+        });
+        break;
+      case 'connection_error':
+        context.dispatch('main/alert', {
+          color: 'error',
+          message: i18n.t('dialogs.accounts.checkToken.connectionError')
+        }, {
+          root: true
+        });
+        break;
       }
 
       context.dispatch('loadAccount', account.id);

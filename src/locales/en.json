@@ -112,6 +112,7 @@
 		"allFilters": "All filters",
 		"any": "Any",
 		"archive": "Archive",
+		"attach": "Attach",
 		"bm": "Business Manager",
 		"cab": "Cabinet",
 		"clear": "Clear",
@@ -211,6 +212,11 @@
 		"apiError": {
 			"message": "Copy and send this code to product's developer",
 			"title": "API error caused"
+		},
+		"cabs": {
+			"attachCard": {
+				"title": "Attach card"
+			}
 		},
 		"confirm": "Confirm please"
 	},

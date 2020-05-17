@@ -45,43 +45,43 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex';
+import {mapGetters} from 'vuex';
 
-  export default {
-    name: 'AccountsMultipleTokensCheck',
+export default {
+  name: 'AccountsMultipleTokensCheck',
 
-    data() {
-      return {
-        loading: false,
-        tokensChecked: 0,
-      };
-    },
+  data() {
+    return {
+      loading: false,
+      tokensChecked: 0,
+    };
+  },
 
-    computed: {
-      ...mapGetters({
-        accounts: 'accounts/ACCOUNTS',
-      })
-    },
+  computed: {
+    ...mapGetters({
+      accounts: 'accounts/ACCOUNTS',
+    })
+  },
 
-    methods: {
-      multipleCheckTokens() {
-        if (!confirm(this.$t('common.confirmPlease'))) return;
-        this.tokensChecked = 0;
-        if (this.accounts.selected && this.accounts.selected.length > 0) {
-          this.loading = true;
-          this.accounts.selected.forEach(account => {
-            this.api(`/accounts/check_token/${account.id}`).then(() => {
-              this.tokensChecked++;
-              if (this.tokensChecked === this.accounts.selected.length) {
-                this.loading = false;
-                this.$store.dispatch('accounts/LOAD_ACCOUNTS');
-              }
-            });
+  methods: {
+    multipleCheckTokens() {
+      if (!confirm(this.$t('common.confirmPlease'))) return;
+      this.tokensChecked = 0;
+      if (this.accounts.selected && this.accounts.selected.length > 0) {
+        this.loading = true;
+        this.accounts.selected.forEach(account => {
+          this.api(`/accounts/check_token/${account.id}`).then(() => {
+            this.tokensChecked++;
+            if (this.tokensChecked === this.accounts.selected.length) {
+              this.loading = false;
+              this.$store.dispatch('accounts/LOAD_ACCOUNTS');
+            }
           });
-        }
+        });
       }
     }
-  };
+  }
+};
 </script>
 <style scoped>
 .v-dialog__content {

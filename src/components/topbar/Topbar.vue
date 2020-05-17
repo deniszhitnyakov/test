@@ -22,12 +22,12 @@
 </template>
 
 <script>
-  import TopbarLocale from './TopbarLocale';
+import TopbarLocale from './TopbarLocale';
 
-  export default {
-    name: 'Topbar',
-    components: {
-      TopbarLocale
-    }
-  };
+export default {
+  name: 'Topbar',
+  components: {
+    TopbarLocale
+  }
+};
 </script>

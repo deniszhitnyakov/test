@@ -11,41 +11,41 @@
 </template>
 
 <script>
-    import {mapGetters}  from 'vuex';
+import {mapGetters}  from 'vuex';
 
-    import tabs          from '../../components/adsmanager/AdsManagerTabs';
-    import ColumnsDialog from '../../components/adsmanager/dialogs/AdsManagerColumnsDialog';
+import tabs          from '../../components/adsmanager/AdsManagerTabs';
+import ColumnsDialog from '../../components/adsmanager/dialogs/AdsManagerColumnsDialog';
 
-    import accounts      from './Accounts';
-    import adsets        from './Adsets';
-    import ads           from './Ads';
-    import cabs          from './Cabs';
-    import campaigns     from './Campaigns';
-    import users         from './Users';
+import accounts      from './Accounts';
+import adsets        from './Adsets';
+import ads           from './Ads';
+import cabs          from './Cabs';
+import campaigns     from './Campaigns';
+import users         from './Users';
 
-    export default {
-        name: 'AdsManager',
+export default {
+  name: 'AdsManager',
         
-        components: {
-            tabs,
-            campaigns,
-            accounts,
-            cabs,
-            adsets,
-            users,
-            ads,
-            ColumnsDialog
-        },
+  components: {
+    tabs,
+    campaigns,
+    accounts,
+    cabs,
+    adsets,
+    users,
+    ads,
+    ColumnsDialog
+  },
 
-        computed: {
-            ...mapGetters({
-                activeTab: 'adsmanager/activeTab',
-                dialogs: 'adsmanager/dialogs'
-            })
-        },
+  computed: {
+    ...mapGetters({
+      activeTab: 'adsmanager/activeTab',
+      dialogs: 'adsmanager/dialogs'
+    })
+  },
 
-        created() {
-          this.$store.dispatch('accounts/LOAD_ACCOUNTS');
-        }
-    };
+  created() {
+    this.$store.dispatch('accounts/LOAD_ACCOUNTS');
+  }
+};
 </script>

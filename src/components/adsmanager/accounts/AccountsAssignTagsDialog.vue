@@ -52,41 +52,41 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex';
+import {mapGetters} from 'vuex';
 
-    export default {
-        name: 'AccountsAssignTagsDialog',
+export default {
+  name: 'AccountsAssignTagsDialog',
         
-        data: () => (
-            {
-                newAccount: {
-                    name: '',
-                }
-            }
-        ),
+  data: () => (
+    {
+      newAccount: {
+        name: '',
+      }
+    }
+  ),
 
-        computed: {
-            ...mapGetters({
-                dialogs: 'accounts/dialogs',
-                tags: 'tags/tags',
-                account: 'accounts/accountForAssigningTags',
-                loading: 'accounts/loading'
-            })
-        },
+  computed: {
+    ...mapGetters({
+      dialogs: 'accounts/dialogs',
+      tags: 'tags/tags',
+      account: 'accounts/accountForAssigningTags',
+      loading: 'accounts/loading'
+    })
+  },
 
-        created() {
-            this.newAccount = {...this.account};
-            this.$store.dispatch('tags/loadTags');
-        },
+  created() {
+    this.newAccount = {...this.account};
+    this.$store.dispatch('tags/loadTags');
+  },
 
-        methods: {
-            async saveTags() {
-                const success = await this.$store.dispatch('accounts/saveTags', this.newAccount);
-                if (success) {
-                    this.$store.dispatch('tags/loadTags');
-                    this.$store.dispatch('accounts/closeDialog', 'assignTags');
-                }
-            }
-        }
-    };
+  methods: {
+    async saveTags() {
+      const success = await this.$store.dispatch('accounts/saveTags', this.newAccount);
+      if (success) {
+        this.$store.dispatch('tags/loadTags');
+        this.$store.dispatch('accounts/closeDialog', 'assignTags');
+      }
+    }
+  }
+};
 </script>

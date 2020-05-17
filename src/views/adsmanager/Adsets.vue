@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    export default {
-        name: 'Adsets'
-    };
+export default {
+  name: 'Adsets'
+};
 </script>

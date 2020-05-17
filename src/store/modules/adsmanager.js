@@ -2,9 +2,9 @@ import moment from 'moment';
 
 import i18n   from '../../i18n';
 import {
-    mixinDialogMutations,
-    mixinDialogActions,
-    mixinDialogGetters
+  mixinDialogMutations,
+  mixinDialogActions,
+  mixinDialogGetters
 } from '../../mixins/vuex_dialogs';
 
 export default {
@@ -22,9 +22,9 @@ export default {
       dates:
         localStorage.getItem('adsmanager-filters-dates') === null
           ? {
-              startDate: moment().format('YYYY-MM-DD'),
-              endDate: moment().format('YYYY-MM-DD'),
-            }
+            startDate: moment().format('YYYY-MM-DD'),
+            endDate: moment().format('YYYY-MM-DD'),
+          }
           : JSON.parse(localStorage.getItem('adsmanager-filters-dates')),
     },
     dialogs: {
@@ -65,7 +65,7 @@ export default {
     },
 
     SET_COLUMNS_PRESETS: (state, data) => {
-        state.columnsPresets = data;
+      state.columnsPresets = data;
     }
   },
   actions: {
@@ -120,10 +120,10 @@ export default {
     },
 
     async loadColumnsPresets(context) {
-        const response = await this._vm.api('/profile/columns_presets');
-        if (typeof response.data.success !== 'undefined' && response.data.success) {
-            context.commit('SET_COLUMNS_PRESETS', response.data.data);
-        }
+      const response = await this._vm.api('/profile/columns_presets');
+      if (typeof response.data.success !== 'undefined' && response.data.success) {
+        context.commit('SET_COLUMNS_PRESETS', response.data.data);
+      }
     }
   },
 };

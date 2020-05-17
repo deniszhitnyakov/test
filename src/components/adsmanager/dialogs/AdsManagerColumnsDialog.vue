@@ -194,140 +194,140 @@
 </template>
 
 <script>
-    import draggable    from 'vuedraggable';
-    import {mapGetters} from 'vuex';
+import draggable    from 'vuedraggable';
+import {mapGetters} from 'vuex';
 
-    import actionCols   from '../../../constants/adsmanager/action_cols';
-    import commonCols   from '../../../constants/adsmanager/common_cols';
+import actionCols   from '../../../constants/adsmanager/action_cols';
+import commonCols   from '../../../constants/adsmanager/common_cols';
 
-    export default {
-        name: 'AdsManagerColumnsDialog',
+export default {
+  name: 'AdsManagerColumnsDialog',
 
-        components: {
-            draggable
-        },
+  components: {
+    draggable
+  },
 
-        data() {
-            return {
-                commonCols,
-                actionCols,
-                cols: {
-                    all: [],
-                    filtered: [],
-                },
-                selectedCols: {
-                    all: [],
-                    filtered: [],
-                },
-                search: '',
-                preset: {
-                  name: '',
-                  shared: false,
-                }
-            };
-        },
-
-        computed: {
-            ...mapGetters({
-                dialogs: 'adsmanager/dialogs',
-                loading: 'adsmanager/loading',
-                profile: 'main/profile'
-            }),
-        },
-
-        watch: {
-            profile: {
-                deep: true,
-                handler() {
-                    if (this.selectedCols.all.length === 0) {
-                        this.selectedCols.all = this.selectedCols.all.concat(this.profile.columns);
-                        this.selectedCols.filtered = this.selectedCols.filtered.concat(this.selectedCols.all);
-                    }
-                }
-            },
-
-            search() {
-                this.filterCols();
-            },
-
-            'selectedCols.all': {
-                deep: true,
-                handler() {
-                    this.filterCols();
-                }
-            }
-        },
-
-        created() {
-            this.cols.all = this.cols.all.concat(this.commonCols);
-            this.cols.all = this.cols.all.concat(this.actionCols);
-            this.cols.filtered = this.cols.all;
-
-            this.selectedCols.all = this.selectedCols.all.concat(this.profile.columns);
-            this.selectedCols.filtered = this.selectedCols.filtered.concat(this.selectedCols.all);
-        },
-        
-        methods: {
-            searchLeftCols(search) {
-                if (!search) {
-                    this.cols.filtered = this.cols.all;
-                    return;
-                }
-                search = search.toString().toLowerCase();
-                this.cols.filtered = this.cols.all.filter(col => {
-                    const colName = this.$t(`adsmanager.cols.${col}`).toString().toLowerCase();
-                    return colName.search(search) !== -1; 
-                });
-            },
-
-            onMove(event) {
-                return this.selectedCols.all.indexOf(event.draggedContext.element) === -1;
-            },
-
-            deleteCol(colToDelete) {
-                this.selectedCols.all = this.selectedCols.all.filter(col => {
-                    if (col === colToDelete) return false;
-                    return true;
-                });
-                this.selectedCols.filtered = this.selectedCols.filtered.filter(col => {
-                    if (col === colToDelete) return false;
-                    return true;
-                });
-            },
-
-            addCol(colToAdd) {
-              if (this.selectedCols.all.indexOf(colToAdd) === -1) {
-                this.selectedCols.all.push(colToAdd);
-                this.filterCols();
-              }
-            },
-
-            filterCols() {
-                if (!this.search) {
-                    this.selectedCols.filtered = this.selectedCols.all;
-                    return;
-                }
-
-                this.selectedCols.filtered = this.selectedCols.all.filter(col => {
-                    const colName = this.$t(`adsmanager.cols.${col}`).toString().toLowerCase();
-                    return colName.search(this.search.toString().toLowerCase()) !== -1; 
-                });
-            },
-
-            async saveCols() {
-                const data = {
-                  columns: this.selectedCols.all,
-                  preset: this.preset,
-                };
-                const success = await this.$store.dispatch('adsmanager/saveCols', data);
-                if (success) {
-                    this.$store.dispatch('adsmanager/closeDialog', 'columns');
-                    this.$store.dispatch('main/loadProfile');
-                    this.$store.dispatch('adsmanager/loadColumnsPresets');
-                }
-            },
-        }
+  data() {
+    return {
+      commonCols,
+      actionCols,
+      cols: {
+        all: [],
+        filtered: [],
+      },
+      selectedCols: {
+        all: [],
+        filtered: [],
+      },
+      search: '',
+      preset: {
+        name: '',
+        shared: false,
+      }
     };
+  },
+
+  computed: {
+    ...mapGetters({
+      dialogs: 'adsmanager/dialogs',
+      loading: 'adsmanager/loading',
+      profile: 'main/profile'
+    }),
+  },
+
+  watch: {
+    profile: {
+      deep: true,
+      handler() {
+        if (this.selectedCols.all.length === 0) {
+          this.selectedCols.all = this.selectedCols.all.concat(this.profile.columns);
+          this.selectedCols.filtered = this.selectedCols.filtered.concat(this.selectedCols.all);
+        }
+      }
+    },
+
+    search() {
+      this.filterCols();
+    },
+
+    'selectedCols.all': {
+      deep: true,
+      handler() {
+        this.filterCols();
+      }
+    }
+  },
+
+  created() {
+    this.cols.all = this.cols.all.concat(this.commonCols);
+    this.cols.all = this.cols.all.concat(this.actionCols);
+    this.cols.filtered = this.cols.all;
+
+    this.selectedCols.all = this.selectedCols.all.concat(this.profile.columns);
+    this.selectedCols.filtered = this.selectedCols.filtered.concat(this.selectedCols.all);
+  },
+        
+  methods: {
+    searchLeftCols(search) {
+      if (!search) {
+        this.cols.filtered = this.cols.all;
+        return;
+      }
+      search = search.toString().toLowerCase();
+      this.cols.filtered = this.cols.all.filter(col => {
+        const colName = this.$t(`adsmanager.cols.${col}`).toString().toLowerCase();
+        return colName.search(search) !== -1; 
+      });
+    },
+
+    onMove(event) {
+      return this.selectedCols.all.indexOf(event.draggedContext.element) === -1;
+    },
+
+    deleteCol(colToDelete) {
+      this.selectedCols.all = this.selectedCols.all.filter(col => {
+        if (col === colToDelete) return false;
+        return true;
+      });
+      this.selectedCols.filtered = this.selectedCols.filtered.filter(col => {
+        if (col === colToDelete) return false;
+        return true;
+      });
+    },
+
+    addCol(colToAdd) {
+      if (this.selectedCols.all.indexOf(colToAdd) === -1) {
+        this.selectedCols.all.push(colToAdd);
+        this.filterCols();
+      }
+    },
+
+    filterCols() {
+      if (!this.search) {
+        this.selectedCols.filtered = this.selectedCols.all;
+        return;
+      }
+
+      this.selectedCols.filtered = this.selectedCols.all.filter(col => {
+        const colName = this.$t(`adsmanager.cols.${col}`).toString().toLowerCase();
+        return colName.search(this.search.toString().toLowerCase()) !== -1; 
+      });
+    },
+
+    async saveCols() {
+      const data = {
+        columns: this.selectedCols.all,
+        preset: this.preset,
+      };
+      const success = await this.$store.dispatch('adsmanager/saveCols', data);
+      if (success) {
+        this.$store.dispatch('adsmanager/closeDialog', 'columns');
+        this.$store.dispatch('main/loadProfile');
+        this.$store.dispatch('adsmanager/loadColumnsPresets');
+      }
+    },
+  }
+};
 </script>
 <style>
     .cols-container {

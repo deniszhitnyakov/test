@@ -82,35 +82,35 @@
 </template>
 
 <script>
-  import numeral        from 'numeral';
+import numeral        from 'numeral';
 
-    export default {
-        name: 'AdsManagerSimpleStatCell',
+export default {
+  name: 'AdsManagerSimpleStatCell',
 
-        props: {
-            cab: {
-                type: Object,
-                default: () => ({})
-            },
-        },
+  props: {
+    cab: {
+      type: Object,
+      default: () => ({})
+    },
+  },
 
-        data() {
-          return {
-            numeral,
-          };
-        },
-
-        computed: {
-          billingPercent() {
-            if (!this.cab.billing || this.cab.billing === 0) return 0;
-            return this.cab.balance / this.cab.billing * 100;
-          },
-
-          billingProgressColor() {
-            if (this.billingPercent > 70 && this.billingPercent < 100) return 'orange';
-            if (this.billingPercent >= 100) return 'red';
-            return 'success';
-          }
-        }
+  data() {
+    return {
+      numeral,
     };
+  },
+
+  computed: {
+    billingPercent() {
+      if (!this.cab.billing || this.cab.billing === 0) return 0;
+      return this.cab.balance / this.cab.billing * 100;
+    },
+
+    billingProgressColor() {
+      if (this.billingPercent > 70 && this.billingPercent < 100) return 'orange';
+      if (this.billingPercent >= 100) return 'red';
+      return 'success';
+    }
+  }
+};
 </script> 

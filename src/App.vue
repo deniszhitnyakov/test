@@ -38,7 +38,7 @@ export default {
   created() {
     this.$store.dispatch('main/setInnerHeight', window.innerHeight);
     window.addEventListener('resize', (data) => {
-        this.$store.dispatch('main/setInnerHeight', data.target.innerHeight);
+      this.$store.dispatch('main/setInnerHeight', data.target.innerHeight);
     });
 
     this.$store.dispatch('main/loadProfile');

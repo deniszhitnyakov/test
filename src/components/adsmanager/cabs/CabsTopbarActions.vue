@@ -146,15 +146,15 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex';
+import {mapGetters} from 'vuex';
 
-  export default {
-    name: 'CabsTopbarActions',
+export default {
+  name: 'CabsTopbarActions',
 
-    computed: {
-      ...mapGetters({
-        cabs: 'cabs/cabs'
-      })
-    }
-  };
+  computed: {
+    ...mapGetters({
+      cabs: 'cabs/cabs'
+    })
+  }
+};
 </script>

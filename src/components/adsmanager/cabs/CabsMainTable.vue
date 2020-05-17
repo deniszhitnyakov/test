@@ -129,99 +129,99 @@
 </template>
 
 <script>
-  import {mapGetters}                                               from 'vuex';
+import {mapGetters}                                               from 'vuex';
 
-  import actionCols                                                 from '../../../constants/adsmanager/action_cols';
-  import commonCols                                                 from '../../../constants/adsmanager/common_cols';  
-  import specialCols                                                from '../../../constants/adsmanager/special_cols';  
-  import customSort                                                 from '../../../mixins/adsmanager/custom_sort';
-  import makeCols                                                   from '../../../mixins/adsmanager/make_cols';  
-  import selectItems                                                from '../../../mixins/adsmanager/select_items';  
-  import BillingCell                                                from '../stat-cells/AdsManagerBillingCell';
-  import ComplexStatCellCpa                                         from '../stat-cells/AdsManagerComplexStatCellCpa';
-  import ComplexStatCellCr                                          from '../stat-cells/AdsManagerComplexStatCellCr';
-  import ComplexStatCellQuantity                                    from '../stat-cells/AdsManagerComplexStatCellQuantity';
-  import SimpleStatCell                                             from '../stat-cells/AdsManagerSimpleStatCell';
+import actionCols                                                 from '../../../constants/adsmanager/action_cols';
+import commonCols                                                 from '../../../constants/adsmanager/common_cols';  
+import specialCols                                                from '../../../constants/adsmanager/special_cols';  
+import customSort                                                 from '../../../mixins/adsmanager/custom_sort';
+import makeCols                                                   from '../../../mixins/adsmanager/make_cols';  
+import selectItems                                                from '../../../mixins/adsmanager/select_items';  
+import BillingCell                                                from '../stat-cells/AdsManagerBillingCell';
+import ComplexStatCellCpa                                         from '../stat-cells/AdsManagerComplexStatCellCpa';
+import ComplexStatCellCr                                          from '../stat-cells/AdsManagerComplexStatCellCr';
+import ComplexStatCellQuantity                                    from '../stat-cells/AdsManagerComplexStatCellQuantity';
+import SimpleStatCell                                             from '../stat-cells/AdsManagerSimpleStatCell';
 
-  import CabsMainTableInfo                                          from './CabsMainTableInfo';
-  import CabsMainTableStatus                                        from './CabsMainTableStatus';
+import CabsMainTableInfo                                          from './CabsMainTableInfo';
+import CabsMainTableStatus                                        from './CabsMainTableStatus';
 
-  export default {
-    name: 'CabsMainTable',
+export default {
+  name: 'CabsMainTable',
 
-    components: {
-      SimpleStatCell,
-      ComplexStatCellQuantity,
-      ComplexStatCellCr,
-      ComplexStatCellCpa,
-      CabsMainTableInfo,
-      CabsMainTableStatus,
-      BillingCell
-    },
+  components: {
+    SimpleStatCell,
+    ComplexStatCellQuantity,
+    ComplexStatCellCr,
+    ComplexStatCellCpa,
+    CabsMainTableInfo,
+    CabsMainTableStatus,
+    BillingCell
+  },
 
-    mixins: [
-      makeCols,
-      customSort,
-      selectItems
-    ],
+  mixins: [
+    makeCols,
+    customSort,
+    selectItems
+  ],
 
-    data() {
-      return {
-        actionCols,
-        commonCols,
-        specialCols,
-        cols: [],
-      };
-    },
+  data() {
+    return {
+      actionCols,
+      commonCols,
+      specialCols,
+      cols: [],
+    };
+  },
 
-    computed: {
-      ...mapGetters({
-        cabs: 'cabs/cabs',
-        selected: 'cabs/selected',
-        loading: 'cabs/loading',
-        innerHeight: 'main/innerHeight',
-        profile: 'main/profile',
-      }),
+  computed: {
+    ...mapGetters({
+      cabs: 'cabs/cabs',
+      selected: 'cabs/selected',
+      loading: 'cabs/loading',
+      innerHeight: 'main/innerHeight',
+      profile: 'main/profile',
+    }),
 
-      firstCols() {
-        let cols = [];
+    firstCols() {
+      let cols = [];
 
-        cols.push({
-          text: this.$t('common.cab'),
-          value: 'cab',
-          width: 150
-        });
+      cols.push({
+        text: this.$t('common.cab'),
+        value: 'cab',
+        width: 150
+      });
 
-        cols.push({
-          text: this.$t('adsmanager.cols.billing'),
-          value: 'billing',
-          width: 200,
-          sortable: false,
-        });
+      cols.push({
+        text: this.$t('adsmanager.cols.billing'),
+        value: 'billing',
+        width: 200,
+        sortable: false,
+      });
 
-        cols.push({
-          text: this.$t('common.status'),
-          value: 'status',
-          width: 100
-        });
+      cols.push({
+        text: this.$t('common.status'),
+        value: 'status',
+        width: 100
+      });
 
-        return cols;
+      return cols;
+    }
+  },
+
+  watch: {
+    profile: {
+      deep: true,
+      handler() {
+        this.cols = this.makeCols(this.firstCols);
       }
-    },
+    }
+  },
 
-    watch: {
-      profile: {
-        deep: true,
-        handler() {
-          this.cols = this.makeCols(this.firstCols);
-        }
-      }
-    },
-
-    created() {
-      this.cols = this.makeCols(this.firstCols);
-    },
-  };
+  created() {
+    this.cols = this.makeCols(this.firstCols);
+  },
+};
 </script>
 <style>
   .stat-table-cabs div.v-data-table__wrapper > table > tbody > tr > td:nth-child(1), 

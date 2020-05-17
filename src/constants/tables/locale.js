@@ -1,5 +1,5 @@
 export default {
-    filterConfirm: 'OK',
-    filterReset: 'Сбросить',
-    // emptyText: 'Нет данных'
+  filterConfirm: 'OK',
+  filterReset: 'Сбросить',
+  // emptyText: 'Нет данных'
 };

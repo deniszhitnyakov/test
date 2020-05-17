@@ -45,29 +45,29 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex';
+import {mapGetters} from 'vuex';
 
-    export default {
-        name: 'AdsManagerTabs',
+export default {
+  name: 'AdsManagerTabs',
 
-        computed: {
-            ...mapGetters({
-                activeTab: 'adsmanager/activeTab',
-                accounts: 'accounts/ACCOUNTS'
-            })
-        },
+  computed: {
+    ...mapGetters({
+      activeTab: 'adsmanager/activeTab',
+      accounts: 'accounts/ACCOUNTS'
+    })
+  },
 
-        data: () => ({
-            tabs: ['users', 'accounts', 'cabs', 'dates', 'campaigns', 'adsets', 'ads'],
-        }),
+  data: () => ({
+    tabs: ['users', 'accounts', 'cabs', 'dates', 'campaigns', 'adsets', 'ads'],
+  }),
 
-        methods: {
-            changeTab(tab) {
-                this.$store.dispatch('adsmanager/setActiveTab', {
-                    tab: tab,
-                    component: this.tabs[tab]
-                });
-            }
-        }
-    };
+  methods: {
+    changeTab(tab) {
+      this.$store.dispatch('adsmanager/setActiveTab', {
+        tab: tab,
+        component: this.tabs[tab]
+      });
+    }
+  }
+};
 </script>

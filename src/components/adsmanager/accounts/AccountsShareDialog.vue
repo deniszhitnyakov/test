@@ -100,81 +100,81 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex';
+import {mapGetters} from 'vuex';
 
-    export default {
-        name: 'AccountsShareDialog',
+export default {
+  name: 'AccountsShareDialog',
 
-        data: () => ({
-            newAccount: {
-              permissions: [],
-            },
-        }),
+  data: () => ({
+    newAccount: {
+      permissions: [],
+    },
+  }),
 
-        computed: {
-            ...mapGetters({
-              account: 'accounts/forShare',
-              users: 'users/allUsers',
-              dialogs: 'accounts/dialogs',
-              loading: 'accounts/loading',
-              profile: 'main/profile',
-            }),
+  computed: {
+    ...mapGetters({
+      account: 'accounts/forShare',
+      users: 'users/allUsers',
+      dialogs: 'accounts/dialogs',
+      loading: 'accounts/loading',
+      profile: 'main/profile',
+    }),
 
-            openedItems() {
-              let opened = [];
+    openedItems() {
+      let opened = [];
 
-              this.users.forEach((user) =>  {
-                if (user.id === this.profile.id) return;
-                if (!Array.isArray(this.newAccount.permissions)) return false;
+      this.users.forEach((user) =>  {
+        if (user.id === this.profile.id) return;
+        if (!Array.isArray(this.newAccount.permissions)) return false;
                 
-                const permission = this.newAccount.permissions.find(p => {
-                  return p.search(`${user.id}-`) === 0;
-                });
+        const permission = this.newAccount.permissions.find(p => {
+          return p.search(`${user.id}-`) === 0;
+        });
 
-                if (permission) {
-                  opened.push(`user-${user.id}`);
-                }
-              });
-
-              return opened;
-            },
-
-            items() {
-              let items = [];
-
-              this.users.forEach(user =>  {
-                if (user.id === this.profile.id) return;
-                let item = {
-                  id: 'user-' + user.id,
-                  name: user.display_name !== null ? user.display_name : user.login
-                };
-                item.children = [
-                  { id: `${user.id}-read`, name: this.$t('dialogs.accounts.share.permissions.read') },
-                  { id: `${user.id}-edit`, name: this.$t('dialogs.accounts.share.permissions.edit') },
-                  { id: `${user.id}-stat`, name: this.$t('dialogs.accounts.share.permissions.stat') },
-                  { id: `${user.id}-share`, name: this.$t('dialogs.accounts.share.permissions.share') },
-                ];
-
-                items.push(item);
-              });
-
-              return items;
-            }
-        },
-        
-        created() {
-            this.newAccount = {...this.account};
-            if (!this.newAccount.permissions) this.newAccount.permissions = [];
-            this.$store.dispatch('users/loadUsers');
-        },
-        
-        methods: {
-            async savePermissions() {
-                const success = await this.$store.dispatch('accounts/savePermissions', this.newAccount);
-                if (success) {
-                    this.$store.dispatch('accounts/closeDialog', 'share');
-                }
-            }
+        if (permission) {
+          opened.push(`user-${user.id}`);
         }
-    };
+      });
+
+      return opened;
+    },
+
+    items() {
+      let items = [];
+
+      this.users.forEach(user =>  {
+        if (user.id === this.profile.id) return;
+        let item = {
+          id: 'user-' + user.id,
+          name: user.display_name !== null ? user.display_name : user.login
+        };
+        item.children = [
+          { id: `${user.id}-read`, name: this.$t('dialogs.accounts.share.permissions.read') },
+          { id: `${user.id}-edit`, name: this.$t('dialogs.accounts.share.permissions.edit') },
+          { id: `${user.id}-stat`, name: this.$t('dialogs.accounts.share.permissions.stat') },
+          { id: `${user.id}-share`, name: this.$t('dialogs.accounts.share.permissions.share') },
+        ];
+
+        items.push(item);
+      });
+
+      return items;
+    }
+  },
+        
+  created() {
+    this.newAccount = {...this.account};
+    if (!this.newAccount.permissions) this.newAccount.permissions = [];
+    this.$store.dispatch('users/loadUsers');
+  },
+        
+  methods: {
+    async savePermissions() {
+      const success = await this.$store.dispatch('accounts/savePermissions', this.newAccount);
+      if (success) {
+        this.$store.dispatch('accounts/closeDialog', 'share');
+      }
+    }
+  }
+};
 </script>

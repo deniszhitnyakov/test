@@ -150,75 +150,75 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex';
+import {mapGetters} from 'vuex';
 
-    export default {
-        name: 'AccountsMultipleShareDialog',
+export default {
+  name: 'AccountsMultipleShareDialog',
 
-        data: () => ({
-            permissions: [],
-            mode: 1,
-            allItems: [],
-        }),
+  data: () => ({
+    permissions: [],
+    mode: 1,
+    allItems: [],
+  }),
 
-        computed: {
-            ...mapGetters({
-                accounts: 'accounts/selected',
-                users: 'users/allUsers',
-                dialogs: 'accounts/dialogs',
-                loading: 'accounts/loading',
-                profile: 'main/profile',
-            }),
+  computed: {
+    ...mapGetters({
+      accounts: 'accounts/selected',
+      users: 'users/allUsers',
+      dialogs: 'accounts/dialogs',
+      loading: 'accounts/loading',
+      profile: 'main/profile',
+    }),
 
-            items() {
-              let items = [];
+    items() {
+      let items = [];
 
-              this.users.forEach(user =>  {
-                if (user.id === this.profile.id) return;
-                let item = {
-                  id: 'user-' + user.id,
-                  name: user.display_name !== null ? user.display_name : user.login
-                };
-                item.children = [
-                  { id: `${user.id}-read`, name: this.$t('dialogs.accounts.share.permissions.read') },
-                  { id: `${user.id}-edit`, name: this.$t('dialogs.accounts.share.permissions.edit') },
-                  { id: `${user.id}-stat`, name: this.$t('dialogs.accounts.share.permissions.stat') },
-                  { id: `${user.id}-share`, name: this.$t('dialogs.accounts.share.permissions.share') },
-                ];
+      this.users.forEach(user =>  {
+        if (user.id === this.profile.id) return;
+        let item = {
+          id: 'user-' + user.id,
+          name: user.display_name !== null ? user.display_name : user.login
+        };
+        item.children = [
+          { id: `${user.id}-read`, name: this.$t('dialogs.accounts.share.permissions.read') },
+          { id: `${user.id}-edit`, name: this.$t('dialogs.accounts.share.permissions.edit') },
+          { id: `${user.id}-stat`, name: this.$t('dialogs.accounts.share.permissions.stat') },
+          { id: `${user.id}-share`, name: this.$t('dialogs.accounts.share.permissions.share') },
+        ];
 
-                this.allItems = this.allItems.concat(item.children.map(child => child.id));
+        this.allItems = this.allItems.concat(item.children.map(child => child.id));
 
-                items.push(item);
-              });
+        items.push(item);
+      });
 
-              return items;
-            }
-        },
+      return items;
+    }
+  },
 
-        created() {
-          this.$store.dispatch('users/loadUsers');
-        },
+  created() {
+    this.$store.dispatch('users/loadUsers');
+  },
         
-        methods: {
-            async savePermissions() {
-                const success = await this.$store.dispatch('accounts/saveMultiplePermissions', {
-                    ids: this.accounts.map(account => account.id),
-                    permissions: this.permissions,
-                    mode: this.mode,
-                });
-                if (success) {
-                    this.$store.dispatch('accounts/closeDialog', 'multipleShare');
-                }
-            },
+  methods: {
+    async savePermissions() {
+      const success = await this.$store.dispatch('accounts/saveMultiplePermissions', {
+        ids: this.accounts.map(account => account.id),
+        permissions: this.permissions,
+        mode: this.mode,
+      });
+      if (success) {
+        this.$store.dispatch('accounts/closeDialog', 'multipleShare');
+      }
+    },
 
-            selectAll() {
-              this.permissions = [];
-              this.permissions = this.permissions.concat(this.allItems);
-            },
+    selectAll() {
+      this.permissions = [];
+      this.permissions = this.permissions.concat(this.allItems);
+    },
 
-            unselectAll() {
-              this.permissions = [];
-            }
-        }
-    };
+    unselectAll() {
+      this.permissions = [];
+    }
+  }
+};
 </script>

@@ -23,10 +23,10 @@ export default new Vuetify({
       },
     },
   },
-    lang: {
-      locales: { en },
-      current: 'en',
-    },
+  lang: {
+    locales: { en },
+    current: 'en',
+  },
   icons: {
     iconfont: 'md',
   },

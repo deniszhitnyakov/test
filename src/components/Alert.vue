@@ -15,22 +15,22 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex';
+import {mapGetters} from 'vuex';
 
-    export default {
-        name: 'Alert',
+export default {
+  name: 'Alert',
 
-        data() {
-            return {
-                snackbar: true
-            };
-        },
-
-        computed: {
-            ...mapGetters({
-                alert: 'main/alert',
-                dialogs: 'main/dialogs'
-            })
-        },
+  data() {
+    return {
+      snackbar: true
     };
+  },
+
+  computed: {
+    ...mapGetters({
+      alert: 'main/alert',
+      dialogs: 'main/dialogs'
+    })
+  },
+};
 </script>

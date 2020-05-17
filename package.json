@@ -83,6 +83,10 @@
         "error",
         "always"
       ],
+      "indent": [
+        2,
+        2
+      ],
       "arca/import-align": 2,
       "arca/import-ordering": 2,
       "arca/newline-after-import-section": 2

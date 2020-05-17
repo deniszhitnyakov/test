@@ -47,31 +47,31 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex';
+import {mapGetters} from 'vuex';
 
-    export default {
-        name: 'AdsManagerTopbarCols',
+export default {
+  name: 'AdsManagerTopbarCols',
 
-        computed: {
-            ...mapGetters({
-                columnsPresets: 'adsmanager/columnsPresets'
-            })
-        },
+  computed: {
+    ...mapGetters({
+      columnsPresets: 'adsmanager/columnsPresets'
+    })
+  },
 
-        created() {
-            this.$store.dispatch('adsmanager/loadColumnsPresets');
-        },
+  created() {
+    this.$store.dispatch('adsmanager/loadColumnsPresets');
+  },
 
-        methods: {
-            async loadPreset(preset) {
-                const data = {
-                    columns: preset.columns
-                };
-                const success = await this.$store.dispatch('adsmanager/saveCols', data);
-                if (success) {
-                    this.$store.dispatch('main/loadProfile');
-                }
-            }
-        }
-    };
+  methods: {
+    async loadPreset(preset) {
+      const data = {
+        columns: preset.columns
+      };
+      const success = await this.$store.dispatch('adsmanager/saveCols', data);
+      if (success) {
+        this.$store.dispatch('main/loadProfile');
+      }
+    }
+  }
+};
 </script>

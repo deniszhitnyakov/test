@@ -25,52 +25,52 @@
 </template>
 
 <script>
-    import moment              from 'moment';
-    import DateRangePicker     from 'vue2-daterange-picker';
-    import {mapGetters}        from 'vuex';
+import moment              from 'moment';
+import DateRangePicker     from 'vue2-daterange-picker';
+import {mapGetters}        from 'vuex';
 
-    export default {
-        name: 'AdsManagerFiltersDate',
+export default {
+  name: 'AdsManagerFiltersDate',
 
-        components: {
-            DateRangePicker
-        },
+  components: {
+    DateRangePicker
+  },
 
-        data() {
-            return {
-                moment,
-                dateRange: {
-                    startDate: '2020-04-23',
-                    endDate: '2020-04-23'
-                },
-                localeData: {
-                    direction: 'ltr',
-                    format: 'yyyy-mm-dd',
-                    separator: ' - ',
-                    applyLabel: 'Apply',
-                    cancelLabel: 'Cancel',
-                    weekLabel: 'W',
-                    customRangeLabel: 'Custom Range',
-                    daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                    monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    firstDay: 0
-                }
-            };
-        },
-
-        computed: {
-          ...mapGetters({
-            globalFilters: 'adsmanager/filters'
-          })
-        },
-
-        methods: {
-          changeDates(dates) {
-            this.$store.dispatch('adsmanager/setFiltersDates', {
-              startDate: this.moment(dates.startDate).format('YYYY-MM-DD'),
-              endDate: this.moment(dates.endDate).format('YYYY-MM-DD')
-            });
-          }
-        }
+  data() {
+    return {
+      moment,
+      dateRange: {
+        startDate: '2020-04-23',
+        endDate: '2020-04-23'
+      },
+      localeData: {
+        direction: 'ltr',
+        format: 'yyyy-mm-dd',
+        separator: ' - ',
+        applyLabel: 'Apply',
+        cancelLabel: 'Cancel',
+        weekLabel: 'W',
+        customRangeLabel: 'Custom Range',
+        daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        firstDay: 0
+      }
     };
+  },
+
+  computed: {
+    ...mapGetters({
+      globalFilters: 'adsmanager/filters'
+    })
+  },
+
+  methods: {
+    changeDates(dates) {
+      this.$store.dispatch('adsmanager/setFiltersDates', {
+        startDate: this.moment(dates.startDate).format('YYYY-MM-DD'),
+        endDate: this.moment(dates.endDate).format('YYYY-MM-DD')
+      });
+    }
+  }
+};
 </script>

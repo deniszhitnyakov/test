@@ -14,15 +14,15 @@ import users      from './modules/users.js';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    modules: {
-        adsmanager,
-        main,
-        jobs,
-        bundles,
-        accounts,
-        tags,
-        users,
-        proxy,
-        cabs
-    },
+  modules: {
+    adsmanager,
+    main,
+    jobs,
+    bundles,
+    accounts,
+    tags,
+    users,
+    proxy,
+    cabs
+  },
 });

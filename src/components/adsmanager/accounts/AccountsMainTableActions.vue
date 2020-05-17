@@ -68,43 +68,43 @@
 </template>
 
 <script>
-    export default {
-        name: 'AccountsMainTableStatus',
+export default {
+  name: 'AccountsMainTableStatus',
         
-        props: {
-            account: {
-                type: Object,
-                default: () => ({
-                    id: -1,
-                })
-            }
-        },
+  props: {
+    account: {
+      type: Object,
+      default: () => ({
+        id: -1,
+      })
+    }
+  },
 
-        data() {
-          return {
-            useColors: false,
-          };
-        },
-        
-        methods: {
-          deleteAccount(account) {
-            if(confirm(this.$t('dialogs.confirm'))) {
-              this.$store.dispatch('accounts/DELETE_ACCOUNTS', [account.id]);
-            }
-          },
-          
-          assignTags(account) {
-            this.$store.dispatch('accounts/setAccountForAssigningTags', account);
-            this.$store.dispatch('accounts/openDialog', 'assignTags');
-          },
-
-          shareAccount(account) {
-            this.$store.dispatch('accounts/initAccountForShare', account);
-          },
-
-          editAccount(account) {
-            this.$store.dispatch('accounts/initAccountForEdit', account);
-          }
-        }
+  data() {
+    return {
+      useColors: false,
     };
+  },
+        
+  methods: {
+    deleteAccount(account) {
+      if(confirm(this.$t('dialogs.confirm'))) {
+        this.$store.dispatch('accounts/DELETE_ACCOUNTS', [account.id]);
+      }
+    },
+          
+    assignTags(account) {
+      this.$store.dispatch('accounts/setAccountForAssigningTags', account);
+      this.$store.dispatch('accounts/openDialog', 'assignTags');
+    },
+
+    shareAccount(account) {
+      this.$store.dispatch('accounts/initAccountForShare', account);
+    },
+
+    editAccount(account) {
+      this.$store.dispatch('accounts/initAccountForEdit', account);
+    }
+  }
+};
 </script>

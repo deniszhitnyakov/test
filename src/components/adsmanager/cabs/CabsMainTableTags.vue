@@ -16,13 +16,13 @@
 </template>
 
 <script>
-    export default {
-        name: 'CabsMainTableTags',
-        props: {
-            cab: {
-                type: Object,
-                default: () => ({})
-            }
-        }
-    };
+export default {
+  name: 'CabsMainTableTags',
+  props: {
+    cab: {
+      type: Object,
+      default: () => ({})
+    }
+  }
+};
 </script>
