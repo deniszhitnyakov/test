@@ -1,5 +1,5 @@
 <template>
-  <td style="font-size: 11px; padding-right: 16px !important;">
+  <td style="font-size: 11px; padding: 8px !important;">
     <!-- КАРТА И БИЛЛИНГ -->
     <div style="display: flex; justify-content: space-between;">
       <!-- КАРТА -->

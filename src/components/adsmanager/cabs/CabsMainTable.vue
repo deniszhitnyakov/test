@@ -50,6 +50,11 @@
                 <td>
                   <cabs-main-table-info :cab="item" />
                 </td>
+                <!-- БИЛЛИНГ -->
+                <billing-cell
+                  :key="`stat-col-${col}`"
+                  :cab="item"
+                />
                 <!-- СТАТУС -->
                 <td>
                   <cabs-main-table-status :cab="item" />
@@ -60,11 +65,6 @@
                     :key="`stat-col-${col}`"
                     :col="col"
                     :item="item"
-                  />
-                  <billing-cell
-                    v-if="col === 'billing'"
-                    :key="`stat-col-${col}`"
-                    :cab="item"
                   />
                   <complex-stat-cell-quantity
                     v-if="actionCols.indexOf(col) > -1"
@@ -92,13 +92,8 @@
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
+                <td>&nbsp;</td>
                 <template v-for="col in profile.columns">
-                  <td
-                    v-if="col === 'billing'"
-                    :key="`stat-col-${col}-total`"
-                  >
-                    &nbsp;
-                  </td>
                   <simple-stat-cell
                     v-if="commonCols.indexOf(col) > -1 && specialCols.indexOf(col) === -1"
                     :key="`stat-col-${col}-total`"
@@ -198,9 +193,16 @@
         });
 
         cols.push({
+          text: this.$t('adsmanager.cols.billing'),
+          value: 'billing',
+          width: 200,
+          sortable: false,
+        });
+
+        cols.push({
           text: this.$t('common.status'),
           value: 'status',
-          width: 150
+          width: 100
         });
 
         return cols;
@@ -249,15 +251,26 @@
     background: #1e1e1e;
   }
 
+  .stat-table-cabs div.v-data-table__wrapper > table > tbody > tr > td:nth-child(4), 
+  .stat-table-cabs div.v-data-table__wrapper > table > thead > tr > th:nth-child(4) {
+    position: sticky !important; 
+    position: -webkit-sticky !important; 
+    left: 398px; 
+    z-index: 3;
+    background: #1e1e1e;
+  }
+
   .stat-table-cabs div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(1), 
   .stat-table-cabs div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(2), 
-  .stat-table-cabs div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(3) {
+  .stat-table-cabs div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(3),
+  .stat-table-cabs div.v-data-table__wrapper > table > tbody > tr:hover > td:nth-child(4) {
     background: #2a2a2a;
   }
 
   .stat-table-cabs div.v-data-table__wrapper > table > thead > tr > th:nth-child(1),
   .stat-table-cabs div.v-data-table__wrapper > table > thead > tr > th:nth-child(2),
-  .stat-table-cabs div.v-data-table__wrapper > table > thead > tr > th:nth-child(3) {
+  .stat-table-cabs div.v-data-table__wrapper > table > thead > tr > th:nth-child(3),
+  .stat-table-cabs div.v-data-table__wrapper > table > thead > tr > th:nth-child(4) {
     z-index: 4 !important;
   }
 </style>

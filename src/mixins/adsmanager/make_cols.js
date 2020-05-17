@@ -40,6 +40,7 @@ export default {
                         if (
                             this.$store.state.adsmanager.activeTab.component === 'users' ||
                             this.$store.state.adsmanager.activeTab.component === 'accounts' ||
+                            this.$store.state.adsmanager.activeTab.component === 'cabs' ||
                             this.$store.state.adsmanager.activeTab.component === 'dates'
                         ) return;
 

@@ -1,6 +1,6 @@
 export default {
   0 : ['NONE'],
-  1 : ['ADS_INTEGRITY_POLICY'],
+  1 : ['POLICY'],
   2 : ['ADS_IP_REVIEW'],
   3 : ['RISK_PAYMENT'],
   4 : ['GRAY_ACCOUNT_SHUT_DOWN'],
