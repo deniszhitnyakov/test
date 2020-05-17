@@ -227,8 +227,18 @@ export default {
     activeFiltersCount() {
       let count = 0;
 
-      if (this.filters.statuses.length > 0) count++;
-      if (this.globalFilters.tags.length > 0) count++;
+      if(!this.filters) return 0;
+
+      if (
+        typeof this.filters.statuses !== 'undefined' && 
+        Array.isArray(this.filters.statuses) &&
+        this.filters.statuses.length > 0
+      ) count++;
+      if (
+        typeof this.globalFilters.tags !== 'undefined' && 
+        this.globalFilters.tags &&
+        this.globalFilters.tags.length > 0
+      ) count++;
 
       return count;
     }

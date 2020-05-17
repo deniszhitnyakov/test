@@ -8,6 +8,7 @@
           color="primary"
           text
           style="min-width: 0; width: 30px; margin-top: 1px;"
+          :disabled="cabs.selected.length === 0"
           v-on="on"
         >
           <v-icon :size="12">
@@ -22,6 +23,7 @@
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
         <v-btn
+          :disabled="cabs.selected.length === 0"
           small
           color="primary"
           text
@@ -40,6 +42,7 @@
     <v-tooltip bottom>
       <template v-slot:activator="{ on }">
         <v-btn
+          :disabled="cabs.selected.length === 0"
           small
           color="primary"
           text
@@ -62,6 +65,7 @@
     >
       <template v-slot:activator="{ on }">
         <v-btn
+          :disabled="cabs.selected.length === 0"
           small
           color="primary"
           text
@@ -130,11 +134,27 @@
         </v-list-item>
       </v-list>
     </v-menu>
+
+    <!-- СЧЕТЧИК -->
+    <span
+      class="body-2 ml-1"
+      :style="{color: cabs.selected.length > 0 ? '' : 'gray'}"
+    >
+      {{ $t('common.selected') }} : {{ cabs.selected.length }}
+    </span>
   </div>
 </template>
 
 <script>
+  import {mapGetters} from 'vuex';
+
   export default {
-    name: 'CabsTopbarActions'
+    name: 'CabsTopbarActions',
+
+    computed: {
+      ...mapGetters({
+        cabs: 'cabs/cabs'
+      })
+    }
   };
 </script>

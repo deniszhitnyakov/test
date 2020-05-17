@@ -32,6 +32,10 @@ if (location.hostname === 'localhost') {
     headers: {
       Authorization: '5-ef7f6ab188cd804e941fe6f4ad27719f'
     }
+    // baseURL: 'https://romochekaz.xyz/new',
+    //   headers: {
+    //     Authorization: '4-f0b5fbc8cab8f36a2695ae2dc0f5d279'
+    //   }
   });
 
   baseUrl = 'https://my.dolphin.ru.com';
