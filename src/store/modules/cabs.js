@@ -23,6 +23,7 @@ export default {
     stat: [],
     dialogs: {
       filters: false,
+      attachCard: false,
     },
     emptyFilters: {
       name: '',

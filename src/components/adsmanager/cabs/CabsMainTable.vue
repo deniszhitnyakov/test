@@ -52,7 +52,6 @@
                 </td>
                 <!-- БИЛЛИНГ -->
                 <billing-cell
-                  :key="`stat-col-${col}`"
                   :cab="item"
                 />
                 <!-- СТАТУС -->

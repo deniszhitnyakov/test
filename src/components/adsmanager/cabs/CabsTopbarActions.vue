@@ -80,7 +80,7 @@
       <v-list>
         <v-list-item
           dense
-          @click="alert('1111')"
+          @click="$store.dispatch('cabs/openDialog', 'attachCard')"
         >
           <v-list-item-title>{{ $t('adsmanager.cabs.actions.attachBankCard') }}</v-list-item-title>
         </v-list-item>

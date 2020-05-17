@@ -1,22 +1,25 @@
 <template>
   <div>
+    <dialog-attach-card v-if="dialogs.attachCard" />
     <topbar />
     <main-table />
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters}     from 'vuex';
 
-import MainTable    from '../../components/adsmanager/cabs/CabsMainTable';
-import Topbar       from '../../components/adsmanager/cabs/CabsTopbar';
+import DialogAttachCard from '../../components/adsmanager/cabs/CabsDialogAttachCard';
+import MainTable        from '../../components/adsmanager/cabs/CabsMainTable';
+import Topbar           from '../../components/adsmanager/cabs/CabsTopbar';
 
 export default {
   name: 'Cabs',
 
   components: {
+    DialogAttachCard, 
     MainTable,
-    Topbar
+    Topbar,
   },
 
   data() {
@@ -30,6 +33,7 @@ export default {
       accounts: 'accounts/filtered',
       globalFilters: 'adsmanager/filters',
       filters: 'cabs/filters',
+      dialogs: 'cabs/dialogs'
     })
   },
 

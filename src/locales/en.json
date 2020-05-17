@@ -215,7 +215,12 @@
 		},
 		"cabs": {
 			"attachCard": {
-				"title": "Attach card"
+				"cardNumber": "Card number",
+				"cvc": "CVC2/CVV2",
+				"loadingText": "Attaching card",
+				"mm": "MM",
+				"title": "Attach card",
+				"yy": "YY"
 			}
 		},
 		"confirm": "Confirm please"

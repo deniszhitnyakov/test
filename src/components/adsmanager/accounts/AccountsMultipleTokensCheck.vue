@@ -84,7 +84,7 @@ export default {
 };
 </script>
 <style scoped>
-.v-dialog__content {
+  .v-dialog__content {
   align-items: flex-end !important;
 }
 </style>
