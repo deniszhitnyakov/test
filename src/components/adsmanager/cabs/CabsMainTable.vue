@@ -56,7 +56,7 @@
                 </td>
                 <template v-for="col in profile.columns">
                   <simple-stat-cell
-                    v-if="commonCols.indexOf(col) > -1"
+                    v-if="commonCols.indexOf(col) > -1 && specialCols.indexOf(col) === -1"
                     :key="`stat-col-${col}`"
                     :col="col"
                     :item="item"
@@ -100,7 +100,7 @@
                     &nbsp;
                   </td>
                   <simple-stat-cell
-                    v-if="commonCols.indexOf(col) > -1"
+                    v-if="commonCols.indexOf(col) > -1 && specialCols.indexOf(col) === -1"
                     :key="`stat-col-${col}-total`"
                     :col="col"
                     it-is-total-row
@@ -134,21 +134,22 @@
 </template>
 
 <script>
-  import {mapGetters}                                              from 'vuex';
+  import {mapGetters}                                               from 'vuex';
 
-  import actionCols                                                from '../../../constants/adsmanager/action_cols';
-  import commonCols                                                from '../../../constants/adsmanager/common_cols';  
-  import customSort                                                from '../../../mixins/adsmanager/custom_sort';
-  import makeCols                                                  from '../../../mixins/adsmanager/make_cols';  
-  import selectItems                                               from '../../../mixins/adsmanager/select_items';  
-  import BillingCell                                               from '../stat-cells/AdsManagerBillingCell';
-  import ComplexStatCellCpa                                        from '../stat-cells/AdsManagerComplexStatCellCpa';
-  import ComplexStatCellCr                                         from '../stat-cells/AdsManagerComplexStatCellCr';
-  import ComplexStatCellQuantity                                   from '../stat-cells/AdsManagerComplexStatCellQuantity';
-  import SimpleStatCell                                            from '../stat-cells/AdsManagerSimpleStatCell';
+  import actionCols                                                 from '../../../constants/adsmanager/action_cols';
+  import commonCols                                                 from '../../../constants/adsmanager/common_cols';  
+  import specialCols                                                from '../../../constants/adsmanager/special_cols';  
+  import customSort                                                 from '../../../mixins/adsmanager/custom_sort';
+  import makeCols                                                   from '../../../mixins/adsmanager/make_cols';  
+  import selectItems                                                from '../../../mixins/adsmanager/select_items';  
+  import BillingCell                                                from '../stat-cells/AdsManagerBillingCell';
+  import ComplexStatCellCpa                                         from '../stat-cells/AdsManagerComplexStatCellCpa';
+  import ComplexStatCellCr                                          from '../stat-cells/AdsManagerComplexStatCellCr';
+  import ComplexStatCellQuantity                                    from '../stat-cells/AdsManagerComplexStatCellQuantity';
+  import SimpleStatCell                                             from '../stat-cells/AdsManagerSimpleStatCell';
 
-  import CabsMainTableInfo                                         from './CabsMainTableInfo';
-  import CabsMainTableStatus                                       from './CabsMainTableStatus';
+  import CabsMainTableInfo                                          from './CabsMainTableInfo';
+  import CabsMainTableStatus                                        from './CabsMainTableStatus';
 
   export default {
     name: 'CabsMainTable',
@@ -173,6 +174,7 @@
       return {
         actionCols,
         commonCols,
+        specialCols,
         cols: [],
       };
     },
