@@ -64,7 +64,7 @@
         </v-btn>
       </template>
       <v-list>
-<!-- ПРИВЯЗАТЬ КАРТУ -->
+        <!-- ПРИВЯЗАТЬ КАРТУ -->
         <v-list-item
           dense
           @click="$store.dispatch('cabs/openDialog', 'attachCard')"
@@ -82,9 +82,10 @@
 
         <v-divider />
 
+        <!-- ПЕРЕИМЕНОВАТЬ -->
         <v-list-item
           dense
-          @click="alert('1111')"
+          @click="$store.dispatch('cabs/openDialog', 'rename')"
         >
           <v-list-item-title>{{ $t('common.rename') }}</v-list-item-title>
         </v-list-item>

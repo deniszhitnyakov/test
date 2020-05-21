@@ -29,6 +29,7 @@ export default {
       tags: false,
       share: false,
       changeCountry: false,
+      rename: false,
     },
     emptyFilters: {
       name: '',
@@ -181,6 +182,12 @@ export default {
         ...state.emptyFilters
       };
       localStorage.removeItem('adsmanager-cabs-filters');
+    },
+
+    REFRESH_SELECTED: state => {
+      state.cabs.selected = state.cabs.selected.map(cab => {
+        return state.cabs.all.find(c => c.id === cab.id);
+      });
     }
   },
   actions: {
@@ -208,6 +215,7 @@ export default {
 
       commit('SET_ALL_CABS', response.data.data);
       commit('FILTER_CABS');
+      commit('REFRESH_SELECTED');
       dispatch('loadStat');
     },
 

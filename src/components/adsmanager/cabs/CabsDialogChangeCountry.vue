@@ -133,9 +133,8 @@ export default {
       if (Array.isArray(this.cabs.selected)) {
         this.cabs.selected.forEach(async (cab) => {
           const data = {id: cab.id, country: this.country.code};
-          await this.api.post('/cabs/change_country', data).catch(() => {
-            this.done++;
-          });
+          await this.api.post('/cabs/change_country', data)
+            .catch(() => true);
           
           this.done++;
           

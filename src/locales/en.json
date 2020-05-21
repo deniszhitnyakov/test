@@ -226,6 +226,9 @@
 			"changeCountry": {
 				"loadingText": "Changing country",
 				"title": "Change country"
+			},
+			"rename": {
+				"loadingText": "Renaming cabs"
 			}
 		},
 		"confirm": "Confirm please",

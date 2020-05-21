@@ -11,7 +11,7 @@
         TOKEN_ERROR
       </v-chip>
     </div>
-    <div>
+    <div v-else-if="cab.account.status">
       <v-chip
         dark
         :color="statuses[cab.status][1]"

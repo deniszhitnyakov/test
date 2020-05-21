@@ -226,6 +226,9 @@
 			"changeCountry": {
 				"loadingText": "Меняю страну",
 				"title": "Изменить страну"
+			},
+			"rename": {
+				"loadingText": "Переименовываю кабинеты"
 			}
 		},
 		"confirm": "Подтверди плиз",
