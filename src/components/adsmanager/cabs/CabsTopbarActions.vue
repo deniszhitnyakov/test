@@ -41,23 +41,7 @@
     </v-tooltip>
 
     <!-- АРХИВИРОВАТЬ -->
-    <v-tooltip bottom>
-      <template v-slot:activator="{ on }">
-        <v-btn
-          :disabled="cabs.selected.length === 0"
-          small
-          color="primary"
-          text
-          style="min-width: 0; width: 30px; margin-top: 1px;"
-          v-on="on"
-        >
-          <v-icon :size="12">
-            fas fa-archive
-          </v-icon>
-        </v-btn>
-      </template>
-      <span>{{ $t('common.archive') }}</span>
-    </v-tooltip>
+    <cabs-dialog-archive />
 
     <!-- ПРОЧИЕ ДЕЙСТВИЯ -->
     <v-menu
@@ -80,20 +64,23 @@
         </v-btn>
       </template>
       <v-list>
+<!-- ПРИВЯЗАТЬ КАРТУ -->
         <v-list-item
           dense
           @click="$store.dispatch('cabs/openDialog', 'attachCard')"
         >
           <v-list-item-title>{{ $t('adsmanager.cabs.actions.attachBankCard') }}</v-list-item-title>
         </v-list-item>
+
+        <!-- ИЗМЕНИТЬ СТРАНУ -->
         <v-list-item
           dense
-          @click="alert('1111')"
+          @click="$store.dispatch('cabs/openDialog', 'changeCountry')"
         >
           <v-list-item-title>{{ $t('adsmanager.cabs.actions.changeBillingCountry') }}</v-list-item-title>
         </v-list-item>
 
-        <v-divider inset />
+        <v-divider />
 
         <v-list-item
           dense
@@ -114,7 +101,7 @@
           <v-list-item-title>{{ $t('adsmanager.cabs.actions.turnOffNotifications') }}</v-list-item-title>
         </v-list-item>
 
-        <v-divider inset />
+        <v-divider />
 
         <v-list-item
           dense
@@ -148,10 +135,16 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters}      from 'vuex';
+
+import CabsDialogArchive from './CabsDialogArchive';
 
 export default {
   name: 'CabsTopbarActions',
+
+  components: {
+    CabsDialogArchive
+  },
 
   computed: {
     ...mapGetters({

@@ -6,6 +6,7 @@
       hide-overlay
       persistent
       width="300"
+      content-class="loading-modal"
     >
       <v-card
         color="primary"

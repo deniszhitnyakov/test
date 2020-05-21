@@ -5,7 +5,7 @@
 				"applyAutomationRule": "Применить автоправило",
 				"applyAutomationRulesGroup": "Применить группу автоправил",
 				"attachBankCard": "Привязать карту",
-				"changeBillingCountry": "Изменить гео биллинга",
+				"changeBillingCountry": "Изменить страну биллинга",
 				"clearAllAutomationRules": "Снять все автоправила",
 				"createPixel": "Создать пиксель",
 				"turnOffNotifications": "Выключить уведомления"
@@ -120,6 +120,7 @@
 		"columns": "Столбцы",
 		"confirmPlease": "Подверди плиз",
 		"conversionRate": "CR",
+		"country": "Страна",
 		"cpa": "CPA",
 		"delete": "Удалить",
 		"dolphinId": "Dolphin ID",
@@ -221,6 +222,10 @@
 				"mm": "ММ",
 				"title": "Привязка карты",
 				"yy": "ГГ"
+			},
+			"changeCountry": {
+				"loadingText": "Меняю страну",
+				"title": "Изменить страну"
 			}
 		},
 		"confirm": "Подтверди плиз",

@@ -5,7 +5,7 @@
 				"applyAutomationRule": "Apply automation rule",
 				"applyAutomationRulesGroup": "Apply automation rules group",
 				"attachBankCard": "Attach bank card",
-				"changeBillingCountry": "Change billing geo",
+				"changeBillingCountry": "Change billing country",
 				"clearAllAutomationRules": "Clear all automation rules",
 				"createPixel": "Create pixel",
 				"turnOffNotifications": "Turn notifications off"
@@ -120,6 +120,7 @@
 		"columns": "Columns",
 		"confirmPlease": "Confirm please",
 		"conversionRate": "CR",
+		"country": "Country",
 		"cpa": "CPA",
 		"delete": "Delete",
 		"dolphinId": "Dolphin ID",
@@ -221,6 +222,10 @@
 				"mm": "MM",
 				"title": "Attach card",
 				"yy": "YY"
+			},
+			"changeCountry": {
+				"loadingText": "Changing country",
+				"title": "Change country"
 			}
 		},
 		"confirm": "Confirm please",

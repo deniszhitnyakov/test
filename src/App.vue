@@ -133,4 +133,10 @@ export default {
   .v-data-footer, .v-data-footer__select {
     height: 48px !important;
   }
+
+  .loading-modal {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+  }
 </style>

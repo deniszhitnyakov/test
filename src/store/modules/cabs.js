@@ -28,6 +28,7 @@ export default {
       attachCard: false,
       tags: false,
       share: false,
+      changeCountry: false,
     },
     emptyFilters: {
       name: '',
@@ -313,6 +314,41 @@ export default {
 
       context.commit('SET_LOADING', {
         param: 'share',
+        value: false
+      });
+
+      if (response.data.success) {
+        context.dispatch('main/alert', {
+          color: 'success',
+          message: i18n.t('common.saved')
+        }, {
+          root: true
+        });
+
+        context.dispatch('loadCabs');
+      } else {
+        context.dispatch('main/apiError', response.data, {
+          root: true
+        });
+      }
+
+      return response.data.success;
+    },
+
+    async archive(context, data) {
+      context.commit('SET_LOADING', {
+        param: 'mainTable',
+        value: true
+      });
+
+      const response = await this._vm.api.post('/cabs/archive', data).catch((e) => {
+        context.dispatch('main/apiError', e, {
+          root: true
+        });
+      });
+
+      context.commit('SET_LOADING', {
+        param: 'mainTable',
         value: false
       });
 
