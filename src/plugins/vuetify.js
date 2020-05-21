@@ -1,7 +1,7 @@
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
-import en         from 'vuetify/es5/locale/en';
-import Vuetify    from 'vuetify/lib';
-import Vue        from 'vue';
+import en      from 'vuetify/es5/locale/en';
+import Vuetify from 'vuetify/lib';
+import Vue     from 'vue';
 
 Vue.use(Vuetify);
 
@@ -13,7 +13,7 @@ export default new Vuetify({
     },
     themes: {
       light: {
-        primary: '#2196F3',
+        primary: '#ee44aa',
         secondary: '#424242',
         accent: '#82B1FF',
         error: '#FF5252',
@@ -24,7 +24,9 @@ export default new Vuetify({
     },
   },
   lang: {
-    locales: { en },
+    locales: {
+      en
+    },
     current: 'en',
   },
   icons: {

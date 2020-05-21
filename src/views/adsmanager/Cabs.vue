@@ -1,6 +1,7 @@
 <template>
   <div>
     <dialog-attach-card v-if="dialogs.attachCard" />
+    <dialog-tags v-if="dialogs.tags" />
     <topbar />
     <main-table />
   </div>
@@ -10,6 +11,7 @@
 import {mapGetters}     from 'vuex';
 
 import DialogAttachCard from '../../components/adsmanager/cabs/CabsDialogAttachCard';
+import DialogTags       from '../../components/adsmanager/cabs/CabsDialogTags';
 import MainTable        from '../../components/adsmanager/cabs/CabsMainTable';
 import Topbar           from '../../components/adsmanager/cabs/CabsTopbar';
 
@@ -18,6 +20,7 @@ export default {
 
   components: {
     DialogAttachCard, 
+    DialogTags,
     MainTable,
     Topbar,
   },

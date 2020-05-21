@@ -223,7 +223,12 @@
 				"yy": "YY"
 			}
 		},
-		"confirm": "Confirm please"
+		"confirm": "Confirm please",
+		"tags": {
+			"addTags": "Add tags",
+			"removeTags": "Remove tags",
+			"title": "Manage tags"
+		}
 	},
 	"filters": {
 		"accountStatus": "Account status",

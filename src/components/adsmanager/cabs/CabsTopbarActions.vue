@@ -10,6 +10,7 @@
           style="min-width: 0; width: 30px; margin-top: 1px;"
           :disabled="cabs.selected.length === 0"
           v-on="on"
+          @click="$store.dispatch('cabs/openDialog', 'tags')"
         >
           <v-icon :size="12">
             fas fa-tags

@@ -197,6 +197,7 @@
             single-line
             prepend-inner-icon="fas fa-search"
             hide-details
+            :value="filters.name"
             @input="filterName"
           />
         </v-col>

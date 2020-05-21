@@ -1,4 +1,4 @@
-// import i18n from '../../i18n';
+import i18n from '../../i18n';
 import {
   mixinDialogMutations,
   mixinDialogActions,
@@ -19,11 +19,13 @@ export default {
     },
     loading: {
       mainTable: false,
+      tags: false,
     },
     stat: [],
     dialogs: {
       filters: false,
       attachCard: false,
+      tags: false,
     },
     emptyFilters: {
       name: '',
@@ -257,6 +259,42 @@ export default {
 
     async clearFilters(context) {
       context.commit('CLEAR_FILTERS');
-    }
+    },
+
+    async saveMultipleTags(context, data) {
+      context.commit('SET_LOADING', {
+        param: 'tags',
+        value: true
+      });
+
+      const response = await this._vm.api.post('/cabs/update_multiple_tags', data).catch((e) => {
+        context.dispatch('main/apiError', e, {
+          root: true
+        });
+      });
+
+      context.commit('SET_LOADING', {
+        param: 'tags',
+        value: false
+      });
+
+      if (response.data.success) {
+        context.dispatch('main/alert', {
+          color: 'success',
+          message: i18n.t('common.saved')
+        }, {
+          root: true
+        });
+
+        context.dispatch('loadCabs');
+        return true;
+      } else {
+        context.dispatch('main/apiError', response.data, {
+          root: true
+        });
+      }
+
+      return response.data.success;
+    },
   },
 };
