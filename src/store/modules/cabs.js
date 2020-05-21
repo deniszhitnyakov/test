@@ -30,6 +30,7 @@ export default {
       share: false,
       changeCountry: false,
       rename: false,
+      createPixel: false,
     },
     emptyFilters: {
       name: '',

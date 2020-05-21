@@ -227,6 +227,9 @@
 				"loadingText": "Changing country",
 				"title": "Change country"
 			},
+			"createPixel": {
+				"loadingText": "Creating pixels"
+			},
 			"rename": {
 				"loadingText": "Renaming cabs"
 			}

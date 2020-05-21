@@ -2,6 +2,7 @@
   <div>
     <dialog-attach-card v-if="dialogs.attachCard" />
     <dialog-change-country v-if="dialogs.changeCountry" />
+    <dialog-create-pixel v-if="dialogs.createPixel" />
     <dialog-rename v-if="dialogs.rename" />
     <dialog-share v-if="dialogs.share" />
     <dialog-tags v-if="dialogs.tags" />
@@ -16,6 +17,7 @@ import {mapGetters}          from 'vuex';
 
 import DialogAttachCard      from '../../components/adsmanager/cabs/CabsDialogAttachCard';
 import DialogChangeCountry   from '../../components/adsmanager/cabs/CabsDialogChangeCountry';
+import DialogCreatePixel     from '../../components/adsmanager/cabs/CabsDialogCreatePixel';
 import DialogRename          from '../../components/adsmanager/cabs/CabsDialogRename';
 import DialogShare           from '../../components/adsmanager/cabs/CabsDialogShare';
 import DialogTags            from '../../components/adsmanager/cabs/CabsDialogTags';
@@ -28,6 +30,7 @@ export default {
   components: {
     DialogAttachCard,
     DialogChangeCountry,
+    DialogCreatePixel,
     DialogRename,
     DialogShare, 
     DialogTags,

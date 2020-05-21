@@ -89,19 +89,22 @@
         >
           <v-list-item-title>{{ $t('common.rename') }}</v-list-item-title>
         </v-list-item>
+
+        <!-- СОЗДАТЬ ПИКСЕЛЬ -->
         <v-list-item
           dense
-          @click="alert('1111')"
+          @click="createPixel"
         >
           <v-list-item-title>{{ $t('adsmanager.cabs.actions.createPixel') }}</v-list-item-title>
         </v-list-item>
+
+        <!-- ОТКЛЮЧИТЬ УВЕДОМЛЕНИЯ -->
         <v-list-item
           dense
           @click="alert('1111')"
         >
           <v-list-item-title>{{ $t('adsmanager.cabs.actions.turnOffNotifications') }}</v-list-item-title>
         </v-list-item>
-
         <v-divider />
 
         <v-list-item
@@ -136,21 +139,29 @@
 </template>
 
 <script>
-import {mapGetters}      from 'vuex';
+import {mapGetters}          from 'vuex';
 
-import CabsDialogArchive from './CabsDialogArchive';
+import CabsDialogArchive     from './CabsDialogArchive';
 
 export default {
   name: 'CabsTopbarActions',
 
   components: {
-    CabsDialogArchive
+    CabsDialogArchive,
   },
 
   computed: {
     ...mapGetters({
       cabs: 'cabs/cabs'
     })
+  },
+
+  methods: {
+    createPixel() {
+      if (confirm(this.$t('common.confirmPlease'))) {
+        this.$store.dispatch('cabs/openDialog', 'createPixel');
+      }
+    }
   }
 };
 </script>

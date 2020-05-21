@@ -227,6 +227,9 @@
 				"loadingText": "Меняю страну",
 				"title": "Изменить страну"
 			},
+			"createPixel": {
+				"loadingText": "Создание пикселей"
+			},
 			"rename": {
 				"loadingText": "Переименовываю кабинеты"
 			}
