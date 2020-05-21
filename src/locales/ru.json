@@ -224,6 +224,11 @@
 			}
 		},
 		"confirm": "Подтверди плиз",
+		"share": {
+			"addPermissions": "Добавить права",
+			"removePermissions": "Снять права",
+			"title": "Поделиться аккаунтами"
+		},
 		"tags": {
 			"addTags": "Добавить теги",
 			"removeTags": "Убрать теги",

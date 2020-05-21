@@ -1,25 +1,29 @@
 <template>
   <div>
     <dialog-attach-card v-if="dialogs.attachCard" />
+    <dialog-share v-if="dialogs.share" />
     <dialog-tags v-if="dialogs.tags" />
+    
     <topbar />
     <main-table />
   </div>
 </template>
 
 <script>
-import {mapGetters}     from 'vuex';
+import {mapGetters}      from 'vuex';
 
-import DialogAttachCard from '../../components/adsmanager/cabs/CabsDialogAttachCard';
-import DialogTags       from '../../components/adsmanager/cabs/CabsDialogTags';
-import MainTable        from '../../components/adsmanager/cabs/CabsMainTable';
-import Topbar           from '../../components/adsmanager/cabs/CabsTopbar';
+import DialogAttachCard  from '../../components/adsmanager/cabs/CabsDialogAttachCard';
+import DialogShare       from '../../components/adsmanager/cabs/CabsDialogShare';
+import DialogTags        from '../../components/adsmanager/cabs/CabsDialogTags';
+import MainTable         from '../../components/adsmanager/cabs/CabsMainTable';
+import Topbar            from '../../components/adsmanager/cabs/CabsTopbar';
 
 export default {
   name: 'Cabs',
 
   components: {
-    DialogAttachCard, 
+    DialogAttachCard,
+    DialogShare, 
     DialogTags,
     MainTable,
     Topbar,

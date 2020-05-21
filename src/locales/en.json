@@ -224,6 +224,11 @@
 			}
 		},
 		"confirm": "Confirm please",
+		"share": {
+			"addPermissions": "Add permissions",
+			"removePermissions": "Remove permissions",
+			"title": "Share multiple accounts"
+		},
 		"tags": {
 			"addTags": "Add tags",
 			"removeTags": "Remove tags",

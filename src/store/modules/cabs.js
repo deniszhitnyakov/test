@@ -20,12 +20,14 @@ export default {
     loading: {
       mainTable: false,
       tags: false,
+      share: false,
     },
     stat: [],
     dialogs: {
       filters: false,
       attachCard: false,
       tags: false,
+      share: false,
     },
     emptyFilters: {
       name: '',
@@ -288,6 +290,41 @@ export default {
 
         context.dispatch('loadCabs');
         return true;
+      } else {
+        context.dispatch('main/apiError', response.data, {
+          root: true
+        });
+      }
+
+      return response.data.success;
+    },
+
+    async savePermissions(context, data) {
+      context.commit('SET_LOADING', {
+        param: 'share',
+        value: true
+      });
+
+      const response = await this._vm.api.post('/cabs/update_multiple_permissions', data).catch((e) => {
+        context.dispatch('main/apiError', e, {
+          root: true
+        });
+      });
+
+      context.commit('SET_LOADING', {
+        param: 'share',
+        value: false
+      });
+
+      if (response.data.success) {
+        context.dispatch('main/alert', {
+          color: 'success',
+          message: i18n.t('common.saved')
+        }, {
+          root: true
+        });
+
+        context.dispatch('loadCabs');
       } else {
         context.dispatch('main/apiError', response.data, {
           root: true
