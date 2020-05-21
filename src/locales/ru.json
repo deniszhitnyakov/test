@@ -12,6 +12,7 @@
 			},
 			"filters": {
 				"active": "Активные",
+				"archived": "Архивированные кабинеты",
 				"attachedCard": "Привязана ли карта",
 				"attachedCardRadios": {
 					"no": "Без карты",
@@ -26,6 +27,7 @@
 				},
 				"onlyBlocked": "Заблокированные",
 				"personalCabs": "Личные кабинеты",
+				"showArchivedCabs": "Показывать архивированные",
 				"underActiveAccounts": "С активными аккаунтами",
 				"withCard": "Есть привязанная карта",
 				"withDebt": "С задолженностью",
@@ -112,6 +114,7 @@
 		"allFilters": "Все фильтры",
 		"any": "Любой",
 		"archive": "Архивировать",
+		"archived": "Архивированные",
 		"attach": "Привязать",
 		"bm": "БМ",
 		"cab": "Кабинет",

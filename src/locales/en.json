@@ -12,6 +12,7 @@
 			},
 			"filters": {
 				"active": "Active",
+				"archived": "Archived cabs",
 				"attachedCard": "Attached card",
 				"attachedCardRadios": {
 					"no": "Without card",
@@ -26,6 +27,7 @@
 				},
 				"onlyBlocked": "Blocked",
 				"personalCabs": "Personal cabs",
+				"showArchivedCabs": "Show archived cabs",
 				"underActiveAccounts": "Under active accounts",
 				"withCard": "With bank card",
 				"withDebt": "Unsettled",
@@ -112,6 +114,7 @@
 		"allFilters": "All filters",
 		"any": "Any",
 		"archive": "Archive",
+		"archived": "Archived",
 		"attach": "Attach",
 		"bm": "Business Manager",
 		"cab": "Cabinet",

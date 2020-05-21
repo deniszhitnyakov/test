@@ -218,6 +218,21 @@
             />
           </v-radio-group>
         </v-col>
+
+        <!-- ФИЛЬТР ПО АРХИВИРОВАННЫМ -->
+        <v-col
+          cols="12"
+          class="py-0 mt-2"
+        >
+          <h5>
+            {{ $t('adsmanager.cabs.filters.archived') }}
+          </h5>
+          <v-checkbox
+            v-model="filters.showArchived"
+            :label="$t('adsmanager.cabs.filters.showArchivedCabs')"
+            @change="$store.dispatch('cabs/setSpecificFilter', {filter: 'showArchived', data: $event ? true : false});"
+          />
+        </v-col>
       </v-row>
 
       <!-- ФИЛЬТР ПО ТЕГАМ -->
@@ -235,10 +250,6 @@ import cabsStatuses         from '../../../constants/cabs/statuses_for_select';
 
 export default {
   name: 'CabsFiltersBar',
-
-  // components: {
-  //     FiltersTags,
-  // },
 
   props: {
     show: {

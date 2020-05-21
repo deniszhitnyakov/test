@@ -40,6 +40,7 @@ export default {
       attachedCard: 'all',
       bms: [],
       tags: [],
+      showArchived: false,
     },
     filters: {}
   },
@@ -152,6 +153,13 @@ export default {
           }
           return false;
         });
+      }
+
+      if(
+        typeof state.filters.showArchived === 'undefined' ||
+        !state.filters.showArchived
+      ) {
+        cabs = cabs.filter(cab => cab.archived === 0);
       }
 
       state.cabs.filtered = cabs;

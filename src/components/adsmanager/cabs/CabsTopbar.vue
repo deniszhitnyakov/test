@@ -135,6 +135,15 @@
                 </v-list-item-title>
               </v-list-item>
 
+              <v-list-item
+                dense
+                @click="$store.dispatch('cabs/setSpecificFilter', {filter: 'showArchived', data: true});"
+              >
+                <v-list-item-title>
+                  {{ $t('adsmanager.cabs.filters.showArchivedCabs') }}
+                </v-list-item-title>
+              </v-list-item>
+
               <v-divider />
 
               <v-list-item
@@ -262,6 +271,10 @@ export default {
       if (
         typeof this.filters.type!== 'undefined' &&
           this.filters.type !== 'all'
+      ) count++;
+      if (
+        typeof this.filters.showArchived!== 'undefined' &&
+          this.filters.showArchived
       ) count++;
       if (
         typeof this.filters.attachedCard !== 'undefined' &&
