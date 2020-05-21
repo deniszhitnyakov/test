@@ -157,6 +157,7 @@
 		"tags": "Теги",
 		"totalSpend": "Расход",
 		"type": "Тип",
+		"unarchive": "Разархивировать",
 		"unselectAll": "Убрать все",
 		"useragent": "Useragent",
 		"yes": "Да"
@@ -235,6 +236,9 @@
 			},
 			"rename": {
 				"loadingText": "Переименовываю кабинеты"
+			},
+			"unarchive": {
+				"loadingText": "Разархивирую кабинеты"
 			}
 		},
 		"confirm": "Подтверди плиз",

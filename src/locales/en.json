@@ -157,6 +157,7 @@
 		"tags": "Tags",
 		"totalSpend": "Spend",
 		"type": "Type",
+		"unarchive": "Unarchive",
 		"unselectAll": "Unselect all",
 		"useragent": "Useragent",
 		"yes": "Yes"
@@ -235,6 +236,9 @@
 			},
 			"rename": {
 				"loadingText": "Renaming cabs"
+			},
+			"unarchive": {
+				"loadingText": "Unarchiving cabs"
 			}
 		},
 		"confirm": "Confirm please",

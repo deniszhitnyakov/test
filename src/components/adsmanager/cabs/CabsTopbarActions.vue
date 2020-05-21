@@ -82,6 +82,14 @@
 
         <v-divider />
 
+        <!-- РАЗАРХИВИРОВАТЬ -->
+        <v-list-item
+          dense
+          @click="unarchive"
+        >
+          <v-list-item-title>{{ $t('common.unarchive') }}</v-list-item-title>
+        </v-list-item>
+
         <!-- ПЕРЕИМЕНОВАТЬ -->
         <v-list-item
           dense
@@ -160,6 +168,12 @@ export default {
     createPixel() {
       if (confirm(this.$t('common.confirmPlease'))) {
         this.$store.dispatch('cabs/openDialog', 'createPixel');
+      }
+    },
+
+    unarchive() {
+      if (confirm(this.$t('common.confirmPlease'))) {
+        this.$store.dispatch('cabs/openDialog', 'unarchive');
       }
     }
   }
