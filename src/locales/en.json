@@ -114,9 +114,11 @@
 		"all": "All",
 		"allFilters": "All filters",
 		"any": "Any",
+		"apply": "Apply",
 		"archive": "Archive",
 		"archived": "Archived",
 		"attach": "Attach",
+		"automationRule": "Automation rule",
 		"bm": "Business Manager",
 		"cab": "Cabinet",
 		"clear": "Clear",
@@ -220,6 +222,13 @@
 			"title": "API error caused"
 		},
 		"cabs": {
+			"applyAutomationRule": {
+				"loadingText": "Applying automation rule",
+				"title": "Apply automation rule"
+			},
+			"applyAutomationRulesGroup": {
+				"loadingText": "Apply automation rules group"
+			},
 			"attachCard": {
 				"cardNumber": "Card number",
 				"cvc": "CVC2/CVV2",

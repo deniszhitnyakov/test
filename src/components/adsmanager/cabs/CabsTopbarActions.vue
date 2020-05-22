@@ -125,9 +125,10 @@
         </v-list-item>
         <v-divider />
 
+        <!-- ПРИМЕНИТЬ АВТОПРАВИЛО -->
         <v-list-item
           dense
-          @click="alert('1111')"
+          @click="$store.dispatch('cabs/openDialog', 'applyAutomationRule')"
         >
           <v-list-item-title>{{ $t('adsmanager.cabs.actions.applyAutomationRule') }}</v-list-item-title>
         </v-list-item>
@@ -137,12 +138,12 @@
         >
           <v-list-item-title>{{ $t('adsmanager.cabs.actions.applyAutomationRulesGroup') }}</v-list-item-title>
         </v-list-item>
-        <v-list-item
+        <!-- <v-list-item
           dense
           @click="alert('1111')"
         >
           <v-list-item-title>{{ $t('adsmanager.cabs.actions.clearAllAutomationRules') }}</v-list-item-title>
-        </v-list-item>
+        </v-list-item> -->
       </v-list>
     </v-menu>
 

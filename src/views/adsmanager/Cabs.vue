@@ -1,5 +1,6 @@
 <template>
   <div>
+    <dialog-apply-automation-rule v-if="dialogs.applyAutomationRule" />
     <dialog-attach-card v-if="dialogs.attachCard" />
     <dialog-change-country v-if="dialogs.changeCountry" />
     <dialog-create-pixel v-if="dialogs.createPixel" />
@@ -16,24 +17,26 @@
 </template>
 
 <script>
-import {mapGetters}                    from 'vuex';
+import {mapGetters}                             from 'vuex';
 
-import DialogAttachCard                from '../../components/adsmanager/cabs/CabsDialogAttachCard';
-import DialogChangeCountry             from '../../components/adsmanager/cabs/CabsDialogChangeCountry';
-import DialogCreatePixel               from '../../components/adsmanager/cabs/CabsDialogCreatePixel';
-import DialogNotificationsOff          from '../../components/adsmanager/cabs/CabsDialogNotificationsOff';
-import DialogNotificationsOn           from '../../components/adsmanager/cabs/CabsDialogNotificationsOn';
-import DialogRename                    from '../../components/adsmanager/cabs/CabsDialogRename';
-import DialogShare                     from '../../components/adsmanager/cabs/CabsDialogShare';
-import DialogTags                      from '../../components/adsmanager/cabs/CabsDialogTags';
-import DialogUnarchive                 from '../../components/adsmanager/cabs/CabsDialogUnarchive';
-import MainTable                       from '../../components/adsmanager/cabs/CabsMainTable';
-import Topbar                          from '../../components/adsmanager/cabs/CabsTopbar';
+import DialogApplyAutomationRule                from '../../components/adsmanager/cabs/CabsDialogApplyAutomationRule';
+import DialogAttachCard                         from '../../components/adsmanager/cabs/CabsDialogAttachCard';
+import DialogChangeCountry                      from '../../components/adsmanager/cabs/CabsDialogChangeCountry';
+import DialogCreatePixel                        from '../../components/adsmanager/cabs/CabsDialogCreatePixel';
+import DialogNotificationsOff                   from '../../components/adsmanager/cabs/CabsDialogNotificationsOff';
+import DialogNotificationsOn                    from '../../components/adsmanager/cabs/CabsDialogNotificationsOn';
+import DialogRename                             from '../../components/adsmanager/cabs/CabsDialogRename';
+import DialogShare                              from '../../components/adsmanager/cabs/CabsDialogShare';
+import DialogTags                               from '../../components/adsmanager/cabs/CabsDialogTags';
+import DialogUnarchive                          from '../../components/adsmanager/cabs/CabsDialogUnarchive';
+import MainTable                                from '../../components/adsmanager/cabs/CabsMainTable';
+import Topbar                                   from '../../components/adsmanager/cabs/CabsTopbar';
 
 export default {
   name: 'Cabs',
 
   components: {
+    DialogApplyAutomationRule,
     DialogAttachCard,
     DialogChangeCountry,
     DialogCreatePixel,

@@ -34,6 +34,8 @@ export default {
       unarchive: false,
       notificationsOff: false,
       notificationsOn: false,
+      applyAutomationRule: false,
+      applyAutomationRulesGroup: false,
     },
     emptyFilters: {
       name: '',

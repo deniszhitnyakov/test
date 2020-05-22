@@ -114,9 +114,11 @@
 		"all": "Все",
 		"allFilters": "Все фильтры",
 		"any": "Любой",
+		"apply": "Применить",
 		"archive": "Архивировать",
 		"archived": "Архивированные",
 		"attach": "Привязать",
+		"automationRule": "Автоправило",
 		"bm": "БМ",
 		"cab": "Кабинет",
 		"clear": "Очистить",
@@ -220,6 +222,13 @@
 			"title": "Ошибка API"
 		},
 		"cabs": {
+			"applyAutomationRule": {
+				"loadingText": "Применяю автоправило",
+				"title": "Применить автоправило"
+			},
+			"applyAutomationRulesGroup": {
+				"loadingText": "Применить группу автоправил"
+			},
 			"attachCard": {
 				"cardNumber": "Номер карты",
 				"cvc": "CVC2/CVV2",
