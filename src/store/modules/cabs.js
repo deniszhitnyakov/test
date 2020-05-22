@@ -32,6 +32,8 @@ export default {
       rename: false,
       createPixel: false,
       unarchive: false,
+      notificationsOff: false,
+      notificationsOn: false,
     },
     emptyFilters: {
       name: '',

@@ -8,7 +8,8 @@
 				"changeBillingCountry": "Изменить страну биллинга",
 				"clearAllAutomationRules": "Снять все автоправила",
 				"createPixel": "Создать пиксель",
-				"turnOffNotifications": "Выключить уведомления"
+				"turnOffNotifications": "Выключить уведомления",
+				"turnOnNotifications": "Включить уведомления"
 			},
 			"filters": {
 				"active": "Активные",
@@ -233,6 +234,12 @@
 			},
 			"createPixel": {
 				"loadingText": "Создание пикселей"
+			},
+			"notificationsOff": {
+				"loadingText": "Выключаю уведомления"
+			},
+			"notificationsOn": {
+				"loadingText": "Включаю уведомления"
 			},
 			"rename": {
 				"loadingText": "Переименовываю кабинеты"

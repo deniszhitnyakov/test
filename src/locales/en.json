@@ -8,7 +8,8 @@
 				"changeBillingCountry": "Change billing country",
 				"clearAllAutomationRules": "Clear all automation rules",
 				"createPixel": "Create pixel",
-				"turnOffNotifications": "Turn notifications off"
+				"turnOffNotifications": "Turn notifications off",
+				"turnOnNotifications": "Turn notifications on"
 			},
 			"filters": {
 				"active": "Active",
@@ -233,6 +234,12 @@
 			},
 			"createPixel": {
 				"loadingText": "Creating pixels"
+			},
+			"notificationsOff": {
+				"loadingText": "Turning notifications off"
+			},
+			"notificationsOn": {
+				"loadingText": "Turning notifications on"
 			},
 			"rename": {
 				"loadingText": "Renaming cabs"

@@ -106,10 +106,20 @@
           <v-list-item-title>{{ $t('adsmanager.cabs.actions.createPixel') }}</v-list-item-title>
         </v-list-item>
 
+        <v-divider />
+
+        <!-- ВКЛЮЧИТЬ УВЕДОМЛЕНИЯ -->
+        <v-list-item
+          dense
+          @click="notificationsOn"
+        >
+          <v-list-item-title>{{ $t('adsmanager.cabs.actions.turnOnNotifications') }}</v-list-item-title>
+        </v-list-item>
+
         <!-- ОТКЛЮЧИТЬ УВЕДОМЛЕНИЯ -->
         <v-list-item
           dense
-          @click="alert('1111')"
+          @click="notificationsOff"
         >
           <v-list-item-title>{{ $t('adsmanager.cabs.actions.turnOffNotifications') }}</v-list-item-title>
         </v-list-item>
@@ -174,6 +184,18 @@ export default {
     unarchive() {
       if (confirm(this.$t('common.confirmPlease'))) {
         this.$store.dispatch('cabs/openDialog', 'unarchive');
+      }
+    },
+
+    notificationsOff() {
+      if (confirm(this.$t('common.confirmPlease'))) {
+        this.$store.dispatch('cabs/openDialog', 'notificationsOff');
+      }
+    },
+
+    notificationsOn() {
+      if (confirm(this.$t('common.confirmPlease'))) {
+        this.$store.dispatch('cabs/openDialog', 'notificationsOn');
       }
     }
   }
