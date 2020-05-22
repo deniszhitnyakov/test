@@ -101,9 +101,11 @@
 			"accounts": "Accounts",
 			"ads": "Ads",
 			"adsets": "Adsets",
+			"bms": "BMs",
 			"cabs": "Cabs",
 			"campaigns": "Campaigns",
 			"dates": "Dates",
+			"tags": "Tags",
 			"users": "Users"
 		}
 	},
@@ -151,6 +153,7 @@
 		"remove": "Remove",
 		"rename": "Rename",
 		"required": "Required",
+		"role": "Role",
 		"save": "Save",
 		"saved": "Saved",
 		"search": "Search",
@@ -163,6 +166,7 @@
 		"type": "Type",
 		"unarchive": "Unarchive",
 		"unselectAll": "Unselect all",
+		"user": "User",
 		"useragent": "Useragent",
 		"yes": "Yes"
 	},

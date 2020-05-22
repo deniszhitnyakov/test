@@ -61,28 +61,28 @@ export default {
         if(this.itIsTotalRow) {
           return (
             typeof this.stat['total'] !== 'undefined' &&
-                      typeof this.stat['total']['cr'] !== 'undefined'
+            typeof this.stat['total']['cr'] !== 'undefined'
           );
         }
 
         return (
           typeof this.stat[this.item.id] !== 'undefined' &&
-                    typeof this.stat[this.item.id]['cr'] !== 'undefined'
+          typeof this.stat[this.item.id]['cr'] !== 'undefined'
         ); 
       }
 
       if(this.itIsTotalRow) {
         return (
           typeof this.stat['total'] !== 'undefined' &&
-                    typeof this.stat['total']['actions'] !== 'undefined' &&
-                    typeof this.stat['total']['actions'][this.col] !== 'undefined'
+          typeof this.stat['total']['actions'] !== 'undefined' &&
+          typeof this.stat['total']['actions'][this.col] !== 'undefined'
         );
       }
 
       return (
         typeof this.stat[this.item.id] !== 'undefined' &&
-                    typeof this.stat[this.item.id]['actions'] !== 'undefined' &&
-                    typeof this.stat[this.item.id]['actions'][this.col] !== 'undefined' 
+        typeof this.stat[this.item.id]['actions'] !== 'undefined' &&
+        typeof this.stat[this.item.id]['actions'][this.col] !== 'undefined' 
       );
     }
   },

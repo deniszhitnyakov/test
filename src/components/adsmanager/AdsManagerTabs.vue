@@ -9,6 +9,9 @@
     <v-tab key="tab-users">
       {{ $t('adsmanager.tabs.users') }}
     </v-tab>
+    <v-tab key="tab-tags">
+      {{ $t('adsmanager.tabs.tags') }}
+    </v-tab>
     <v-tab key="tab-accounts">
       <v-badge
         color="red"
@@ -26,11 +29,14 @@
         {{ $t('adsmanager.tabs.accounts') }}
       </v-badge>
     </v-tab>
-    <v-tab key="tab-cabs">
-      {{ $t('adsmanager.tabs.cabs') }}
-    </v-tab>
     <v-tab key="tab-dates">
       {{ $t('adsmanager.tabs.dates') }}
+    </v-tab>
+    <v-tab key="tab-bms">
+      {{ $t('adsmanager.tabs.bms') }}
+    </v-tab>
+    <v-tab key="tab-cabs">
+      {{ $t('adsmanager.tabs.cabs') }}
     </v-tab>
     <v-tab key="tab-campaigns">
       {{ $t('adsmanager.tabs.campaigns') }}
@@ -58,7 +64,7 @@ export default {
   },
 
   data: () => ({
-    tabs: ['users', 'accounts', 'cabs', 'dates', 'campaigns', 'adsets', 'ads'],
+    tabs: ['users', 'tags', 'accounts', 'dates', 'bms', 'cabs',  'campaigns', 'adsets', 'ads'],
   }),
 
   methods: {

@@ -1,5 +1,5 @@
 <template>
-  <td v-if="show">
+  <td>
     <span
       v-if="show"
     >
