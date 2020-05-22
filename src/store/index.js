@@ -5,6 +5,7 @@ import accounts   from './modules/accounts.js';
 import adsmanager from './modules/adsmanager.js';
 import bundles    from './modules/bundles.js';
 import cabs       from './modules/cabs.js';
+import dates      from './modules/dates.js';
 import jobs       from './modules/jobs.js';
 import main       from './modules/main.js';
 import proxy      from './modules/proxy.js';
@@ -16,6 +17,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     adsmanager,
+    dates,
     main,
     jobs,
     bundles,

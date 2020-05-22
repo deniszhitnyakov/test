@@ -131,6 +131,7 @@
 		"conversionRate": "CR",
 		"country": "Country",
 		"cpa": "CPA",
+		"date": "Date",
 		"delete": "Delete",
 		"dolphinId": "Dolphin ID",
 		"existingProxy": "Existing Proxy",

@@ -57,6 +57,8 @@ export default {
     },
 
     show() {
+      if (!this.stat) return false;
+      
       if (this.col === 'action_results') {
         if(this.itIsTotalRow) {
           return (

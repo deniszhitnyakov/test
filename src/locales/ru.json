@@ -131,6 +131,7 @@
 		"conversionRate": "CR",
 		"country": "Страна",
 		"cpa": "CPA",
+		"date": "Дата",
 		"delete": "Удалить",
 		"dolphinId": "Dolphin ID",
 		"existingProxy": "Существующий прокси",
