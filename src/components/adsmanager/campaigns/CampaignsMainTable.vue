@@ -80,6 +80,11 @@
                     :col="col"
                     :item="item"
                   />
+                  <billing-cell
+                    v-if="col === 'billing'"
+                    :key="`stat-col-${col}`"
+                    :cab="item.cab"
+                  />
                 </template>
               </tr>
 
@@ -113,6 +118,12 @@
                     :col="col"
                     it-is-total-row
                   />
+                  <td
+                    v-if="col === 'billing'"
+                    :key="`stat-col-${col}-total`"
+                  >
+                    &nbsp;
+                  </td>
                 </template>
               </tr>
             </tbody>
@@ -132,6 +143,7 @@ import specialCols                                                from '../../..
 import customSort                                                 from '../../../mixins/adsmanager/custom_sort';
 import makeCols                                                   from '../../../mixins/adsmanager/make_cols';  
 import selectItems                                                from '../../../mixins/adsmanager/select_items';  
+import BillingCell                                                from '../stat-cells/AdsManagerBillingCell';
 import ComplexStatCellCpa                                         from '../stat-cells/AdsManagerComplexStatCellCpa';
 import ComplexStatCellCr                                          from '../stat-cells/AdsManagerComplexStatCellCr';
 import ComplexStatCellQuantity                                    from '../stat-cells/AdsManagerComplexStatCellQuantity';
@@ -141,6 +153,7 @@ export default {
   name: 'CampaignsMainTable',
 
   components: {
+    BillingCell,
     ComplexStatCellQuantity,
     ComplexStatCellCr,
     ComplexStatCellCpa,
