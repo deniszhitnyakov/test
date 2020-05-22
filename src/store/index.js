@@ -2,6 +2,7 @@ import Vuex       from 'vuex';
 import Vue        from 'vue';
 
 import accounts   from './modules/accounts.js';
+import adsets     from './modules/adsets.js';
 import adsmanager from './modules/adsmanager.js';
 import bundles    from './modules/bundles.js';
 import cabs       from './modules/cabs.js';
@@ -17,6 +18,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
+    adsets,
     adsmanager,
     campaigns,
     dates,
