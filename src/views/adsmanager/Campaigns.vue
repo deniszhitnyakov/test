@@ -1,11 +1,17 @@
 <template>
   <div>
-    campaigns
+    <topbar />
   </div>
 </template>
 
 <script>
+import Topbar from '../../components/adsmanager/campaigns/CampaignsTopbar';
+
 export default {
-  name: 'Campaigns'
+  name: 'Campaigns',
+
+  components: {
+    Topbar
+  }
 };
 </script>

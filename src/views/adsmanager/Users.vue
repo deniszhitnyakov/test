@@ -1,11 +1,17 @@
 <template>
   <div>
-    users
+    <topbar />
   </div>
 </template>
 
 <script>
+import Topbar from '../../components/adsmanager/users/UsersTopbar';
+
 export default {
-  name: 'Users'
+  name: 'Users',
+
+  components: {
+    Topbar
+  }
 };
 </script>

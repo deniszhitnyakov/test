@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import Topbar from '../../components/adsmanager/adsets/AdsetsTopbar';
+import Topbar from '../../components/adsmanager/dates/DatesTopbar';
 
 export default {
-  name: 'Adsets',
+  name: 'Dates',
 
   components: {
     Topbar
