@@ -139,4 +139,8 @@ export default {
     bottom: 0;
     right: 0;
   }
+
+  .v-application .elevation-1 {
+    box-shadow: none !important;
+  }
 </style>
