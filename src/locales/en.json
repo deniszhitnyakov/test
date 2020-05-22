@@ -112,6 +112,7 @@
 	"common": {
 		"access_token": "Access token",
 		"account": "Account",
+		"ad": "Ad",
 		"add": "Add",
 		"adset": "Adset",
 		"all": "All",

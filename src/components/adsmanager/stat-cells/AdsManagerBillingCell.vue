@@ -89,8 +89,14 @@ export default {
 
   props: {
     cab: {
-      type: Object,
-      default: () => ({})
+      type: [Object, Array],
+      default: () => ({
+        card_number: null,
+        card_type: null,
+        balance: 0,
+        billing: 0,
+        cab_limit: 0,
+      })
     },
   },
 

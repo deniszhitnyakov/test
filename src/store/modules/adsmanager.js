@@ -11,8 +11,8 @@ export default {
   namespaced: true,
   state: {
     activeTab: {
-      tab: 5,
-      component: 'adsets',
+      tab: 6,
+      component: 'ads',
     },
     filters: {
       tags:
