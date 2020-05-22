@@ -132,9 +132,11 @@
         >
           <v-list-item-title>{{ $t('adsmanager.cabs.actions.applyAutomationRule') }}</v-list-item-title>
         </v-list-item>
+
+        <!-- ПРИМЕНИТЬ ГРУППУ АВТОПРАВИЛ -->
         <v-list-item
           dense
-          @click="alert('1111')"
+          @click="$store.dispatch('cabs/openDialog', 'applyAutomationRulesGroup')"
         >
           <v-list-item-title>{{ $t('adsmanager.cabs.actions.applyAutomationRulesGroup') }}</v-list-item-title>
         </v-list-item>

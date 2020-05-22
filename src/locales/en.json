@@ -119,6 +119,7 @@
 		"archived": "Archived",
 		"attach": "Attach",
 		"automationRule": "Automation rule",
+		"automationRulesGroup": "Automation rules group",
 		"bm": "Business Manager",
 		"cab": "Cabinet",
 		"clear": "Clear",
@@ -227,7 +228,8 @@
 				"title": "Apply automation rule"
 			},
 			"applyAutomationRulesGroup": {
-				"loadingText": "Apply automation rules group"
+				"loadingText": "Apply automation rules group",
+				"title": "Apply automation rules group"
 			},
 			"attachCard": {
 				"cardNumber": "Card number",

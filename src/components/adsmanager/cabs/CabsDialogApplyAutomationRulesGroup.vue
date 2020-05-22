@@ -16,7 +16,7 @@
         <v-card-text>
           <div style="display: flex; justify-content: space-between;">
             <div>
-              {{ $t('dialogs.cabs.applyAutomationRule.loadingText') }}
+              {{ $t('dialogs.cabs.applyAutomationRulesGroup.loadingText') }}
             </div>
             <div>
               {{ done }} / {{ cabs.selected.length }}
@@ -42,7 +42,7 @@
       <v-card :loading="false">
         <v-card-title>
           <span class="headline">
-            {{ $t('dialogs.cabs.applyAutomationRule.title') }}
+            {{ $t('dialogs.cabs.applyAutomationRulesGroup.title') }}
           </span>
         </v-card-title>
         <v-card-text style="max-height: 700px;">
@@ -52,9 +52,9 @@
                 cols="12"
               >
                 <v-combobox
-                  v-model="rule"
-                  :label="$t('common.automationRule')"
-                  :items="rules"
+                  v-model="group"
+                  :label="$t('common.automationRulesGroup')"
+                  :items="rulesGroups"
                   item-value="id"
                   item-text="name"
                   dense
@@ -69,15 +69,15 @@
           <v-btn
             color="blue darken-1"
             text
-            @click="$store.dispatch('cabs/closeDialog', 'applyAutomationRule')"
+            @click="$store.dispatch('cabs/closeDialog', 'applyAutomationRulesGroup')"
           >
             {{ $t('common.close') }}
           </v-btn>
           <v-btn
             color="blue darken-1"
             text
-            :disabled="!rule"
-            @click="applyAutomationRule"
+            :disabled="!group"
+            @click="applyAutomationRulesGroup"
           >
             {{ $t('common.apply') }}
           </v-btn>
@@ -91,15 +91,15 @@
 import {mapGetters} from 'vuex';
 
 export default {
-  name: 'CabsDialogApplyAutomationRule',
+  name: 'CabsDialogApplyAutomationRulesGroup',
 
   data() {
     return {
       showModal: true,
       showLoading: false,
       done: 0,
-      rules: [],
-      rule: null,
+      rulesGroups: [],
+      group: null,
     };
   },
 
@@ -111,35 +111,35 @@ export default {
   },
 
   created() {
-    this.loadRules();
+    this.loadRulesGroups();
   },
 
   methods: {
-    async loadRules() {
-      const response = await this.api('/automation_rules');
-      this.rules = response.data.data;
+    async loadRulesGroups() {
+      const response = await this.api('/automation_rules_groups');
+      this.rulesGroups = response.data.data;
     },
 
-    applyAutomationRule() {
+    applyAutomationRulesGroup() {
       this.showModal = false;
       this.showLoading = true;
 
-      if (Array.isArray(this.cabs.selected) && this.rule) {
+      if (Array.isArray(this.cabs.selected) && this.group) {
         this.cabs.selected.forEach(async (cab) => {
-          const data = {id: cab.id, rule_id: this.rule.id};
-          await this.api.post('/cabs/apply_automation_rule', data)
+          const data = {id: cab.id, group_id: this.group.id};
+          await this.api.post('/cabs/apply_automation_rules_group', data)
             .catch(() => true);
           this.done++;
           
           if (this.done === this.cabs.selected.length) {
             this.showLoading = false;
-            this.$store.dispatch('cabs/closeDialog', 'applyAutomationRule');
+            this.$store.dispatch('cabs/closeDialog', 'applyAutomationRulesGroup');
             this.$store.dispatch('cabs/loadCabs');
           }
         });
       } else {
         this.showLoading = false;
-        this.$store.dispatch('cabs/closeDialog', 'applyAutomationRule');
+        this.$store.dispatch('cabs/closeDialog', 'applyAutomationRulesGroup');
       }
     },
   }

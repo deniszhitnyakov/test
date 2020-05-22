@@ -119,6 +119,7 @@
 		"archived": "Архивированные",
 		"attach": "Привязать",
 		"automationRule": "Автоправило",
+		"automationRulesGroup": "Группа автоправил",
 		"bm": "БМ",
 		"cab": "Кабинет",
 		"clear": "Очистить",
@@ -227,7 +228,8 @@
 				"title": "Применить автоправило"
 			},
 			"applyAutomationRulesGroup": {
-				"loadingText": "Применить группу автоправил"
+				"loadingText": "Применить группу автоправил",
+				"title": "Применить группу автоправил"
 			},
 			"attachCard": {
 				"cardNumber": "Номер карты",
