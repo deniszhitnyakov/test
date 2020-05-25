@@ -125,8 +125,26 @@
       </v-badge>
     </v-tab>
 
+    <!-- ОБЪЯВЛЕНИЯ -->
     <v-tab key="tab-ads">
-      {{ $t('adsmanager.tabs.ads') }}
+      <v-badge
+        color="red"
+        inline
+        tile
+        :content="ads.selected.length"
+        :value="ads.selected.length"
+      >
+        <template #badge>
+          {{ ads.selected.length }}
+          <!-- <v-icon
+            style="margin-top: -2px;"
+            @click="clickedOnClear = true; $store.dispatch('users/clearSelected')"
+          >
+            close
+          </v-icon> -->
+        </template>
+        {{ $t('adsmanager.tabs.ads') }}
+      </v-badge>
     </v-tab>
   </v-tabs>
 </template>
