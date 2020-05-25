@@ -49,12 +49,28 @@ export default {
   actions: {
     ...mixinDialogActions,
 
-    async loadCampaigns(context) {
-      const response = await this._vm.api('/campaigns');
+    async loadCampaigns({commit, rootState, dispatch}) {
+      const data = {
+        users_ids: rootState.users.users.all.length === 0 ?
+          -1 : rootState.users.users.selected.length > 0 ?
+            rootState.users.users.selected.map(user => user.id) : 
+            rootState.users.users.filtered.map(user => user.id),
+        accounts_ids: rootState.accounts.accounts.all.length === 0 ?
+          -1 : rootState.accounts.accounts.selected.length > 0 ?
+            rootState.accounts.accounts.selected.map(account => account.id) : 
+            rootState.accounts.accounts.filtered.map(account => account.id),
+        cabs_ids: rootState.cabs.cabs.all.length === 0 ?
+          -1 : rootState.cabs.cabs.selected.length > 0 ?
+            rootState.cabs.cabs.selected.map(cab => cab.id) :
+            rootState.cabs.cabs.filtered.map(cab => cab.id)
+      };
+      console.log(data);
+      
+      const response = await this._vm.api.post('/campaigns', data);
       if (response.data.success) {
-        context.commit('SET_ALL', response.data.data);
-        context.commit('FILTER');
-        context.dispatch('loadStat');
+        commit('SET_ALL', response.data.data);
+        commit('FILTER');
+        dispatch('loadStat');
       }
     },
 
