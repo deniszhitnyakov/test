@@ -52,6 +52,7 @@ export default {
     ...mapGetters({
       dialogs: 'accounts/dialogs',
       globalFilters: 'adsmanager/filters',
+      accounts: 'accounts/accounts'
     })
   },
 
@@ -63,6 +64,18 @@ export default {
         this.$store.dispatch('accounts/loadStat');
       }
     },
+
+    'accounts.selected': {
+      deep: true,
+      handler(newVal, oldVal) {
+        if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+          this.$store.dispatch('cabs/clearSelected');
+          this.$store.dispatch('campaigns/clearSelected');
+          this.$store.dispatch('adsets/clearSelected');
+          this.$store.dispatch('ads/clearSelected');
+        }
+      }
+    }
   },
   
   created() {

@@ -64,7 +64,8 @@ export default {
       accounts: 'accounts/filtered',
       globalFilters: 'adsmanager/filters',
       filters: 'cabs/filters',
-      dialogs: 'cabs/dialogs'
+      dialogs: 'cabs/dialogs',
+      cabs: 'cabs/cabs'
     })
   },
 
@@ -87,6 +88,17 @@ export default {
       deep: true,
       handler() {
         this.filterCabs();
+      }
+    },
+
+    'cabs.selected': {
+      deep: true,
+      handler(newVal, oldVal) {
+        if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+          this.$store.dispatch('campaigns/clearSelected');
+          this.$store.dispatch('adsets/clearSelected');
+          this.$store.dispatch('ads/clearSelected');
+        }
       }
     }
   },

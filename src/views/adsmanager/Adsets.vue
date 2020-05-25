@@ -6,8 +6,10 @@
 </template>
 
 <script>
-import MainTable from '../../components/adsmanager/adsets/AdsetsMainTable';
-import Topbar    from '../../components/adsmanager/adsets/AdsetsTopbar';
+import {mapGetters} from 'vuex';
+
+import MainTable    from '../../components/adsmanager/adsets/AdsetsMainTable';
+import Topbar       from '../../components/adsmanager/adsets/AdsetsTopbar';
 
 export default {
   name: 'Adsets',
@@ -21,6 +23,23 @@ export default {
     return {
       updateInterval: null,
     };
+  },
+
+  computed: {
+    ...mapGetters({
+      adsets: 'adsets/adsets'
+    })
+  },
+
+  watch: {
+    'adsets.selected': {
+      deep: true,
+      handler(newVal, oldVal) {
+        if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+          this.$store.dispatch('ads/clearSelected');
+        }
+      }
+    }
   },
 
   created() {

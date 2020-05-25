@@ -115,5 +115,9 @@ export default {
     async saveSelected(context, data) {
       context.commit('SET_SELECTED', data);
     },
+
+    async clearSelected(context) {
+      context.commit('SET_SELECTED', []);
+    }
   }
 };

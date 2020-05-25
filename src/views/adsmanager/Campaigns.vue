@@ -6,8 +6,10 @@
 </template>
 
 <script>
-import MainTable from '../../components/adsmanager/campaigns/CampaignsMainTable';
-import Topbar    from '../../components/adsmanager/campaigns/CampaignsTopbar';
+import {mapGetters} from 'vuex';
+
+import MainTable    from '../../components/adsmanager/campaigns/CampaignsMainTable';
+import Topbar       from '../../components/adsmanager/campaigns/CampaignsTopbar';
 
 export default {
   name: 'Campaigns',
@@ -21,6 +23,24 @@ export default {
     return {
       updateInterval: null,
     };
+  },
+
+  computed: {
+    ...mapGetters({
+      campaigns: 'campaigns/campaigns'
+    })
+  },
+
+  watch: {
+    'campaigns.selected': {
+      deep: true,
+      handler(newVal, oldVal) {
+        if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+          this.$store.dispatch('adsets/clearSelected');
+          this.$store.dispatch('ads/clearSelected');
+        }
+      }
+    }
   },
 
   created() {

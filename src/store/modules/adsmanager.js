@@ -10,10 +10,8 @@ import {
 export default {
   namespaced: true,
   state: {
-    activeTab: {
-      tab: 6,
-      component: 'ads',
-    },
+    activeTab: localStorage.getItem('adsmanager-active-tab') ?
+      JSON.parse(localStorage.getItem('adsmanager-active-tab')) : {tab: 1, component: 'accounts'},
     filters: {
       tags:
         typeof localStorage.getItem('adsmanager-filters-tags') === 'undefined'
@@ -48,6 +46,7 @@ export default {
 
     SET_ACTIVE_TAB: (state, tab) => {
       state.activeTab = tab;
+      localStorage.setItem('adsmanager-active-tab', JSON.stringify(tab));
     },
 
     SET_FILTERS_TAGS: (state, tags) => {

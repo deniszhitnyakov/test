@@ -76,7 +76,7 @@ export default {
         adsets_ids: rootState.adsets.adsets.selected.length > 0 ?
           rootState.adsets.adsets.selected.map(adset => adset.id) :
           rootState.adsets.adsets.all.length === 0 ?
-            -1: rootState.campaigns.campaigns.filtered.map(campaign => campaign.id)
+            -1: rootState.adsets.adsets.filtered.map(adset => adset.id)
       };
 
       const response = await this._vm.api.post('/ads', data);
@@ -119,5 +119,9 @@ export default {
     async saveSelected(context, data) {
       context.commit('SET_SELECTED', data);
     },
+
+    async clearSelected(context) {
+      context.commit('SET_SELECTED', []);
+    }
   }
 };

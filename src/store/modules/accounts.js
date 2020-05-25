@@ -48,6 +48,7 @@ export default {
     stat: state => state.stat,
     selected: state => state.accounts.selected,
     filtered: state => state.accounts.filtered,
+    accounts: state => state.accounts,
   },
   mutations: {
     ...mixinDialogMutations,
@@ -521,7 +522,7 @@ export default {
     },
 
     async clearSelected(context) {
-      context.commit('CLEAR_SELECTED_ACCOUNTS');
+      context.commit('SET_SELECTED', []);
     }
   }
 };

@@ -36,15 +36,7 @@ export default {
     })
   },
 
-  // watch: {
-  //   'adsets.selected': {
-  //     deep: true,
-      
-  //   }
-  // },
-
   created() {
-    console.log(this.adsets.selected);
     this.$store.dispatch('ads/loadAds');
     this.updateInterval = setInterval(() => {
       this.$store.dispatch('ads/loadAds');

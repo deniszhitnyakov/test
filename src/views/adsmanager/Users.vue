@@ -34,9 +34,14 @@ export default {
   watch: {
     'users.selected': {
       deep: true,
-      handler() {
-        this.$store.dispatch('accounts/clearSelected');
-        this.$store.dispatch('cabs/clearSelected');
+      handler(newVal, oldVal) {
+        if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+          this.$store.dispatch('accounts/clearSelected');
+          this.$store.dispatch('cabs/clearSelected');
+          this.$store.dispatch('campaigns/clearSelected');
+          this.$store.dispatch('adsets/clearSelected');
+          this.$store.dispatch('ads/clearSelected');
+        }
       }
     }
   },
