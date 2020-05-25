@@ -216,14 +216,14 @@ export default {
       });
 
       const data = {
-        users_ids: rootState.users.users.all.length === 0 ?
-          -1 : rootState.users.users.selected.length > 0 ?
-            rootState.users.users.selected.map(user => user.id) :
-            rootState.users.users.filtered.map(user => user.id),
-        accounts_ids: rootState.accounts.accounts.all.length === 0 ?
-          -1 : rootState.accounts.accounts.selected.length > 0 ?
-            rootState.accounts.accounts.selected.map(account => account.id) : 
-            rootState.accounts.accounts.filtered.map(account => account.id)
+        users_ids: rootState.users.users.selected.length > 0 ?
+          rootState.users.users.selected.map(user => user.id) :
+          rootState.users.users.all.length === 0 ?
+            -1 : rootState.users.users.filtered.map(user => user.id),
+        accounts_ids: rootState.accounts.accounts.selected.length > 0 ?
+          rootState.accounts.accounts.selected.map(account => account.id) :
+          rootState.accounts.accounts.all.length === 0 ?
+            -1 : rootState.accounts.accounts.filtered.map(account => account.id),
       };
       const response = await this._vm.api.post('/cabs', data).catch((e) => {
         dispatch('main/apiError', e, {

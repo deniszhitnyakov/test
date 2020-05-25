@@ -57,22 +57,22 @@ export default {
 
     async loadAdsets({commit, dispatch, rootState}) {
       const data = {
-        users_ids: rootState.users.users.all.length === 0 ?
-          -1 : rootState.users.users.selected.length > 0 ?
-            rootState.users.users.selected.map(user => user.id) : 
-            rootState.users.users.filtered.map(user => user.id),
-        accounts_ids: rootState.accounts.accounts.all.length === 0 ?
-          -1 : rootState.accounts.accounts.selected.length > 0 ?
-            rootState.accounts.accounts.selected.map(account => account.id) : 
-            rootState.accounts.accounts.filtered.map(account => account.id),
-        cabs_ids: rootState.cabs.cabs.all.length === 0 ?
-          -1 : rootState.cabs.cabs.selected.length > 0 ?
-            rootState.cabs.cabs.selected.map(cab => cab.id) : 
-            rootState.cabs.cabs.filtered.map(cab => cab.id),
-        campaigns_ids: rootState.campaigns.campaigns.all.length === 0 ?
-          -1 : rootState.campaigns.campaigns.selected.length > 0 ?
-            rootState.campaigns.campaigns.selected.map(campaign => campaign.id) : 
-            rootState.campaigns.campaigns.filtered.map(campaign => campaign.id)
+        users_ids: rootState.users.users.selected.length > 0 ?
+          rootState.users.users.selected.map(user => user.id) :
+          rootState.users.users.all.length === 0 ?
+            -1 : rootState.users.users.filtered.map(user => user.id),
+        accounts_ids: rootState.accounts.accounts.selected.length > 0 ?
+          rootState.accounts.accounts.selected.map(account => account.id) :
+          rootState.accounts.accounts.all.length === 0 ?
+            -1 : rootState.accounts.accounts.filtered.map(account => account.id),
+        cabs_ids: rootState.cabs.cabs.selected.length > 0 ?
+          rootState.cabs.cabs.selected.map(cab => cab.id) :
+          rootState.cabs.cabs.all.length === 0 ?
+            -1 : rootState.cabs.cabs.filtered.map(cab => cab.id),
+        campaigns_ids: rootState.campaigns.campaigns.selected.length > 0 ?
+          rootState.campaigns.campaigns.selected.map(campaign => campaign.id) :
+          rootState.campaigns.campaigns.all.length === 0 ?
+            -1 : rootState.campaigns.campaigns.filtered.map(campaign => campaign.id),
       };
       
       const response = await this._vm.api.post('/adsets', data);

@@ -159,9 +159,10 @@ export default {
     LOAD_ACCOUNTS({commit, rootState, dispatch}) {
       commit('SET_LOADING', {param: 'mainTable', value: true});
       const data = {
-        users_ids: rootState.users.users.selected ? 
-          rootState.users.users.selected.map(user => user.id) : rootState.users.users.filtered ?
-            rootState.users.users.filtered.map(user => user.id) : null
+        users_ids: rootState.users.users.selected.length > 0 ?
+          rootState.users.users.selected.map(user => user.id) :
+          rootState.users.users.all.length === 0 ?
+            -1 : rootState.users.users.filtered.map(user => user.id),
       };
       this._vm.api.post('/accounts', data).then(response => {
         commit('SET_ALL_ACCOUNTS', response.data.data);
