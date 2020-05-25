@@ -64,7 +64,6 @@ export default {
             rootState.cabs.cabs.selected.map(cab => cab.id) :
             rootState.cabs.cabs.filtered.map(cab => cab.id)
       };
-      console.log(data);
       
       const response = await this._vm.api.post('/campaigns', data);
       if (response.data.success) {
