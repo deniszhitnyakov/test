@@ -65,7 +65,7 @@ export default {
     SET_FILTERED_ACCOUNTS: (state, payload) => {
       state.accounts.filtered = payload;
     },
-    SET_SELECTED_ACCOUNTS: (state, payload) => {
+    SET_SELECTED: (state, payload) => {
       state.accounts.selected = payload;
     },
     DELETE_ACCOUNTS: (state, payload) => {
@@ -156,7 +156,12 @@ export default {
 
     LOAD_ACCOUNTS({commit, rootState, dispatch}) {
       commit('SET_LOADING', {param: 'mainTable', value: true});
-      this._vm.api('/accounts').then(response => {
+      const data = {
+        users_ids: rootState.users.users.selected ? 
+          rootState.users.users.selected.map(user => user.id) : rootState.users.users.filtered ?
+            rootState.users.users.filtered.map(user => user.id) : null
+      };
+      this._vm.api.post('/accounts', data).then(response => {
         commit('SET_ALL_ACCOUNTS', response.data.data);
         commit('FILTER_ACCOUNTS', rootState.adsmanager.filters);
         commit('SET_LOADING', {
@@ -167,8 +172,8 @@ export default {
       });
     },
 
-    SAVE_SELECTED_ACCOUNTS(context, payload) {
-      context.commit('SET_SELECTED_ACCOUNTS', payload);
+    saveSelected(context, payload) {
+      context.commit('SET_SELECTED', payload);
     },
 
     async setFiltersName(context, payload) {
@@ -474,7 +479,7 @@ export default {
     },
 
     async saveSelectedAccounts(context, accounts) {
-      context.commit('SET_SELECTED_ACCOUNTS', accounts);
+      context.commit('SET_SELECTED', accounts);
     },
 
     async saveMultiplePermissions(context, data) {

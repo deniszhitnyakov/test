@@ -6,6 +6,7 @@
 </template>
 
 <script>
+
 import MainTable from '../../components/adsmanager/ads/AdsMainTable';
 import Topbar    from '../../components/adsmanager/ads/AdsTopbar';
 

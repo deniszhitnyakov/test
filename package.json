@@ -39,8 +39,15 @@
     "@vue/cli-plugin-eslint": "~4.3.0",
     "@vue/cli-service": "~4.3.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
+    "babel-plugin-syntax-flow": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "eslint": "^6.8.0",
+    "eslint-config-vue": "^2.0.2",
+    "eslint-plugin-flowtype-errors": "^4.3.0",
+    "eslint-plugin-html": "^6.0.2",
     "eslint-plugin-vue": "^6.2.2",
+    "flow-bin": "^0.125.1",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
     "vue-cli-plugin-i18n": "~0.6.1",
@@ -54,7 +61,9 @@
       "node": true
     },
     "plugins": [
-      "arca"
+      "arca",
+      "html",
+      "flowtype-errors"
     ],
     "extends": [
       "plugin:vue/recommended",
@@ -85,7 +94,8 @@
       ],
       "arca/import-align": 2,
       "arca/import-ordering": 2,
-      "arca/newline-after-import-section": 2
+      "arca/newline-after-import-section": 2,
+      "flowtype-errors/show-errors": 2
     }
   },
   "browserslist": [

@@ -46,6 +46,10 @@ export default {
     SET_STAT: (state, stat) => {
       state.stat = stat;
     },
+
+    SET_SELECTED: (state, data) => {
+      state.users.selected = data;
+    }
   },
   actions: {
     ...mixinDialogActions,
@@ -79,8 +83,6 @@ export default {
         });
       });
 
-      console.log(response.data);
-
       commit('SET_LOADING', {
         param: 'mainTable',
         value: false,
@@ -88,5 +90,13 @@ export default {
 
       commit('SET_STAT', response.data.data);
     },
+
+    async saveSelected(context, data) {
+      context.commit('SET_SELECTED', data);
+    },
+
+    async clearSelected({commit}) {
+      commit('SET_SELECTED', []);
+    }
   }
 };

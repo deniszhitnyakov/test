@@ -4,7 +4,7 @@
       <v-card-text style="padding: 0px 8px 0px 8px">
         <!-- ТАБЛИЦА -->
         <v-data-table
-          v-model="selected"
+          :value="selected"
           :headers="cols"
           :items="accounts.filtered"
           :loading="loading.mainTable"
@@ -16,6 +16,7 @@
           class="elevation-1 stat-table stat-table-accounts"
           :custom-sort="customSort"
           :footer-props="{'items-per-page-options': [10, 30, 50, 100, -1]}"
+          @item-selected="selectItem"
         >
           <template #header.data-table-select="{ on , props }">
             <v-simple-checkbox
@@ -38,9 +39,9 @@
                     <v-simple-checkbox
                       v-ripple
                       color="primary"
-                      :value="typeof selected.find(account => account.id === item.id) !== 'undefined'"
+                      :value="typeof accounts.selected.find(account => account.id === item.id) !== 'undefined'"
                       style="width: 48px; text-align: center;"
-                      @input="selectAccount($event, item)"
+                      @input="selectItem(item, $event)"
                     />
                   </div>
                 </td>
@@ -119,19 +120,20 @@
 </template>
 
 <script>
-import { mapGetters }                                       from 'vuex';
+import { mapGetters }                                             from 'vuex';
 
-import actionCols                                           from '../../../constants/adsmanager/action_cols';
-import commonCols                                           from '../../../constants/adsmanager/common_cols';
-import customSort                                           from '../../../mixins/adsmanager/custom_sort';
-import makeCols                                             from '../../../mixins/adsmanager/make_cols';
-import ComplexStatCellCpa                                   from '../stat-cells/AdsManagerComplexStatCellCpa';
-import ComplexStatCellCr                                    from '../stat-cells/AdsManagerComplexStatCellCr';
-import ComplexStatCellQuantity                              from '../stat-cells/AdsManagerComplexStatCellQuantity';
-import SimpleStatCell                                       from '../stat-cells/AdsManagerSimpleStatCell';
+import actionCols                                                 from '../../../constants/adsmanager/action_cols';
+import commonCols                                                 from '../../../constants/adsmanager/common_cols';
+import customSort                                                 from '../../../mixins/adsmanager/custom_sort';
+import makeCols                                                   from '../../../mixins/adsmanager/make_cols';
+import selectItems                                                from '../../../mixins/adsmanager/select_items';  
+import ComplexStatCellCpa                                         from '../stat-cells/AdsManagerComplexStatCellCpa';
+import ComplexStatCellCr                                          from '../stat-cells/AdsManagerComplexStatCellCr';
+import ComplexStatCellQuantity                                    from '../stat-cells/AdsManagerComplexStatCellQuantity';
+import SimpleStatCell                                             from '../stat-cells/AdsManagerSimpleStatCell';
 
-import AccountsMainTableInfo                                from './AccountsMainTableInfo';
-import AccountsMainTableStatus                              from './AccountsMainTableStatus';
+import AccountsMainTableInfo                                      from './AccountsMainTableInfo';
+import AccountsMainTableStatus                                    from './AccountsMainTableStatus';
 
 export default {
   components: {
@@ -143,15 +145,20 @@ export default {
     ComplexStatCellCpa
   },
 
-  mixins: [makeCols, customSort],
+  mixins: [
+    makeCols, 
+    customSort,
+    selectItems
+  ],
 
   data: function() {
     return ({
-      selected: [],
+      // selected: [],
       cols: [],
       nativeCols: [],
       commonCols,
       actionCols,
+      level: 'accounts'
     });
   },
 
@@ -162,27 +169,11 @@ export default {
       innerHeight: 'main/innerHeight',
       profile: 'main/profile',
       stat: 'accounts/stat',
+      selected: 'accounts/selected'
     }),
   },
 
   watch: {
-    selected: {
-      deep: true,
-      handler() {
-        this.$store.dispatch('accounts/saveSelectedAccounts', this.selected);
-      }
-    },
-
-    'accounts.selected': {
-      deep: true,
-      handler() {
-        if (JSON.stringify(this.selected) !== JSON.stringify(this.accounts.selected)) {
-          this.selected = [];
-          this.selected = this.selected.concat(this.accounts.selected);
-        }
-      }
-    },
-
     profile: {
       deep: true,
       handler(newProfile, oldProfile) {
@@ -216,19 +207,6 @@ export default {
     this.cols = this.cols.concat(this.nativeCols);
     this.cols = this.cols.concat(statCols);
   },
-
-  methods: {
-    selectAccount(state, account) {
-      if (state === true) {
-        this.selected.push(account);
-      } else {
-        this.selected = this.selected.filter(a => {
-          if (a.id === account.id) return false;
-          return true;
-        });
-      }
-    },
-  }
 };
 </script>
 <style>
