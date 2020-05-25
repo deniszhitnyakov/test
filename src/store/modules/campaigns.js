@@ -45,6 +45,10 @@ export default {
     SET_STAT: (state, stat) => {
       state.stat = stat;
     },
+
+    SET_SELECTED: (state, data) => {
+      state.campaigns.selected = data;
+    }
   },
   actions: {
     ...mixinDialogActions,
@@ -99,6 +103,10 @@ export default {
       });
 
       commit('SET_STAT', response.data.data);
+    },
+
+    async saveSelected(context, data) {
+      context.commit('SET_SELECTED', data);
     },
   }
 };

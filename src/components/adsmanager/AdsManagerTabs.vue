@@ -81,9 +81,28 @@
       </v-badge>
     </v-tab>
 
+    <!-- КАМПАНИИ -->
     <v-tab key="tab-campaigns">
-      {{ $t('adsmanager.tabs.campaigns') }}
+      <v-badge
+        color="red"
+        inline
+        tile
+        :content="campaigns.selected.length"
+        :value="campaigns.selected.length"
+      >
+        <template #badge>
+          {{ campaigns.selected.length }}
+          <!-- <v-icon
+            style="margin-top: -2px;"
+            @click="clickedOnClear = true; $store.dispatch('users/clearSelected')"
+          >
+            close
+          </v-icon> -->
+        </template>
+        {{ $t('adsmanager.tabs.campaigns') }}
+      </v-badge>
     </v-tab>
+
     <v-tab key="tab-adsets">
       {{ $t('adsmanager.tabs.adsets') }}
     </v-tab>
@@ -110,6 +129,9 @@ export default {
       users: 'users/users',
       accounts: 'accounts/ACCOUNTS',
       cabs: 'cabs/cabs',
+      campaigns: 'campaigns/campaigns',
+      adsets: 'adsets/adsets',
+      ads: 'ads/ads',
     })
   },
 

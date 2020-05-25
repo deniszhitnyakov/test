@@ -12,14 +12,14 @@ export default {
           return true;
         });
       }
-      this.$store.dispatch(`${this.level}/saveSelected`, selected);
+      this.$store.dispatch(`${this.$store.state.adsmanager.activeTab.component}/saveSelected`, selected);
     },
 
     selectAll() {
       if (arguments[0]['value']) {
-        this.$store.dispatch(`${this.level}/saveSelected`, arguments[0]['items']);
+        this.$store.dispatch(`${this.$store.state.adsmanager.activeTab.component}/saveSelected`, arguments[0]['items']);
       } else {
-        this.$store.dispatch(`${this.level}/saveSelected`, []);
+        this.$store.dispatch(`${this.$store.state.adsmanager.activeTab.component}/saveSelected`, []);
       }
     }
   }

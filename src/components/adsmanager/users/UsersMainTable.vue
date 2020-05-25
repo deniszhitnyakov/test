@@ -159,7 +159,6 @@ export default {
       commonCols,
       specialCols,
       cols: [],
-      level: 'users',
     };
   },
 

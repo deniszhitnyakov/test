@@ -158,7 +158,6 @@ export default {
       nativeCols: [],
       commonCols,
       actionCols,
-      level: 'accounts'
     });
   },
 

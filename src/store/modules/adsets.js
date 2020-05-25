@@ -68,6 +68,8 @@ export default {
             rootState.campaigns.campaigns.selected.map(campaign => campaign.id) : 
             rootState.campaigns.campaigns.filtered.map(campaign => campaign.id)
       };
+
+      console.log(data);
       
       const response = await this._vm.api.post('/adsets', data);
 
