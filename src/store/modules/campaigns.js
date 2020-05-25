@@ -14,7 +14,8 @@ export default {
   state: {
     campaigns: {
       all: [],
-      selected: [],
+      selected: localStorage.getItem('adsmanager-campaigns-selected') ?
+        JSON.parse(localStorage.getItem('adsmanager-campaigns-selected')) : [],
       filtered: [],
     },
     loading: {
@@ -48,6 +49,7 @@ export default {
 
     SET_SELECTED: (state, data) => {
       state.campaigns.selected = data;
+      localStorage.setItem('adsmanager-campaigns-selected', JSON.stringify(data));
     }
   },
   actions: {

@@ -7,7 +7,8 @@ export default {
   state: {
     accounts: {
       all: [],
-      selected: [],
+      selected: localStorage.getItem('adsmanager-accounts-selected') ?
+        JSON.parse(localStorage.getItem('adsmanager-accounts-selected')) : [],
       filtered: [],
       forAssigningTags: {},
       forShare: {},
@@ -67,6 +68,7 @@ export default {
     },
     SET_SELECTED: (state, payload) => {
       state.accounts.selected = payload;
+      localStorage.setItem('adsmanager-accounts-selected', JSON.stringify(payload));
     },
     DELETE_ACCOUNTS: (state, payload) => {
       state.accounts.all = state.accounts.all.filter(account => {

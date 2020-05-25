@@ -14,7 +14,8 @@ export default {
   state: {
     adsets: {
       all: [],
-      selected: [],
+      selected: localStorage.getItem('adsmanager-adsets-selected') ?
+        JSON.parse(localStorage.getItem('adsmanager-adsets-selected')) : [],
       filtered: [],
     },
     loading: {
@@ -48,6 +49,7 @@ export default {
 
     SET_SELECTED: (state, data) => {
       state.adsets.selected = data;
+      localStorage.setItem('adsmanager-adsets-selected', JSON.stringify(data));
     }
   },
   actions: {

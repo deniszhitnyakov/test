@@ -15,7 +15,8 @@ export default {
     cabs: {
       all: [],
       filtered: [],
-      selected: [],
+      selected: localStorage.getItem('adsmanager-cabs-selected') ?
+        JSON.parse(localStorage.getItem('adsmanager-cabs-selected')) : [],
     },
     loading: {
       mainTable: false,
@@ -176,6 +177,7 @@ export default {
 
     SET_SELECTED_CABS: (state, cabs) => {
       state.cabs.selected = cabs;
+      localStorage.setItem('adsmanager-cabs-selected', JSON.stringify(cabs));
     },
 
     SET_SPECIFIC_FILTER: (state, data) => {

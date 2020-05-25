@@ -14,7 +14,8 @@ export default {
   state: {
     users: {
       all: [],
-      selected: [],
+      selected: localStorage.getItem('adsmanager-users-selected') ?
+        JSON.parse(localStorage.getItem('adsmanager-users-selected')) : [],
       filtered: [],
     },
     loading: {
@@ -49,6 +50,7 @@ export default {
 
     SET_SELECTED: (state, data) => {
       state.users.selected = data;
+      localStorage.setItem('adsmanager-users-selected', JSON.stringify(data));
     }
   },
   actions: {
