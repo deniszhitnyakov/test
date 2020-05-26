@@ -48,33 +48,33 @@ import {mapGetters} from 'vuex';
 import DialogForm   from './AccountsDialogForm';
 
 export default {
-  name: 'AccountsSingleEditDialog',
+    name: 'AccountsSingleEditDialog',
 
-  components: {
-    DialogForm
-  },
+    components: {
+        DialogForm
+    },
 
-  computed: {
-    ...mapGetters({
-      dialogs: 'accounts/dialogs',
-      loading: 'accounts/loading',
-      account: 'accounts/forEdit'
-    })
-  },
+    computed: {
+        ...mapGetters({
+            dialogs: 'accounts/dialogs',
+            loading: 'accounts/loading',
+            account: 'accounts/forEdit'
+        })
+    },
 
-  data() {
-    return {
-      validation: {
-        state: false,
-      },
-      newAccount: {},
-    };
-  },
+    data() {
+        return {
+            validation: {
+                state: false,
+            },
+            newAccount: {},
+        };
+    },
 
-  methods: {
-    saveAccount() {
-      this.$store.dispatch('accounts/saveAccount', this.newAccount);
+    methods: {
+        saveAccount() {
+            this.$store.dispatch('accounts/saveAccount', this.newAccount);
+        }
     }
-  }
 };
 </script>

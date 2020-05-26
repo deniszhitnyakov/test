@@ -153,34 +153,34 @@
 import {mapGetters} from 'vuex';
 
 export default {
-  name: 'AdsManagerTabs',
+    name: 'AdsManagerTabs',
 
-  data: () => ({
-    tabs: ['users', 'accounts', 'dates', 'cabs',  'campaigns', 'adsets', 'ads'],
-    clickedOnClear: false,
-  }),
+    data: () => ({
+        tabs: ['users', 'accounts', 'dates', 'cabs',  'campaigns', 'adsets', 'ads'],
+        clickedOnClear: false,
+    }),
 
-  computed: {
-    ...mapGetters({
-      activeTab: 'adsmanager/activeTab',
-      users: 'users/users',
-      accounts: 'accounts/ACCOUNTS',
-      cabs: 'cabs/cabs',
-      campaigns: 'campaigns/campaigns',
-      adsets: 'adsets/adsets',
-      ads: 'ads/ads',
-    })
-  },
+    computed: {
+        ...mapGetters({
+            activeTab: 'adsmanager/activeTab',
+            users: 'users/users',
+            accounts: 'accounts/ACCOUNTS',
+            cabs: 'cabs/cabs',
+            campaigns: 'campaigns/campaigns',
+            adsets: 'adsets/adsets',
+            ads: 'ads/ads',
+        })
+    },
 
-  methods: {
-    changeTab(tab) {
-      if( !this.clickedOnClear) {
-        this.$store.dispatch('adsmanager/setActiveTab', {
-          tab: tab,
-          component: this.tabs[tab]
-        });
-      }
+    methods: {
+        changeTab(tab) {
+            if( !this.clickedOnClear) {
+                this.$store.dispatch('adsmanager/setActiveTab', {
+                    tab: tab,
+                    component: this.tabs[tab]
+                });
+            }
+        }
     }
-  }
 };
 </script>

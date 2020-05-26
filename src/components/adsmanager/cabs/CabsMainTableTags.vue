@@ -17,12 +17,12 @@
 
 <script>
 export default {
-  name: 'CabsMainTableTags',
-  props: {
-    cab: {
-      type: Object,
-      default: () => ({})
+    name: 'CabsMainTableTags',
+    props: {
+        cab: {
+            type: Object,
+            default: () => ({})
+        }
     }
-  }
 };
 </script>

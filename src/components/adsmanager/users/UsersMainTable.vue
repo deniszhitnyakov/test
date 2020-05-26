@@ -138,70 +138,70 @@ import ComplexStatCellQuantity                                    from '../stat-
 import SimpleStatCell                                             from '../stat-cells/AdsManagerSimpleStatCell';
 
 export default {
-  name: 'UsersMainTable',
+    name: 'UsersMainTable',
 
-  components: {
-    ComplexStatCellQuantity,
-    ComplexStatCellCr,
-    ComplexStatCellCpa,
-    SimpleStatCell,
-  },
+    components: {
+        ComplexStatCellQuantity,
+        ComplexStatCellCr,
+        ComplexStatCellCpa,
+        SimpleStatCell,
+    },
 
-  mixins: [
-    makeCols,
-    customSort,
-    selectItems
-  ],
+    mixins: [
+        makeCols,
+        customSort,
+        selectItems
+    ],
 
-  data() {
-    return {
-      actionCols,
-      commonCols,
-      specialCols,
-      cols: [],
-    };
-  },
+    data() {
+        return {
+            actionCols,
+            commonCols,
+            specialCols,
+            cols: [],
+        };
+    },
 
-  computed: {
-    ...mapGetters({
-      users: 'users/users',
-      selected: 'users/selected',
-      loading: 'users/loading',
-      innerHeight: 'main/innerHeight',
-      profile: 'main/profile',
-    }),
+    computed: {
+        ...mapGetters({
+            users: 'users/users',
+            selected: 'users/selected',
+            loading: 'users/loading',
+            innerHeight: 'main/innerHeight',
+            profile: 'main/profile',
+        }),
 
-    firstCols() {
-      let cols = [];
+        firstCols() {
+            let cols = [];
 
-      cols.push({
-        text: this.$t('common.user'),
-        value: 'user',
-        width: 200
-      });
+            cols.push({
+                text: this.$t('common.user'),
+                value: 'user',
+                width: 200
+            });
 
-      cols.push({
-        text: this.$t('common.role'),
-        value: 'role',
-        width: 150,
-      });
+            cols.push({
+                text: this.$t('common.role'),
+                value: 'role',
+                width: 150,
+            });
 
-      return cols;
-    }
-  },
+            return cols;
+        }
+    },
 
-  watch: {
-    profile: {
-      deep: true,
-      handler() {
+    watch: {
+        profile: {
+            deep: true,
+            handler() {
+                this.cols = this.makeCols(this.firstCols);
+            }
+        }
+    },
+
+    created() {
         this.cols = this.makeCols(this.firstCols);
-      }
-    }
-  },
-
-  created() {
-    this.cols = this.makeCols(this.firstCols);
-  },
+    },
 };
 </script>
 <style>

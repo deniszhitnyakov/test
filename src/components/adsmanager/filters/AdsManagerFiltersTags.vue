@@ -21,26 +21,26 @@
 import { mapGetters }  from 'vuex';
 
 export default {
-  name: 'AdsManagerFiltersTags',
+    name: 'AdsManagerFiltersTags',
 
-  computed: {
-    ...mapGetters({
-      tags: 'tags/tags',
-      globalFilters: 'adsmanager/filters'
-    })
-  },
+    computed: {
+        ...mapGetters({
+            tags: 'tags/tags',
+            globalFilters: 'adsmanager/filters'
+        })
+    },
 
-  created() {
-    this.$store.dispatch('tags/loadTags');
-  },
+    created() {
+        this.$store.dispatch('tags/loadTags');
+    },
 
-  methods: {
-    filterTags(tags) {
-      if(tags) {
-        this.$emit('filtered');
-      }
-      this.$store.dispatch('adsmanager/setFiltersTags', tags);
+    methods: {
+        filterTags(tags) {
+            if(tags) {
+                this.$emit('filtered');
+            }
+            this.$store.dispatch('adsmanager/setFiltersTags', tags);
+        }
     }
-  }
 };
 </script>

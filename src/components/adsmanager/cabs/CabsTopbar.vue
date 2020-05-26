@@ -225,75 +225,75 @@ import FiltersBar           from './CabsFiltersBar';
 import TopbarActions        from './CabsTopbarActions';
 
 export default {
-  name: 'CabsTopbar',
+    name: 'CabsTopbar',
 
-  components: {
-    TopbarActions,
-    TopbarCols,
-    FiltersDate,
-    FiltersBar
-  },
-
-  data() {
-    return {
-      showFilters: false,
-      nameSearchText: '',
-    };
-  },
-
-  computed: {
-    ...mapGetters({
-      filters: 'cabs/filters',
-      globalFilters: 'adsmanager/filters'
-    }),
-      
-    activeFiltersCount() {
-      let count = 0;
-
-      if (!this.filters) return 0;
-
-      if (
-        typeof this.filters.accountsStatuses !== 'undefined' &&
-          this.filters.accountsStatuses.length > 0
-      ) count++;
-      if (
-        typeof this.filters.cabsStatuses !== 'undefined' &&
-          this.filters.cabsStatuses.length > 0
-      ) count++;
-      if (
-        typeof this.filters.bms !== 'undefined' &&
-          this.filters.bms.length > 0
-      ) count++;
-      if (
-        typeof this.filters.tags !== 'undefined' &&
-          this.filters.tags.length > 0
-      ) count++;
-      if (
-        typeof this.filters.type!== 'undefined' &&
-          this.filters.type !== 'all'
-      ) count++;
-      if (
-        typeof this.filters.showArchived!== 'undefined' &&
-          this.filters.showArchived
-      ) count++;
-      if (
-        typeof this.filters.attachedCard !== 'undefined' &&
-          this.filters.attachedCard !== 'all'
-      ) count++;
-
-      return count;
-    }
-  },
-
-  methods: {
-    filterName(name) {
-      this.nameSearchText = name;
-      setTimeout(async () => {
-        if (name === this.nameSearchText) {
-          await this.$store.dispatch('cabs/setSpecificFilter', {filter: 'name', data: name});
-        }  
-      }, 500);
+    components: {
+        TopbarActions,
+        TopbarCols,
+        FiltersDate,
+        FiltersBar
     },
-  }
+
+    data() {
+        return {
+            showFilters: false,
+            nameSearchText: '',
+        };
+    },
+
+    computed: {
+        ...mapGetters({
+            filters: 'cabs/filters',
+            globalFilters: 'adsmanager/filters'
+        }),
+      
+        activeFiltersCount() {
+            let count = 0;
+
+            if (!this.filters) return 0;
+
+            if (
+                typeof this.filters.accountsStatuses !== 'undefined' &&
+          this.filters.accountsStatuses.length > 0
+            ) count++;
+            if (
+                typeof this.filters.cabsStatuses !== 'undefined' &&
+          this.filters.cabsStatuses.length > 0
+            ) count++;
+            if (
+                typeof this.filters.bms !== 'undefined' &&
+          this.filters.bms.length > 0
+            ) count++;
+            if (
+                typeof this.filters.tags !== 'undefined' &&
+          this.filters.tags.length > 0
+            ) count++;
+            if (
+                typeof this.filters.type!== 'undefined' &&
+          this.filters.type !== 'all'
+            ) count++;
+            if (
+                typeof this.filters.showArchived!== 'undefined' &&
+          this.filters.showArchived
+            ) count++;
+            if (
+                typeof this.filters.attachedCard !== 'undefined' &&
+          this.filters.attachedCard !== 'all'
+            ) count++;
+
+            return count;
+        }
+    },
+
+    methods: {
+        filterName(name) {
+            this.nameSearchText = name;
+            setTimeout(async () => {
+                if (name === this.nameSearchText) {
+                    await this.$store.dispatch('cabs/setSpecificFilter', {filter: 'name', data: name});
+                }  
+            }, 500);
+        },
+    }
 };
 </script>

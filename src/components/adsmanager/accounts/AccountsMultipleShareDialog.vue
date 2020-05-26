@@ -153,72 +153,72 @@
 import {mapGetters} from 'vuex';
 
 export default {
-  name: 'AccountsMultipleShareDialog',
+    name: 'AccountsMultipleShareDialog',
 
-  data: () => ({
-    permissions: [],
-    mode: 1,
-    allItems: [],
-  }),
-
-  computed: {
-    ...mapGetters({
-      accounts: 'accounts/selected',
-      users: 'users/allUsers',
-      dialogs: 'accounts/dialogs',
-      loading: 'accounts/loading',
-      profile: 'main/profile',
+    data: () => ({
+        permissions: [],
+        mode: 1,
+        allItems: [],
     }),
 
-    items() {
-      let items = [];
+    computed: {
+        ...mapGetters({
+            accounts: 'accounts/selected',
+            users: 'users/allUsers',
+            dialogs: 'accounts/dialogs',
+            loading: 'accounts/loading',
+            profile: 'main/profile',
+        }),
 
-      this.users.forEach(user =>  {
-        if (user.id === this.profile.id) return;
-        let item = {
-          id: 'user-' + user.id,
-          name: user.display_name !== null ? user.display_name : user.login
-        };
-        item.children = [
-          { id: `${user.id}-read`, name: this.$t('dialogs.accounts.share.permissions.read') },
-          { id: `${user.id}-edit`, name: this.$t('dialogs.accounts.share.permissions.edit') },
-          { id: `${user.id}-stat`, name: this.$t('dialogs.accounts.share.permissions.stat') },
-          { id: `${user.id}-share`, name: this.$t('dialogs.accounts.share.permissions.share') },
-        ];
+        items() {
+            let items = [];
 
-        this.allItems = this.allItems.concat(item.children.map(child => child.id));
+            this.users.forEach(user =>  {
+                if (user.id === this.profile.id) return;
+                let item = {
+                    id: 'user-' + user.id,
+                    name: user.display_name !== null ? user.display_name : user.login
+                };
+                item.children = [
+                    { id: `${user.id}-read`, name: this.$t('dialogs.accounts.share.permissions.read') },
+                    { id: `${user.id}-edit`, name: this.$t('dialogs.accounts.share.permissions.edit') },
+                    { id: `${user.id}-stat`, name: this.$t('dialogs.accounts.share.permissions.stat') },
+                    { id: `${user.id}-share`, name: this.$t('dialogs.accounts.share.permissions.share') },
+                ];
 
-        items.push(item);
-      });
+                this.allItems = this.allItems.concat(item.children.map(child => child.id));
 
-      return items;
-    }
-  },
+                items.push(item);
+            });
 
-  created() {
-    this.$store.dispatch('users/loadUsers');
-  },
+            return items;
+        }
+    },
+
+    created() {
+        this.$store.dispatch('users/loadUsers');
+    },
         
-  methods: {
-    async savePermissions() {
-      const success = await this.$store.dispatch('accounts/saveMultiplePermissions', {
-        ids: this.accounts.map(account => account.id),
-        permissions: this.permissions,
-        mode: this.mode,
-      });
-      if (success) {
-        this.$store.dispatch('accounts/closeDialog', 'multipleShare');
-      }
-    },
+    methods: {
+        async savePermissions() {
+            const success = await this.$store.dispatch('accounts/saveMultiplePermissions', {
+                ids: this.accounts.map(account => account.id),
+                permissions: this.permissions,
+                mode: this.mode,
+            });
+            if (success) {
+                this.$store.dispatch('accounts/closeDialog', 'multipleShare');
+            }
+        },
 
-    selectAll() {
-      this.permissions = [];
-      this.permissions = this.permissions.concat(this.allItems);
-    },
+        selectAll() {
+            this.permissions = [];
+            this.permissions = this.permissions.concat(this.allItems);
+        },
 
-    unselectAll() {
-      this.permissions = [];
+        unselectAll() {
+            this.permissions = [];
+        }
     }
-  }
 };
 </script>

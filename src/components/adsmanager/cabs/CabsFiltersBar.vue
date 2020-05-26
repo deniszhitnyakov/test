@@ -249,112 +249,112 @@ import cabsStatuses         from '../../../constants/cabs/statuses_for_select';
 // import FiltersTags          from '../filters/AdsManagerFiltersTags';
 
 export default {
-  name: 'CabsFiltersBar',
+    name: 'CabsFiltersBar',
 
-  props: {
-    show: {
-      type: Boolean,
-      default: false,
-    },
-    activeFiltersCount: {
-      type: Number,
-      default: 0,
-    }
-  },
-
-  data() {
-    return {
-      accountsStatuses,
-      cabsStatuses,
-      bms: [],
-    };
-  },
-
-  computed: {
-    ...mapGetters({
-      cabs: 'cabs/cabs',
-      filters: 'cabs/filters',
-      tags: 'tags/tags',
-    })
-  },
-
-  watch: {
-    cabs: {
-      deep: true,
-      handler() {
-        this.makeBmsList();
-      }
-    }
-  },
-
-  created() {
-    this.makeBmsList();
-    this.$store.dispatch('tags/loadTags');
-    setInterval(() => {
-      this.$store.dispatch('tags/loadTags');
-    }, 60000);
-  },
-
-  methods: {
-    makeBmsList() {
-      if (!this.cabs) return;
-      this.cabs.all.forEach(cab => {
-        if (cab.business_name && typeof cab.business_name !== 'undefined') {
-          if (this.bms.indexOf(cab.business_name) === -1) {
-            this.bms.push({id: cab.business_id, name: cab.business_name});
-          }
+    props: {
+        show: {
+            type: Boolean,
+            default: false,
+        },
+        activeFiltersCount: {
+            type: Number,
+            default: 0,
         }
-      });
     },
+
+    data() {
+        return {
+            accountsStatuses,
+            cabsStatuses,
+            bms: [],
+        };
+    },
+
+    computed: {
+        ...mapGetters({
+            cabs: 'cabs/cabs',
+            filters: 'cabs/filters',
+            tags: 'tags/tags',
+        })
+    },
+
+    watch: {
+        cabs: {
+            deep: true,
+            handler() {
+                this.makeBmsList();
+            }
+        }
+    },
+
+    created() {
+        this.makeBmsList();
+        this.$store.dispatch('tags/loadTags');
+        setInterval(() => {
+            this.$store.dispatch('tags/loadTags');
+        }, 60000);
+    },
+
+    methods: {
+        makeBmsList() {
+            if (!this.cabs) return;
+            this.cabs.all.forEach(cab => {
+                if (cab.business_name && typeof cab.business_name !== 'undefined') {
+                    if (this.bms.indexOf(cab.business_name) === -1) {
+                        this.bms.push({id: cab.business_id, name: cab.business_name});
+                    }
+                }
+            });
+        },
             
-    async filterAccountsStatuses(statuses) {
-      if (statuses && statuses.length > 0) {
-        this.$store.dispatch('cabs/clearSelected');
-        statuses = statuses.map(status => {
-          if (typeof status.value !== 'undefined') return status.value;
-        });
-      } else {
-        statuses = [];
-      }
-      await this.$store.dispatch('cabs/setSpecificFilter', {
-        filter: 'accountsStatuses',
-        data: statuses
-      });
-    },
+        async filterAccountsStatuses(statuses) {
+            if (statuses && statuses.length > 0) {
+                this.$store.dispatch('cabs/clearSelected');
+                statuses = statuses.map(status => {
+                    if (typeof status.value !== 'undefined') return status.value;
+                });
+            } else {
+                statuses = [];
+            }
+            await this.$store.dispatch('cabs/setSpecificFilter', {
+                filter: 'accountsStatuses',
+                data: statuses
+            });
+        },
 
-    async filterCabsStatuses(statuses) {
-      if (statuses && statuses.length > 0) {
-        this.$store.dispatch('cabs/clearSelected');
-      }
-      const data = {
-        filter: 'cabsStatuses',
-        data: statuses
-      };
-      await this.$store.dispatch('cabs/setSpecificFilter', data);
-    },
+        async filterCabsStatuses(statuses) {
+            if (statuses && statuses.length > 0) {
+                this.$store.dispatch('cabs/clearSelected');
+            }
+            const data = {
+                filter: 'cabsStatuses',
+                data: statuses
+            };
+            await this.$store.dispatch('cabs/setSpecificFilter', data);
+        },
 
-    async filterBms(bms) {
-      if (bms && bms.length > 0) {
-        this.$store.dispatch('cabs/clearSelected');
-      }
-      const data = {
-        filter: 'bms',
-        data: bms
-      };
-      await this.$store.dispatch('cabs/setSpecificFilter', data);
-    },
+        async filterBms(bms) {
+            if (bms && bms.length > 0) {
+                this.$store.dispatch('cabs/clearSelected');
+            }
+            const data = {
+                filter: 'bms',
+                data: bms
+            };
+            await this.$store.dispatch('cabs/setSpecificFilter', data);
+        },
 
-    async filterTags(tags) {
-      if (tags && tags.length > 0) {
-        this.$store.dispatch('cabs/clearSelected');
-      }
-      const data = {
-        filter: 'tags',
-        data: tags
-      };
-      await this.$store.dispatch('cabs/setSpecificFilter', data);
+        async filterTags(tags) {
+            if (tags && tags.length > 0) {
+                this.$store.dispatch('cabs/clearSelected');
+            }
+            const data = {
+                filter: 'tags',
+                data: tags
+            };
+            await this.$store.dispatch('cabs/setSpecificFilter', data);
+        }
     }
-  }
 };
 </script>
 <style></style>

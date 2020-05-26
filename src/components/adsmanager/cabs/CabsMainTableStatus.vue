@@ -44,23 +44,23 @@ import disableReasons from '../../../constants/cabs/disable_reasons';
 import statuses       from '../../../constants/cabs/statuses';
 
 export default {
-  name: 'CabsMainTableStatus',
+    name: 'CabsMainTableStatus',
 
-  props: {
-    cab: {
-      type: Object,
-      default: () => ({
-        status: 1,
-        disable_reason: 0,
-      })
-    }
-  },
+    props: {
+        cab: {
+            type: Object,
+            default: () => ({
+                status: 1,
+                disable_reason: 0,
+            })
+        }
+    },
 
-  data() {
-    return {
-      statuses,
-      disableReasons,
-    };
-  },
+    data() {
+        return {
+            statuses,
+            disableReasons,
+        };
+    },
 };
 </script>

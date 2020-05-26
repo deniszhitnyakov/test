@@ -150,71 +150,71 @@ import ComplexStatCellQuantity                                    from '../stat-
 import SimpleStatCell                                             from '../stat-cells/AdsManagerSimpleStatCell';
 
 export default {
-  name: 'CampaignsMainTable',
+    name: 'CampaignsMainTable',
 
-  components: {
-    BillingCell,
-    ComplexStatCellQuantity,
-    ComplexStatCellCr,
-    ComplexStatCellCpa,
-    SimpleStatCell,
-  },
+    components: {
+        BillingCell,
+        ComplexStatCellQuantity,
+        ComplexStatCellCr,
+        ComplexStatCellCpa,
+        SimpleStatCell,
+    },
 
-  mixins: [
-    makeCols,
-    customSort,
-    selectItems
-  ],
+    mixins: [
+        makeCols,
+        customSort,
+        selectItems
+    ],
 
-  data() {
-    return {
-      actionCols,
-      commonCols,
-      specialCols,
-      cols: [],
-    };
-  },
+    data() {
+        return {
+            actionCols,
+            commonCols,
+            specialCols,
+            cols: [],
+        };
+    },
 
-  computed: {
-    ...mapGetters({
-      campaigns: 'campaigns/campaigns',
-      selected: 'campaigns/selected',
-      loading: 'campaigns/loading',
-      innerHeight: 'main/innerHeight',
-      profile: 'main/profile',
-    }),
+    computed: {
+        ...mapGetters({
+            campaigns: 'campaigns/campaigns',
+            selected: 'campaigns/selected',
+            loading: 'campaigns/loading',
+            innerHeight: 'main/innerHeight',
+            profile: 'main/profile',
+        }),
 
-    firstCols() {
-      let cols = [];
+        firstCols() {
+            let cols = [];
 
-      cols.push({
-        text: this.$t('common.campaign'),
-        value: 'campaign',
-        width: 200
-      });
+            cols.push({
+                text: this.$t('common.campaign'),
+                value: 'campaign',
+                width: 200
+            });
 
-      cols.push({
-        text: this.$t('common.status'),
-        value: 'status',
-        width: 100
-      });
+            cols.push({
+                text: this.$t('common.status'),
+                value: 'status',
+                width: 100
+            });
 
-      return cols;
-    }
-  },
+            return cols;
+        }
+    },
 
-  watch: {
-    profile: {
-      deep: true,
-      handler() {
+    watch: {
+        profile: {
+            deep: true,
+            handler() {
+                this.cols = this.makeCols(this.firstCols);
+            }
+        }
+    },
+
+    created() {
         this.cols = this.makeCols(this.firstCols);
-      }
-    }
-  },
-
-  created() {
-    this.cols = this.makeCols(this.firstCols);
-  },
+    },
 };
 </script>
 <style>

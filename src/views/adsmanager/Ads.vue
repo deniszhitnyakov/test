@@ -12,42 +12,42 @@ import MainTable               from '../../components/adsmanager/ads/AdsMainTabl
 import Topbar                  from '../../components/adsmanager/ads/AdsTopbar';
 
 export default {
-  name: 'Ads',
+    name: 'Ads',
 
-  components: {
-    MainTable,
-    Topbar
-  },
+    components: {
+        MainTable,
+        Topbar
+    },
 
-  data() {
-    return {
-      updateInterval: null,
-    };
-  },
+    data() {
+        return {
+            updateInterval: null,
+        };
+    },
 
-  // I made eror in word
-  // And one mor eror
+    // I made eror in word
+    // And one mor eror
 
-  computed: {
-    ...mapGetters({
-      users: 'users/users',
-      accounts: 'accounts/ACCOUNTS',
-      cabs: 'cabs/cabs',
-      campaigns: 'campaigns/campaigns',
-      adsets: 'adsets/adsets',
-      ads: 'ads/ads',
-    })
-  },
+    computed: {
+        ...mapGetters({
+            users: 'users/users',
+            accounts: 'accounts/ACCOUNTS',
+            cabs: 'cabs/cabs',
+            campaigns: 'campaigns/campaigns',
+            adsets: 'adsets/adsets',
+            ads: 'ads/ads',
+        })
+    },
 
-  created() {
-    this.$store.dispatch('ads/loadAds');
-    this.updateInterval = setInterval(() => {
-      this.$store.dispatch('ads/loadAds');
-    }, 60000);
-  },
+    created() {
+        this.$store.dispatch('ads/loadAds');
+        this.updateInterval = setInterval(() => {
+            this.$store.dispatch('ads/loadAds');
+        }, 60000);
+    },
 
-  beforeDestroy() {
-    clearInterval(this.updateInterval);
-  },
+    beforeDestroy() {
+        clearInterval(this.updateInterval);
+    },
 };
 </script>

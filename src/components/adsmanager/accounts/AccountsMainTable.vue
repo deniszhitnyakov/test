@@ -136,76 +136,76 @@ import AccountsMainTableInfo                                      from './Accoun
 import AccountsMainTableStatus                                    from './AccountsMainTableStatus';
 
 export default {
-  components: {
-    AccountsMainTableStatus,
-    AccountsMainTableInfo,
-    SimpleStatCell,
-    ComplexStatCellQuantity,
-    ComplexStatCellCr,
-    ComplexStatCellCpa
-  },
+    components: {
+        AccountsMainTableStatus,
+        AccountsMainTableInfo,
+        SimpleStatCell,
+        ComplexStatCellQuantity,
+        ComplexStatCellCr,
+        ComplexStatCellCpa
+    },
 
-  mixins: [
-    makeCols, 
-    customSort,
-    selectItems
-  ],
+    mixins: [
+        makeCols, 
+        customSort,
+        selectItems
+    ],
 
-  data: function() {
-    return ({
-      // selected: [],
-      cols: [],
-      nativeCols: [],
-      commonCols,
-      actionCols,
-    });
-  },
+    data: function() {
+        return ({
+            // selected: [],
+            cols: [],
+            nativeCols: [],
+            commonCols,
+            actionCols,
+        });
+    },
 
-  computed: {
-    ...mapGetters({
-      accounts: 'accounts/ACCOUNTS',
-      loading: 'accounts/loading',
-      innerHeight: 'main/innerHeight',
-      profile: 'main/profile',
-      stat: 'accounts/stat',
-      selected: 'accounts/selected'
-    }),
-  },
+    computed: {
+        ...mapGetters({
+            accounts: 'accounts/ACCOUNTS',
+            loading: 'accounts/loading',
+            innerHeight: 'main/innerHeight',
+            profile: 'main/profile',
+            stat: 'accounts/stat',
+            selected: 'accounts/selected'
+        }),
+    },
 
-  watch: {
-    profile: {
-      deep: true,
-      handler(newProfile, oldProfile) {
-        if (oldProfile.columns.length === 0) return;
-        if (JSON.stringify(newProfile.columns) !== JSON.stringify(oldProfile.columns)) {
-          const newCols = this.makeCols();
-          this.cols = [];
-          this.cols = this.cols.concat(this.nativeCols);
-          this.cols = this.cols.concat(newCols);
-          this.$forceUpdate();
+    watch: {
+        profile: {
+            deep: true,
+            handler(newProfile, oldProfile) {
+                if (oldProfile.columns.length === 0) return;
+                if (JSON.stringify(newProfile.columns) !== JSON.stringify(oldProfile.columns)) {
+                    const newCols = this.makeCols();
+                    this.cols = [];
+                    this.cols = this.cols.concat(this.nativeCols);
+                    this.cols = this.cols.concat(newCols);
+                    this.$forceUpdate();
+                }
+            }
         }
-      }
-    }
-  },
+    },
 
-  async created() {
-    await this.$store.dispatch('main/loadProfile');
+    async created() {
+        await this.$store.dispatch('main/loadProfile');
 
-    this.nativeCols.push({
-      text: this.$t('common.account'),
-      value: 'account',
-      width: 150
-    });
-    this.nativeCols.push({
-      text: this.$t('common.status'),
-      value: 'status',
-      width: 100
-    });
+        this.nativeCols.push({
+            text: this.$t('common.account'),
+            value: 'account',
+            width: 150
+        });
+        this.nativeCols.push({
+            text: this.$t('common.status'),
+            value: 'status',
+            width: 100
+        });
 
-    const statCols = this.makeCols();
-    this.cols = this.cols.concat(this.nativeCols);
-    this.cols = this.cols.concat(statCols);
-  },
+        const statCols = this.makeCols();
+        this.cols = this.cols.concat(this.nativeCols);
+        this.cols = this.cols.concat(statCols);
+    },
 };
 </script>
 <style>

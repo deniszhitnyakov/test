@@ -20,32 +20,32 @@ import Sidebar      from './components/Sidebar';
 import Topbar       from './components/topbar/Topbar';
 
 export default {
-  name: 'App',
+    name: 'App',
 
-  components: {
-    Alert,
-    Topbar,
-    Sidebar,
-    ApiError
-  },
+    components: {
+        Alert,
+        Topbar,
+        Sidebar,
+        ApiError
+    },
 
-  computed: {
-    ...mapGetters({
-      dialogs: 'main/dialogs'
-    })
-  },
+    computed: {
+        ...mapGetters({
+            dialogs: 'main/dialogs'
+        })
+    },
 
-  created() {
-    this.$store.dispatch('main/setInnerHeight', window.innerHeight);
-    window.addEventListener('resize', (data) => {
-      this.$store.dispatch('main/setInnerHeight', data.target.innerHeight);
-    });
+    created() {
+        this.$store.dispatch('main/setInnerHeight', window.innerHeight);
+        window.addEventListener('resize', (data) => {
+            this.$store.dispatch('main/setInnerHeight', data.target.innerHeight);
+        });
 
-    this.$store.dispatch('main/loadProfile');
-    setInterval(() => {
-      this.$store.dispatch('main/loadProfile');
-    }, 60000);
-  }
+        this.$store.dispatch('main/loadProfile');
+        setInterval(() => {
+            this.$store.dispatch('main/loadProfile');
+        }, 60000);
+    }
 };
 </script>
 <style>

@@ -91,57 +91,57 @@
 import {mapGetters} from 'vuex';
 
 export default {
-  name: 'CabsDialogApplyAutomationRulesGroup',
+    name: 'CabsDialogApplyAutomationRulesGroup',
 
-  data() {
-    return {
-      showModal: true,
-      showLoading: false,
-      done: 0,
-      rulesGroups: [],
-      group: null,
-    };
-  },
-
-  computed: {
-    ...mapGetters({
-      cabs: 'cabs/cabs',
-      dialogs: 'cabs/dialogs'
-    })
-  },
-
-  created() {
-    this.loadRulesGroups();
-  },
-
-  methods: {
-    async loadRulesGroups() {
-      const response = await this.api('/automation_rules_groups');
-      this.rulesGroups = response.data.data;
+    data() {
+        return {
+            showModal: true,
+            showLoading: false,
+            done: 0,
+            rulesGroups: [],
+            group: null,
+        };
     },
 
-    applyAutomationRulesGroup() {
-      this.showModal = false;
-      this.showLoading = true;
+    computed: {
+        ...mapGetters({
+            cabs: 'cabs/cabs',
+            dialogs: 'cabs/dialogs'
+        })
+    },
 
-      if (Array.isArray(this.cabs.selected) && this.group) {
-        this.cabs.selected.forEach(async (cab) => {
-          const data = {id: cab.id, group_id: this.group.id};
-          await this.api.post('/cabs/apply_automation_rules_group', data)
-            .catch(() => true);
-          this.done++;
+    created() {
+        this.loadRulesGroups();
+    },
+
+    methods: {
+        async loadRulesGroups() {
+            const response = await this.api('/automation_rules_groups');
+            this.rulesGroups = response.data.data;
+        },
+
+        applyAutomationRulesGroup() {
+            this.showModal = false;
+            this.showLoading = true;
+
+            if (Array.isArray(this.cabs.selected) && this.group) {
+                this.cabs.selected.forEach(async (cab) => {
+                    const data = {id: cab.id, group_id: this.group.id};
+                    await this.api.post('/cabs/apply_automation_rules_group', data)
+                        .catch(() => true);
+                    this.done++;
           
-          if (this.done === this.cabs.selected.length) {
-            this.showLoading = false;
-            this.$store.dispatch('cabs/closeDialog', 'applyAutomationRulesGroup');
-            this.$store.dispatch('cabs/loadCabs');
-          }
-        });
-      } else {
-        this.showLoading = false;
-        this.$store.dispatch('cabs/closeDialog', 'applyAutomationRulesGroup');
-      }
-    },
-  }
+                    if (this.done === this.cabs.selected.length) {
+                        this.showLoading = false;
+                        this.$store.dispatch('cabs/closeDialog', 'applyAutomationRulesGroup');
+                        this.$store.dispatch('cabs/loadCabs');
+                    }
+                });
+            } else {
+                this.showLoading = false;
+                this.$store.dispatch('cabs/closeDialog', 'applyAutomationRulesGroup');
+            }
+        },
+    }
 };
 </script>

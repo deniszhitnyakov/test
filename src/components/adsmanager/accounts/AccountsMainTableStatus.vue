@@ -24,17 +24,17 @@
 import colors from '../../../constants/accounts/status-colors';
 
 export default {
-  name: 'AccountsMainTableStatus',
-  props: {
-    account: {
-      type: Object,
-      default: () => ({
-        status: 'NEW',
-      })
-    }
-  },
-  data: () => ({
-    colors
-  })
+    name: 'AccountsMainTableStatus',
+    props: {
+        account: {
+            type: Object,
+            default: () => ({
+                status: 'NEW',
+            })
+        }
+    },
+    data: () => ({
+        colors
+    })
 };
 </script>

@@ -72,42 +72,42 @@ import accountsStatuses     from '../../../constants/accounts/accounts-statuses'
 import FiltersTags          from '../filters/AdsManagerFiltersTags';
 
 export default {
-  name: 'AccountsFiltersBar',
+    name: 'AccountsFiltersBar',
 
-  components: {
-    FiltersTags,
-  },
+    components: {
+        FiltersTags,
+    },
 
-  props: {
-    show: {
-      type: Boolean,
-      default: false,
+    props: {
+        show: {
+            type: Boolean,
+            default: false,
+        }
+    },
+
+    data() {
+        return {
+            accountsStatuses
+        };
+    },
+
+    computed: {
+        ...mapGetters({
+            accounts: 'accounts/ACCOUNTS',
+            filters: 'accounts/FILTERS',
+            tags: 'tags/tags',
+        })
+    },
+
+    methods: {
+        async filterStatus(statuses) {
+            if (statuses) this.$store.dispatch('accounts/clearSelected');
+            await this.$store.dispatch('accounts/setFiltersStatuses', statuses.map(status => {
+                if (typeof status.value !== 'undefined') return status.value;
+                return status;
+            }));
+            this.$store.dispatch('accounts/loadStat');
+        }
     }
-  },
-
-  data() {
-    return {
-      accountsStatuses
-    };
-  },
-
-  computed: {
-    ...mapGetters({
-      accounts: 'accounts/ACCOUNTS',
-      filters: 'accounts/FILTERS',
-      tags: 'tags/tags',
-    })
-  },
-
-  methods: {
-    async filterStatus(statuses) {
-      if (statuses) this.$store.dispatch('accounts/clearSelected');
-      await this.$store.dispatch('accounts/setFiltersStatuses', statuses.map(status => {
-        if (typeof status.value !== 'undefined') return status.value;
-        return status;
-      }));
-      this.$store.dispatch('accounts/loadStat');
-    }
-  }
 };
 </script>

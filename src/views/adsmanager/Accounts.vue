@@ -29,70 +29,70 @@ import SingleAddDialog                      from '../../components/adsmanager/ac
 import Topbar                               from '../../components/adsmanager/accounts/AccountsTopbar';
 
 export default {
-  name: 'Accounts',
+    name: 'Accounts',
   
-  components: {
-    Topbar,
-    MainTable,
-    AssignTagsDialog,
-    ShareDialog,
-    SingleAddDialog,
-    EditDialog,
-    MultipleShareDialog,
-    MultipleAssignTagsDialog
-  },
-
-  data() {
-    return {
-      updateStatInterval: 0,
-    };
-  },
-  
-  computed: {
-    ...mapGetters({
-      dialogs: 'accounts/dialogs',
-      globalFilters: 'adsmanager/filters',
-      accounts: 'accounts/accounts'
-    })
-  },
-
-  watch: {
-    globalFilters: {
-      deep: true,
-      async handler() {
-        await this.$store.dispatch('accounts/filterAccounts');
-        this.$store.dispatch('accounts/loadStat');
-      }
+    components: {
+        Topbar,
+        MainTable,
+        AssignTagsDialog,
+        ShareDialog,
+        SingleAddDialog,
+        EditDialog,
+        MultipleShareDialog,
+        MultipleAssignTagsDialog
     },
 
-    'accounts.selected': {
-      deep: true,
-      handler(newVal, oldVal) {
-        if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
-          this.$store.dispatch('cabs/clearSelected');
-          this.$store.dispatch('campaigns/clearSelected');
-          this.$store.dispatch('adsets/clearSelected');
-          this.$store.dispatch('ads/clearSelected');
-        }
-      }
-    }
-  },
+    data() {
+        return {
+            updateStatInterval: 0,
+        };
+    },
   
-  created() {
-    this.$store.dispatch('accounts/LOAD_ACCOUNTS');
-    this.$store.dispatch('users/loadUsers');
-    this.updateStatInterval = setInterval( () => {
-      this.$store.dispatch('accounts/LOAD_ACCOUNTS');
-      this.$store.dispatch('users/loadUsers');
-    }, 60000 );
-  },
+    computed: {
+        ...mapGetters({
+            dialogs: 'accounts/dialogs',
+            globalFilters: 'adsmanager/filters',
+            accounts: 'accounts/accounts'
+        })
+    },
 
-  mounted() {
-    this.$store.dispatch('accounts/filterAccounts');
-  },
+    watch: {
+        globalFilters: {
+            deep: true,
+            async handler() {
+                await this.$store.dispatch('accounts/filterAccounts');
+                this.$store.dispatch('accounts/loadStat');
+            }
+        },
 
-  beforeDestroy() {
-    clearInterval(this.updateStatInterval);
-  },
+        'accounts.selected': {
+            deep: true,
+            handler(newVal, oldVal) {
+                if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+                    this.$store.dispatch('cabs/clearSelected');
+                    this.$store.dispatch('campaigns/clearSelected');
+                    this.$store.dispatch('adsets/clearSelected');
+                    this.$store.dispatch('ads/clearSelected');
+                }
+            }
+        }
+    },
+  
+    created() {
+        this.$store.dispatch('accounts/LOAD_ACCOUNTS');
+        this.$store.dispatch('users/loadUsers');
+        this.updateStatInterval = setInterval( () => {
+            this.$store.dispatch('accounts/LOAD_ACCOUNTS');
+            this.$store.dispatch('users/loadUsers');
+        }, 60000 );
+    },
+
+    mounted() {
+        this.$store.dispatch('accounts/filterAccounts');
+    },
+
+    beforeDestroy() {
+        clearInterval(this.updateStatInterval);
+    },
 };
 </script>

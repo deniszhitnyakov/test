@@ -36,14 +36,14 @@
 import {mapGetters} from 'vuex';
 
 export default {
-  name: 'ApiError',
+    name: 'ApiError',
 
-  computed: {
-    ...mapGetters({
-      dialogs: 'main/dialogs',
-      apiError: 'main/apiError',
-    })
-  }
+    computed: {
+        ...mapGetters({
+            dialogs: 'main/dialogs',
+            apiError: 'main/apiError',
+        })
+    }
 };
 </script>
 

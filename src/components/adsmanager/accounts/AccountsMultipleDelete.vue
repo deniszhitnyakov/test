@@ -17,22 +17,22 @@
 import {mapGetters} from 'vuex';
 
 export default {
-  name: 'AccountsMultipleDelete',
+    name: 'AccountsMultipleDelete',
 
-  computed: {
-    ...mapGetters({
-      accounts: 'accounts/ACCOUNTS',
-    })
-  },
+    computed: {
+        ...mapGetters({
+            accounts: 'accounts/ACCOUNTS',
+        })
+    },
 
-  methods: {
-    multipleDelete() {
-      if (!confirm(this.$t('common.confirmPlease'))) return;
-      this.$store.dispatch(
-        'accounts/multipleDeleteAccounts', 
-        this.accounts.selected.map(account => account.id)
-      );
+    methods: {
+        multipleDelete() {
+            if (!confirm(this.$t('common.confirmPlease'))) return;
+            this.$store.dispatch(
+                'accounts/multipleDeleteAccounts', 
+                this.accounts.selected.map(account => account.id)
+            );
+        }
     }
-  }
 };
 </script>

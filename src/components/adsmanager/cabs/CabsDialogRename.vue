@@ -108,66 +108,66 @@
 import {mapGetters} from 'vuex';
 
 export default {
-  name: 'CabsDialogRename',
+    name: 'CabsDialogRename',
 
-  data() {
-    return {
-      showModal: true,
-      showLoading: false,
-      done: 0,
-      selectedCabs: [],
-      disabledSaveButton: true,
-    };
-  },
-
-  computed: {
-    ...mapGetters({
-      cabs: 'cabs/cabs',
-      dialogs: 'cabs/dialogs'
-    }),
-  },
-
-  created() {
-    this.selectedCabs = this.selectedCabs.concat(this.cabs.selected);
-    for (let i = 0; i < this.selectedCabs.length; i++) {
-      this.selectedCabs[i].newName = this.selectedCabs[i].name;
-    }
-  },
-
-  methods: {
-    rename() {
-      if (this.selectedCabs && Array.isArray(this.selectedCabs)) {
-        this.showModal = false;
-        this.showLoading = true;
-
-        this.selectedCabs.forEach(async (cab) => {
-          const data = {
-            id: cab.id,
-            name: cab.newName
-          };
-
-          await this.api.post('/cabs/rename', data)
-            .catch(() => true);
-
-          this.done++;
-
-          if (this.selectedCabs.length === this.done) {
-            this.$store.dispatch('cabs/closeDialog', 'rename');
-            this.$store.dispatch('cabs/loadCabs');
-          }
-        });
-      } else {
-        this.$store.dispatch('cabs/closeDialog', 'rename');
-      }
+    data() {
+        return {
+            showModal: true,
+            showLoading: false,
+            done: 0,
+            selectedCabs: [],
+            disabledSaveButton: true,
+        };
     },
 
-    watchDisabledButton() {
-      if (this.selectedCabs.filter(c => c.name !== c.newName).length > 0) {
-        this.disabledSaveButton = false;
-      } else {
-        this.disabledSaveButton = true;
-      }
+    computed: {
+        ...mapGetters({
+            cabs: 'cabs/cabs',
+            dialogs: 'cabs/dialogs'
+        }),
+    },
+
+    created() {
+        this.selectedCabs = this.selectedCabs.concat(this.cabs.selected);
+        for (let i = 0; i < this.selectedCabs.length; i++) {
+            this.selectedCabs[i].newName = this.selectedCabs[i].name;
+        }
+    },
+
+    methods: {
+        rename() {
+            if (this.selectedCabs && Array.isArray(this.selectedCabs)) {
+                this.showModal = false;
+                this.showLoading = true;
+
+                this.selectedCabs.forEach(async (cab) => {
+                    const data = {
+                        id: cab.id,
+                        name: cab.newName
+                    };
+
+                    await this.api.post('/cabs/rename', data)
+                        .catch(() => true);
+
+                    this.done++;
+
+                    if (this.selectedCabs.length === this.done) {
+                        this.$store.dispatch('cabs/closeDialog', 'rename');
+                        this.$store.dispatch('cabs/loadCabs');
+                    }
+                });
+            } else {
+                this.$store.dispatch('cabs/closeDialog', 'rename');
+            }
+        },
+
+        watchDisabledButton() {
+            if (this.selectedCabs.filter(c => c.name !== c.newName).length > 0) {
+                this.disabledSaveButton = false;
+            } else {
+                this.disabledSaveButton = true;
+            }
+        }
     }
-  }
 };
 </script>

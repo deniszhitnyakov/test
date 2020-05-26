@@ -146,80 +146,80 @@ import CabsMainTableInfo                                          from './CabsMa
 import CabsMainTableStatus                                        from './CabsMainTableStatus';
 
 export default {
-  name: 'CabsMainTable',
+    name: 'CabsMainTable',
 
-  components: {
-    SimpleStatCell,
-    ComplexStatCellQuantity,
-    ComplexStatCellCr,
-    ComplexStatCellCpa,
-    CabsMainTableInfo,
-    CabsMainTableStatus,
-    BillingCell
-  },
+    components: {
+        SimpleStatCell,
+        ComplexStatCellQuantity,
+        ComplexStatCellCr,
+        ComplexStatCellCpa,
+        CabsMainTableInfo,
+        CabsMainTableStatus,
+        BillingCell
+    },
 
-  mixins: [
-    makeCols,
-    customSort,
-    selectItems
-  ],
+    mixins: [
+        makeCols,
+        customSort,
+        selectItems
+    ],
 
-  data() {
-    return {
-      actionCols,
-      commonCols,
-      specialCols,
-      cols: [],
-    };
-  },
+    data() {
+        return {
+            actionCols,
+            commonCols,
+            specialCols,
+            cols: [],
+        };
+    },
 
-  computed: {
-    ...mapGetters({
-      cabs: 'cabs/cabs',
-      selected: 'cabs/selected',
-      loading: 'cabs/loading',
-      innerHeight: 'main/innerHeight',
-      profile: 'main/profile',
-    }),
+    computed: {
+        ...mapGetters({
+            cabs: 'cabs/cabs',
+            selected: 'cabs/selected',
+            loading: 'cabs/loading',
+            innerHeight: 'main/innerHeight',
+            profile: 'main/profile',
+        }),
 
-    firstCols() {
-      let cols = [];
+        firstCols() {
+            let cols = [];
 
-      cols.push({
-        text: this.$t('common.cab'),
-        value: 'cab',
-        width: 150
-      });
+            cols.push({
+                text: this.$t('common.cab'),
+                value: 'cab',
+                width: 150
+            });
 
-      cols.push({
-        text: this.$t('adsmanager.cols.billing'),
-        value: 'billing',
-        width: 200,
-        sortable: false,
-      });
+            cols.push({
+                text: this.$t('adsmanager.cols.billing'),
+                value: 'billing',
+                width: 200,
+                sortable: false,
+            });
 
-      cols.push({
-        text: this.$t('common.status'),
-        value: 'status',
-        width: 100
-      });
+            cols.push({
+                text: this.$t('common.status'),
+                value: 'status',
+                width: 100
+            });
 
-      return cols;
-    }
-  },
+            return cols;
+        }
+    },
 
-  watch: {
-    profile: {
-      deep: true,
-      handler() {
+    watch: {
+        profile: {
+            deep: true,
+            handler() {
+                this.cols = this.makeCols(this.firstCols);
+            }
+        }
+    },
+
+    created() {
         this.cols = this.makeCols(this.firstCols);
-      }
-    }
-  },
-
-  created() {
-    this.cols = this.makeCols(this.firstCols);
-  },
+    },
 };
 </script>
 <style>

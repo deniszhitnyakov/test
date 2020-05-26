@@ -35,91 +35,91 @@ import MainTable                                      from '../../components/ads
 import Topbar                                         from '../../components/adsmanager/cabs/CabsTopbar';
 
 export default {
-  name: 'Cabs',
+    name: 'Cabs',
 
-  components: {
-    DialogApplyAutomationRule,
-    DialogApplyAutomationRulesGroup,
-    DialogAttachCard,
-    DialogChangeCountry,
-    DialogCreatePixel,
-    DialogNotificationsOff,
-    DialogNotificationsOn,
-    DialogRename,
-    DialogShare, 
-    DialogTags,
-    DialogUnarchive,
-    MainTable,
-    Topbar,
-  },
-
-  data() {
-    return {
-      updateStatInterval: 0,
-    };
-  },
-
-  computed: {
-    ...mapGetters({
-      accounts: 'accounts/filtered',
-      globalFilters: 'adsmanager/filters',
-      filters: 'cabs/filters',
-      dialogs: 'cabs/dialogs',
-      cabs: 'cabs/cabs'
-    })
-  },
-
-  watch: {
-    accounts: {
-      deep: true,
-      handler() {
-        this.$store.dispatch('cabs/loadCabs');
-      }
+    components: {
+        DialogApplyAutomationRule,
+        DialogApplyAutomationRulesGroup,
+        DialogAttachCard,
+        DialogChangeCountry,
+        DialogCreatePixel,
+        DialogNotificationsOff,
+        DialogNotificationsOn,
+        DialogRename,
+        DialogShare, 
+        DialogTags,
+        DialogUnarchive,
+        MainTable,
+        Topbar,
     },
 
-    globalFilters: {
-      deep: true,
-      handler() {
-        this.filterCabs();
-      }
+    data() {
+        return {
+            updateStatInterval: 0,
+        };
     },
 
-    filters: {
-      deep: true,
-      handler() {
-        this.filterCabs();
-      }
+    computed: {
+        ...mapGetters({
+            accounts: 'accounts/filtered',
+            globalFilters: 'adsmanager/filters',
+            filters: 'cabs/filters',
+            dialogs: 'cabs/dialogs',
+            cabs: 'cabs/cabs'
+        })
     },
 
-    'cabs.selected': {
-      deep: true,
-      handler(newVal, oldVal) {
-        if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
-          this.$store.dispatch('campaigns/clearSelected');
-          this.$store.dispatch('adsets/clearSelected');
-          this.$store.dispatch('ads/clearSelected');
+    watch: {
+        accounts: {
+            deep: true,
+            handler() {
+                this.$store.dispatch('cabs/loadCabs');
+            }
+        },
+
+        globalFilters: {
+            deep: true,
+            handler() {
+                this.filterCabs();
+            }
+        },
+
+        filters: {
+            deep: true,
+            handler() {
+                this.filterCabs();
+            }
+        },
+
+        'cabs.selected': {
+            deep: true,
+            handler(newVal, oldVal) {
+                if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+                    this.$store.dispatch('campaigns/clearSelected');
+                    this.$store.dispatch('adsets/clearSelected');
+                    this.$store.dispatch('ads/clearSelected');
+                }
+            }
         }
-      }
-    }
-  },
+    },
 
-  created() {
-    this.$store.dispatch('cabs/loadFilters');
-    this.$store.dispatch('cabs/loadCabs');
-    this.updateStatInterval = setInterval(() => {
-      this.$store.dispatch('cabs/loadCabs');
-    }, 60000);
-  },
+    created() {
+        this.$store.dispatch('cabs/loadFilters');
+        this.$store.dispatch('cabs/loadCabs');
+        this.updateStatInterval = setInterval(() => {
+            this.$store.dispatch('cabs/loadCabs');
+        }, 60000);
+    },
 
-  beforeDestroy() {
-    clearInterval(this.updateStatInterval);
-  },
+    beforeDestroy() {
+        clearInterval(this.updateStatInterval);
+    },
 
-  methods: {
-    async filterCabs() {
-      await this.$store.dispatch('cabs/filterCabs');
-      await this.$store.dispatch('cabs/loadStat');
-    }
-  },
+    methods: {
+        async filterCabs() {
+            await this.$store.dispatch('cabs/filterCabs');
+            await this.$store.dispatch('cabs/loadStat');
+        }
+    },
 };
 </script>

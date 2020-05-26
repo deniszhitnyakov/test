@@ -12,46 +12,46 @@ import MainTable    from '../../components/adsmanager/campaigns/CampaignsMainTab
 import Topbar       from '../../components/adsmanager/campaigns/CampaignsTopbar';
 
 export default {
-  name: 'Campaigns',
+    name: 'Campaigns',
 
-  components: {
-    MainTable,
-    Topbar
-  },
+    components: {
+        MainTable,
+        Topbar
+    },
 
-  data() {
-    return {
-      updateInterval: null,
-    };
-  },
+    data() {
+        return {
+            updateInterval: null,
+        };
+    },
 
-  computed: {
-    ...mapGetters({
-      campaigns: 'campaigns/campaigns'
-    })
-  },
+    computed: {
+        ...mapGetters({
+            campaigns: 'campaigns/campaigns'
+        })
+    },
 
-  watch: {
-    'campaigns.selected': {
-      deep: true,
-      handler(newVal, oldVal) {
-        if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
-          this.$store.dispatch('adsets/clearSelected');
-          this.$store.dispatch('ads/clearSelected');
+    watch: {
+        'campaigns.selected': {
+            deep: true,
+            handler(newVal, oldVal) {
+                if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+                    this.$store.dispatch('adsets/clearSelected');
+                    this.$store.dispatch('ads/clearSelected');
+                }
+            }
         }
-      }
-    }
-  },
+    },
 
-  created() {
-    this.$store.dispatch('campaigns/loadCampaigns');
-    this.updateInterval = setInterval(() => {
-      this.$store.dispatch('campaigns/loadCampaigns');
-    }, 60000);
-  },
+    created() {
+        this.$store.dispatch('campaigns/loadCampaigns');
+        this.updateInterval = setInterval(() => {
+            this.$store.dispatch('campaigns/loadCampaigns');
+        }, 60000);
+    },
 
-  beforeDestroy() {
-    clearInterval(this.updateInterval);
-  },
+    beforeDestroy() {
+        clearInterval(this.updateInterval);
+    },
 };
 </script>

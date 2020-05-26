@@ -198,63 +198,63 @@ import MultipleDelete       from './AccountsMultipleDelete';
 import MultipleTokensCheck  from './AccountsMultipleTokensCheck';
 
 export default {
-  name: 'AccountsTopbar',
+    name: 'AccountsTopbar',
 
-  components: {
-    FiltersBar,
-    FiltersDate,
-    TopbarCols,
-    MultipleTokensCheck,
-    MultipleDelete
-  },
+    components: {
+        FiltersBar,
+        FiltersDate,
+        TopbarCols,
+        MultipleTokensCheck,
+        MultipleDelete
+    },
 
-  data() {
-    return {
-      nameSearchText: '',
-      accountsStatuses,
-      showFilters: false,
-    };
-  },
+    data() {
+        return {
+            nameSearchText: '',
+            accountsStatuses,
+            showFilters: false,
+        };
+    },
   
-  computed: {
-    ...mapGetters({
-      accounts: 'accounts/ACCOUNTS',
-      filters: 'accounts/FILTERS',
-      tags: 'tags/tags',
-      globalFilters: 'adsmanager/filters'
-    }),
+    computed: {
+        ...mapGetters({
+            accounts: 'accounts/ACCOUNTS',
+            filters: 'accounts/FILTERS',
+            tags: 'tags/tags',
+            globalFilters: 'adsmanager/filters'
+        }),
 
-    activeFiltersCount() {
-      let count = 0;
+        activeFiltersCount() {
+            let count = 0;
 
-      if(!this.filters) return 0;
+            if(!this.filters) return 0;
 
-      if (
-        typeof this.filters.statuses !== 'undefined' && 
+            if (
+                typeof this.filters.statuses !== 'undefined' && 
         Array.isArray(this.filters.statuses) &&
         this.filters.statuses.length > 0
-      ) count++;
-      if (
-        typeof this.globalFilters.tags !== 'undefined' && 
+            ) count++;
+            if (
+                typeof this.globalFilters.tags !== 'undefined' && 
         this.globalFilters.tags &&
         this.globalFilters.tags.length > 0
-      ) count++;
+            ) count++;
 
-      return count;
-    }
-  },
-
-  methods: {
-    filterName(name) {
-      this.nameSearchText = name;
-      setTimeout(async () => {
-        if (name === this.nameSearchText) {
-          await this.$store.dispatch('accounts/setFiltersName', name);
-          this.$store.dispatch('accounts/loadStat');
-        }  
-      }, 500);
+            return count;
+        }
     },
-  }
+
+    methods: {
+        filterName(name) {
+            this.nameSearchText = name;
+            setTimeout(async () => {
+                if (name === this.nameSearchText) {
+                    await this.$store.dispatch('accounts/setFiltersName', name);
+                    this.$store.dispatch('accounts/loadStat');
+                }  
+            }, 500);
+        },
+    }
 };
 </script>
 

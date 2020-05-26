@@ -81,41 +81,41 @@
 import {mapGetters} from 'vuex';
 
 export default {
-  name: 'CabsDialogTags',
+    name: 'CabsDialogTags',
         
-  data() {
-    return {
-      mode: 1,
-      selectedTags: [],
-    };
-  },
+    data() {
+        return {
+            mode: 1,
+            selectedTags: [],
+        };
+    },
 
-  computed: {
-    ...mapGetters({
-      dialogs: 'cabs/dialogs',
-      tags: 'tags/tags',
-      cabs: 'cabs/selected',
-      loading: 'cabs/loading'
-    })
-  },
+    computed: {
+        ...mapGetters({
+            dialogs: 'cabs/dialogs',
+            tags: 'tags/tags',
+            cabs: 'cabs/selected',
+            loading: 'cabs/loading'
+        })
+    },
 
-  created() {
-    this.$store.dispatch('tags/loadTags');
-  },
-
-  methods: {
-    async saveTags() {
-      const data = {
-        ids: this.cabs.map(cab => cab.id),
-        tags: this.selectedTags,
-        mode: this.mode,
-      };
-      const success = await this.$store.dispatch('cabs/saveMultipleTags', data);
-      if (success) {
+    created() {
         this.$store.dispatch('tags/loadTags');
-        this.$store.dispatch('cabs/closeDialog', 'tags');
-      }
+    },
+
+    methods: {
+        async saveTags() {
+            const data = {
+                ids: this.cabs.map(cab => cab.id),
+                tags: this.selectedTags,
+                mode: this.mode,
+            };
+            const success = await this.$store.dispatch('cabs/saveMultipleTags', data);
+            if (success) {
+                this.$store.dispatch('tags/loadTags');
+                this.$store.dispatch('cabs/closeDialog', 'tags');
+            }
+        }
     }
-  }
 };
 </script>

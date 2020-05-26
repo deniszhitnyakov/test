@@ -141,88 +141,88 @@
 import {mapGetters} from 'vuex';
 
 export default {
-  name: 'CabsDialogAttachCard',
+    name: 'CabsDialogAttachCard',
 
-  data() {
-    return {
-      card: {
-        number: '',
-        cvc: '',
-        expire1: '',
-        expire2: '',
-      },
-      showModal: true,
-      showLoading: false,
-      loadingInfo: {
-        total: 0,
-        success: 0,
-        error: 0,
-        done: 0,
-      }
-    };
-  },
-
-  computed: {
-    ...mapGetters({
-      dialogs: 'cabs/dialogs',
-      cabs: 'cabs/cabs'
-    }),
-
-    disableAttachButton() {
-      if (!this.card.number || this.card.number.length === 0) return true;
-      if (!this.card.cvc || this.card.cvc.length === 0) return true;
-      if (!this.card.expire1 || this.card.expire1.length === 0) return true;
-      if (!this.card.expire2 || this.card.expire2.length === 0) return true;
-
-      return false;
+    data() {
+        return {
+            card: {
+                number: '',
+                cvc: '',
+                expire1: '',
+                expire2: '',
+            },
+            showModal: true,
+            showLoading: false,
+            loadingInfo: {
+                total: 0,
+                success: 0,
+                error: 0,
+                done: 0,
+            }
+        };
     },
 
-    showClear() {
-      if (this.card.number || this.card.number.length > 0) return true;
-      if (this.card.cvc || this.card.cvc.length > 0) return true;
-      if (this.card.expire1 || this.card.expire1.length > 0) return true;
-      if (this.card.expire2 || this.card.expire2.length > 0) return true;
+    computed: {
+        ...mapGetters({
+            dialogs: 'cabs/dialogs',
+            cabs: 'cabs/cabs'
+        }),
 
-      return false;
-    }
-  },
+        disableAttachButton() {
+            if (!this.card.number || this.card.number.length === 0) return true;
+            if (!this.card.cvc || this.card.cvc.length === 0) return true;
+            if (!this.card.expire1 || this.card.expire1.length === 0) return true;
+            if (!this.card.expire2 || this.card.expire2.length === 0) return true;
+
+            return false;
+        },
+
+        showClear() {
+            if (this.card.number || this.card.number.length > 0) return true;
+            if (this.card.cvc || this.card.cvc.length > 0) return true;
+            if (this.card.expire1 || this.card.expire1.length > 0) return true;
+            if (this.card.expire2 || this.card.expire2.length > 0) return true;
+
+            return false;
+        }
+    },
         
-  methods: {
-    clearCard() {
-      this.card = {
-        number: '',
-        cvc: '',
-        expire1: '',
-        expire2: '',
-      };
-    },
+    methods: {
+        clearCard() {
+            this.card = {
+                number: '',
+                cvc: '',
+                expire1: '',
+                expire2: '',
+            };
+        },
 
-    attachCard() {
-      if (this.cabs.selected && this.cabs.selected.length > 0) {
-        this.loadingInfo.total = this.cabs.selected.length;
-        this.cabs.selected.forEach(cab => {
-          const data = {
-            cab_id: cab.id,
-            card: this.card,
-          };
+        attachCard() {
+            if (this.cabs.selected && this.cabs.selected.length > 0) {
+                this.loadingInfo.total = this.cabs.selected.length;
+                this.cabs.selected.forEach(cab => {
+                    const data = {
+                        cab_id: cab.id,
+                        card: this.card,
+                    };
           
-          this.api.post('/cabs/attach_card', data).then((response) => {
-            console.log(response);
-            if (typeof response.data.error != 'undefined') {
-              this.loadingInfo.error++;
-            } else {
-              this.loadingInfo.success++;
+                    this.api.post('/cabs/attach_card', data).then((response) => {
+                        console.log(response);
+                        if (typeof response.data.error != 'undefined') {
+                            this.loadingInfo.error++;
+                        } else {
+                            this.loadingInfo.success++;
+                        }
+                        this.loadingInfo.done++;
+                        if (this.loadingInfo.done === this.loadingInfo.total) {
+                            this.$store.dispatch('cabs/closeDialog', 'attachCard');
+                            this.$store.dispatch('cabs/loadCabs');
+                        }
+                    });
+                });
             }
-            this.loadingInfo.done++;
-            if (this.loadingInfo.done === this.loadingInfo.total) {
-              this.$store.dispatch('cabs/closeDialog', 'attachCard');
-              this.$store.dispatch('cabs/loadCabs');
-            }
-          });
-        });
-      }
+        }
     }
-  }
 };
 </script>
 <style scoped>

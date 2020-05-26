@@ -12,50 +12,50 @@ import MainTable    from '../../components/adsmanager/dates/DatesMainTable';
 import Topbar       from '../../components/adsmanager/dates/DatesTopbar';
 
 export default {
-  name: 'Dates',
+    name: 'Dates',
 
-  components: {
-    MainTable,
-    Topbar
-  },
-
-  data() {
-    return {
-      updateInterval: null,
-    };
-  },
-
-  computed: {
-    ...mapGetters({
-      globalFilters: 'adsmanager/filters',
-    })
-  },
-
-  watch: {
-    globalFilters: {
-      deep: true,
-      handler() {
-        this.$store.dispatch('dates/loadDates');
-      }
+    components: {
+        MainTable,
+        Topbar
     },
 
-    filters: {
-      deep: true,
-      handler() {
-        this.$store.dispatch('cabs/loadDates');
-      }
-    }
-  },
+    data() {
+        return {
+            updateInterval: null,
+        };
+    },
 
-  created() {
-    this.$store.dispatch('dates/loadDates');
-    this.updateInterval = setInterval(() => {
-      this.$store.dispatch('dates/loadDates');
-    }, 60000);
-  },
+    computed: {
+        ...mapGetters({
+            globalFilters: 'adsmanager/filters',
+        })
+    },
 
-  beforeDestroy() {
-    clearInterval(this.updateInterval);
-  },
+    watch: {
+        globalFilters: {
+            deep: true,
+            handler() {
+                this.$store.dispatch('dates/loadDates');
+            }
+        },
+
+        filters: {
+            deep: true,
+            handler() {
+                this.$store.dispatch('cabs/loadDates');
+            }
+        }
+    },
+
+    created() {
+        this.$store.dispatch('dates/loadDates');
+        this.updateInterval = setInterval(() => {
+            this.$store.dispatch('dates/loadDates');
+        }, 60000);
+    },
+
+    beforeDestroy() {
+        clearInterval(this.updateInterval);
+    },
 };
 </script>

@@ -80,41 +80,41 @@
 import {mapGetters} from 'vuex';
 
 export default {
-  name: 'AccountsMultipleAssignTagsDialog',
+    name: 'AccountsMultipleAssignTagsDialog',
         
-  data() {
-    return {
-      mode: 1,
-      selectedTags: [],
-    };
-  },
+    data() {
+        return {
+            mode: 1,
+            selectedTags: [],
+        };
+    },
 
-  computed: {
-    ...mapGetters({
-      dialogs: 'accounts/dialogs',
-      tags: 'tags/tags',
-      accounts: 'accounts/selected',
-      loading: 'accounts/loading'
-    })
-  },
+    computed: {
+        ...mapGetters({
+            dialogs: 'accounts/dialogs',
+            tags: 'tags/tags',
+            accounts: 'accounts/selected',
+            loading: 'accounts/loading'
+        })
+    },
 
-  created() {
-    this.$store.dispatch('tags/loadTags');
-  },
-
-  methods: {
-    async saveTags() {
-      const data = {
-        ids: this.accounts.map(account => account.id),
-        tags: this.selectedTags,
-        mode: this.mode,
-      };
-      const success = await this.$store.dispatch('accounts/saveMultipleTags', data);
-      if (success) {
+    created() {
         this.$store.dispatch('tags/loadTags');
-        this.$store.dispatch('accounts/closeDialog', 'multipleAssignTags');
-      }
+    },
+
+    methods: {
+        async saveTags() {
+            const data = {
+                ids: this.accounts.map(account => account.id),
+                tags: this.selectedTags,
+                mode: this.mode,
+            };
+            const success = await this.$store.dispatch('accounts/saveMultipleTags', data);
+            if (success) {
+                this.$store.dispatch('tags/loadTags');
+                this.$store.dispatch('accounts/closeDialog', 'multipleAssignTags');
+            }
+        }
     }
-  }
 };
 </script>

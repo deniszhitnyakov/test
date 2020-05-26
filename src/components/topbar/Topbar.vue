@@ -25,9 +25,9 @@
 import TopbarLocale from './TopbarLocale';
 
 export default {
-  name: 'Topbar',
-  components: {
-    TopbarLocale
-  }
+    name: 'Topbar',
+    components: {
+        TopbarLocale
+    }
 };
 </script>

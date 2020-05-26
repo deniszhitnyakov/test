@@ -23,23 +23,23 @@
 import {mapGetters} from 'vuex';
 
 export default {
-  name: 'CabsDialogArchive',
+    name: 'CabsDialogArchive',
 
-  computed: {
-    ...mapGetters({
-      cabs: 'cabs/cabs'
-    })
-  },
+    computed: {
+        ...mapGetters({
+            cabs: 'cabs/cabs'
+        })
+    },
 
-  methods: {
-    archive() {
-      if (confirm(this.$t('common.confirmPlease'))) {
-        const data = {
-          ids: this.cabs.selected.map(cab => cab.id)
-        };
-        this.$store.dispatch('cabs/archive', data);
-      }
+    methods: {
+        archive() {
+            if (confirm(this.$t('common.confirmPlease'))) {
+                const data = {
+                    ids: this.cabs.selected.map(cab => cab.id)
+                };
+                this.$store.dispatch('cabs/archive', data);
+            }
+        }
     }
-  }
 };
 </script>

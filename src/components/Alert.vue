@@ -18,19 +18,19 @@
 import {mapGetters} from 'vuex';
 
 export default {
-  name: 'Alert',
+    name: 'Alert',
 
-  data() {
-    return {
-      snackbar: true
-    };
-  },
+    data() {
+        return {
+            snackbar: true
+        };
+    },
 
-  computed: {
-    ...mapGetters({
-      alert: 'main/alert',
-      dialogs: 'main/dialogs'
-    })
-  },
+    computed: {
+        ...mapGetters({
+            alert: 'main/alert',
+            dialogs: 'main/dialogs'
+        })
+    },
 };
 </script>

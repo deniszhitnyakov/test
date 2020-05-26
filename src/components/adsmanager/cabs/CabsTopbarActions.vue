@@ -165,42 +165,42 @@ import {mapGetters}          from 'vuex';
 import CabsDialogArchive     from './CabsDialogArchive';
 
 export default {
-  name: 'CabsTopbarActions',
+    name: 'CabsTopbarActions',
 
-  components: {
-    CabsDialogArchive,
-  },
-
-  computed: {
-    ...mapGetters({
-      cabs: 'cabs/cabs'
-    })
-  },
-
-  methods: {
-    createPixel() {
-      if (confirm(this.$t('common.confirmPlease'))) {
-        this.$store.dispatch('cabs/openDialog', 'createPixel');
-      }
+    components: {
+        CabsDialogArchive,
     },
 
-    unarchive() {
-      if (confirm(this.$t('common.confirmPlease'))) {
-        this.$store.dispatch('cabs/openDialog', 'unarchive');
-      }
+    computed: {
+        ...mapGetters({
+            cabs: 'cabs/cabs'
+        })
     },
 
-    notificationsOff() {
-      if (confirm(this.$t('common.confirmPlease'))) {
-        this.$store.dispatch('cabs/openDialog', 'notificationsOff');
-      }
-    },
+    methods: {
+        createPixel() {
+            if (confirm(this.$t('common.confirmPlease'))) {
+                this.$store.dispatch('cabs/openDialog', 'createPixel');
+            }
+        },
 
-    notificationsOn() {
-      if (confirm(this.$t('common.confirmPlease'))) {
-        this.$store.dispatch('cabs/openDialog', 'notificationsOn');
-      }
+        unarchive() {
+            if (confirm(this.$t('common.confirmPlease'))) {
+                this.$store.dispatch('cabs/openDialog', 'unarchive');
+            }
+        },
+
+        notificationsOff() {
+            if (confirm(this.$t('common.confirmPlease'))) {
+                this.$store.dispatch('cabs/openDialog', 'notificationsOff');
+            }
+        },
+
+        notificationsOn() {
+            if (confirm(this.$t('common.confirmPlease'))) {
+                this.$store.dispatch('cabs/openDialog', 'notificationsOn');
+            }
+        }
     }
-  }
 };
 </script>

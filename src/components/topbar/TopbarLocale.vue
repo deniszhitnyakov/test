@@ -24,9 +24,9 @@
 
 <script>
 export default {
-  name: 'TopbarLocale',
-  data: () => ({
-    newLocale: '',
-  })
+    name: 'TopbarLocale',
+    data: () => ({
+        newLocale: '',
+    })
 };
 </script>

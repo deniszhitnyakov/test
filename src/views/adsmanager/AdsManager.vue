@@ -25,29 +25,29 @@ import dates          from './Dates';
 import users          from './Users';
 
 export default {
-  name: 'AdsManager',
+    name: 'AdsManager',
         
-  components: {
-    tabs,
-    campaigns,
-    accounts,
-    cabs,
-    dates,
-    adsets,
-    users,
-    ads,
-    ColumnsDialog
-  },
+    components: {
+        tabs,
+        campaigns,
+        accounts,
+        cabs,
+        dates,
+        adsets,
+        users,
+        ads,
+        ColumnsDialog
+    },
 
-  computed: {
-    ...mapGetters({
-      activeTab: 'adsmanager/activeTab',
-      dialogs: 'adsmanager/dialogs'
-    })
-  },
+    computed: {
+        ...mapGetters({
+            activeTab: 'adsmanager/activeTab',
+            dialogs: 'adsmanager/dialogs'
+        })
+    },
 
-  created() {
-    this.$store.dispatch('accounts/LOAD_ACCOUNTS');
-  }
+    created() {
+        this.$store.dispatch('accounts/LOAD_ACCOUNTS');
+    }
 };
 </script>

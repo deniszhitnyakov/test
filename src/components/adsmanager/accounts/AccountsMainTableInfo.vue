@@ -16,23 +16,23 @@
 import AccountTags                      from './AccountsMainTableTags';
 
 export default {
-  name: 'AccountsMainTableInfo',
+    name: 'AccountsMainTableInfo',
 
-  components: {
-    AccountTags,
-  },
+    components: {
+        AccountTags,
+    },
 
-  props: {
-    account: {
-      type: Object,
-      default: () => ({})
+    props: {
+        account: {
+            type: Object,
+            default: () => ({})
+        }
+    },
+
+    methods: {
+        editAccount(account) {
+            this.$store.dispatch('accounts/initAccountForEdit', account);
+        }
     }
-  },
-
-  methods: {
-    editAccount(account) {
-      this.$store.dispatch('accounts/initAccountForEdit', account);
-    }
-  }
 };
 </script>

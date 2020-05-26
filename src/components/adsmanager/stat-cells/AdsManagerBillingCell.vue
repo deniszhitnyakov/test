@@ -85,38 +85,38 @@
 import numeral        from 'numeral';
 
 export default {
-  name: 'AdsManagerSimpleStatCell',
+    name: 'AdsManagerSimpleStatCell',
 
-  props: {
-    cab: {
-      type: [Object, Array],
-      default: () => ({
-        card_number: null,
-        card_type: null,
-        balance: 0,
-        billing: 0,
-        cab_limit: 0,
-      })
-    },
-  },
-
-  data() {
-    return {
-      numeral,
-    };
-  },
-
-  computed: {
-    billingPercent() {
-      if (!this.cab.billing || this.cab.billing === 0) return 0;
-      return this.cab.balance / this.cab.billing * 100;
+    props: {
+        cab: {
+            type: [Object, Array],
+            default: () => ({
+                card_number: null,
+                card_type: null,
+                balance: 0,
+                billing: 0,
+                cab_limit: 0,
+            })
+        },
     },
 
-    billingProgressColor() {
-      if (this.billingPercent > 70 && this.billingPercent < 100) return 'orange';
-      if (this.billingPercent >= 100) return 'red';
-      return 'success';
+    data() {
+        return {
+            numeral,
+        };
+    },
+
+    computed: {
+        billingPercent() {
+            if (!this.cab.billing || this.cab.billing === 0) return 0;
+            return this.cab.balance / this.cab.billing * 100;
+        },
+
+        billingProgressColor() {
+            if (this.billingPercent > 70 && this.billingPercent < 100) return 'orange';
+            if (this.billingPercent >= 100) return 'red';
+            return 'success';
+        }
     }
-  }
 };
 </script> 

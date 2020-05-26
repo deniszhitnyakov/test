@@ -35,39 +35,39 @@
 import {mapGetters} from 'vuex';
 
 export default {
-  name: 'CabsDialogsCreatePixel',
+    name: 'CabsDialogsCreatePixel',
 
-  data() {
-    return {
-      showLoading: true,
-      done: 0,
-    };
-  },
-
-  computed: {
-    ...mapGetters({
-      cabs: 'cabs/cabs',
-      dialogs: 'cabs/dialogs'
-    })
-  },
-
-  created() {
-    if (this.cabs.selected && Array.isArray(this.cabs.selected) && this.cabs.selected.length > 0) {
-      this.cabs.selected.forEach(async cab => {
-        const data = {
-          id: cab.id
+    data() {
+        return {
+            showLoading: true,
+            done: 0,
         };
-        await this.api.post('/cabs/create_pixel', data)
-          .catch(() => true);
-        this.done++;
-        if (this.cabs.selected.length === this.done) {
-          this.$store.dispatch('cabs/closeDialog', 'createPixel');
-          this.$store.dispatch('cabs/loadCabs');
+    },
+
+    computed: {
+        ...mapGetters({
+            cabs: 'cabs/cabs',
+            dialogs: 'cabs/dialogs'
+        })
+    },
+
+    created() {
+        if (this.cabs.selected && Array.isArray(this.cabs.selected) && this.cabs.selected.length > 0) {
+            this.cabs.selected.forEach(async cab => {
+                const data = {
+                    id: cab.id
+                };
+                await this.api.post('/cabs/create_pixel', data)
+                    .catch(() => true);
+                this.done++;
+                if (this.cabs.selected.length === this.done) {
+                    this.$store.dispatch('cabs/closeDialog', 'createPixel');
+                    this.$store.dispatch('cabs/loadCabs');
+                }
+            });
+        } else {
+            this.$store.dispatch('cabs/closeDialog', 'createPixel');
         }
-      });
-    } else {
-      this.$store.dispatch('cabs/closeDialog', 'createPixel');
     }
-  }
 };
 </script>

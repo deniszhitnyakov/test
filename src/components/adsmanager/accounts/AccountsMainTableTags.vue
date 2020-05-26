@@ -17,12 +17,12 @@
 
 <script>
 export default {
-  name: 'AccountsMainTableTags',
-  props: {
-    account: {
-      type: Object,
-      default: () => ({})
+    name: 'AccountsMainTableTags',
+    props: {
+        account: {
+            type: Object,
+            default: () => ({})
+        }
     }
-  }
 };
 </script>
