@@ -16,7 +16,7 @@ export default {
 
   components: {
     MainTable,
-    Topbar
+    Topbar,
   },
 
   data() {
