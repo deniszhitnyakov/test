@@ -163,7 +163,7 @@ export default {
 
             if(
                 typeof state.filters.showArchived === 'undefined' ||
-        !state.filters.showArchived
+                !state.filters.showArchived
             ) {
                 cabs = cabs.filter(cab => cab.archived === 0);
             }

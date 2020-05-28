@@ -25,9 +25,6 @@ export default {
         };
     },
 
-    // I made eror in word
-    // And one mor eror
-
     computed: {
         ...mapGetters({
             users: 'users/users',

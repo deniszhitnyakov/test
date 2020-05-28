@@ -31,12 +31,12 @@ if (location.hostname === 'localhost') {
     api = axios.create({
         baseURL: 'https://my.dolphin.ru.com/new',
         headers: {
-            Authorization: '5-ef7f6ab188cd804e941fe6f4ad27719f',
+            Authorization: '1-d14f18e1f69c50db1fec88b09c39c2db',
         },
-    // baseURL: 'https://romochekaz.xyz/new',
-    //   headers: {
-    //     Authorization: '4-f0b5fbc8cab8f36a2695ae2dc0f5d279'
-    //   }
+        // baseURL: 'https://romochekaz.xyz/new',
+        //   headers: {
+        //     Authorization: '4-f0b5fbc8cab8f36a2695ae2dc0f5d279'
+        //   }
     });
 
     baseUrl = 'https://my.dolphin.ru.com';

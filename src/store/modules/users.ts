@@ -14,76 +14,97 @@ export default {
     state: {
         users: {
             all: [],
-            selected: localStorage.getItem('adsmanager-users-selected') ?
-                JSON.parse(localStorage.getItem('adsmanager-users-selected')) : [],
+            selected: localStorage.getItem('adsmanager-users-selected')
+                ? JSON.parse(localStorage.getItem('adsmanager-users-selected') || '')
+                : [],
             filtered: [],
         },
         loading: {
             mainTable: false,
         },
-        stat: []
+        stat: [],
     },
     getters: {
         ...mixinDialogGetters,
-    
-        allUsers: state => state.users.all,
-        users: state => state.users,
-        selected: state => state.users.selected,
-        loading: state => state.loading,
-        stat: state => state.stat,
+
+        allUsers: (state: { users: { all: object } }) => state.users.all,
+        users: (state: { users: object }) => state.users,
+        selected: (state: { users: { selected: object } }) => state.users.selected,
+        loading: (state: { loading: boolean }) => state.loading,
+        stat: (state: { stat: object }) => state.stat,
     },
     mutations: {
         ...mixinDialogMutations,
         ...mixinSetLoading,
 
-        SET_ALL_USERS: (state, users) => {
+        SET_ALL_USERS: (state: { users: { all: any } }, users: any) => {
             state.users.all = users;
         },
 
-        FILTER: state => {
+        FILTER: (state: { users: { filtered: any; all: any } }) => {
             state.users.filtered = state.users.all;
         },
-    
-        SET_STAT: (state, stat) => {
+
+        SET_STAT: (state: { stat: any }, stat: any) => {
             state.stat = stat;
         },
 
-        SET_SELECTED: (state, data) => {
+        SET_SELECTED: (state: { users: { selected: any } }, data: any) => {
             state.users.selected = data;
             localStorage.setItem('adsmanager-users-selected', JSON.stringify(data));
-        }
+        },
     },
     actions: {
         ...mixinDialogActions,
-    
-        async loadUsers(context) {
+
+        async loadUsers(context: {
+            commit: (mutation: string, data: object | null) => void;
+            dispatch: (action: string) => void;
+        }) {
             const response = await this._vm.api('/users');
             if (response.data.success) {
                 context.commit('SET_ALL_USERS', response.data.data);
-                context.commit('FILTER');
+                context.commit('FILTER', null);
                 context.dispatch('loadStat');
             }
         },
 
-        async loadStat({
-            dispatch,
-            commit,
-            rootState
-        }) {
+        async loadStat(
+            {dispatch}: {dispatch: (action: string, data?: object, options?: object) => void},
+            {commit}: {commit: (mutation: string, data?: object) => void},
+            {rootState}: {
+                rootState: {
+                    users: {
+                        users: { 
+                            filtered: { 
+                                id: number; 
+                            }[]; 
+                        }
+                    },
+                    adsmanager: {
+                        filters: {
+                            dates: object
+                        }
+                    }
+                }
+            }
+        ) {
             commit('SET_LOADING', {
                 param: 'mainTable',
                 value: true,
             });
 
             const data = {
-                ids: rootState.users.users.filtered.map(user => user.id),
+                ids: rootState.users.users.filtered.map((user: { id: any }) => user.id),
                 dates: rootState.adsmanager.filters.dates,
             };
-            const response = await this._vm.api.post('/stat/by_user', data).catch((e) => {
-                dispatch('main/apiError', e, {
-                    root: true
+            const response = await this._vm.api
+                .post('/stat/by_user', data)
+                .catch((e: any) => {
+                    dispatch('main/apiError', e, {
+                        root: true,
+                    });
                 });
-            });
 
             commit('SET_LOADING', {
                 param: 'mainTable',
@@ -93,12 +114,17 @@ export default {
             commit('SET_STAT', response.data.data);
         },
 
-        async saveSelected(context, data) {
+        async saveSelected(
+            context: { commit: (arg0: string, arg1: any) => void },
+            data: any
+        ) {
             context.commit('SET_SELECTED', data);
         },
 
-        async clearSelected({commit}) {
+        async clearSelected(
+            {commit} : {commit: (mutation: string, data: object) => void}
+        ) {
             commit('SET_SELECTED', []);
-        }
-    }
+        },
+    },
 };

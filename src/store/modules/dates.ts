@@ -34,7 +34,7 @@ export default {
         ...mixinDialogMutations,
         ...mixinSetLoading,
 
-        SET_ALL_DATES: (state, users) => {
+        SET_ALL: (state, users) => {
             state.dates.all = users;
         },
 
@@ -55,11 +55,55 @@ export default {
             rootState
         }) {
             const data = {
-                dates: rootState.adsmanager.filters.dates
+                dates: rootState.adsmanager.filters.dates,
+                users_ids:
+                rootState.users.users.selected.length > 0
+                    ? rootState.users.users.selected.map((user) => user.id)
+                    : rootState.users.users.all.length === 0
+                        ? -1
+                        : rootState.users.users.filtered.map((user) => user.id),
+                accounts_ids:
+                rootState.accounts.accounts.selected.length > 0
+                    ? rootState.accounts.accounts.selected.map(
+                        (account) => account.id
+                    )
+                    : rootState.accounts.accounts.all.length === 0
+                        ? -1
+                        : rootState.accounts.accounts.filtered.map(
+                            (account) => account.id
+                        ),
+                cabs_ids:
+                rootState.cabs.cabs.selected.length > 0
+                    ? rootState.cabs.cabs.selected.map((cab) => cab.id)
+                    : rootState.cabs.cabs.all.length === 0
+                        ? -1
+                        : rootState.cabs.cabs.filtered.map((cab) => cab.id),
+                campaigns_ids:
+                rootState.campaigns.campaigns.selected.length > 0
+                    ? rootState.campaigns.campaigns.selected.map(
+                        (campaign) => campaign.id
+                    )
+                    : rootState.campaigns.campaigns.all.length === 0
+                        ? -1
+                        : rootState.campaigns.campaigns.filtered.map(
+                            (campaign) => campaign.id
+                        ),
+                adsets_ids:
+                rootState.adsets.adsets.selected.length > 0
+                    ? rootState.adsets.adsets.selected.map((adset) => adset.id)
+                    : rootState.adsets.adsets.all.length === 0
+                        ? -1
+                        : rootState.adsets.adsets.filtered.map((adset) => adset.id),
+                ads_ids:
+                rootState.ads.ads.selected.length > 0
+                    ? rootState.ads.ads.selected.map((ad) => ad.id)
+                    : rootState.ads.ads.all.length === 0
+                        ? -1
+                        : rootState.ads.ads.filtered.map((ad) => ad.id),
             };
             const response = await this._vm.api.post('/dates', data);
             if (response.data.success) {
-                commit('SET_ALL_DATES', response.data.data);
+                commit('SET_ALL', response.data.data);
                 commit('FILTER');
                 dispatch('loadStat');
             }
