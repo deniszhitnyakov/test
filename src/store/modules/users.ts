@@ -69,26 +69,7 @@ export default {
             }
         },
 
-        async loadStat(
-            {dispatch}: {dispatch: (action: string, data?: object, options?: object) => void},
-            {commit}: {commit: (mutation: string, data?: object) => void},
-            {rootState}: {
-                rootState: {
-                    users: {
-                        users: { 
-                            filtered: { 
-                                id: number; 
-                            }[]; 
-                        }
-                    },
-                    adsmanager: {
-                        filters: {
-                            dates: object
-                        }
-                    }
-                }
-            }
-        ) {
+        async loadStat({commit, dispatch, rootState}) {
             commit('SET_LOADING', {
                 param: 'mainTable',
                 value: true,
@@ -105,6 +86,7 @@ export default {
                         root: true,
                     });
                 });
+            console.log(response.data);
 
             commit('SET_LOADING', {
                 param: 'mainTable',
