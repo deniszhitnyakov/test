@@ -51,6 +51,14 @@ export default {
             state.campaigns.selected = data;
             localStorage.setItem('adsmanager-campaigns-selected', JSON.stringify(data));
         },
+
+        SET_ALL: (state, payload) => {
+            state.campaigns.all = payload;
+        },
+
+        SET_FILTERED: (state, payload) => {
+            state.campaigns.filtered = payload;
+        },
     },
     actions: {
         ...mixinDialogActions,
@@ -112,6 +120,12 @@ export default {
         },
 
         async clearSelected(context) {
+            context.commit('SET_SELECTED', []);
+        },
+
+        async clear(context) {
+            context.commit('SET_ALL', []);
+            context.commit('SET_FILTERED', []);
             context.commit('SET_SELECTED', []);
         }
     }

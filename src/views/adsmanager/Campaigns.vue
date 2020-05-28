@@ -36,8 +36,8 @@ export default {
             deep: true,
             handler(newVal, oldVal) {
                 if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
-                    this.$store.dispatch('adsets/clearSelected');
-                    this.$store.dispatch('ads/clearSelected');
+                    this.$store.dispatch('adsets/clear');
+                    this.$store.dispatch('ads/clear');
                 }
             }
         }

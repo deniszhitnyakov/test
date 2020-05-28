@@ -180,6 +180,14 @@ export default {
             localStorage.setItem('adsmanager-cabs-selected', JSON.stringify(cabs));
         },
 
+        SET_ALL: (state, payload) => {
+            state.cabs.all = payload;
+        },
+
+        SET_FILTERED: (state, payload) => {
+            state.cabs.filtered = payload;
+        },
+
         SET_SPECIFIC_FILTER: (state, data) => {
             state.filters[data.filter] = data.data;
             localStorage.setItem('adsmanager-cabs-filters', JSON.stringify(state.filters));
@@ -400,5 +408,11 @@ export default {
 
             return response.data.success;
         },
+
+        async clear(context) {
+            context.commit('SET_ALL', []);
+            context.commit('SET_FILTERED', []);
+            context.commit('SET_SELECTED_CABS', []);
+        }
     },
 };

@@ -86,7 +86,6 @@ export default {
                         root: true,
                     });
                 });
-            console.log(response.data);
 
             commit('SET_LOADING', {
                 param: 'mainTable',

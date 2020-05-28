@@ -67,10 +67,20 @@ export default {
         SET_FILTERED_ACCOUNTS: (state, payload) => {
             state.accounts.filtered = payload;
         },
+        
+        SET_ALL: (state, payload) => {
+            state.accounts.all = payload;
+        },
+
+        SET_FILTERED: (state, payload) => {
+            state.accounts.filtered = payload;
+        },
+
         SET_SELECTED: (state, payload) => {
             state.accounts.selected = payload;
             localStorage.setItem('adsmanager-accounts-selected', JSON.stringify(payload));
         },
+
         DELETE_ACCOUNTS: (state, payload) => {
             state.accounts.all = state.accounts.all.filter(account => {
                 return payload.indexOf(account.id) === -1;
@@ -522,6 +532,12 @@ export default {
         },
 
         async clearSelected(context) {
+            context.commit('SET_SELECTED', []);
+        },
+
+        async clear(context) {
+            context.commit('SET_ALL', []);
+            context.commit('SET_FILTERED', []);
             context.commit('SET_SELECTED', []);
         }
     }
