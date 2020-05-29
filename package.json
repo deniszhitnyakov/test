@@ -37,26 +37,20 @@
   },
   "devDependencies": {
     "@kazupon/vue-i18n-loader": "^0.3.0",
-    "@typescript-eslint/eslint-plugin": "^2.26.0",
-    "@typescript-eslint/parser": "^2.26.0",
     "@vue/cli-plugin-babel": "~4.3.0",
     "@vue/cli-plugin-eslint": "~4.3.0",
-    "@vue/cli-plugin-typescript": "^4.3.1",
     "@vue/cli-service": "~4.3.0",
-    "@vue/eslint-config-typescript": "^5.0.2",
     "babel-eslint": "^10.1.0",
     "babel-plugin-syntax-flow": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "eslint": "^6.8.0",
     "eslint-config-vue": "^2.0.2",
-    "eslint-plugin-flowtype-errors": "^4.3.0",
     "eslint-plugin-html": "^6.0.2",
     "eslint-plugin-vue": "^6.2.2",
     "flow-bin": "^0.125.1",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
-    "typescript": "~3.8.3",
     "vue-cli-plugin-i18n": "~0.6.1",
     "vue-cli-plugin-vuetify": "~2.0.5",
     "vue-template-compiler": "^2.6.11",
@@ -69,17 +63,12 @@
     },
     "plugins": [
       "arca",
-      "html",
-      "flowtype-errors"
+      "html"
     ],
     "extends": [
       "plugin:vue/recommended",
-      "eslint:recommended",
-      "@vue/typescript"
+      "eslint:recommended"
     ],
-    "parserOptions": {
-      "parser": "@typescript-eslint/parser"
-    },
     "rules": {
       "no-multiple-empty-lines": [
         "error",
@@ -101,8 +90,7 @@
       ],
       "arca/import-align": 2,
       "arca/import-ordering": 2,
-      "arca/newline-after-import-section": 2,
-      "flowtype-errors/show-errors": 2
+      "arca/newline-after-import-section": 2
     }
   },
   "browserslist": [

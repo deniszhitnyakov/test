@@ -27,29 +27,29 @@ export default {
     getters: {
         ...mixinDialogGetters,
 
-        allUsers: (state: { users: { all: object } }) => state.users.all,
-        users: (state: { users: object }) => state.users,
-        selected: (state: { users: { selected: object } }) => state.users.selected,
-        loading: (state: { loading: boolean }) => state.loading,
-        stat: (state: { stat: object }) => state.stat,
+        allUsers: state  => state.users.all,
+        users: (state) => state.users,
+        selected: (state) => state.users.selected,
+        loading: (state) => state.loading,
+        stat: (state) => state.stat,
     },
     mutations: {
         ...mixinDialogMutations,
         ...mixinSetLoading,
 
-        SET_ALL_USERS: (state: { users: { all: any } }, users: any) => {
+        SET_ALL_USERS: (state, users) => {
             state.users.all = users;
         },
 
-        FILTER: (state: { users: { filtered: any; all: any } }) => {
+        FILTER: (state) => {
             state.users.filtered = state.users.all;
         },
 
-        SET_STAT: (state: { stat: any }, stat: any) => {
+        SET_STAT: (state, stat) => {
             state.stat = stat;
         },
 
-        SET_SELECTED: (state: { users: { selected: any } }, data: any) => {
+        SET_SELECTED: (state, data) => {
             state.users.selected = data;
             localStorage.setItem('adsmanager-users-selected', JSON.stringify(data));
         },
@@ -57,10 +57,7 @@ export default {
     actions: {
         ...mixinDialogActions,
 
-        async loadUsers(context: {
-            commit: (mutation: string, data: object | null) => void;
-            dispatch: (action: string) => void;
-        }) {
+        async loadUsers({context}) {
             const response = await this._vm.api('/users');
             if (response.data.success) {
                 context.commit('SET_ALL_USERS', response.data.data);
@@ -76,12 +73,12 @@ export default {
             });
 
             const data = {
-                ids: rootState.users.users.filtered.map((user: { id: any }) => user.id),
+                ids: rootState.users.users.filtered.map((user) => user.id),
                 dates: rootState.adsmanager.filters.dates,
             };
             const response = await this._vm.api
                 .post('/stat/by_user', data)
-                .catch((e: any) => {
+                .catch((e) => {
                     dispatch('main/apiError', e, {
                         root: true,
                     });
@@ -95,16 +92,11 @@ export default {
             commit('SET_STAT', response.data.data);
         },
 
-        async saveSelected(
-            context: { commit: (arg0: string, arg1: any) => void },
-            data: any
-        ) {
+        async saveSelected(context, data) {
             context.commit('SET_SELECTED', data);
         },
 
-        async clearSelected(
-            {commit} : {commit: (mutation: string, data: object) => void}
-        ) {
+        async clearSelected({commit}) {
             commit('SET_SELECTED', []);
         },
     },

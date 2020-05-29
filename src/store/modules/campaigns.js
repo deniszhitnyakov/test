@@ -35,10 +35,6 @@ export default {
         ...mixinDialogMutations,
         ...mixinSetLoading,
 
-        SET_ALL: (state, campaigns) => {
-            state.campaigns.all = campaigns;
-        },
-
         FILTER: state => {
             state.campaigns.filtered = state.campaigns.all;
         },

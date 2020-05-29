@@ -12,10 +12,10 @@ import {
 export default {
     namespaced: true,
     state: {
-        ads: {
+        adsets: {
             all: [],
-            selected: localStorage.getItem('adsmanager-ads-selected') ?
-                JSON.parse(localStorage.getItem('adsmanager-ads-selected')) : [],
+            selected: localStorage.getItem('adsmanager-adsets-selected') ?
+                JSON.parse(localStorage.getItem('adsmanager-adsets-selected')) : [],
             filtered: [],
         },
         loading: {
@@ -26,8 +26,8 @@ export default {
     getters: {
         ...mixinDialogGetters,
 
-        ads: state => state.ads,
-        selected: state => state.ads.selected,
+        adsets: state => state.adsets,
+        selected: state => state.adsets.selected,
         loading: state => state.loading,
         stat: state => state.stat,
     },
@@ -35,12 +35,8 @@ export default {
         ...mixinDialogMutations,
         ...mixinSetLoading,
 
-        SET_ALL: (state, ads) => {
-            state.ads.all = ads;
-        },
-
         FILTER: state => {
-            state.ads.filtered = state.ads.all;
+            state.adsets.filtered = state.adsets.all;
         },
 
         SET_STAT: (state, stat) => {
@@ -48,22 +44,22 @@ export default {
         },
 
         SET_SELECTED: (state, data) => {
-            state.ads.selected = data;
-            localStorage.setItem('adsmanager-ads-selected', JSON.stringify(data));
+            state.adsets.selected = data;
+            localStorage.setItem('adsmanager-adsets-selected', JSON.stringify(data));
         },
 
         SET_ALL: (state, payload) => {
-            state.ads.all = payload;
+            state.adsets.all = payload;
         },
 
         SET_FILTERED: (state, payload) => {
-            state.ads.filtered = payload;
+            state.adsets.filtered = payload;
         },
     },
     actions: {
         ...mixinDialogActions,
 
-        async loadAds({commit, dispatch, rootState}) {
+        async loadAdsets({commit, dispatch, rootState}) {
             const data = {
                 users_ids: rootState.users.users.selected.length > 0 ?
                     rootState.users.users.selected.map(user => user.id) :
@@ -78,16 +74,12 @@ export default {
                     rootState.cabs.cabs.all.length === 0 ?
                         -1 : rootState.cabs.cabs.filtered.map(cab => cab.id),
                 campaigns_ids: rootState.campaigns.campaigns.selected.length > 0 ?
-                    rootState.campaigns.campaigns.selected.map(campaign => campaign.id) : 
+                    rootState.campaigns.campaigns.selected.map(campaign => campaign.id) :
                     rootState.campaigns.campaigns.all.length === 0 ?
-                        -1: rootState.campaigns.campaigns.filtered.map(campaign => campaign.id),
-                adsets_ids: rootState.adsets.adsets.selected.length > 0 ?
-                    rootState.adsets.adsets.selected.map(adset => adset.id) :
-                    rootState.adsets.adsets.all.length === 0 ?
-                        -1: rootState.adsets.adsets.filtered.map(adset => adset.id)
+                        -1 : rootState.campaigns.campaigns.filtered.map(campaign => campaign.id),
             };
-
-            const response = await this._vm.api.post('/ads', data);
+      
+            const response = await this._vm.api.post('/adsets', data);
 
             if (response.data.success) {
                 commit('SET_ALL', response.data.data);
@@ -107,10 +99,10 @@ export default {
             });
 
             const data = {
-                ids: rootState.ads.ads.filtered.map(ad => ad.id),
+                ids: rootState.adsets.adsets.filtered.map(adset => adset.id),
                 dates: rootState.adsmanager.filters.dates,
             };
-            const response = await this._vm.api.post('/stat/by_ad', data).catch((e) => {
+            const response = await this._vm.api.post('/stat/by_adset', data).catch((e) => {
                 dispatch('main/apiError', e, {
                     root: true
                 });
