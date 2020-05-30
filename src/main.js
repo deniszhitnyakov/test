@@ -31,7 +31,7 @@ if (location.hostname === 'localhost') {
     api = axios.create({
         baseURL: 'https://my.dolphin.ru.com/new',
         headers: {
-            Authorization: '1-d14f18e1f69c50db1fec88b09c39c2db',
+            Authorization: '1-9f7b3eb76fc9b4234add1cf3b37ebbee',
         },
     });
 
