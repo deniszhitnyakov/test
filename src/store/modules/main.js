@@ -36,7 +36,7 @@ export default {
 
         alert: state => state.alert,
 
-        profile: state => state.profile,
+        profile: state => state.profile
     },
     mutations: {
         ...mixinDialogMutations,
@@ -110,6 +110,6 @@ export default {
 
         async closeAlert(context) {
             context.commit('CLOSE_ALERT');
-        },
+        }
     }
 };

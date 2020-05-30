@@ -110,6 +110,7 @@
 		}
 	},
 	"common": {
+		"id": "ID",
 		"access_token": "Access token",
 		"account": "Account",
 		"ad": "Ad",
@@ -291,11 +292,20 @@
 	},
 	"sidebar": {
 		"adsManager": "Ads Manager",
+		"proxy": "Proxy",
 		"automationRules": "Automation Rules",
 		"bankCards": "Bank Cards",
 		"comments": "Comments",
 		"createAds": "Create ads",
 		"settings": "Settings",
 		"tracker": "Tracker"
+	},
+	"proxy": {
+		"type": "Proxy type",
+		"ip": "IP",
+		"externalIp": "External IP",
+		"port": "Port",
+		"accQuantity": "Number of accounts",
+		"changeName": "Change proxy name"
 	}
 }

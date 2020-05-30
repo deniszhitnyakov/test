@@ -110,6 +110,7 @@
 		}
 	},
 	"common": {
+		"id": "ID",
 		"access_token": "Токен",
 		"account": "Аккаунт",
 		"ad": "Объявление",
@@ -291,11 +292,20 @@
 	},
 	"sidebar": {
 		"adsManager": "Ads Manager",
+		"proxy": "Прокси",
 		"automationRules": "Авто-правила",
 		"bankCards": "Банковские карты",
 		"comments": "Комментарии",
 		"createAds": "Залить рекламу",
 		"settings": "Настройки",
 		"tracker": "Трекер"
+	},
+	"proxy": {
+		"type": "Тип прокси",
+		"ip": "IP",
+		"externalIp": "Внешний IP",
+		"port": "Порт",
+		"accQuantity": "Кол-во аккаунтов",
+		"changeName": "Поменять имя прокси"
 	}
 }

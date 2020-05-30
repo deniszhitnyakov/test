@@ -21,3 +21,6 @@ yarn-error.log*
 *.sw?
 Ads Manager.mindnode/QuickLook/Preview.jpg
 mindmaps
+
+#yarn lock
+yarn.lock

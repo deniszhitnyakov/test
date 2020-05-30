@@ -20,6 +20,15 @@
           </v-list-item-title>
         </v-list-item>
 
+        <v-list-item :to="{path: '/proxy'}">
+          <v-list-item-icon>
+            <v-icon>widgets</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>
+            {{ $t("sidebar.proxy") }}
+          </v-list-item-title>
+        </v-list-item>
+
         <v-list-item>
           <v-list-item-icon>
             <v-icon>material-icons cloud_upload</v-icon>

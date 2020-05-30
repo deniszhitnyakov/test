@@ -16,6 +16,7 @@ import apiError   from './mixins/api_error_root';
 import vuetify    from './plugins/vuetify';
 import store      from './store/index';
 import AdsManager from './views/adsmanager/AdsManager';
+import ProxyPage  from './views/proxypage/ProxyPage';
 
 Vue.prototype.moment = moment;
 
@@ -24,6 +25,10 @@ const routes = [
         path: '/adsmanager',
         component: AdsManager,
     },
+    {
+        path: '/proxy',
+        component: ProxyPage
+    }
 ];
 
 let api, baseUrl;
@@ -31,7 +36,7 @@ if (location.hostname === 'localhost') {
     api = axios.create({
         baseURL: 'https://my.dolphin.ru.com/new',
         headers: {
-            Authorization: '1-d14f18e1f69c50db1fec88b09c39c2db',
+            Authorization: '1-9f7b3eb76fc9b4234add1cf3b37ebbee',
         },
     });
 
