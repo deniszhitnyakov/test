@@ -6,7 +6,7 @@
         <v-data-table
           :value="selected"
           :headers="cols"
-          :items="proxy.all"
+          :items="proxies"
           :loading="loading.mainTable"
           :loading-text="$t('common.loading')"
           fixed-header
@@ -98,9 +98,16 @@ export default {
             selected: 'ads/selected',
             loading: 'ads/loading',
             innerHeight: 'main/innerHeight'
-        })
+        }),
+        proxies () {
+            let proxies = [];
+            this.proxy.all.forEach(proxy => {
+                proxies.push(
+                    {...proxy, type: proxy.type.toUpperCase()}
+                );});
+            return proxies;
+        }
     },
-
     created() {
         this.$store.dispatch('proxy/loadProxy');
         this.updateInterval = setInterval(() => {
@@ -109,8 +116,10 @@ export default {
     },
     methods: {
         handleRowClicked (value) {
-            this.$store.dispatch('proxy/toggleModal');
-            this.$store.dispatch('proxy/getProxyName', {id: value.id, name: value.name});
+            this.$store.dispatch('modal/toggleModal');
+            this.$store.dispatch('proxy/getProxyName', 
+                {id: value.id, name: value.name}
+            );
         }
     }
 };

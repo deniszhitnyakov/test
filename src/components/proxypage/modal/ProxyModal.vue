@@ -39,8 +39,8 @@ import {mapGetters}                                               from 'vuex';
 export default {
     computed: {
         ...mapGetters({
-            dialog: 'proxy/modal',
-            proxy: 'proxy/proxy'
+            dialog: 'modal/modal',
+            proxy: 'proxy/proxyModifiers'
         })
     },
     methods: {
@@ -48,7 +48,7 @@ export default {
             this.$store.dispatch('proxy/saveNewName', {id: this.proxy.id, name: this.proxy.name});
         },
         handleModalClose() {
-            this.$store.dispatch('proxy/toggleModal');
+            this.$store.dispatch('modal/toggleModal');
         }
     }
 };

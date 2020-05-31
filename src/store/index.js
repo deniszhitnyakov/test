@@ -11,6 +11,7 @@ import campaigns  from './modules/campaigns';
 import dates      from './modules/dates';
 import jobs       from './modules/jobs';
 import main       from './modules/main';
+import modal      from './modules/modal';
 import proxy      from './modules/proxy';
 import tags       from './modules/tags';
 import users      from './modules/users';
@@ -31,6 +32,7 @@ export default new Vuex.Store({
         tags,
         users,
         proxy,
-        cabs
+        cabs,
+        modal
     },
 });
