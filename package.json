@@ -39,7 +39,7 @@
     "@kazupon/vue-i18n-loader": "^0.3.0",
     "@vue/cli-plugin-babel": "~4.3.0",
     "@vue/cli-plugin-eslint": "~4.3.0",
-    "@vue/cli-service": "~4.3.0",
+    "@vue/cli-service": "~5.0.8",
     "babel-eslint": "^10.1.0",
     "babel-plugin-syntax-flow": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
